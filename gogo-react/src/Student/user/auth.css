@@ -1,0 +1,36 @@
+.register{
+    font-size: 20px;
+}
+.registerug{
+    width: 40%;
+    height: 50px;
+}
+.apple{
+    font-size: 20px;
+}
+.image{
+    width: 40%;
+    margin-bottom: 10% ;
+}
+.logo{
+    width:15%;
+    margin-right: 5%;
+}
+.logo2{
+    width:13%;
+    margin-right: 6%;
+    margin-bottom: 5px;
+}
+@media screen and (max-width: 820px) {
+    #text{
+        font-size: 90%;
+    }
+    .registerug{
+        width:70%;
+    }
+  }
+  #reset{
+      display: flex;
+      margin-left: auto;
+      justify-content: flex-end;
+  }
