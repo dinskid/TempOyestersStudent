@@ -22,6 +22,7 @@ const ResetPassword = ({
   history,
   loading,
   error,
+  checkSuccess,
   resetPasswordAction,
 }) => {
   const [newPassword] = useState('');
@@ -37,7 +38,7 @@ const ResetPassword = ({
         null,
         ''
       );
-    } else if (!loading && newPassword === 'success')
+    } else if (!loading && checkSuccess === 'success')
       NotificationManager.success(
         'Please login with your new password.',
         'Reset Password Success',
@@ -164,7 +165,7 @@ const ResetPassword = ({
 
 const mapStateToProps = ({ authUser }) => {
   const { newPassword, resetPasswordCode, loading, error } = authUser;
-  return { newPassword, resetPasswordCode, loading, error };
+  return { checkSuccess: newPassword, resetPasswordCode, loading, error };
 };
 
 export default connect(mapStateToProps, {

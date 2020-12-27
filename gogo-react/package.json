@@ -2,6 +2,7 @@
   "name": "gogo-react",
   "version": "5.2.0",
   "description": "Gogo - React Bootstrap 4 Admin Dashboard Template",
+  "proxy": "http://localhost:5001",
   "private": true,
   "dependencies": {
     "@glidejs/glide": "^3.4.1",

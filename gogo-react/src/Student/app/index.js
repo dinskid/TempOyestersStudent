@@ -38,9 +38,12 @@ const BlankPage = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './blank-page')
 );
 
+const Validate = React.lazy(() => import('./Validate'));
+
 const App = ({ match }) => {
   return (
     <AppLayout>
+      <Validate />
       <div className="dashboard-wrapper">
         <Suspense fallback={<div className="loading" />}>
           <Switch>
@@ -78,27 +81,27 @@ const App = ({ match }) => {
               path={`${match.url}/blank-page`}
               render={(props) => <BlankPage {...props} />}
             />
-                          <Route
+            <Route
               path={`${match.url}/privacy`}
               render={(props) => <Privacy {...props} />}
             />
-              <Route
+            <Route
               path={`${match.url}/cookie`}
               render={(props) => <Cookie {...props} />}
             />
-              <Route
+            <Route
               path={`${match.url}/terms`}
               render={(props) => <Terms {...props} />}
             />
-              <Route
+            <Route
               path={`${match.url}/irp`}
               render={(props) => <IRP {...props} />}
             />
-              <Route
+            <Route
               path={`${match.url}/antispam`}
               render={(props) => <Anti {...props} />}
             />
-              <Route
+            <Route
               path={`${match.url}/abuse`}
               render={(props) => <Abuse {...props} />}
             />
