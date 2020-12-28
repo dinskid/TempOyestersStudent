@@ -1,18 +1,23 @@
-const sequelize = require("sequelize");
+const sequelize = require('sequelize');
 
-const db = new sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_user, process.env.MYSQL_ROOT_PASSWORD, {
-  dialect: "mysql",
-  host: process.env.DB_HOST
-});
+const db = new sequelize(
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQL_user,
+  process.env.MYSQL_ROOT_PASSWORD,
+  {
+    dialect: 'mysql',
+    host: process.env.DB_HOST,
+  }
+);
 
 // console.log('🚀', process.env.DB_other)
 
 db.authenticate()
   .then(() => {
-    console.log("database connected successfully");
+    console.log('database connected successfully');
   })
   .catch((e) => {
-    console.log(e,"error in database connectivity");
-});
+    console.log(e, 'error in database connectivity');
+  });
 
-module.exports =  db;
+module.exports = db;
