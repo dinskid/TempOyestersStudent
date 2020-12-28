@@ -51,7 +51,7 @@ const loginWithEmailPasswordAsync = async (
 };
 
 function* loginWithEmailPassword({ payload }) {
-  const { email, password } = payload.user.values;
+  const { email, password, using_google = false } = payload.user.values;
   const { history } = payload.user;
   console.log(payload);
   try {
@@ -60,7 +60,8 @@ function* loginWithEmailPassword({ payload }) {
     const loginUser = yield call(
       loginWithEmailPasswordAsync,
       customer_email,
-      customer_password
+      customer_password,
+      using_google
     );
     console.log(loginUser);
     if (loginUser.success) {
@@ -90,6 +91,7 @@ const registerWithEmailPasswordAsync = async ({
   customer_first_name,
   customer_last_name,
   customer_phone_number,
+  using_google = false,
 }) => {
   try {
     const values = {
@@ -98,6 +100,7 @@ const registerWithEmailPasswordAsync = async ({
       student_phone_number: customer_phone_number,
       student_email: customer_email,
       student_password: customer_password,
+      using_google,
     };
     const result = await axiosInstance.post('/auth/register', { values });
     return result.data;
@@ -117,6 +120,7 @@ function* registerWithEmailPassword({ payload }) {
     customer_password,
     customer_first_name,
     customer_last_name,
+    using_google = false,
   } = payload.user.values;
   const { history } = payload.user;
   try {
@@ -132,7 +136,7 @@ function* registerWithEmailPassword({ payload }) {
       history.push('/app/pages/product/data-list');
     } else {
       try {
-        yield put(registerUserError(registerUser.data.error));
+        yield put(registerUserError(registerUser.error));
       } catch (err) {
         yield put(registerUserError('unable to register'));
       }

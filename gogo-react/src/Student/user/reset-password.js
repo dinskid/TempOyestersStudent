@@ -133,7 +133,7 @@ const ResetPassword = ({
                   </FormGroup>
 
                   <div className="d-flex justify-content-between align-items-center">
-                    <NavLink to="/user/login">
+                    <NavLink to="/Student/user/login">
                       <IntlMessages id="user.login-title" />
                     </NavLink>
                     <Button

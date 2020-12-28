@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Card, CardTitle, Label, FormGroup, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import { NotificationManager } from '../../components/common/react-notifications';
-import axios from 'axios';
 import { loginUser } from '../../redux/actions';
 import { Colxx } from '../../components/common/CustomBootstrap';
 import IntlMessages from '../../helpers/IntlMessages';
-import { adminRoot } from '../../constants/defaultValues';
 import Logo from './logo.png';
 import './auth.css';
 import Google from './google.png';
 import Apple from './apple.png';
+
+import { useGoogleLogin } from 'react-google-login';
+import { refreshTokenSetup } from './utils/refreshTokenSetup';
+import { loginUserError } from '../../redux/auth/actions';
+
 const validatePassword = (value) => {
   let error;
   if (!value) {
@@ -46,6 +49,8 @@ const validation = Yup.object().shape({
 });
 
 const Login = ({ history, loading, error, loginUserAction }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (error) {
       NotificationManager.warning(error, 'Login Error', 3000, null, null, '');
@@ -57,6 +62,33 @@ const Login = ({ history, loading, error, loginUserAction }) => {
       loginUserAction({ history, values });
     }
   };
+
+  const onSuccess = (res) => {
+    console.log('login success', res.profileObj);
+    refreshTokenSetup(res);
+    console.log(
+      res.profileObj.name,
+      res.profileObj.email,
+      res.profileObj.imageUrl
+    );
+    const values = {
+      customer_name: res.profileObj.name,
+      email: res.profileObj.email,
+      using_google: true,
+    };
+    loginUserAction({ history, values });
+  };
+  const onFailure = (err) => {
+    dispatch(loginUserError(err.error || 'unable to register'));
+    console.log(err);
+  };
+  const { signIn } = useGoogleLogin({
+    onSuccess,
+    onFailure,
+    clientId: process.env.REACT_APP_CLIENT_ID,
+    isSignedIn: false,
+    accessType: 'offline',
+  });
 
   return (
     <Row className="h-100">
@@ -150,6 +182,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                 <Button
                   outline
                   color="secondary"
+                  onClick={signIn}
                   className="mb-2 d-flex align-items-center p-3 registerug"
                 >
                   {/*<div className={`glyph-icon ${simplelineicons[176]} mr-2 `} />*/}

@@ -22,11 +22,11 @@ const Student = db.define('student_table', {
     },
     student_last_name: {
         type: STRING,
-        allowNull:false
+        allowNull:true
     },
     student_phone_number: {
         type: INTEGER,
-        allowNull:false
+        allowNull:true
     },
     student_email: {
         type: STRING,
@@ -34,7 +34,7 @@ const Student = db.define('student_table', {
     },
     student_password: {
         type: STRING,
-        allowNull:false
+        allowNull:true
     }
 
 })
