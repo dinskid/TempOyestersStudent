@@ -31,6 +31,7 @@ app.use(express.json());
 
 app.use('/auth', require('./loginSignUp'));
 app.use('/sessions', require('./sessions'));
+app.use('/blog', require('./blog'));
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
