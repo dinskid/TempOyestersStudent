@@ -2,17 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { Colxx, Separator } from '../../../components/common/CustomBootstrap';
 import axios from 'axios';
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button,Col,Row
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+  Col,
+  Row,
 } from 'reactstrap';
 import './course.css';
 import { servicePath } from '../../../constants/defaultValues';
-import Angular from './angular.png'
+import Angular from './angular.png';
 import ListPageHeading from '../../../containers/pages/ListPageHeading';
 import AddNewModal from '../../../containers/pages/AddNewModal';
 import ListPageListing from '../../../containers/pages/ListPageListing';
 import useMousetrap from '../../../hooks/use-mousetrap';
-import { Link,Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import axiosInstance from '../../../helpers/axiosInstance';
+import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
+
 /* import ReactCardFlip from 'react-card-flip'; */
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
@@ -22,11 +32,6 @@ const getIndex = (value, arr, prop) => {
   }
   return -1;
 };
-let names = [{img:'angular', course:'Angular',genre:'Front-end JavaScript Framework',desc:'Angular is a TypeScript-based open-source web application framework.',cost:1200,tags:'Web, frontend'}]
-
-
-
-
 
 const apiUrl = `${servicePath}/cakes/paging`;
 
@@ -56,6 +61,8 @@ const DataListPages = ({ match }) => {
     label: 'Product Name',
   });
 
+  const [error, setError] = useState(null);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [totalItemCount, setTotalItemCount] = useState(0);
   const [totalPage, setTotalPage] = useState(1);
@@ -64,29 +71,68 @@ const DataListPages = ({ match }) => {
   const [items, setItems] = useState([]);
   const [lastChecked, setLastChecked] = useState(null);
 
+  const [names, setNames] = useState([
+    {
+      img: 'angular',
+      course: 'Angular',
+      genre: 'Front-end JavaScript Framework',
+      desc:
+        'Angular is a TypeScript-based open-source web application framework.',
+      cost: 1200,
+      tags: 'Web, frontend',
+    },
+  ]);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedPageSize, selectedOrderOption]);
 
   useEffect(() => {
-    async function fetchData() {
-      axios
-        .get(
-          `${apiUrl}?pageSize=${selectedPageSize}&currentPage=${currentPage}&orderBy=${selectedOrderOption.column}&search=${search}`
-        )
-        .then((res) => {
-          return res.data;
-        })
-        .then((data) => {
-          setTotalPage(data.totalPage);
-          setItems(data.data.map(x=>{ return { ...x,img : x.img.replace("img/","img/products/")}}));
-          setSelectedItems([]);
-          setTotalItemCount(data.totalItem);
-          setIsLoaded(true);
-        });
-    }
+    if (error)
+      NotificationManager.warning(
+        error,
+        'My Courses Error',
+        3000,
+        null,
+        null,
+        ''
+      );
+  }, [error]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await axiosInstance.get('/courses');
+        console.log(result);
+        if (result.data.success) {
+          const data = result.data.courses.map((doc) => ({
+            img: doc.session_thumbnail,
+            course: doc.session_name,
+            genre: doc.session_tagline,
+            desc: doc.session_description,
+            cost: doc.session_fee,
+            tags: doc.session_tags,
+          }));
+          setNames(data);
+        } else {
+          try {
+            setError(result.data.error);
+          } catch (e) {
+            setError('Unable to fetch courses');
+          }
+        }
+      } catch (err) {
+        try {
+          setError(err.response.data.error);
+        } catch (error) {
+          setError('Unable to fetch courses');
+        }
+      } finally {
+        setIsLoaded(true);
+      }
+    };
     fetchData();
-  }, [selectedPageSize, currentPage, selectedOrderOption, search]);
+  }, []);
 
   const onCheckItem = (event, id) => {
     if (
@@ -166,28 +212,49 @@ const DataListPages = ({ match }) => {
     <div className="loading" />
   ) : (
     <>
-    {/*   <h1>My Courses</h1>
+      {/*   <h1>My Courses</h1>
       <Separator className="mb-5" /> */}
-         <Row>
-      {names.map(name => {
-
-return  (
-  
-<Col md={3} xs={12}>
-<Card className="mt-2 mb-2" style={{width: "100%", height: "450px", marginLeft: "auto", marginRight: "auto"}}>
-  <Route><Link to="course"><CardImg top style={{width: '100%'}} src={require(`./${name.img}.png`)} alt="Card image cap" /></Link></Route>
-  <CardBody>
-    <h2 className="font-weight-bold">{name.course}</h2>
-    <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
-    <CardText>{name.desc}</CardText>
-    <Row><h5 className="mr-auto ml-4"><b>${name.cost}</b></h5><h5 className="ml-auto mr-4"><b>Tags:</b> {name.tags}</h5></Row>
-  </CardBody>
-</Card>
-</Col>
-)
-})}
-
-</Row>
+      <Row>
+        {names.map((name) => {
+          return (
+            <Col md={3} xs={12}>
+              <Card
+                className="mt-2 mb-2"
+                style={{
+                  width: '100%',
+                  height: '450px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+              >
+                <Route>
+                  <Link to="course">
+                    <CardImg
+                      top
+                      style={{ width: '100%' }}
+                      src={require(`./img2.jpg`)}
+                      alt="Card image cap"
+                    />
+                  </Link>
+                </Route>
+                <CardBody>
+                  <h2 className="font-weight-bold">{name.course}</h2>
+                  <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
+                  <CardText>{name.desc}</CardText>
+                  <Row>
+                    <h5 className="mr-auto ml-4">
+                      <b>RS. {name.cost}</b>
+                    </h5>
+                    <h5 className="ml-auto mr-4">
+                      <b>Tags:</b> {name.tags}
+                    </h5>
+                  </Row>
+                </CardBody>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
     </>
   );
 };
