@@ -15,6 +15,10 @@ const Student = db.define('student_table', {
     //     key:'customer_id'
     // },
   },
+  ref_id: {
+    type: INTEGER,
+    defaultValue: 0,
+  },
   student_first_name: {
     type: STRING,
     allowNull: false,

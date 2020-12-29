@@ -5,7 +5,7 @@ const db = require('../config/connection');
 router.get('/', verifyToken, async (req, res) => {
   try {
     const result = await db.query(
-      'SELECT session_id,session_type,session_name,session_tagline,session_description,session_tags,session_fee,session_thumbnail FROM session_tables',
+      'SELECT session_id,session_name,session_tagline,session_description,session_tags,session_fee,session_thumbnail FROM session_tables WHERE session_type="recorded session"',
       { type: db.QueryTypes.SELECT }
     );
     if (!result)
@@ -50,6 +50,38 @@ router.get('/live', verifyToken, async (req, res) => {
       success: 0,
       error: 'unable to find sessions',
       errorReturned: JSON.stringify(err),
+    });
+  }
+});
+
+router.get('/details/:id', verifyToken, async (req, res) => {
+  try {
+    if (!req.params.id)
+      return res.status(400).json({
+        success: 0,
+        error: 'session id not provided',
+      });
+    const result = await db.query(
+      `SELECT   session_name ,
+      session_description ,
+      session_fee ,
+      session_thumbnail ,
+      session_fee ,
+      session_duration
+      FROM session_tables WHERE session_id=${req.params.id}`,
+      { type: db.QueryTypes.SELECT }
+    );
+    if (!result)
+      return res.status(400).json({
+        success: 0,
+        error: 'Could not fetch details',
+      });
+    return res.status(200).json({ success: 1, session: result[0] });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      success: 0,
+      error: 'Could not fetch details',
     });
   }
 });

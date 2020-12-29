@@ -20,12 +20,30 @@ import Man from './man.jpg';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import Angular from './angular.png';
 import { ImAlarm } from 'react-icons/im';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, useHistory } from 'react-router-dom';
+
+import axiosInstance from '../../../../helpers/axiosInstance';
+import NotificationManager from '../../../../components/common/react-notifications';
 
 const DetailsPages = ({ match, intl, ...props }) => {
-  console.log(props.location.state.session_id);
   const { messages } = intl;
+  const history = useHistory();
+  const [error, setError] = useState(null);
 
+  let session_id;
+  try {
+    session_id = props.location.state.session_id;
+  } catch (err) {
+    history.push('/app/pages/product/data-list');
+  }
+  const [session, setSession] = useState({
+    session_name: '',
+    session_description: '',
+    session_fee: '',
+    session_thumbnail: '',
+    session_fee: '',
+    session_duration: '',
+  });
   const [instructor, setInstructor] = ['Udit Narayan'];
   const [work_exp, setWork_exp] = [
     'Senior Web Developer, Flexor Inc. from 2013 - 2017',
@@ -44,17 +62,52 @@ const DetailsPages = ({ match, intl, ...props }) => {
     'Content-8',
     'Content-9',
   ];
+  useEffect(() => {
+    if (error)
+      NotificationManager.warning(
+        error,
+        'All Courses Error',
+        3000,
+        null,
+        null,
+        ''
+      );
+  }, [error, setError]);
+
+  useEffect(() => {
+    const getDetails = async () => {
+      try {
+        const result = await axiosInstance.get(
+          `/sessions/details/${session_id}`
+        );
+        console.log(result);
+
+        if (result.data.success) setSession(result.data.session);
+        else {
+          try {
+            setError(result.data.error);
+          } catch (er) {
+            setError('Could not fetch details');
+          }
+        }
+      } catch (err) {
+        try {
+          setError(err.response.data.error);
+        } catch (e) {
+          setError('Could not fetch details');
+        }
+      }
+    };
+    getDetails();
+  }, []);
 
   return (
     <>
       <Row>
         <Col md="8">
           <div>
-            <h2 className="heading">Angular 8 Course (2020)</h2>
-            <h6>
-              Master Angular 10 (formerly "Angular 2") and build awesome,
-              reactive web apps with the successor of Angular.js
-            </h6>
+            <h2 className="heading">{session.session_name}</h2>
+            <h6>{session.session_description}</h6>
             <p className="para">
               Instructor: <a href="#">{instructor}</a>
             </p>
@@ -898,16 +951,17 @@ const DetailsPages = ({ match, intl, ...props }) => {
           <Card className="fixed width ">
             <CardImg
               top
-              src={Angular}
+              src={require('./angular.png') || session.session_thumbnail}
               alt="Card image cap"
               style={{ width: '100%', height: '50%' }}
             />
             <CardBody>
               <CardText tag="h2" className="price">
-                Rs. 1200
+                Rs. {session.session_fee}
               </CardText>
               <CardText tag="h6" className="mb-2">
-                <ImAlarm className="mr-2" /> Duration 2 Weeks
+                <ImAlarm className="mr-2" /> Duration {session.session_duration}{' '}
+                days
               </CardText>
 
               <Button className="btn2 mt-4">Add to Cart</Button>

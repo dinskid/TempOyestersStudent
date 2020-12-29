@@ -5,43 +5,7 @@ import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications';
 
 const Live_Session = () => {
-  const [names, setNames] = useState([
-    {
-      img: 'angular',
-      course: 'Angular',
-      genre: 'Front-end JavaScript Framework',
-      desc:
-        'Angular is a TypeScript-based open-source web application framework.',
-      cost: 1200,
-      tags: 'Web, frontend',
-    },
-    {
-      img: 'react',
-      course: 'ReactJS',
-      genre: 'Front-end JavaScript Library',
-      desc: 'React makes it painless to create interactive UIs.',
-      cost: 1300,
-      tags: 'Web, frontend',
-    },
-    {
-      img: 'vue',
-      course: 'VueJS',
-      genre: 'The Progressive JavaScript Framework',
-      desc:
-        'Vue.js lets you extend HTML with HTML attributes called directives.',
-      cost: 1500,
-      tags: 'Web, frontend',
-    },
-    {
-      img: 'vue',
-      course: 'VueJS',
-      genre: 'The Progressive JavaScript Framework',
-      desc:
-        'Vue.js lets you extend HTML with HTML attributes called directives.',
-      cost: 1500,
-      tags: 'Web, frontend',
-    },
-  ]);
+  const [names, setNames] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {

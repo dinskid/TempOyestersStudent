@@ -72,7 +72,6 @@ const DataListPages = ({ match }) => {
             tags: doc.session_tags,
           }));
           console.log(data);
-          setIsLoaded(true);
           setNames(data);
         } else {
           try {
@@ -87,6 +86,8 @@ const DataListPages = ({ match }) => {
         } catch (error) {
           setError('Unable to fetch data');
         }
+      } finally {
+        setIsLoaded(true);
       }
     }
     fetchData();
@@ -217,7 +218,7 @@ const DataListPages = ({ match }) => {
                   <CardText>{name.desc}</CardText>
                   <Row>
                     <h5 className="mr-auto ml-4">
-                      <b>${name.cost}</b>
+                      <b>Rs. {name.cost}</b>
                     </h5>
                     <h5 className="ml-auto mr-4">
                       <b>Tags:</b> {name.tags}
