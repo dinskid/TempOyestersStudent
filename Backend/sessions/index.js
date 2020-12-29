@@ -62,19 +62,29 @@ router.get('/details/:id', verifyToken, async (req, res) => {
         error: 'session id not provided',
       });
     const result = await db.query(
-      `SELECT   session_name ,
-      session_description ,
-      session_fee ,
-      session_thumbnail ,
-      session_fee ,
-      session_duration
-      FROM session_tables WHERE session_id=${req.params.id}`,
+      `SELECT  
+      s.session_name ,
+      s.session_description ,
+      s.session_fee ,
+      s.session_thumbnail ,
+      s.session_fee ,
+      s.session_duration,
+      c.chapter_learnings
+      FROM session_tables as s INNER JOIN chapter_tables as c
+      ON s.session_id=c.session_id AND s.session_id=${req.params.id}  `,
       { type: db.QueryTypes.SELECT }
     );
+    console.log(result);
+
     if (!result)
       return res.status(400).json({
         success: 0,
         error: 'Could not fetch details',
+      });
+    if (!result.length)
+      return res.status(200).json({
+        success: 1,
+        session: [],
       });
     return res.status(200).json({ success: 1, session: result[0] });
   } catch (err) {

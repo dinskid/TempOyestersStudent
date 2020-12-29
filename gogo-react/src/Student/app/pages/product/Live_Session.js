@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardImg, CardText, CardBody, Col, Row } from 'reactstrap';
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  Col,
+  Row,
+  Spinner,
+} from 'reactstrap';
 import './course1.css';
 import axiosInstance from '../../../../helpers/axiosInstance';
-import NotificationManager from '../../../../components/common/react-notifications';
+import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 
 const Live_Session = () => {
   const [names, setNames] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (error)
@@ -49,10 +58,28 @@ const Live_Session = () => {
         } catch (error) {
           setError('Unable to fetch data');
         }
+      } finally {
+        setIsLoaded(true);
       }
     }
     fetchData();
   }, []);
+
+  if (!isLoaded)
+    return (
+      <div style={{ marginTop: '30%', marginLeft: '50%' }}>
+        <Spinner color="primary" />
+      </div>
+    );
+
+  if (!names.length)
+    return (
+      <>
+        <div>
+          <h1>No Live Sessions Found</h1>
+        </div>
+      </>
+    );
 
   return (
     <Row>

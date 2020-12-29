@@ -18,12 +18,11 @@ import { FiHeart } from 'react-icons/fi';
 import { BiCheck } from 'react-icons/bi';
 import Man from './man.jpg';
 import { AiFillPlayCircle } from 'react-icons/ai';
-import Angular from './angular.png';
 import { ImAlarm } from 'react-icons/im';
 import { Route, Link, useHistory } from 'react-router-dom';
 
 import axiosInstance from '../../../../helpers/axiosInstance';
-import NotificationManager from '../../../../components/common/react-notifications';
+import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 
 const DetailsPages = ({ match, intl, ...props }) => {
   const { messages } = intl;
@@ -44,13 +43,17 @@ const DetailsPages = ({ match, intl, ...props }) => {
     session_fee: '',
     session_duration: '',
   });
+
   const [instructor, setInstructor] = ['Udit Narayan'];
+
   const [work_exp, setWork_exp] = [
     'Senior Web Developer, Flexor Inc. from 2013 - 2017',
   ];
+
   const [about, setAbout] = [
     'Full stack web developer responsible for end-to-end web app development and creative cloud engineering. Led three teams of five employees each. Prototyped an average of 25 new product features per year. Drove best practice implementation for 22 employees across multiple departments. Decreased rework by 23% and costs by 15%. Boosted user experience scores by 55% over company-wide previous best.',
   ];
+
   const [content, setContent] = [
     'Content-1',
     'Content-2',
@@ -62,6 +65,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
     'Content-8',
     'Content-9',
   ];
+
   useEffect(() => {
     if (error)
       NotificationManager.warning(

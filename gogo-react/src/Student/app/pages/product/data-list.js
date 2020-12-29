@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardImg, CardText, CardBody, Col, Row } from 'reactstrap';
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  Col,
+  Row,
+  Spinner,
+} from 'reactstrap';
 import './course1.css';
 import { servicePath } from '../../../../constants/defaultValues';
 import useMousetrap from '../../../../hooks/use-mousetrap';
 import { Route, Link } from 'react-router-dom';
 import axiosInstance from '../../../../helpers/axiosInstance';
-import NotificationManager from '../../../../components/common/react-notifications';
+import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
@@ -15,8 +23,6 @@ const getIndex = (value, arr, prop) => {
   }
   return -1;
 };
-
-const apiUrl = `${servicePath}/cakes/paging`;
 
 const orderOptions = [
   { column: 'title', label: 'Product Name' },
@@ -178,10 +184,22 @@ const DataListPages = ({ match }) => {
 
   const startIndex = (currentPage - 1) * selectedPageSize;
   const endIndex = currentPage * selectedPageSize;
+  if (!isLoaded)
+    return (
+      <div style={{ marginTop: '30%', marginLeft: '50%' }}>
+        <Spinner color="primary" />
+      </div>
+    );
 
-  return !isLoaded ? (
-    <div className="loading" />
-  ) : (
+  if (!names.length)
+    return (
+      <>
+        <div>
+          <h1>No Live Sessions Found</h1>
+        </div>
+      </>
+    );
+  return (
     <>
       {/* <div className="container"> */}
       <Row>

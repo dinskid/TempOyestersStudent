@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Colxx, Separator } from '../../../components/common/CustomBootstrap';
-import axios from 'axios';
 import {
   Card,
   CardImg,
   CardText,
   CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
+  Spinner,
   Col,
   Row,
 } from 'reactstrap';
 import './course.css';
 import { servicePath } from '../../../constants/defaultValues';
-import Angular from './angular.png';
-import ListPageHeading from '../../../containers/pages/ListPageHeading';
-import AddNewModal from '../../../containers/pages/AddNewModal';
-import ListPageListing from '../../../containers/pages/ListPageListing';
 import useMousetrap from '../../../hooks/use-mousetrap';
 import { Link, Route } from 'react-router-dom';
 import axiosInstance from '../../../helpers/axiosInstance';
@@ -32,8 +24,6 @@ const getIndex = (value, arr, prop) => {
   }
   return -1;
 };
-
-const apiUrl = `${servicePath}/cakes/paging`;
 
 const orderOptions = [
   { column: 'title', label: 'Product Name' },
@@ -71,17 +61,7 @@ const DataListPages = ({ match }) => {
   const [items, setItems] = useState([]);
   const [lastChecked, setLastChecked] = useState(null);
 
-  const [names, setNames] = useState([
-    {
-      img: 'angular',
-      course: 'Angular',
-      genre: 'Front-end JavaScript Framework',
-      desc:
-        'Angular is a TypeScript-based open-source web application framework.',
-      cost: 1200,
-      tags: 'Web, frontend',
-    },
-  ]);
+  const [names, setNames] = useState([]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -208,9 +188,22 @@ const DataListPages = ({ match }) => {
   const startIndex = (currentPage - 1) * selectedPageSize;
   const endIndex = currentPage * selectedPageSize;
 
-  return !isLoaded ? (
-    <div className="loading" />
-  ) : (
+  if (!isLoaded)
+    return (
+      <div style={{ marginTop: '30%', marginLeft: '50%' }}>
+        <Spinner color="primary" />
+      </div>
+    );
+  if (!names.length)
+    return (
+      <>
+        <div>
+          <h1>You do not have any courses</h1>
+        </div>
+      </>
+    );
+
+  return (
     <>
       {/*   <h1>My Courses</h1>
       <Separator className="mb-5" /> */}
