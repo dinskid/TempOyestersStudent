@@ -234,10 +234,10 @@ const affiliateData = [
     accessor: 'course_purchase',
     cellClass: 'text-muted w-20',
     Cell: (props) => {
-      if (props.value == 'Yes') {
+      if (props.value == 'YES') {
         return (
           <Badge
-            color="primary"
+            color="info"
             style={{
               fontSize: '10px',
               borderRadius: '10px',
