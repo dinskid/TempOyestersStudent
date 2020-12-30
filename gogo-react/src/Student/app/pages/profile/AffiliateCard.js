@@ -648,7 +648,7 @@ const AffiliateCard = () => {
         <Col md="12" xs="12">
           <Card className="h-100 pl-4  ">
             <Nav tabs className="card-header-tabs ">
-              <NavItem style={{ marginTop: '40px' }}>
+              <NavItem style={{ marginTop: '40px', marginLeft: 0 }}>
                 <NavLink
                   to="#"
                   location={{}}
