@@ -5,12 +5,11 @@
   bottom: 0;
   padding-top:6%;
   z-index: 4;
-/*   margin-left: -10px; */
   height: 100%;
   transition: border-radius $menu-collapse-time;
 
   .scrollbar-container {
-    margin-right: 15px;
+    margin-right: 0;
     padding-right: 0;
   }
 
@@ -87,7 +86,6 @@
         top: 50%;
         transform: translateY(-50%);
         left: 0;
-        margin-left:-20px;
       }
 
       &:last-of-type {

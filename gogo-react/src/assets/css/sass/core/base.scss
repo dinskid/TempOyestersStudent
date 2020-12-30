@@ -29,7 +29,7 @@ html {
 
 body {
   font-family: 'Nunito', sans-serif;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   font-weight: 400;
   color: $primary-color;
   background: $background-color;
@@ -62,7 +62,7 @@ body {
 }
 
 h1 {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   padding-bottom: 10px;
   display: inline-block;
 
@@ -73,7 +73,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 
   @include respond-below(sm) {
     font-size: 1.1rem;
@@ -81,7 +81,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 
   @include respond-below(sm) {
     font-size: 1rem;
@@ -97,7 +97,7 @@ h3 {
 }
 
 h4 {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
 
   @include respond-below(sm) {
     font-size: 0.9rem;
@@ -105,7 +105,7 @@ h4 {
 }
 
 h5 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 
   @include respond-below(sm) {
     font-size: 0.9rem;
@@ -224,7 +224,7 @@ hr {
 }
 
 .list-item-heading {
-  font-size: 1rem;
+  font-size: 1.8rem;
 }
 
 .truncate {
