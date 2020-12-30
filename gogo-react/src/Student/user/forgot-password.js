@@ -7,6 +7,7 @@ import { Colxx } from '../../components/common/CustomBootstrap';
 import IntlMessages from '../../helpers/IntlMessages';
 import { forgotPassword } from '../../redux/actions';
 import { NotificationManager } from '../../components/common/react-notifications';
+import Logo from './logo.png';
 
 const validateEmail = (value) => {
   let error;
@@ -67,7 +68,7 @@ const ForgotPassword = ({
             <p className="white mb-0">
               Please use your e-mail to reset your password. <br />
               If you are not a member, please{' '}
-              <NavLink to="/Student/user/register" className="white">
+              <NavLink to="/Student/user/register" className="black">
                 register
               </NavLink>
               .
@@ -75,7 +76,13 @@ const ForgotPassword = ({
           </div>
           <div className="form-side">
             <NavLink to="/" className="white">
-              <span className="logo-single" />
+              {/* <span className="logo-single" /> */}
+              <img
+                src={Logo}
+                className="image mb-5"
+                style={{ width: '40%' }}
+                alt="1111"
+              />
             </NavLink>
             <CardTitle className="mb-4">
               <IntlMessages id="user.forgot-password" />

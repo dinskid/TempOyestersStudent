@@ -237,7 +237,7 @@ const affiliateData = [
       if (props.value == 'YES') {
         return (
           <Badge
-            color="info"
+            // color="info"
             style={{
               fontSize: '10px',
               borderRadius: '10px',
@@ -301,28 +301,28 @@ const uniqueVisits = [
   {
     Header: 'Unique Visits from instagram',
     accessor: 'unique_visits_from_instagram',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-15',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Unique Visits from WhatsApp',
     accessor: 'unique_visits_from_whatsapp',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-15',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Unique Visits from Linkedin',
     accessor: 'unique_visits_from_linkedin',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-15',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Unique Visits from Email',
     accessor: 'unique_visits_from_email',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-15',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
@@ -390,28 +390,28 @@ const cityWise = [
   {
     Header: 'City wise Visits from instagram',
     accessor: 'city_wise_visits_from_instagram',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-25 ',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from WhatsApp',
     accessor: 'city_wise_visits_from_whatsapp',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-25',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from Linkedin',
     accessor: 'city_wise_visits_from_linkedin',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-25',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from Email',
     accessor: 'city_wise_visits_from_email',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-25',
     Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
     sortType: 'basic',
   },
@@ -442,7 +442,7 @@ const Table = ({ columns, data }) => {
 
   return (
     <>
-      <table {...getTableProps()} className="r-table table">
+      <table {...getTableProps()} className="r-table table ">
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -505,8 +505,14 @@ const AffiliateCard = () => {
             {' '}
             <p style={{}}>{props.value}</p>
             <Badge
-              className="mb-2 ml-2"
-              style={{ borderRadius: '0px', height: '20px', cursor: 'pointer' }}
+              className="mb-0 ml-2"
+              style={{
+                borderRadius: '0px',
+                height: '25px',
+                cursor: 'pointer',
+                fontSize: '10px',
+                borderRadius: '10px',
+              }}
               onClick={() => navigator.clipboard.writeText(props.value)}
             >
               Copy Link

@@ -100,7 +100,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
               Please use your credentials to login.
               <br />
               If you are not a member, please{' '}
-              <NavLink to="/Student/user/register" className="white">
+              <NavLink to="/Student/user/register" className="black">
                 register
               </NavLink>
               .
@@ -169,9 +169,10 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                         <span className="bounce2" />
                         <span className="bounce3" />
                       </span>
-                      <span className="label">
+                      <span className="label">Login</span>
+                      {/* <span className="label">
                         <IntlMessages id="user.login-button" />
-                      </span>
+                      </span> */}
                     </Button>
                   </div>
                 </Form>

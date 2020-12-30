@@ -1,248 +1,17 @@
 import React from 'react';
-import { Row, Card, Col, CardBody, Badge, CardText } from 'reactstrap';
-import { useTable, usePagination, useSortBy } from 'react-table';
+import { Row, Card, Col, CardBody, CardText } from 'reactstrap';
 import { FaClipboardCheck } from 'react-icons/fa';
 import { FaUserGraduate } from 'react-icons/fa';
 import { IoIosPaper } from 'react-icons/io';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
-import { TiSocialInstagram } from 'react-icons/ti';
-import { IoLogoWhatsapp } from 'react-icons/io';
-import { AiFillLinkedin } from 'react-icons/ai';
-import { MdEmail } from 'react-icons/md';
-// import './mystyle.css';
-/* import data1 from '../../../../data/data2'; */
 import AffiliateCard from './AffiliateCard';
 
-function Table({ columns, data }) {
-  const {
-    getTableProps,
-    getTableBodyProps,
-    prepareRow,
-    headerGroups,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageCount,
-    gotoPage,
-    setPageSize,
-    state: { pageIndex, pageSize },
-  } = useTable(
-    {
-      columns,
-      data,
-      initialState: { pageIndex: 0, pageSize: 6 },
-    },
-    useSortBy,
-    usePagination
-  );
-
-  return (
-    <>
-      <table {...getTableProps()} className="r-table table">
-        <thead style={{ position: 'sticky' }}>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column, columnIndex) => (
-                <th
-                  key={`th_${columnIndex}`}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className={
-                    column.isSorted
-                      ? column.isSortedDesc
-                        ? 'sorted-desc'
-                        : 'sorted-asc'
-                      : ''
-                  }
-                  style={{ fontSize: '20px', position: 'sticky' }}
-                >
-                  {column.render('Header')}
-                  <span />
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell, cellIndex) => (
-                  <td
-                    key={`td_${cellIndex}`}
-                    {...cell.getCellProps({
-                      className: cell.column.cellClass,
-                    })}
-                  >
-                    {cell.render('Cell')}
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
-      {/* <DatatablePagination
-          page={pageIndex}
-          pages={pageCount}
-          canPrevious={canPreviousPage}
-          canNext={canNextPage}
-          pageSizeOptions={[4, 10, 20, 30, 40, 50]}
-          showPageSizeOptions={false}
-          showPageJump={false}
-          defaultPageSize={pageSize}
-          onPageChange={(p) => gotoPage(p)}
-          onPageSizeChange={(s) => setPageSize(s)}
-          paginationMaxSize={pageCount}
-        /> */}
-    </>
-  );
-}
-
 function affiliate() {
-  const cols = [
-    {
-      Header: 'Course',
-      accessor: 'c_name',
-      cellClass: 'text-muted w-15',
-      Cell: (props) => <p>{props.value}</p>,
-      sortType: 'basic',
-    },
-    {
-      Header: 'Student Name',
-      accessor: 's_name',
-      cellClass: 'text-muted w-15',
-      Cell: (props) => <p>{props.value}</p>,
-      sortType: 'basic',
-    },
-    {
-      Header: 'Email ID',
-      accessor: 'email',
-      cellClass: 'text-muted w-15',
-      Cell: (props) => (
-        <>
-          <p className="mt-1">{props.value}</p>
-        </>
-      ),
-      sortType: 'basic',
-    },
-    {
-      Header: 'Contact',
-      accessor: 'contact',
-      cellClass: 'text-muted w-10',
-      Cell: (props) => (
-        <>
-          {' '}
-          <p style={{}}>{props.value}</p>
-        </>
-      ),
-      sortType: 'basic',
-    },
-    {
-      Header: 'Link',
-      accessor: 'Link',
-      cellClass: 'text-muted w-20',
-      Cell: (props) => (
-        <>
-          {' '}
-          <Row>
-            {' '}
-            <p style={{}}>{props.value}</p>
-            <Badge
-              className="mb-2 ml-2"
-              style={{ borderRadius: '0px', height: '20px', cursor: 'pointer' }}
-              onClick={() => navigator.clipboard.writeText(props.value)}
-            >
-              Copy Link
-            </Badge>
-          </Row>
-        </>
-      ),
-      sortType: 'basic',
-    },
-    {
-      Header: 'Share on',
-      accessor: 'share',
-      cellClass: 'text-muted w-20',
-      Cell: (props) => (
-        <>
-          <Row>
-            <p className="mt-1">{props.value}</p>
-            <TiSocialInstagram
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#ED4956', cursor: 'pointer' }}
-            />
-            <IoLogoWhatsapp
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#10B418', cursor: 'pointer' }}
-            />
-            <AiFillLinkedin
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#0A66C2', cursor: 'pointer' }}
-            />
-            <MdEmail
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#F14236', cursor: 'pointer' }}
-            />
-          </Row>
-        </>
-      ),
-      sortType: 'basic',
-    },
-    {
-      Header: 'Course Purchased',
-      accessor: 'purchased',
-      cellClass: 'text-muted w-30',
-      Cell: (props) => {
-        if (props.value == 'Yes') {
-          return (
-            <Badge
-              color="primary"
-              style={{
-                fontSize: '10px',
-                borderRadius: '10px',
-                marginLeft: '60px',
-              }}
-            >
-              {props.value}
-            </Badge>
-          );
-        } else {
-          return (
-            <Badge
-              color="danger"
-              style={{
-                fontSize: '10px',
-                borderRadius: '10px',
-                marginLeft: '60px',
-              }}
-            >
-              {props.value}
-            </Badge>
-          );
-        }
-      },
-      sortType: 'basic',
-    },
-  ];
-
-  const cols1 = [
-    {
-      Header: 'Course',
-      accessor: 'c_name',
-      cellClass: 'text-muted w-15',
-      Cell: (props) => <p>{props.value}</p>,
-      sortType: 'basic',
-    },
-  ];
-  // return <Trial />;
-
   return (
     <div>
       <Row>
-        <Col md={3} xs={12}>
-          <Card style={{ backgroundColor: '#9B59B6' }}>
+        <Col sm="3" xs="12">
+          <Card style={{ backgroundColor: '#9B59B6', height: '176px' }}>
             <CardBody>
               <Row>
                 <Col md={6} xs={6}>
@@ -251,10 +20,16 @@ function affiliate() {
                   />
                 </Col>
                 <Col md={6} xs={6}>
-                  <CardText className="font-weight-bold head text-light">
+                  <CardText
+                    className="font-weight-bold head text-light"
+                    style={{ fontSize: '40px', marginTop: 20 }}
+                  >
                     31
                   </CardText>
-                  <CardText className="font-weight-bold text-center para text-light">
+                  <CardText
+                    className="font-weight-bold  para text-light"
+                    style={{ fontSize: '15px' }}
+                  >
                     Registrations
                   </CardText>
                 </Col>
@@ -262,18 +37,24 @@ function affiliate() {
             </CardBody>
           </Card>
         </Col>
-        <Col md={3} xs={12}>
-          <Card style={{ backgroundColor: '#F58F84' }}>
+        <Col sm="3" xs="12">
+          <Card style={{ backgroundColor: '#F58F84', height: '176px' }}>
             <CardBody>
               <Row>
                 <Col md={6} xs={6}>
                   <IoIosPaper style={{ fontSize: '100px', color: 'white' }} />
                 </Col>
                 <Col md={6} xs={6}>
-                  <CardText className="font-weight-bold head text-light">
+                  <CardText
+                    className="font-weight-bold head text-light"
+                    style={{ fontSize: '40px', marginTop: 20 }}
+                  >
                     31
                   </CardText>
-                  <CardText className="font-weight-bold text-center para text-light">
+                  <CardText
+                    className="font-weight-bold r para text-light"
+                    style={{ fontSize: '15px' }}
+                  >
                     Enrollments
                   </CardText>
                 </Col>
@@ -281,8 +62,8 @@ function affiliate() {
             </CardBody>
           </Card>
         </Col>
-        <Col md={3} xs={12}>
-          <Card style={{ backgroundColor: '#4B77BE' }}>
+        <Col sm="3" xs="12">
+          <Card style={{ backgroundColor: '#4B77BE', height: '176px' }}>
             <CardBody>
               <Row>
                 <Col md={6} xs={6}>
@@ -291,10 +72,16 @@ function affiliate() {
                   />
                 </Col>
                 <Col md={6} xs={6}>
-                  <CardText className="font-weight-bold head text-light">
+                  <CardText
+                    className="font-weight-bold head text-light"
+                    style={{ fontSize: '40px', marginTop: 20 }}
+                  >
                     31
                   </CardText>
-                  <CardText className="font-weight-bold text-center para text-light">
+                  <CardText
+                    className="font-weight-bold  para text-light"
+                    style={{ fontSize: '15px' }}
+                  >
                     Enrollments from top scorer
                   </CardText>
                 </Col>
@@ -302,8 +89,8 @@ function affiliate() {
             </CardBody>
           </Card>
         </Col>
-        <Col md={3} xs={12}>
-          <Card style={{ backgroundColor: '#E68364' }}>
+        <Col sm="3" xs="12">
+          <Card style={{ backgroundColor: '#E68364', height: '176px' }}>
             <CardBody>
               <Row>
                 <Col md={6} xs={6}>
@@ -312,10 +99,16 @@ function affiliate() {
                   />
                 </Col>
                 <Col md={6} xs={6}>
-                  <CardText className="font-weight-bold head text-light">
+                  <CardText
+                    className="font-weight-bold head text-light"
+                    style={{ fontSize: '40px', marginTop: 20 }}
+                  >
                     31
                   </CardText>
-                  <CardText className="font-weight-bold text-center para text-light">
+                  <CardText
+                    className="font-weight-bold  para text-light"
+                    style={{ fontSize: '15px' }}
+                  >
                     Rewards Received
                   </CardText>
                 </Col>

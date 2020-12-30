@@ -32,6 +32,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
   let session_id;
   try {
     session_id = props.location.state.session_id;
+    console.log(session_id);
   } catch (err) {
     history.push('/app/pages/product/data-list');
   }
@@ -42,6 +43,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
     session_thumbnail: '',
     session_fee: '',
     session_duration: '',
+    chapter_learnings: [],
   });
 
   const [instructor, setInstructor] = ['Udit Narayan'];
@@ -126,7 +128,19 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 What you'll learn
               </CardTitle>
               <Row>
-                <Col md="1">
+                {session.chapter_learnings.map((doc) => {
+                  return (
+                    <>
+                      <Col md="1">
+                        <BiCheck className="bicheck" />
+                      </Col>
+                      <Col md="5">
+                        <CardText className="ct">{doc}</CardText>
+                      </Col>
+                    </>
+                  );
+                })}
+                {/* <Col md="1">
                   <BiCheck className="bicheck" />
                 </Col>
                 <Col md="5">
@@ -166,7 +180,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
                     Create single-page applications with one of the most modern
                     JavaScript frameworks out there.
                   </CardText>
-                </Col>
+                </Col> */}
               </Row>
             </Card>
           </div>

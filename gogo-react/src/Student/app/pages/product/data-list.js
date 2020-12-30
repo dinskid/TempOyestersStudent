@@ -14,6 +14,7 @@ import useMousetrap from '../../../../hooks/use-mousetrap';
 import { Route, Link } from 'react-router-dom';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import Badge from 'reactstrap/lib/Badge';
 
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
@@ -73,7 +74,6 @@ const DataListPages = ({ match }) => {
             img: doc.session_thumbnail,
             course: doc.session_name,
             genre: doc.session_tagline,
-            desc: doc.session_description,
             cost: doc.session_fee,
             tags: doc.session_tags,
           }));
@@ -195,24 +195,27 @@ const DataListPages = ({ match }) => {
     return (
       <>
         <div>
-          <h1>No Live Sessions Found</h1>
+          <h1>No Sessions Found</h1>
         </div>
       </>
     );
+
   return (
     <>
       {/* <div className="container"> */}
       <Row>
         {names.map((name) => {
+          console.log(name.tags.split(','));
           return (
             <Col md={3} xs={12}>
               <Card
-                className="mt-2 mb-2"
+                className="mt-2"
                 style={{
                   width: '100%',
-                  height: '450px',
+                  minHeight: '550px',
                   marginLeft: 'auto',
                   marginRight: 'auto',
+                  marginBottom: '50px',
                 }}
               >
                 <Route>
@@ -224,23 +227,60 @@ const DataListPages = ({ match }) => {
                   >
                     <CardImg
                       top
-                      style={{ width: '100%' }}
+                      style={{
+                        width: '100%',
+                        position: 'relative',
+                        maxHeight: '250px',
+                      }}
                       src={require('./react.png') || name.img}
                       alt="Card image cap"
                     />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        height: '30px',
+                        backgroundColor: '#ff0000',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      <p
+                        className="mt-1 mb-2 mr-2 ml-2"
+                        style={{ color: '#fff', fontSize: '16px' }}
+                      >
+                        Rs.{name.cost}
+                      </p>
+                    </div>
                   </Link>
                 </Route>
                 <CardBody>
                   <h2 className="font-weight-bold">{name.course}</h2>
+                  {/* <ul
+                    className="ml-0"
+                    style={{ display: 'flex', listStyleType: 'none' }}
+                  >
+                    {name.tags.split(',').map((tag) => (
+                      <li
+                        style={{
+                          color: 'blue',
+                          fontSize: '.9rem',
+                          opacity: '.7',
+                        }}
+                      >
+                        #{tag}
+                      </li>
+                    ))}
+                  </ul> */}
                   <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
                   <CardText>{name.desc}</CardText>
                   <Row>
-                    <h5 className="mr-auto ml-4">
-                      <b>Rs. {name.cost}</b>
-                    </h5>
-                    <h5 className="ml-auto mr-4">
+                    {/* <h5 className="ml-2 mr-4">
                       <b>Tags:</b> {name.tags}
-                    </h5>
+                    </h5> */}
+                    {name.tags.split(',').map((tag) => {
+                      return <Badge className="m-1">{tag}</Badge>;
+                    })}
                   </Row>
                 </CardBody>
               </Card>

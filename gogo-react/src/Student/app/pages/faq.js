@@ -4,6 +4,7 @@ import {
   CardImg,
   CardText,
   CardBody,
+  Badge,
   Spinner,
   Col,
   Row,
@@ -212,22 +213,40 @@ const DataListPages = ({ match }) => {
           return (
             <Col md={3} xs={12}>
               <Card
-                className="mt-2 mb-2"
+                className="mt-2"
                 style={{
                   width: '100%',
-                  height: '450px',
+                  minHeight: '550px',
                   marginLeft: 'auto',
                   marginRight: 'auto',
+                  marginBottom: '50px',
                 }}
               >
                 <Route>
                   <Link to="course">
                     <CardImg
                       top
-                      style={{ width: '100%' }}
+                      style={{ width: '100%', maxHeight: '250px' }}
                       src={require(`./img2.jpg`)}
                       alt="Card image cap"
                     />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        height: '30px',
+                        backgroundColor: '#ff0000',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      <p
+                        className="mt-1 mb-2 mr-2 ml-2"
+                        style={{ color: '#fff', fontSize: '16px' }}
+                      >
+                        Rs.{name.cost}
+                      </p>
+                    </div>
                   </Link>
                 </Route>
                 <CardBody>
@@ -235,12 +254,15 @@ const DataListPages = ({ match }) => {
                   <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
                   <CardText>{name.desc}</CardText>
                   <Row>
-                    <h5 className="mr-auto ml-4">
+                    {/* <h5 className="mr-auto ml-4">
                       <b>RS. {name.cost}</b>
-                    </h5>
-                    <h5 className="ml-auto mr-4">
+                    </h5> */}
+                    {/* <h5 className="ml-2 mr-4">
                       <b>Tags:</b> {name.tags}
-                    </h5>
+                    </h5> */}
+                    {name.tags.split(',').map((tag) => {
+                      return <Badge className="m-1">{tag}</Badge>;
+                    })}
                   </Row>
                 </CardBody>
               </Card>
