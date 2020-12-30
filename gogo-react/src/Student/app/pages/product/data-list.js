@@ -5,6 +5,7 @@ import {
   CardText,
   CardBody,
   Col,
+  Badge,
   Row,
   Spinner,
 } from 'reactstrap';
@@ -14,7 +15,6 @@ import useMousetrap from '../../../../hooks/use-mousetrap';
 import { Route, Link } from 'react-router-dom';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
-import Badge from 'reactstrap/lib/Badge';
 
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
@@ -279,7 +279,7 @@ const DataListPages = ({ match }) => {
                       <b>Tags:</b> {name.tags}
                     </h5> */}
                     {name.tags.split(',').map((tag) => {
-                      return <Badge className="m-1">{tag}</Badge>;
+                      return <Badge className="badge-color m-1">{tag}</Badge>;
                     })}
                   </Row>
                 </CardBody>

@@ -128,18 +128,20 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 What you'll learn
               </CardTitle>
               <Row>
-                {session.chapter_learnings.map((doc) => {
-                  return (
-                    <>
-                      <Col md="1">
-                        <BiCheck className="bicheck" />
-                      </Col>
-                      <Col md="5">
-                        <CardText className="ct">{doc}</CardText>
-                      </Col>
-                    </>
-                  );
-                })}
+                {session.chapter_learnings
+                  ? session.chapter_learnings.map((doc) => {
+                      return (
+                        <>
+                          <Col md="1">
+                            <BiCheck className="bicheck" />
+                          </Col>
+                          <Col md="5">
+                            <CardText className="ct">{doc}</CardText>
+                          </Col>
+                        </>
+                      );
+                    })
+                  : ''}
                 {/* <Col md="1">
                   <BiCheck className="bicheck" />
                 </Col>
