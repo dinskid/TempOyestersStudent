@@ -3,7 +3,6 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import AppLayout from '../../layout/AppLayout';
-// import { ProtectedRoute, UserRole } from '../../helpers/authHelper';
 
 const Dashboards = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './dashboards')
@@ -60,11 +59,6 @@ const App = ({ match }) => {
               path={`${match.url}/applications`}
               render={(props) => <Applications {...props} />}
             />
-            {/* <ProtectedRoute
-                    path={`${match.url}/applications`}
-                    component={Applications}
-                    roles={[UserRole.Admin]}
-            /> */}
             <Route
               path={`${match.url}/pages`}
               render={(props) => <Pages {...props} />}

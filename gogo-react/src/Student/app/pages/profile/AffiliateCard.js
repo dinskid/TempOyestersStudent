@@ -211,28 +211,36 @@ const affiliateData = [
     Header: 'Student Name',
     accessor: 'student_name',
     cellClass: 'text-muted ',
-    Cell: (props) => <p className="ml-2">{props.value}</p>,
+    Cell: (props) => (
+      <p className="ml-2" style={{ fontSize: '1rem' }}>
+        {props.value}
+      </p>
+    ),
     sortType: 'basic',
   },
   {
     Header: 'Course Name',
     accessor: 'course_name',
     cellClass: 'text-muted w-15',
-    Cell: (props) => <p className="ml-4">{props.value}</p>,
+    Cell: (props) => (
+      <p className="ml-4" style={{ fontSize: '1rem' }}>
+        {props.value}
+      </p>
+    ),
     sortType: 'basic',
   },
   {
     Header: 'Email Id',
     accessor: 'email_id',
     cellClass: 'text-muted w-15',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Contact',
     accessor: 'contact',
     cellClass: 'text-muted ',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
@@ -271,10 +279,10 @@ const affiliateData = [
     sortType: 'basic',
   },
   {
-    Header: 'Student Earnings',
+    Header: 'Your Earnings',
     accessor: 'student_earnings',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
 ];
@@ -373,28 +381,28 @@ const countryWise = [
     Header: 'Country Visits from instagram',
     accessor: 'country_visits_from_instagram',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Country Visits from WhatsApp',
     accessor: 'country_visits_from_whatsapp',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Country Visits from Linkedin',
     accessor: 'country_visits_from_linkedin',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Country Visits from Email',
     accessor: 'country_visits_from_email',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
 ];
@@ -404,28 +412,28 @@ const cityWise = [
     Header: 'City wise Visits from instagram',
     accessor: 'city_wise_visits_from_instagram',
     cellClass: 'text-muted w-25 ',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from WhatsApp',
     accessor: 'city_wise_visits_from_whatsapp',
     cellClass: 'text-muted w-25',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from Linkedin',
     accessor: 'city_wise_visits_from_linkedin',
     cellClass: 'text-muted w-25',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from Email',
     accessor: 'city_wise_visits_from_email',
     cellClass: 'text-muted w-25',
-    Cell: (props) => <p>{props.value}</p>,
+    Cell: (props) => <p style={{ fontSize: '1rem' }}>{props.value}</p>,
     sortType: 'basic',
   },
 ];
@@ -511,7 +519,9 @@ const AffiliateCard = () => {
       Header: 'Course Name',
       accessor: 'course_name',
       cellClass: 'text-muted w-25',
-      Cell: (props) => <p style={{ marginLeft: '10px' }}>{props.value}</p>,
+      Cell: (props) => (
+        <p style={{ marginLeft: '10px', fontSize: '1rem' }}>{props.value}</p>
+      ),
       sortType: 'basic',
     },
     {
@@ -519,7 +529,6 @@ const AffiliateCard = () => {
       accessor: 'link',
       cellClass: 'text-muted w-25',
       Cell: (props) => {
-        console.log(props.value);
         const textToBeCopied = props.value;
         return (
           <>
@@ -537,12 +546,7 @@ const AffiliateCard = () => {
                   borderRadius: '10px',
                 }}
                 onClick={() => {
-                  navigator.clipboard
-                    .writeText(textToBeCopied)
-                    .then(() => console.log('written successfully'))
-                    .catch((err) =>
-                      console.log('error while writing to clipboard', err)
-                    );
+                  navigator.clipboard.writeText(textToBeCopied);
                 }}
               >
                 Copy Link
@@ -577,7 +581,7 @@ const AffiliateCard = () => {
         return (
           <>
             <Row>
-              <p className="mt-1">value</p>
+              {/* <p className="mt-1">value</p> */}
               <TiSocialInstagram
                 className="mb-1 ml-2"
                 style={{
@@ -817,7 +821,7 @@ const AffiliateCard = () => {
               </NavItem>
             </Nav>
             <Scrollbars style={{ width: '100%', height: 400 }}>
-              <CardBody>
+              <CardBody style={{ width: '120%' }}>
                 <TabContent activeTab={activeFirstTab6}>
                   <TabPane tabId="20">
                     <Table columns={links} data={linksData} />{' '}

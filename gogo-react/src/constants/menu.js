@@ -9,6 +9,12 @@ const data = [
     to: `${adminRoot}/pages/product/data-list`,
   },
   {
+    id: 'pages-blog',
+    icon: 'iconsminds-wifi',
+    label: 'Live Sessions',
+    to: `${adminRoot}/pages/product/Live_Session`,
+  },
+  {
     id: 'pages-product',
     icon: 'iconsminds-open-book',
     label: 'My Courses',
@@ -19,12 +25,6 @@ const data = [
     icon: 'iconsminds-affiliate',
     label: 'Affiliate',
     to: `${adminRoot}/pages/profile/affiliate`,
-  },
-  {
-    id: 'pages-blog',
-    icon: 'iconsminds-wifi',
-    label: 'Live Sessions',
-    to: `${adminRoot}/pages/product/Live_Session`,
   },
 
   {

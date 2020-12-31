@@ -120,6 +120,10 @@ router.post('/login', async (req, res) => {
         }
       );
 
+      res.cookie('auth-token', jwtToken, {
+        httpOnly: true,
+      });
+
       return res.status(200).json({
         success: 1,
         message: 'Login Successful',

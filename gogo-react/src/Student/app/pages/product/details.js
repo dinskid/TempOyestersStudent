@@ -137,14 +137,14 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 {session.chapter_learnings
                   ? session.chapter_learnings.map((doc) => {
                       return (
-                        <>
+                        <Row md={6}>
                           <Col md="1">
                             <BiCheck className="bicheck" />
                           </Col>
                           <Col md="5">
                             <CardText className="ct">{doc}</CardText>
                           </Col>
-                        </>
+                        </Row>
                       );
                     })
                   : ''}

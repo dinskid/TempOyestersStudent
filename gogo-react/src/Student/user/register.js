@@ -211,7 +211,6 @@ const Register = ({
                       </div>
                     ) : null}
                   </FormGroup>
-
                   <FormGroup className="form-group has-float-label">
                     <Label>Password</Label>
                     <Field
@@ -259,37 +258,39 @@ const Register = ({
                       </div>
                     ) : null}
                   </FormGroup>
-                  <div className="d-flex justify-content-between align-items-center">
+                  <div className=" mt-3 d-flex justify-content-between  align-items-center">
+                    <Button color="primary" type="submit" className="register">
+                      Register
+                    </Button>{' '}
+                    <br />
+                    <br />
                     <NavLink to="/Student/user/login">
                       Already Registered?
                     </NavLink>
-                    <Button color="primary" type="submit" className="register">
-                      Register
-                    </Button>
                   </div>
                 </Form>
               )}
             </Formik>
-            <Row className="mt-4 d-flex justify-content-center">
+            <Row className="mt-4 ">
               <div style={{ width: '90%' }}>
                 <Button
                   outline
                   color="secondary"
                   onClick={signIn}
-                  className="mb-2 d-flex align-items-center p-3 registerug"
+                  className="mb-2 d-flex align-items-center  registerug"
                 >
                   {/*<div className={`glyph-icon ${simplelineicons[176]} mr-2 `} />*/}
                   <img src={Google} className="logo" />
                   <span>Continue with Google</span>
                 </Button>
-                <Button
+                {/* <Button
                   outline
                   color="secondary"
                   className="mb-2 d-flex align-items-center p-3 registerug"
                 >
                   <img src={Apple} className="logo2" />
                   <span>Continue with Apple</span>
-                </Button>
+                </Button> */}
               </div>{' '}
             </Row>
           </div>

@@ -190,14 +190,14 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                   <img src={Google} className="logo" />
                   <span id="text">Continue with Google</span>
                 </Button>
-                <Button
+                {/* <Button
                   outline
                   color="secondary"
                   className="mb-2 d-flex align-items-center p-3 registerug"
                 >
                   <img src={Apple} className="logo2" />
                   <span id="text">Continue with Apple</span>
-                </Button>
+                </Button> */}
               </div>{' '}
             </Row>
           </div>

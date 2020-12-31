@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
-
+const cookieParser = require('cookie-parser');
 require('./config/connection');
 
 const app = express();
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use(morgan('dev'));
 app.use(fileUpload());
 app.use(morgan('dev'));
-
+app.use(cookieParser());
 //Body Parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

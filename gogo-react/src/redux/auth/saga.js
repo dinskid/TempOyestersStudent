@@ -1,5 +1,4 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { auth } from '../../helpers/Firebase';
 import {
   LOGIN_USER,
   REGISTER_USER,
@@ -19,7 +18,6 @@ import {
   resetPasswordError,
 } from './actions';
 
-import { adminRoot, currentUser } from '../../constants/defaultValues';
 import { setCurrentUser } from '../../helpers/Utils';
 import axiosInstance from '../../helpers/axiosInstance';
 
@@ -154,19 +152,10 @@ export function* watchLogoutUser() {
   yield takeEvery(LOGOUT_USER, logout);
 }
 
-// const logoutAsync = async (history) => {
-//   await auth
-//     .signOut()
-//     .then((user) => user)
-//     .catch((error) => error);
-//   history.push(adminRoot);
-// };
-
 function* logout({ payload }) {
   const { history } = payload;
   setCurrentUser();
   history.push('/Student/user/login');
-  // yield call(logoutAsync, history);
 }
 
 export function* watchForgotPassword() {

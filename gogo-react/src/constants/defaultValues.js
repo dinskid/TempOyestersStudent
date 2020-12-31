@@ -1,6 +1,4 @@
-import { UserRole } from "../helpers/authHelper";
-
-/* 
+/*
 Menu Types:
 "menu-default", "menu-sub-hidden", "menu-hidden"
 */
@@ -15,23 +13,12 @@ export const localeOptions = [
   { id: 'enrtl', name: 'English - RTL', direction: 'rtl' },
 ];
 
-export const firebaseConfig = {
-  apiKey: 'AIzaSyBBksq-Asxq2M4Ot-75X19IyrEYJqNBPcg',
-  authDomain: 'gogo-react-login.firebaseapp.com',
-  databaseURL: 'https://gogo-react-login.firebaseio.com',
-  projectId: 'gogo-react-login',
-  storageBucket: 'gogo-react-login.appspot.com',
-  messagingSenderId: '216495999563',
-};
-
 export const currentUser = {
   id: 1,
   title: 'Sarah Kortney',
   img: '/assets/img/profiles/l-1.jpg',
   date: 'Last seen today 15:24',
-  role: UserRole.Admin
-}
-
+};
 
 export const adminRoot = '/app';
 export const buyUrl = 'https://1.envato.market/k4z0';

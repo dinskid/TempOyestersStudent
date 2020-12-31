@@ -7,13 +7,11 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import './helpers/Firebase';
 import AppLocale from './lang';
 import ColorSwitcher from './components/common/ColorSwitcher';
 import { NotificationContainer } from './components/common/react-notifications';
 import { isMultiColorActive, adminRoot } from './constants/defaultValues';
 import { getDirection } from './helpers/Utils';
-import { ProtectedRoute, UserRole } from './helpers/authHelper';
 
 const ViewHome = React.lazy(() =>
   import(/* webpackChunkName: "views" */ './Student/home')
@@ -33,7 +31,6 @@ const ViewError = React.lazy(() =>
 const ViewUnauthorized = React.lazy(() =>
   import(/* webpackChunkName: "views-error" */ './Student/unauthorized')
 );
-
 
 class App extends React.Component {
   constructor(props) {
@@ -64,11 +61,6 @@ class App extends React.Component {
             <Suspense fallback={<div className="loading" />}>
               <Router>
                 <Switch>
-                  <ProtectedRoute
-                    path={adminRoot}
-                    component={ViewApp}
-                    roles={[UserRole.Admin, UserRole.Editor]}
-                  />
                   <Route
                     path="/Student/user"
                     render={(props) => <ViewUser {...props} />}
@@ -90,7 +82,7 @@ class App extends React.Component {
                   />
                   <Route
                     path="/app"
-                    exact
+                    // exact
                     render={(props) => <ViewApp {...props} />}
                   />
                   {/* <Route
@@ -98,9 +90,9 @@ class App extends React.Component {
                     exact
                     render={(props) => <ViewInst {...props} />}
                   /> */}
-                  
-                  <Redirect exact from="/" to={"/Student/user"} />
-                 
+
+                  <Redirect exact from="/" to={'/Student/user'} />
+
                   {/* <Redirect to="/error" /> */}
                 </Switch>
               </Router>
