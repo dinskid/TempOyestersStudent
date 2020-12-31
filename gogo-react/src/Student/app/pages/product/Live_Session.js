@@ -124,7 +124,7 @@ const Live_Session = () => {
               {/* </Link></Route> */}
               <CardBody>
                 <h2 className="font-weight-bold">{name.course}</h2>
-                <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
+                {/* <h6 className="mb-2 font-weight-bold">{name.genre}</h6> */}
                 <CardText>{name.desc}</CardText>
                 <Row>
                   {/* <h5 className="mr-auto ml-4">
@@ -133,9 +133,9 @@ const Live_Session = () => {
                   {/* <h5 className="ml-2 mr-4">
                     <b>Tags:</b> {name.tags}
                   </h5> */}
-                  {name.tags.split(',').map((tag) => {
+                  {/* {name.tags.split(',').map((tag) => {
                     return <Badge className="m-1">{tag}</Badge>;
-                  })}
+                  })} */}
                 </Row>
               </CardBody>
             </Card>

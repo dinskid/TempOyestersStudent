@@ -106,55 +106,55 @@ const AvgSessionData = [
 ];
 const countryWiseData = [
   {
-    country_visits_from_email: 12,
-    country_visits_from_instagram: 23,
-    country_visits_from_linkedin: 42,
-    country_visits_from_whatsapp: 21,
+    country_visits_from_email: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_instagram: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_linkedin: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_whatsapp: 'India(80%), USA(15%), Bangladesh(5%)',
   },
   {
-    country_visits_from_email: 12,
-    country_visits_from_instagram: 23,
-    country_visits_from_linkedin: 42,
-    country_visits_from_whatsapp: 21,
+    country_visits_from_email: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_instagram: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_linkedin: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_whatsapp: 'India(80%), USA(15%), Bangladesh(5%)',
   },
   {
-    country_visits_from_email: 12,
-    country_visits_from_instagram: 23,
-    country_visits_from_linkedin: 42,
-    country_visits_from_whatsapp: 21,
+    country_visits_from_email: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_instagram: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_linkedin: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_whatsapp: 'India(80%), USA(15%), Bangladesh(5%)',
   },
   {
-    country_visits_from_email: 12,
-    country_visits_from_instagram: 23,
-    country_visits_from_linkedin: 42,
-    country_visits_from_whatsapp: 21,
+    country_visits_from_email: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_instagram: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_linkedin: 'India(80%), USA(15%), Bangladesh(5%)',
+    country_visits_from_whatsapp: 'India(80%), USA(15%), Bangladesh(5%)',
   },
 ];
 
 const cityWiseData = [
   {
-    city_wise_visits_from_email: 12,
-    city_wise_visits_from_instagram: 23,
-    city_wise_visits_from_linkedin: 42,
-    city_wise_visits_from_whatsapp: 21,
+    city_wise_visits_from_email: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_instagram: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_linkedin: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_whatsapp: 'Delhi(80%), Kolkata(20%)',
   },
   {
-    city_wise_visits_from_email: 12,
-    city_wise_visits_from_instagram: 23,
-    city_wise_visits_from_linkedin: 42,
-    city_wise_visits_from_whatsapp: 21,
+    city_wise_visits_from_email: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_instagram: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_linkedin: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_whatsapp: 'Delhi(80%), Kolkata(20%)',
   },
   {
-    city_wise_visits_from_email: 12,
-    city_wise_visits_from_instagram: 23,
-    city_wise_visits_from_linkedin: 42,
-    city_wise_visits_from_whatsapp: 21,
+    city_wise_visits_from_email: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_instagram: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_linkedin: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_whatsapp: 'Delhi(80%), Kolkata(20%)',
   },
   {
-    city_wise_visits_from_email: 12,
-    city_wise_visits_from_instagram: 23,
-    city_wise_visits_from_linkedin: 42,
-    city_wise_visits_from_whatsapp: 21,
+    city_wise_visits_from_email: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_instagram: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_linkedin: 'Delhi(80%), Kolkata(20%)',
+    city_wise_visits_from_whatsapp: 'Delhi(80%), Kolkata(20%)',
   },
 ];
 const affiliate2 = [
@@ -164,6 +164,7 @@ const affiliate2 = [
     email_id: 'johndoe@gmail.com',
     contact: '9764010025',
     course_purchase: 'No',
+    student_earnings: '200 Points',
     class: 'text-muted w-10 danger badge-sm',
   },
   {
@@ -172,6 +173,7 @@ const affiliate2 = [
     email_id: 'johndoe@gmail.com',
     contact: '9764010025',
     course_purchase: 'No',
+    student_earnings: '100 Points',
     class: 'text-muted w-10 danger badge-sm',
   },
   {
@@ -180,6 +182,8 @@ const affiliate2 = [
     email_id: 'johndoe@gmail.com',
     contact: '9764010025',
     course_purchase: 'YES',
+
+    student_earnings: '140 Points',
     class: 'text-muted w-10 danger badge-sm',
   },
   {
@@ -187,6 +191,7 @@ const affiliate2 = [
     course_name: 'Angular',
     email_id: 'johndoe@gmail.com',
     contact: '9764010025',
+    student_earnings: '600 Points',
     course_purchase: 'No',
     class: 'text-muted w-10 danger badge-sm',
   },
@@ -195,6 +200,7 @@ const affiliate2 = [
     course_name: 'Angular',
     email_id: 'johndoe@gmail.com',
     contact: '9764010025',
+    student_earnings: '120 Points',
     course_purchase: 'YES',
     class: 'text-muted w-10 danger badge-sm',
   },
@@ -204,7 +210,7 @@ const affiliateData = [
   {
     Header: 'Student Name',
     accessor: 'student_name',
-    cellClass: 'text-muted w-15',
+    cellClass: 'text-muted ',
     Cell: (props) => <p className="ml-2">{props.value}</p>,
     sortType: 'basic',
   },
@@ -218,21 +224,21 @@ const affiliateData = [
   {
     Header: 'Email Id',
     accessor: 'email_id',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted w-15',
     Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Contact',
     accessor: 'contact',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted ',
     Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Course Purchases',
     accessor: 'course_purchase',
-    cellClass: 'text-muted w-20',
+    cellClass: 'text-muted ',
     Cell: (props) => {
       if (props.value == 'YES') {
         return (
@@ -241,7 +247,7 @@ const affiliateData = [
             style={{
               fontSize: '10px',
               borderRadius: '10px',
-              marginLeft: '60px',
+              marginLeft: '40px',
             }}
           >
             {props.value}
@@ -254,7 +260,7 @@ const affiliateData = [
             style={{
               fontSize: '10px',
               borderRadius: '10px',
-              marginLeft: '60px',
+              marginLeft: '40px',
             }}
           >
             {props.value}
@@ -262,6 +268,13 @@ const affiliateData = [
         );
       }
     },
+    sortType: 'basic',
+  },
+  {
+    Header: 'Student Earnings',
+    accessor: 'student_earnings',
+    cellClass: 'text-muted w-20',
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
 ];
@@ -360,28 +373,28 @@ const countryWise = [
     Header: 'Country Visits from instagram',
     accessor: 'country_visits_from_instagram',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Country Visits from WhatsApp',
     accessor: 'country_visits_from_whatsapp',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Country Visits from Linkedin',
     accessor: 'country_visits_from_linkedin',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'Country Visits from Email',
     accessor: 'country_visits_from_email',
     cellClass: 'text-muted w-20',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
 ];
@@ -391,28 +404,28 @@ const cityWise = [
     Header: 'City wise Visits from instagram',
     accessor: 'city_wise_visits_from_instagram',
     cellClass: 'text-muted w-25 ',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from WhatsApp',
     accessor: 'city_wise_visits_from_whatsapp',
     cellClass: 'text-muted w-25',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from Linkedin',
     accessor: 'city_wise_visits_from_linkedin',
     cellClass: 'text-muted w-25',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
   {
     Header: 'City wise Visits from Email',
     accessor: 'city_wise_visits_from_email',
     cellClass: 'text-muted w-25',
-    Cell: (props) => <p style={{ marginLeft: '80px' }}>{props.value}</p>,
+    Cell: (props) => <p>{props.value}</p>,
     sortType: 'basic',
   },
 ];
@@ -495,91 +508,122 @@ const AffiliateCard = () => {
 
   const links = [
     {
-      Header: 'Link',
-      accessor: 'link',
-      cellClass: 'text-muted w-20',
-      Cell: (props) => (
-        <>
-          {' '}
-          <Row style={{ width: '200px' }}>
-            {' '}
-            <p style={{}}>{props.value}</p>
-            <Badge
-              className="mb-0 ml-2"
-              style={{
-                borderRadius: '0px',
-                height: '25px',
-                cursor: 'pointer',
-                fontSize: '10px',
-                borderRadius: '10px',
-              }}
-              onClick={() => navigator.clipboard.writeText(props.value)}
-            >
-              Copy Link
-            </Badge>
-          </Row>
-        </>
-      ),
-      sortType: 'basic',
-    },
-    {
-      Header: 'RefId',
-      accessor: 'refid',
-      cellClass: 'text-muted w-10',
-      Cell: (props) => <p>{props.value}</p>,
-      sortType: 'basic',
-    },
-    {
       Header: 'Course Name',
       accessor: 'course_name',
-      cellClass: 'text-muted w-15',
+      cellClass: 'text-muted w-25',
       Cell: (props) => <p style={{ marginLeft: '10px' }}>{props.value}</p>,
       sortType: 'basic',
     },
     {
-      Header: 'Course Id',
-      accessor: 'courseid',
-      cellClass: 'text-muted w-15',
-      Cell: (props) => <p style={{ marginLeft: '30px' }}>{props.value}</p>,
+      Header: 'Link',
+      accessor: 'link',
+      cellClass: 'text-muted w-25',
+      Cell: (props) => {
+        console.log(props.value);
+        const textToBeCopied = props.value;
+        return (
+          <>
+            {' '}
+            <Row style={{ width: '200px' }}>
+              {' '}
+              <p style={{}}>{textToBeCopied}</p>
+              <Badge
+                className="mb-0 ml-2"
+                style={{
+                  borderRadius: '0px',
+                  height: '25px',
+                  cursor: 'pointer',
+                  fontSize: '10px',
+                  borderRadius: '10px',
+                }}
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(textToBeCopied)
+                    .then(() => console.log('written successfully'))
+                    .catch((err) =>
+                      console.log('error while writing to clipboard', err)
+                    );
+                }}
+              >
+                Copy Link
+              </Badge>
+            </Row>
+          </>
+        );
+      },
       sortType: 'basic',
     },
+    // {
+    //   Header: 'RefId',
+    //   accessor: 'refid',
+    //   cellClass: 'text-muted w-10',
+    //   Cell: (props) => <p>{props.value}</p>,
+    //   sortType: 'basic',
+    // },
+
+    // {
+    //   Header: 'Course Id',
+    //   accessor: 'courseid',
+    //   cellClass: 'text-muted w-15',
+    //   Cell: (props) => <p style={{ marginLeft: '30px' }}>{props.value}</p>,
+    //   sortType: 'basic',
+    // },
     {
       Header: 'Share On',
       accessor: 'share_on',
       cellClass: 'text-muted w-25',
-      Cell: (props) => (
-        <>
-          <Row>
-            <p className="mt-1">{props.value}</p>
-            <TiSocialInstagram
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#ED4956', cursor: 'pointer' }}
-            />
-            <IoLogoWhatsapp
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#10B418', cursor: 'pointer' }}
-            />
-            <AiFillLinkedin
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#0A66C2', cursor: 'pointer' }}
-            />
-            <MdEmail
-              className="mb-1 ml-2"
-              style={{ fontSize: '25px', color: '#F14236', cursor: 'pointer' }}
-            />
-          </Row>
-        </>
-      ),
+      Cell: (props) => {
+        console.log(props.data);
+        return (
+          <>
+            <Row>
+              <p className="mt-1">value</p>
+              <TiSocialInstagram
+                className="mb-1 ml-2"
+                style={{
+                  fontSize: '25px',
+                  color: '#ED4956',
+                  cursor: 'pointer',
+                }}
+              />
+              <IoLogoWhatsapp
+                className="mb-1 ml-2"
+                style={{
+                  fontSize: '25px',
+                  color: '#10B418',
+                  cursor: 'pointer',
+                }}
+              />
+              <AiFillLinkedin
+                className="mb-1 ml-2"
+                style={{
+                  fontSize: '25px',
+                  color: '#0A66C2',
+                  cursor: 'pointer',
+                }}
+              />
+              <MdEmail
+                className="mb-1 ml-2"
+                style={{
+                  fontSize: '25px',
+                  color: '#F14236',
+                  cursor: 'pointer',
+                }}
+              />
+            </Row>
+          </>
+        );
+      },
       sortType: 'basic',
     },
 
-    {
-      Header: 'Platform',
-      accessor: 'platform',
-      cellClass: 'text-muted w-20',
-      Cell: (props) => <p>{props.value}</p>,
-      sortType: 'basic',
-    },
+    // {
+    //   Header: 'Platform',
+    //   accessor: 'platform',
+    //   cellClass: 'text-muted w-20',
+    //   Cell: (props) => <p>{props.value}</p>,
+    //   sortType: 'basic',
+    // },
   ];
 
   const linksData = [
@@ -589,7 +633,12 @@ const AffiliateCard = () => {
       courseid: 2,
       platform: 'zoom',
       course_name: 'React',
-      share_on: 'Share On: ',
+      share_on: {
+        link_whatsapp: 'newLink',
+        link_instagram: 'newLink',
+        link_linkedin: 'newLink',
+        link_message: 'newLink',
+      },
 
       class: 'text-muted w-10 danger badge-sm',
     },
@@ -599,7 +648,12 @@ const AffiliateCard = () => {
       courseid: 2,
       platform: 'zoom',
       course_name: 'React',
-      share_on: 'Share On: ',
+      share_on: {
+        link_whatsapp: 'newLink1',
+        link_instagram: 'newLink1',
+        link_linkedin: 'newLink1',
+        link_message: 'newLink1',
+      },
 
       class: 'text-muted w-10 danger badge-sm',
     },
@@ -609,7 +663,12 @@ const AffiliateCard = () => {
       courseid: 2,
       platform: 'zoom',
       course_name: 'React',
-      share_on: 'Share On: ',
+      share_on: {
+        link_whatsapp: 'newLink2',
+        link_instagram: 'newLink2',
+        link_linkedin: 'newLink2',
+        link_message: 'newLink2',
+      },
 
       class: 'text-muted w-10 danger badge-sm',
     },
@@ -619,7 +678,12 @@ const AffiliateCard = () => {
       courseid: 2,
       platform: 'zoom',
       course_name: 'React',
-      share_on: 'Share On: ',
+      share_on: {
+        link_whatsapp: 'newLink3',
+        link_instagram: 'newLink3',
+        link_linkedin: 'newLink3',
+        link_message: 'newLink3',
+      },
 
       class: 'text-muted w-10 danger badge-sm',
     },
@@ -631,6 +695,7 @@ const AffiliateCard = () => {
         const result = await axiosInstance.get(`/referal`);
         console.log(result);
         if (result.data.success) {
+          const data = result.data.result.map((doc) => ({}));
         } else {
           try {
             setError(result.data.error);
@@ -652,7 +717,7 @@ const AffiliateCard = () => {
     <>
       <Row>
         <Col md="12" xs="12">
-          <Card className="h-100 pl-4  ">
+          <Card className="h-100 pl-5  ">
             <Nav tabs className="card-header-tabs ">
               <NavItem style={{ marginTop: '40px', marginLeft: 0 }}>
                 <NavLink
