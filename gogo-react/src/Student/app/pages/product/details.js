@@ -23,11 +23,13 @@ import { Route, Link, useHistory } from 'react-router-dom';
 
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import Loader from './Loader';
 
 const DetailsPages = ({ match, intl, ...props }) => {
   const { messages } = intl;
   const history = useHistory();
   const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   let session_id;
   try {
@@ -102,10 +104,14 @@ const DetailsPages = ({ match, intl, ...props }) => {
         } catch (e) {
           setError('Could not fetch details');
         }
+      } finally {
+        setIsLoaded(true);
       }
     };
     getDetails();
   }, []);
+
+  if (!isLoaded) return <Loader />;
 
   return (
     <>
