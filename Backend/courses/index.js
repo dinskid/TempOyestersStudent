@@ -8,6 +8,7 @@ router.get('/', verifyToken, async (req, res) => {
     const result = await db.query(
       `SELECT 
         session_tables.session_name, 
+        session_tables.session_id, 
         session_tables.session_thumbnail,
         session_tables.session_tagline,
         session_tables.session_description,

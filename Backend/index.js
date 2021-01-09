@@ -34,6 +34,7 @@ app.use('/sessions', require('./sessions'));
 app.use('/blog', require('./blog'));
 app.use('/courses', require('./courses'));
 app.use('/referal', require('./referalLink'));
+app.use('/mycourses', require('./mycourses'));
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Row,
   Card,
@@ -8,40 +8,32 @@ import {
   TabContent,
   UncontrolledCollapse,
   FormGroup,
-  Label,
   Input,
   CardTitle,
   CardHeader,
+  Spinner,
   CardText,
   CardBody,
   Col,
   Progress,
   Nav,
   NavItem,
-  Dropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
-  Media,
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import Breadcrumb from '../../../containers/navs/Breadcrumb';
-import { Separator, Colxx } from '../../../components/common/CustomBootstrap';
-import knowledgeBaseData from '../../../data/knowledgebase';
-import ReactPlayer from 'react-player';
 import './miscellaneous/course.css';
-import Angular from './angular.mp4';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { comments } from '../../../data/comments';
 import classnames from 'classnames';
-import { VscDeviceCameraVideo } from 'react-icons/vsc';
 import { MdAttachFile } from 'react-icons/md';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { FiDownload } from 'react-icons/fi';
 import { FcCheckmark } from 'react-icons/fc';
-import { Link, Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 import img from './img2.jpg';
 import { VideoPlayer } from './VideoPlayer';
+import axiosInstance from '../../../helpers/axiosInstance';
+import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
+
 const Comments = [
   {
     img: 'img1',
@@ -68,23 +60,79 @@ const Comments = [
     name: 'Mary Jane',
   },
 ];
-const KnowledgeBase = ({ match }) => {
+const KnowledgeBase = ({ match, ...props }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [activeFirstTab, setActiveFirstTab] = useState('1');
+  const history = useHistory();
+  const [error, setError] = useState(null);
+  const [courseDetails, setCourseDetails] = useState('');
+  const [courseContent, setCourseContent] = useState([]);
+
+  useEffect(() => {
+    if (error)
+      NotificationManager.warning(
+        error,
+        'My Courses Error',
+        3000,
+        null,
+        null,
+        ''
+      );
+  }, [error]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        if (!props.location.state.session_id)
+          history.push('/app/pages/mycourses');
+      } catch (e) {
+        history.push('/app/pages/mycourses');
+      }
+
+      try {
+        const result = await axiosInstance.get(
+          `/mycourses/${props.location.state.session_id}`
+        );
+        console.log(result);
+        if (result.data.success) {
+          setCourseDetails(result.data.sessionData);
+          setCourseContent(result.data.ans);
+        } else {
+          try {
+            setError(result.data.error);
+          } catch (e) {
+            setError('Unable to fetch courses');
+          }
+        }
+      } catch (err) {
+        try {
+          setError(err.response.data.error);
+        } catch (error) {
+          setError('Unable to fetch courses');
+        }
+      } finally {
+        setIsLoaded(true);
+      }
+    };
+    getData();
+  }, []);
+  if (!isLoaded)
+    return (
+      <div style={{ marginTop: '30%', marginLeft: '50%' }}>
+        <Spinner color="primary" />
+      </div>
+    );
 
   return (
     <>
       <Row>
         <Col md="9">
-          {/*<video width="90%" controls>
-          <source src={Angular} type="video/mp4"/>
-        Your browser does not support the video tag.
-        </video>*/}
           <VideoPlayer />
           <p className="mt-3" style={{ fontSize: '15px' }}>
-            #frontend #web_development #angular
+            {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)}
           </p>
-          <h2 className="font-weight-bold">Angular - Get Started(Content-1)</h2>
-          <p>20 nov 2019</p>
+          <h2 className="font-weight-bold">{courseDetails.session_name}</h2>
+          <p>{courseDetails.session_start_time.substring(0, 10)}</p>
         </Col>
         <Col md="3">
           <Card body className="progressbox">
@@ -98,817 +146,44 @@ const KnowledgeBase = ({ match }) => {
               Contents
             </CardTitle>
             <Scrollbars style={{ width: 280, height: 350 }}>
-              <Card className="toggle">
-                <Button
-                  color="link"
-                  id="toggler"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">
-                    Getting started{' '}
-                    <FcCheckmark style={{ marginLeft: '80px' }} />
-                  </p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler2"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">
-                    The Basics
-                    <FcCheckmark style={{ marginLeft: '110px' }} />
-                  </p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler2">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3">
-                        <FcCheckmark />
-                      </p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler3"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">Course Projects - The Basics</p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler3">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"> </p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler4"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">Debugging</p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler4">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler5"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">Components and databinding</p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler5">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler6"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">Project - Components</p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler6">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler7"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">Directives</p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler7">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler8"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">Project - Directives</p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler8">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content1 m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content1 mt-3 ml-auto mr-3"></p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
-              <Card className="toggle2">
-                <Button
-                  color="link"
-                  id="toggler9"
-                  style={{ marginBottom: '1rem' }}
-                >
-                  <p className="p1">Mega Projects</p>
-                </Button>
-              </Card>
-              <UncontrolledCollapse toggler="#toggler9">
-                <Card className="toggled">
-                  <CardBody>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-1
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-2
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-3
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-4
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-5
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-6
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-7
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-8
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-9
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                    <Row>
-                      <p className="content m-3">
-                        <AiFillPlayCircle className="iconvid" />
-                        content-10
-                      </p>
-                      <p className="content mt-3 ml-auto mr-3"></p>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </UncontrolledCollapse>
+              {courseContent.map((doc, index) => {
+                const togglerId = `toggler${index}`;
+                return (
+                  <>
+                    <Card className="toggle">
+                      <Button
+                        color="link"
+                        id={togglerId}
+                        style={{ marginBottom: '1rem' }}
+                      >
+                        <p className="p1">
+                          {doc.name}
+                          <FcCheckmark style={{ marginLeft: '80px' }} />
+                        </p>
+                      </Button>
+                    </Card>
+                    <UncontrolledCollapse toggler={togglerId}>
+                      <Card className="toggled">
+                        <CardBody>
+                          {doc.lesson.map((l) => {
+                            return (
+                              <Row>
+                                <p className="content1 m-3">
+                                  <AiFillPlayCircle className="iconvid" />
+                                  {l.name}
+                                </p>
+                                <p className="content1 mt-3 ml-auto mr-3">
+                                  <FcCheckmark />
+                                </p>
+                              </Row>
+                            );
+                          })}
+                        </CardBody>
+                      </Card>
+                    </UncontrolledCollapse>
+                  </>
+                );
+              })}
             </Scrollbars>
           </Card>
         </Col>

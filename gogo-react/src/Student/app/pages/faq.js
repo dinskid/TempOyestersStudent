@@ -93,6 +93,7 @@ const DataListPages = ({ match }) => {
             desc: doc.session_description,
             cost: doc.session_fee,
             tags: doc.session_tags,
+            session_id: doc.session_id,
           }));
           setNames(data);
         } else {
@@ -223,7 +224,12 @@ const DataListPages = ({ match }) => {
                 }}
               >
                 <Route>
-                  <Link to="course">
+                  <Link
+                    to={{
+                      pathname: 'course',
+                      state: { session_id: name.session_id },
+                    }}
+                  >
                     <CardImg
                       top
                       style={{ width: '100%', maxHeight: '250px' }}
