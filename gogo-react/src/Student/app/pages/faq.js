@@ -83,7 +83,7 @@ const DataListPages = ({ match }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axiosInstance.get('/courses');
+        const result = await axiosInstance.get('/student/courses');
         console.log(result);
         if (result.data.success) {
           const data = result.data.courses.map((doc) => ({

@@ -11,22 +11,20 @@ import {
   CardImg,
 } from 'reactstrap';
 import { injectIntl } from 'react-intl';
-
-import './course1.css';
 import { HiOutlineShare } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';
 import { BiCheck } from 'react-icons/bi';
-import Man from './man.jpg';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { ImAlarm } from 'react-icons/im';
 import { Route, Link, useHistory } from 'react-router-dom';
 
+import './course1.css';
+import Man from './man.jpg';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import Loader from './Loader';
 
 const DetailsPages = ({ match, intl, ...props }) => {
-  const { messages } = intl;
   const history = useHistory();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -58,17 +56,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
     'Full stack web developer responsible for end-to-end web app development and creative cloud engineering. Led three teams of five employees each. Prototyped an average of 25 new product features per year. Drove best practice implementation for 22 employees across multiple departments. Decreased rework by 23% and costs by 15%. Boosted user experience scores by 55% over company-wide previous best.',
   ];
 
-  const [content, setContent] = [
-    'Content-1',
-    'Content-2',
-    'Content-3',
-    'Content-4',
-    'Content-5',
-    'Content-6',
-    'Content-7',
-    'Content-8',
-    'Content-9',
-  ];
+  const [content, setContent] = useState([]);
 
   useEffect(() => {
     if (error)
@@ -86,12 +74,14 @@ const DetailsPages = ({ match, intl, ...props }) => {
     const getDetails = async () => {
       try {
         const result = await axiosInstance.get(
-          `/sessions/details/${session_id}`
+          `/student/sessions/details/${session_id}`
         );
         console.log(result);
 
-        if (result.data.success) setSession(result.data.session);
-        else {
+        if (result.data.success) {
+          setSession(result.data.session);
+          setContent(result.data.ans);
+        } else {
           try {
             setError(result.data.error);
           } catch (er) {
@@ -148,47 +138,6 @@ const DetailsPages = ({ match, intl, ...props }) => {
                       );
                     })
                   : ''}
-                {/* <Col md="1">
-                  <BiCheck className="bicheck" />
-                </Col>
-                <Col md="5">
-                  <CardText className="ct">
-                    {' '}
-                    Develop modern, complex, responsive and scalable web
-                    applications with Angular 10.
-                  </CardText>
-                </Col>
-                <Col md="1">
-                  <BiCheck className="bicheck" />
-                </Col>
-                <Col md="5">
-                  <CardText className="ct">
-                    Fully understand the architecture behind an Angular
-                    application and how to use it.
-                  </CardText>
-                </Col>
-              </Row>
-              <Row className="mt-4">
-                <Col md="1">
-                  <BiCheck className="bicheck" />
-                </Col>
-                <Col md="5">
-                  <CardText className="ct">
-                    {' '}
-                    Use the gained, deep understanding of the Angular
-                    fundamentals to quickly establish yourself as a frontend
-                    developer.
-                  </CardText>
-                </Col>
-                <Col md="1">
-                  <BiCheck className="bicheck" />
-                </Col>
-                <Col md="5">
-                  <CardText className="ct">
-                    Create single-page applications with one of the most modern
-                    JavaScript frameworks out there.
-                  </CardText>
-                </Col> */}
               </Row>
             </Card>
           </div>
@@ -219,6 +168,42 @@ const DetailsPages = ({ match, intl, ...props }) => {
           </Card>
           <h2 className="mt-4 font-weight-bold">Course Content</h2>
           <Card className="toggle">
+            {content.map((doc, index) => {
+              const togglerId = `toggler${index}`;
+              return (
+                <>
+                  <Card className="toggle">
+                    <Button
+                      color="link"
+                      id={togglerId}
+                      style={{ marginBottom: '1rem' }}
+                    >
+                      <p className="p">
+                        {doc.name}
+                        {/* <FcCheckmark style={{ marginLeft: '80px' }} /> */}
+                      </p>
+                    </Button>
+                  </Card>
+                  <UncontrolledCollapse toggler={togglerId}>
+                    <Card className="toggled">
+                      <CardBody>
+                        {doc.lesson.map((l) => {
+                          return (
+                            <Row>
+                              <p className="content m-3">
+                                <AiFillPlayCircle className="iconvid" />
+                                {l.name}
+                              </p>
+                              <p className="content mt-3 ml-auto mr-3">1:44</p>
+                            </Row>
+                          );
+                        })}
+                      </CardBody>
+                    </Card>
+                  </UncontrolledCollapse>
+                </>
+              );
+            })}
             <Button color="link" id="toggler" style={{ marginBottom: '1rem' }}>
               <p className="p">Getting started</p>
             </Button>

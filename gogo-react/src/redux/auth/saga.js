@@ -36,7 +36,7 @@ const loginWithEmailPasswordAsync = async (
       student_password: customer_password,
       using_google,
     };
-    const result = await axiosInstance.post('/auth/login', { values });
+    const result = await axiosInstance.post('/student/auth/login', { values });
     return result.data;
   } catch (err) {
     try {
@@ -100,7 +100,9 @@ const registerWithEmailPasswordAsync = async ({
       student_password: customer_password,
       using_google,
     };
-    const result = await axiosInstance.post('/auth/register', { values });
+    const result = await axiosInstance.post('/student/auth/register', {
+      values,
+    });
     return result.data;
   } catch (error) {
     try {
@@ -165,7 +167,9 @@ export function* watchForgotPassword() {
 const forgotPasswordAsync = async (email) => {
   try {
     const values = { email };
-    const result = await axiosInstance.post('/auth/forgotPassword', { values });
+    const result = await axiosInstance.post('/student/auth/forgotPassword', {
+      values,
+    });
     return result.data;
   } catch (error) {
     try {
@@ -208,7 +212,9 @@ export function* watchResetPassword() {
 const resetPasswordAsync = async (resetPasswordCode, newPassword) => {
   try {
     const values = { email: resetPasswordCode, newPassword };
-    const result = await axiosInstance.post('/auth/reset-password', { values });
+    const result = await axiosInstance.post('/student/auth/reset-password', {
+      values,
+    });
     return result.data;
   } catch (error) {
     try {

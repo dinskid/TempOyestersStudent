@@ -67,6 +67,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   const [error, setError] = useState(null);
   const [courseDetails, setCourseDetails] = useState('');
   const [courseContent, setCourseContent] = useState([]);
+  const [videoSrc, setVideoSrc] = useState(null);
 
   useEffect(() => {
     if (error)
@@ -91,12 +92,13 @@ const KnowledgeBase = ({ match, ...props }) => {
 
       try {
         const result = await axiosInstance.get(
-          `/mycourses/${props.location.state.session_id}`
+          `/student/mycourses/${props.location.state.session_id}`
         );
         console.log(result);
         if (result.data.success) {
           setCourseDetails(result.data.sessionData);
           setCourseContent(result.data.ans);
+          setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
         } else {
           try {
             setError(result.data.error);
@@ -116,6 +118,7 @@ const KnowledgeBase = ({ match, ...props }) => {
     };
     getData();
   }, []);
+
   if (!isLoaded)
     return (
       <div style={{ marginTop: '30%', marginLeft: '50%' }}>
@@ -127,7 +130,7 @@ const KnowledgeBase = ({ match, ...props }) => {
     <>
       <Row>
         <Col md="9">
-          <VideoPlayer />
+          <VideoPlayer videoSrc={videoSrc} />
           <p className="mt-3" style={{ fontSize: '15px' }}>
             {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)}
           </p>
@@ -168,7 +171,14 @@ const KnowledgeBase = ({ match, ...props }) => {
                           {doc.lesson.map((l) => {
                             return (
                               <Row>
-                                <p className="content1 m-3">
+                                <p
+                                  onClick={() => {
+                                    console.log(l.videoUrl);
+                                    setVideoSrc(l.videoUrl);
+                                  }}
+                                  target="_blank"
+                                  className="content1 m-3"
+                                >
                                   <AiFillPlayCircle className="iconvid" />
                                   {l.name}
                                 </p>

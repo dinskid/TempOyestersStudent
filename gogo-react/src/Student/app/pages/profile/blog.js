@@ -82,7 +82,7 @@ const Blog = () => {
         formData.append('blog_thumbnail', blog.blog_thumbnail);
         formData.append('values', JSON.stringify(blog));
 
-        const result = await axiosInstance.post('/blog', formData);
+        const result = await axiosInstance.post('/student/blog', formData);
         if (result.data.success) setSuccess('Blog Saved Successfully');
         else {
           try {

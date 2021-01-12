@@ -696,7 +696,7 @@ const AffiliateCard = () => {
   useEffect(() => {
     const getLinkData = async () => {
       try {
-        const result = await axiosInstance.get(`/referal`);
+        const result = await axiosInstance.get(`/student/referal`);
         console.log(result);
         if (result.data.success) {
           const data = result.data.result.map((doc) => ({}));

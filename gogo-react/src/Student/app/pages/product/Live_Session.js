@@ -33,7 +33,7 @@ const Live_Session = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await axiosInstance.get('/sessions/live');
+        const result = await axiosInstance.get('/student/sessions/live');
         console.log(result);
         if (result.data.success) {
           const data = result.data.sessions.map((doc) => ({

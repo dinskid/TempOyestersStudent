@@ -2,11 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import videojs from 'video.js';
 require('videojs-hls-quality-selector');
 
-export const VideoPlayer = (props) => {
+export const VideoPlayer = () => {
+  // console.log('videoplayer ', videoSrc);
   const videoPlayerRef = useRef(null); // Instead of ID
   const [currentTime, setCurrentTime] = useState(null);
   const videoSrc =
-    'https://testVedant.b-cdn.net/ffmpegencrypted/1080p/1080p.m3u8';
+    'https://secondtrailhojayenga.s3.ap-south-1.amazonaws.com/data/master.m3u8';
 
   const videoJSOptions = {
     autoplay: 'muted',
@@ -18,11 +19,12 @@ export const VideoPlayer = (props) => {
 
   useEffect(() => {
     if (videoPlayerRef) {
+      console.log(videoSrc);
       const player = videojs(videoPlayerRef.current, videoJSOptions, () => {
         player.src(videoSrc);
 
         player.hlsQualitySelector({
-          displayCurrentQuality: true,
+          // displayCurrentQuality: true,
         });
         player.on('ended', () => {
           console.log('ended');
