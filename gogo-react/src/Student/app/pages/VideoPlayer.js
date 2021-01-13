@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import videojs from 'video.js';
-require('videojs-hls-quality-selector');
+import videojsqualityselector from 'videojs-hls-quality-selector';
+import 'videojs-contrib-quality-levels';
 
-export const VideoPlayer = () => {
-  // console.log('videoplayer ', videoSrc);
+export const VideoPlayer = ({ videoSrc }) => {
   const videoPlayerRef = useRef(null); // Instead of ID
   const [currentTime, setCurrentTime] = useState(null);
-  const videoSrc =
-    'https://secondtrailhojayenga.s3.ap-south-1.amazonaws.com/data/master.m3u8';
+  // const videoSrc =
+  //   'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8';
 
   const videoJSOptions = {
     autoplay: 'muted',
@@ -23,9 +23,13 @@ export const VideoPlayer = () => {
       const player = videojs(videoPlayerRef.current, videoJSOptions, () => {
         player.src(videoSrc);
 
-        player.hlsQualitySelector({
-          // displayCurrentQuality: true,
-        });
+        // player.hlsQualitySelector({
+        //   displayCurrentQuality: true,
+        // });
+
+        player.hlsQualitySelector = videojsqualityselector;
+        player.hlsQualitySelector({ displayCurrentQuality: true });
+
         player.on('ended', () => {
           console.log('ended');
         });
@@ -37,7 +41,7 @@ export const VideoPlayer = () => {
     }
 
     return () => {};
-  }, []);
+  }, [videoSrc]);
 
   return (
     <div onContextMenu={(e) => e.preventDefault()} style={{ width: '100%' }}>
