@@ -100,6 +100,11 @@ const CartIndex = () => {
     getData();
   }, [reload]);
 
+  const handleReload = () => {
+    console.log('handle reloading ');
+    setReload(!reload);
+  };
+
   const handleRemove = async (id) => {
     try {
       const result = await axiosInstance.delete(`/student/cart/${id}`);
@@ -194,6 +199,9 @@ const CartIndex = () => {
       <TabContent activeTab={activeFirstTab}>
         <TabPane tabId="1">
           <Cart
+            handleReload={handleReload}
+            reload={reload}
+            setReload={setReload}
             data={cart}
             checkoutPrice={checkoutPrice}
             handleRemove={handleRemove}

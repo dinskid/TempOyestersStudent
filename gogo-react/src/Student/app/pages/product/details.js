@@ -274,6 +274,10 @@ const DetailsPages = ({ match, intl, ...props }) => {
               <Button className="button ml-3 disabled" onClick={handleWishList}>
                 Wishlist <FiHeart />
               </Button>
+            ) : cartItemStatus == 'purchased' ? (
+              <Button className="button ml-3 disabled">
+                Already Purchased
+              </Button>
             ) : (
               <Button className="button ml-3" onClick={handleWishList}>
                 Wishlist <FiHeart />
@@ -1141,14 +1145,24 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 >
                   Go To Cart
                 </Button>
+              ) : cartItemStatus == 'purchased' ? (
+                <Button className="btn2 mt-4 disabled">
+                  Already Purchased
+                </Button>
               ) : (
                 <Button className="btn2 mt-4" onClick={handleAddToCart}>
                   Add to Cart
                 </Button>
               )}
-              <Button outline color="secondary" className="btn3">
-                Buy Now
-              </Button>
+              {cartItemStatus == 'purchased' ? (
+                <Button className="btn2 mt-4 disabled">
+                  Already Purchased
+                </Button>
+              ) : (
+                <Button outline color="secondary" className="btn3">
+                  Buy Now
+                </Button>
+              )}
             </CardBody>
           </Card>
         </Col>
