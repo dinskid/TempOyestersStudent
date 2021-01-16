@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Alert } from 'reactstrap';
 
-const AlertExample = ({ code }) => {
+const AlertExample = ({ code, onRemove }) => {
   const [visible, setVisible] = useState(true);
 
-  const onDismiss = () => setVisible(false);
+  const onDismiss = () => {
+    setVisible(false);
+    onRemove(code);
+  };
 
   return (
     <Alert
@@ -13,7 +16,7 @@ const AlertExample = ({ code }) => {
       isOpen={visible}
       toggle={onDismiss}
     >
-      {code}{' '}
+      {code} is Applied
     </Alert>
   );
 };

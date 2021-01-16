@@ -6,12 +6,14 @@ import {
   CardText,
   CardBody,
   Col,
+  Form,
+  FormGroup,
+  Input,
   Row,
 } from 'reactstrap';
 import { FiHeart } from 'react-icons/fi';
 import { AiFillCloseCircle, AiFillClockCircle } from 'react-icons/ai';
 
-import Coupon from './Coupon';
 import NoDataFound from './NoDataFound';
 import logo from '../angular.png';
 import Alert from './Alert';
@@ -32,6 +34,9 @@ const Cart = ({
   const [paymentDone, setPaymentDone] = useState(-1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [coupons, setCoupons] = useState([]);
+  const [code, setCode] = useState(null);
+  const [finalValue, setFinalValue] = useState(checkoutPrice);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -50,11 +55,12 @@ const Cart = ({
   const razorpay = () => {
     setLoading(true);
     const values = {
-      amount: checkoutPrice,
+      amount: finalValue,
       sessions: data.map((doc) => ({
         session_id: doc.session_id,
         session_fee: doc.cost,
       })),
+      coupons: JSON.stringify(coupons),
     };
     axiosInstance
       .post('/student/cart/razorpay', { values })
@@ -118,12 +124,76 @@ const Cart = ({
         }
       })
       .then(() => {
-        handleReload();
-        setReload(!reload);
-        setLoading(false);
+        window.location.reload();
+        // handleReload();
+        // setReload(!reload);
+        // setLoading(false);
       });
   };
 
+  const onRemove = (code) => {
+    console.log(code);
+    const newArr = coupons.filter((doc) => doc.code != code);
+    console.log(newArr);
+    let totDiscount = 0;
+    newArr.forEach((d) => {
+      console.log(d.value);
+      totDiscount += parseInt(d.value);
+    });
+    console.log(totDiscount);
+    const val = checkoutPrice - (checkoutPrice * totDiscount) / 100;
+    setFinalValue(val);
+
+    setCoupons(newArr);
+  };
+
+  const alreadyApplied = (code) => {
+    for (let i = 0; i < coupons.length; i++)
+      if (coupons[i].code == code) return true;
+    return false;
+  };
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      if (alreadyApplied(code)) setError('Coupon Code Already Applied');
+      else {
+        console.log(code);
+        const values = code;
+        const result = await axiosInstance.post('/student/cart/coupon', {
+          values,
+        });
+        console.log(result);
+        if (result.data.success) {
+          const newArr = [...coupons];
+          newArr.push({
+            code: result.data.result.coupon_code,
+            value: result.data.result.coupon_code_value,
+            visible: true,
+          });
+          let totDiscount = 0;
+          newArr.forEach((doc) => {
+            totDiscount += parseInt(doc.value);
+          });
+          console.log(totDiscount);
+          const val = finalValue - (finalValue * totDiscount) / 100;
+          setFinalValue(val);
+          setCoupons(newArr);
+        } else {
+          try {
+            setError(result.data.error);
+          } catch (er) {
+            setError('Invalid Coupon');
+          }
+        }
+      }
+    } catch (err) {
+      try {
+        setError(err.response.data.error);
+      } catch (e) {
+        setError('Internal Server Error');
+      }
+    }
+  };
   if (!data.length) return <NoDataFound />;
   if (loading) return <Loader />;
   return (
@@ -217,13 +287,28 @@ const Cart = ({
       <Col md={3} xs={12}>
         <h2>Total:</h2>
         <h4>
-          <b> Rs. {checkoutPrice} </b>{' '}
+          <b> Rs. {finalValue} </b>{' '}
         </h4>
         <Button style={{ marginBottom: '2rem' }} onClick={razorpay}>
           Checkout
         </Button>
-        <Coupon />
-        <Alert code="DEMO CODE" />
+        {/* <Coupon /> */}
+        <Form inline style={{ marginLeft: '-1rem' }}>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Input
+              type="text"
+              name="code"
+              placeholder="Enter Coupon Code Here"
+              onChange={(e) => setCode(e.target.value)}
+              value={code}
+            />
+          </FormGroup>
+
+          <Button onClick={handleSubmit}>Submit</Button>
+        </Form>
+        {coupons.map((doc) => (
+          <Alert code={doc.code} onRemove={onRemove} />
+        ))}
       </Col>
     </Row>
   );
