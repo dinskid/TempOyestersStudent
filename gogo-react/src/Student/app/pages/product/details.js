@@ -9,6 +9,10 @@ import {
   CardText,
   UncontrolledCollapse,
   CardImg,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from 'reactstrap';
 import { injectIntl } from 'react-intl';
 import { HiOutlineShare } from 'react-icons/hi';
@@ -23,11 +27,21 @@ import Man from './man.jpg';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import Loader from './Loader';
+import { FcOk } from 'react-icons/fc';
 
 const DetailsPages = ({ match, intl, ...props }) => {
   const history = useHistory();
+
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
+  const [cartModal, setCartModal] = useState(false);
+  const toggleCartModal = () => setCartModal(!cartModal);
+
+  const [cartItemStatus, setCartItemStatus] = useState(false);
 
   let session_id;
   try {
@@ -81,6 +95,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
         if (result.data.success) {
           setSession(result.data.session);
           setContent(result.data.ans);
+          setCartItemStatus(result.data.cart_item_status);
         } else {
           try {
             setError(result.data.error);
@@ -101,10 +116,142 @@ const DetailsPages = ({ match, intl, ...props }) => {
     getDetails();
   }, []);
 
+  const handleWishList = async () => {
+    try {
+      const values = {
+        session_id,
+        cart_item_status: 'wishlist',
+      };
+      const result = await axiosInstance.post('/student/cart', { values });
+      console.log(result);
+      if (result.data.success) {
+        setCartItemStatus('wishlist');
+        toggle();
+      } else {
+        try {
+          setError(result.data.error);
+        } catch (er) {
+          setError('Unable to add to wishlist');
+        }
+      }
+    } catch (error) {
+      try {
+        setError(error.response.data.error);
+      } catch (e) {
+        setError('Unable to add to wishlist');
+      }
+    }
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      const values = {
+        session_id,
+        cart_item_status: 'cart',
+      };
+      const result = await axiosInstance.post('/student/cart', { values });
+      console.log(result);
+      if (result.data.success) {
+        setCartItemStatus('cart');
+        toggleCartModal();
+      } else {
+        try {
+          setError(result.data.error);
+        } catch (er) {
+          setError('Unable to add to wishlist');
+        }
+      }
+    } catch (error) {
+      try {
+        setError(error.response.data.error);
+      } catch (e) {
+        setError('Unable to add to wishlist');
+      }
+    }
+  };
+
   if (!isLoaded) return <Loader />;
 
   return (
     <>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Added to WishList</ModalHeader>
+        <ModalBody>
+          <div style={{ display: 'flex' }}>
+            <div>
+              <FcOk />
+              <img
+                src={Man}
+                style={{
+                  height: '100px',
+                  width: '100px',
+                }}
+                alt="Session Thumbnail"
+              />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                marginLeft: '2rem',
+              }}
+            >
+              <h4>{session.session_name}</h4>
+              <p>{session.session_description}</p>
+            </div>{' '}
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onClick={() => history.push('/app/pages/cart')}
+          >
+            Visit WishList
+          </Button>{' '}
+          <Button color="secondary" onClick={toggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+      <Modal isOpen={cartModal} toggle={toggleCartModal}>
+        <ModalHeader toggle={toggleCartModal}>Added to Cart</ModalHeader>
+        <ModalBody>
+          <div style={{ display: 'flex' }}>
+            <div>
+              <FcOk />
+              <img
+                src={Man}
+                style={{
+                  height: '100px',
+                  width: '100px',
+                }}
+                alt="Session Thumbnail"
+              />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                marginLeft: '2rem',
+              }}
+            >
+              <h4>{session.session_name}</h4>
+              <p>{session.session_description}</p>
+            </div>{' '}
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onClick={() => history.push('/app/pages/cart')}
+          >
+            Visit Cart
+          </Button>{' '}
+          <Button color="secondary" onClick={toggleCartModal}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
       <Row>
         <Col md="8">
           <div>
@@ -116,9 +263,22 @@ const DetailsPages = ({ match, intl, ...props }) => {
             <Button className="button">
               Share <HiOutlineShare />
             </Button>
-            <Button className="button ml-3">
-              Wishlist <FiHeart />
-            </Button>
+            {cartItemStatus == 'wishlist' ? (
+              <Button
+                className="button ml-3"
+                onClick={() => history.push('/app/pages/cart')}
+              >
+                Go To Wishlist <FiHeart />
+              </Button>
+            ) : cartItemStatus == 'cart' ? (
+              <Button className="button ml-3 disabled" onClick={handleWishList}>
+                Wishlist <FiHeart />
+              </Button>
+            ) : (
+              <Button className="button ml-3" onClick={handleWishList}>
+                Wishlist <FiHeart />
+              </Button>
+            )}
             <Card body className="what_to_learn">
               <CardTitle tag="h2" className="head">
                 What you'll learn
@@ -974,8 +1134,18 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 <ImAlarm className="mr-2" /> Duration {session.session_duration}{' '}
                 days
               </CardText>
-
-              <Button className="btn2 mt-4">Add to Cart</Button>
+              {cartItemStatus == 'cart' ? (
+                <Button
+                  className="btn2 mt-4"
+                  onClick={() => history.push('/app/pages/cart')}
+                >
+                  Go To Cart
+                </Button>
+              ) : (
+                <Button className="btn2 mt-4" onClick={handleAddToCart}>
+                  Add to Cart
+                </Button>
+              )}
               <Button outline color="secondary" className="btn3">
                 Buy Now
               </Button>

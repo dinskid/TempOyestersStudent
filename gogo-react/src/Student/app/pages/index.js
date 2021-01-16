@@ -26,6 +26,8 @@ const Course = React.lazy(() =>
   import(/* webpackChunkName: "miscellaneous-faq" */ './course')
 );
 
+const Cart = React.lazy(() => import('./cart'));
+
 const Pages = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
@@ -34,7 +36,7 @@ const Pages = ({ match }) => (
         path={`${match.url}/product`}
         render={(props) => <Product {...props} />}
       />
-  {/*     <Route path={`${match.url}/faq`} render={(props) => <Faq {...props} />} /> */}
+      {/*     <Route path={`${match.url}/faq`} render={(props) => <Faq {...props} />} /> */}
       <Route
         path={`${match.url}/profile`}
         render={(props) => <Profile {...props} />}
@@ -55,8 +57,15 @@ const Pages = ({ match }) => (
         path={`${match.url}/course`}
         render={(props) => <Course {...props} />}
       />
+      <Route
+        path={`${match.url}/cart`}
+        render={(props) => <Cart {...props} />}
+      />
 
-      <Route path={`${match.url}/mycourses`} render={(props) => <Faq {...props} />} />
+      <Route
+        path={`${match.url}/mycourses`}
+        render={(props) => <Faq {...props} />}
+      />
       <Redirect to="/error" />
     </Switch>
   </Suspense>
