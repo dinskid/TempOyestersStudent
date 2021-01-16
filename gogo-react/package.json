@@ -62,7 +62,9 @@
     "redux-saga": "^1.1.3",
     "sortablejs": "^1.10.2",
     "video.js": "^7.10.2",
+    "videojs-contrib-quality-levels": "^2.0.9",
     "videojs-hls-quality-selector": "^1.1.4",
+    "videojs-seek-buttons": "^1.6.0",
     "yup": "^0.29.1"
   },
   "scripts": {

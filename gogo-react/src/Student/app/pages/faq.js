@@ -9,12 +9,13 @@ import {
   Col,
   Row,
 } from 'reactstrap';
+
 import './course.css';
-import { servicePath } from '../../../constants/defaultValues';
 import useMousetrap from '../../../hooks/use-mousetrap';
 import { Link, Route } from 'react-router-dom';
 import axiosInstance from '../../../helpers/axiosInstance';
 import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
+import NoDataFound from './NoDataFound';
 
 /* import ReactCardFlip from 'react-card-flip'; */
 const getIndex = (value, arr, prop) => {
@@ -196,15 +197,7 @@ const DataListPages = ({ match }) => {
         <Spinner color="primary" />
       </div>
     );
-  if (!names.length)
-    return (
-      <>
-        <div>
-          <h1>You do not have any courses</h1>
-        </div>
-      </>
-    );
-
+  if (!names.length) return <NoDataFound />;
   return (
     <>
       {/*   <h1>My Courses</h1>

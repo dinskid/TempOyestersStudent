@@ -11,34 +11,16 @@ import IntlMessages from '../../helpers/IntlMessages';
 import Logo from './logo.png';
 import './auth.css';
 import Google from './google.png';
-import Apple from './apple.png';
 
 import { useGoogleLogin } from 'react-google-login';
 import { refreshTokenSetup } from './utils/refreshTokenSetup';
 import { loginUserError } from '../../redux/auth/actions';
 
-const validatePassword = (value) => {
-  let error;
-  if (!value) {
-    error = 'Please enter your password';
-  } else if (value.length < 4) {
-    error = 'Value must be longer than 3 characters';
-  }
-  return error;
-};
 const initialvalue = {
   email: '',
   password: '',
 };
-const validateEmail = (value) => {
-  let error;
-  if (!value) {
-    error = 'Please enter your email address';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid email address';
-  }
-  return error;
-};
+
 const validation = Yup.object().shape({
   password: Yup.string()
     .min(8, 'Password should have min 8 characters')
@@ -95,7 +77,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">MAGIC IS IN THE DETAILS</p>
+            <p className="text-white h2">Oyesters Training</p>
             <p className="white mb-0">
               Please use your credentials to login.
               <br />
