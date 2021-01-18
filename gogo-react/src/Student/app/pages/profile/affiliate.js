@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Card, Col, CardBody, CardText } from 'reactstrap';
 import { FaClipboardCheck } from 'react-icons/fa';
 import { FaUserGraduate } from 'react-icons/fa';
@@ -6,7 +6,39 @@ import { IoIosPaper } from 'react-icons/io';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import AffiliateCard from './AffiliateCard';
 
-function affiliate() {
+import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import axiosInstance from '../../../../helpers/axiosInstance';
+import Disabled from './Disabled';
+
+function Affiliate() {
+  const [enabled, setEnabled] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      NotificationManager.warning(error, 'Blog Error', 3000, null, null, '');
+      setError(null);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await axiosInstance.get('/student/auth/enabled');
+        setEnabled(result.data.result.customer_affiliate);
+      } catch (error) {
+        try {
+          setError(error.response.data.error);
+        } catch (error) {
+          setError('Unable to find blogs');
+        }
+      }
+    };
+    getData();
+  }, []);
+
+  if (!enabled) return <Disabled />;
+
   return (
     <div>
       <Row>
@@ -133,4 +165,4 @@ function affiliate() {
   );
 }
 
-export default affiliate;
+export default Affiliate;

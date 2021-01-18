@@ -8,6 +8,7 @@ import { Card, CardBody, Row, Col, Input, Button } from 'reactstrap';
 import UploadPreview from './preview';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import axiosInstance from '../../../../helpers/axiosInstance';
+import Disabled from './Disabled';
 
 const Blog = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -22,6 +23,7 @@ const Blog = () => {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [enabled, setEnabled] = useState(true);
 
   const onEditorStateChange = (editorState) => {
     setBlog((prevState) => ({
@@ -51,6 +53,22 @@ const Blog = () => {
       setSuccess(null);
     }
   }, [success]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await axiosInstance.get('/student/auth/enabled');
+        setEnabled(result.data.result.customer_blogs);
+      } catch (error) {
+        try {
+          setError(error.response.data.error);
+        } catch (error) {
+          setError('Unable to find blogs');
+        }
+      }
+    };
+    getData();
+  }, []);
 
   const [displayProfileImage, setDisplayProfileImage] = useState(null);
 
@@ -101,6 +119,8 @@ const Blog = () => {
       }
     }
   };
+
+  if (!enabled) return <Disabled />;
 
   return (
     <div>
