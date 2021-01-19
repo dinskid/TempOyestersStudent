@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { iconsmind, simplelineicons } from '../../data/icons';
 //import './auth.css'
 import { Row, Card, CardTitle, FormGroup, Label, Button } from 'reactstrap';
@@ -73,6 +73,8 @@ const Register = ({
   ...props
 }) => {
   const dispatch = useDispatch();
+  const [customer_id, setCustomer_id] = useState(null);
+
   useEffect(() => {
     if (error) {
       NotificationManager.warning(
@@ -85,6 +87,12 @@ const Register = ({
       );
     }
   }, [error]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('customer_id');
+    if (id) setCustomer_id(id);
+  }, []);
 
   const onSuccess = (res) => {
     // console.log('login success', res.profileObj);
@@ -119,6 +127,7 @@ const Register = ({
 
   const onSubmit = (values) => {
     console.log(values);
+    values.customer_id = customer_id;
     registerUserAction({ history, values });
   };
 

@@ -90,6 +90,7 @@ const registerWithEmailPasswordAsync = async ({
   customer_last_name,
   customer_phone_number,
   using_google = false,
+  customer_id = null,
 }) => {
   try {
     const values = {
@@ -99,6 +100,7 @@ const registerWithEmailPasswordAsync = async ({
       student_email: customer_email,
       student_password: customer_password,
       using_google,
+      customer_id,
     };
     const result = await axiosInstance.post('/student/auth/register', {
       values,
