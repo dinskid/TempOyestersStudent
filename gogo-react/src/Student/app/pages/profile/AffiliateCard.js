@@ -8,18 +8,20 @@ import {
   NavLink,
   CardBody,
   Card,
+  Button,
   Col,
   Badge,
-  Button,
 } from 'reactstrap';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { useTable, usePagination, useSortBy } from 'react-table';
+
 import { TiSocialInstagram } from 'react-icons/ti';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import { AiFillLinkedin } from 'react-icons/ai';
 import { MdEmail } from 'react-icons/md';
 import classnames from 'classnames';
-import { useTable, usePagination, useSortBy } from 'react-table';
 import axiosInstance from '../../../../helpers/axiosInstance';
+// import Table from './Table';
 
 const visitsData = [
   {
@@ -437,7 +439,6 @@ const cityWise = [
     sortType: 'basic',
   },
 ];
-
 const Table = ({ columns, data }) => {
   const {
     getTableProps,

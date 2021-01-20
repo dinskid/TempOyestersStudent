@@ -3,15 +3,17 @@
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import {BsChatSquareDots} from 'react-icons/bs'
-import {RiNotification4Line} from 'react-icons/ri'
-import './nav.css'
+import { BsChatSquareDots } from 'react-icons/bs';
+import { RiNotification4Line } from 'react-icons/ri';
+import './nav.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   UncontrolledDropdown,
   DropdownItem,
   DropdownToggle,
-  DropdownMenu,Row,Col,
+  DropdownMenu,
+  Row,
+  Col,
   Input,
 } from 'reactstrap';
 
@@ -44,21 +46,34 @@ import { getDirection, setDirection } from '../../helpers/Utils';
 
 const Messages = ({ img, title, date }) => {
   return (
-    
     <div>
-      <div className="border-bottom-3 d-flex" style={{marginLeft:'-15px', marginRight:'-15px' }}>
-        
-          <Row className="ml-2">
-            <Col md={2}>
-          <img src={img} style={{width:'300%', borderRadius:'50%', display:'flex'}}/></Col>
+      <div
+        className="border-bottom-3 d-flex"
+        style={{ marginLeft: '-15px', marginRight: '-15px' }}
+      >
+        <Row className="ml-2">
+          <Col md={2}>
+            <img
+              src={img}
+              style={{ width: '300%', borderRadius: '50%', display: 'flex' }}
+            />
+          </Col>
           <Col md={10}>
-          <p className="font-weight-medium mb-1 ml-3 d-flex">{title}</p></Col>
-          <p className="text-muted mt-1 mb-0  text-small d-flex" style={{marginLeft:"70px"}}>{date}</p></Row>
-          
-        
+            <p className="font-weight-medium mb-1 ml-3 d-flex">{title}</p>
+          </Col>
+          <p
+            className="text-muted mt-1 mb-0  text-small d-flex"
+            style={{ marginLeft: '70px' }}
+          >
+            {date}
+          </p>
+        </Row>
       </div>
-      <DropdownItem divider style={{width:'200px',backgroundColor:'#F1F1F1', color:'#F1F1F1'}} />
-   </div>
+      <DropdownItem
+        divider
+        style={{ width: '200px', backgroundColor: '#F1F1F1', color: '#F1F1F1' }}
+      />
+    </div>
   );
 };
 
@@ -131,7 +146,6 @@ const TopNav = ({
     }
     e.stopPropagation();
   };
-
 
   const handleDocumentClickSearch = (e) => {
     let isSearchClick = false;
@@ -248,13 +262,13 @@ const TopNav = ({
           <MobileMenuIcon />
         </NavLink>
         <NavLink className="navbar-logo" to={adminRoot}>
-          <img src={require(`./logo.png`)} className="Logo"/>
-      </NavLink>
-            {/* <BsChatSquareDots className="chat"/> */}
-            {/* <IoIosNotificationsOutline className="notification"/> */}
-            {/* <RiNotification4Line className="noti"/> */}
-          
-{/*         <div className="search">
+          <img src={require(`./logo.png`)} className="Logo" />
+        </NavLink>
+        {/* <BsChatSquareDots className="chat"/> */}
+        {/* <IoIosNotificationsOutline className="notification"/> */}
+        {/* <RiNotification4Line className="noti"/> */}
+
+        {/*         <div className="search">
           <Input
             name="searchKeyword"
             id="searchKeyword"
@@ -271,7 +285,7 @@ const TopNav = ({
           </span>
         </div> */}
 
-{/*         <div className="d-inline-block">
+        {/*         <div className="d-inline-block">
           <UncontrolledDropdown className="ml-2">
             <DropdownToggle
               caret
@@ -295,19 +309,15 @@ const TopNav = ({
             </DropdownMenu>
           </UncontrolledDropdown>
         </div> */}
-        <div className="position-relative d-none d-none d-lg-inline-block">
-
-        </div>
+        <div className="position-relative d-none d-none d-lg-inline-block"></div>
       </div>
 
-
       {/* <div className="navbar-right"> */}
-        
-        {/* <div className="header-icons d-flex align-middle ml-auto"> */}
-           {/* <TopnavEasyAccess /> */}
-          
- 
-         {/*  <button
+
+      {/* <div className="header-icons d-flex align-middle ml-auto"> */}
+      {/* <TopnavEasyAccess /> */}
+
+      {/*  <button
             className="header-icon btn btn-empty d-none d-sm-inline-block"
             type="button"
             id="fullScreenButton"
@@ -319,14 +329,14 @@ const TopNav = ({
               <i className="simple-icon-size-fullscreen d-block" />
             )}
           </button> */}
-        {/* </div> */}
-        <div className="user d-flex ml-auto mr-4">
+      {/* </div> */}
+      <div className="user d-flex ml-auto mr-4">
         <UncontrolledDropdown className="ml-auto">
           <DropdownToggle
             className="header-icon notificationButton"
             color="empty"
           >
-            <i className="simple-icon-speech" style={{fontSize:'20px'}} />
+            <i className="simple-icon-speech" style={{ fontSize: '20px' }} />
             <span className="count">2</span>
           </DropdownToggle>
           <DropdownMenu
@@ -343,32 +353,32 @@ const TopNav = ({
                     <Messages key={index} {...mess} />
                   </a>
                 );
-              })} 
+              })}
             </PerfectScrollbar>
           </DropdownMenu>
         </UncontrolledDropdown>
 
-        <TopnavNotifications className="noti" /> 
-          <UncontrolledDropdown className="dropdown-menu-right">
-            <DropdownToggle className="p-0" color="empty">
-             {/*  <span className="name mr-1">Sarah Kortney</span> */}
-              <span>
-                <img alt="Profile" src="/assets/img/profiles/l-1.jpg" />
-              </span>
-            </DropdownToggle>
-            <DropdownMenu className="mt-3" right>
-              <a href="/app/pages/profile/setting"><DropdownItem>Account</DropdownItem></a>
-              <DropdownItem>Features</DropdownItem>
-              <DropdownItem>History</DropdownItem>
-              <DropdownItem>Support</DropdownItem>
-              
-              <DropdownItem divider />
-              <DropdownItem onClick={() => handleLogout()}>
-                Sign out
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </div>
+        <TopnavNotifications className="noti" />
+        <UncontrolledDropdown className="dropdown-menu-right">
+          <DropdownToggle className="p-0" color="empty">
+            {/*  <span className="name mr-1">Sarah Kortney</span> */}
+            <span>
+              <img alt="Profile" src="/assets/img/profiles/l-1.jpg" />
+            </span>
+          </DropdownToggle>
+          <DropdownMenu className="mt-3" right>
+            <a href="/app/pages/profile/setting">
+              <DropdownItem>Account</DropdownItem>
+            </a>
+            {/* <DropdownItem>Features</DropdownItem> */}
+            {/* <DropdownItem>History</DropdownItem> */}
+            <DropdownItem>Support</DropdownItem>
+
+            <DropdownItem divider />
+            <DropdownItem onClick={() => handleLogout()}>Sign out</DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </div>
       {/* </div> */}
     </nav>
   );
