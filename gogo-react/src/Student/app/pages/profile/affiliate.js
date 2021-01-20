@@ -13,6 +13,10 @@ import Disabled from './Disabled';
 function Affiliate() {
   const [enabled, setEnabled] = useState(true);
   const [error, setError] = useState(null);
+  const [totalRewards, setTotalRewards] = useState(0);
+
+  const handleTotalRewards = (num) => setTotalRewards(num);
+
   useEffect(() => {
     if (error) {
       console.log(error);
@@ -135,7 +139,7 @@ function Affiliate() {
                     className="font-weight-bold head text-light"
                     style={{ fontSize: '40px', marginTop: 20 }}
                   >
-                    31
+                    {totalRewards}
                   </CardText>
                   <CardText
                     className="font-weight-bold  para text-light"
@@ -152,7 +156,7 @@ function Affiliate() {
       <Row>
         <Col md="12" xs="12">
           <Card className="h-120 mt-4 mb-4 ">
-            <AffiliateCard />
+            <AffiliateCard handleTotalRewards={handleTotalRewards} />
             {/* <Scrollbars style={{ width: '100%', height: 400 }}>
               <CardBody style={{ width: '120%' }}>
                 <Table columns={cols} data={data} />

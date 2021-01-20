@@ -157,54 +157,54 @@ const cityWiseData = [
     city_wise_visits_from_whatsapp: 'Delhi(80%), Kolkata(20%)',
   },
 ];
-const affiliate2 = [
-  {
-    student_name: 'First Student',
-    course_name: 'Angular',
-    email_id: 'johndoe@gmail.com',
-    contact: '9764010025',
-    course_purchase: 'No',
-    student_earnings: '200 Points',
-    class: 'text-muted w-10 danger badge-sm',
-  },
-  {
-    student_name: 'First Student',
-    course_name: 'Angular',
-    email_id: 'johndoe@gmail.com',
-    contact: '9764010025',
-    course_purchase: 'No',
-    student_earnings: '100 Points',
-    class: 'text-muted w-10 danger badge-sm',
-  },
-  {
-    student_name: 'First Student',
-    course_name: 'Angular',
-    email_id: 'johndoe@gmail.com',
-    contact: '9764010025',
-    course_purchase: 'YES',
+// const affiliate2 = [
+//   {
+//     student_name: 'First Student',
+//     course_name: 'Angular',
+//     email_id: 'johndoe@gmail.com',
+//     contact: '9764010025',
+//     course_purchase: 'No',
+//     student_earnings: '200 Points',
+//     class: 'text-muted w-10 danger badge-sm',
+//   },
+//   {
+//     student_name: 'First Student',
+//     course_name: 'Angular',
+//     email_id: 'johndoe@gmail.com',
+//     contact: '9764010025',
+//     course_purchase: 'No',
+//     student_earnings: '100 Points',
+//     class: 'text-muted w-10 danger badge-sm',
+//   },
+//   {
+//     student_name: 'First Student',
+//     course_name: 'Angular',
+//     email_id: 'johndoe@gmail.com',
+//     contact: '9764010025',
+//     course_purchase: 'YES',
 
-    student_earnings: '140 Points',
-    class: 'text-muted w-10 danger badge-sm',
-  },
-  {
-    student_name: 'First Student',
-    course_name: 'Angular',
-    email_id: 'johndoe@gmail.com',
-    contact: '9764010025',
-    student_earnings: '600 Points',
-    course_purchase: 'No',
-    class: 'text-muted w-10 danger badge-sm',
-  },
-  {
-    student_name: 'First Student',
-    course_name: 'Angular',
-    email_id: 'johndoe@gmail.com',
-    contact: '9764010025',
-    student_earnings: '120 Points',
-    course_purchase: 'YES',
-    class: 'text-muted w-10 danger badge-sm',
-  },
-];
+//     student_earnings: '140 Points',
+//     class: 'text-muted w-10 danger badge-sm',
+//   },
+//   {
+//     student_name: 'First Student',
+//     course_name: 'Angular',
+//     email_id: 'johndoe@gmail.com',
+//     contact: '9764010025',
+//     student_earnings: '600 Points',
+//     course_purchase: 'No',
+//     class: 'text-muted w-10 danger badge-sm',
+//   },
+//   {
+//     student_name: 'First Student',
+//     course_name: 'Angular',
+//     email_id: 'johndoe@gmail.com',
+//     contact: '9764010025',
+//     student_earnings: '120 Points',
+//     course_purchase: 'YES',
+//     class: 'text-muted w-10 danger badge-sm',
+//   },
+// ];
 
 const affiliateData = [
   {
@@ -510,9 +510,10 @@ const Table = ({ columns, data }) => {
   );
 };
 
-const AffiliateCard = () => {
+const AffiliateCard = ({ handleTotalRewards }) => {
   const [activeFirstTab6, setActiveFirstTab6] = useState('20');
   const [error, setError] = useState(null);
+  const [affiliate2, setAffiliate2] = useState([]);
 
   const links = [
     {
@@ -696,10 +697,24 @@ const AffiliateCard = () => {
   useEffect(() => {
     const getLinkData = async () => {
       try {
-        const result = await axiosInstance.get(`/student/referal`);
+        const result = await axiosInstance.get(`/student/affiliates`);
         console.log(result);
         if (result.data.success) {
-          const data = result.data.result.map((doc) => ({}));
+          let a = 0;
+          const data = result.data.finalResult.map((doc) => {
+            a += parseInt(doc.affiliate_rewards_given);
+            return {
+              student_name: doc.affiliate_brought_student_name,
+              course_name: doc.course_name,
+              email_id: doc.student_email,
+              contact: doc.student_phone_number,
+              student_earnings: doc.affiliate_rewards_given,
+              course_purchase: doc.affiliate_purchase_status ? 'YES' : 'NO',
+              class: 'text-muted w-10 danger badge-sm',
+            };
+          });
+          handleTotalRewards(a);
+          setAffiliate2(data);
         } else {
           try {
             setError(result.data.error);
