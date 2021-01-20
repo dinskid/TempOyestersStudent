@@ -1,43 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { Row, Card, Button, Col } from 'reactstrap';
 
-import axios from 'axios';
-
-import { servicePath } from '../../../../constants/defaultValues';
-import './course1.css'
-import ListPageHeading from '../../../../containers/pages/ListPageHeading';
-import AddNewModal from '../../../../containers/pages/AddNewModal';
-import ListPageListing from '../../../../containers/pages/ListPageListing';
-import useMousetrap from '../../../../hooks/use-mousetrap';
 import { FiGlobe } from 'react-icons/fi';
 import { FiGithub } from 'react-icons/fi';
 import { FiTwitter } from 'react-icons/fi';
 import { FiFacebook } from 'react-icons/fi';
 import { FiInstagram } from 'react-icons/fi';
 import { AiOutlineLeftCircle } from 'react-icons/ai';
-import {Route, Link} from 'react-router-dom'
-import {
-  Row,
-  Card,
-  CardTitle,ListGroupItem,ListGroup,
-  CardBody,
-  Nav,
-  NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownItem,
-  DropdownMenu,
-  TabContent,
-  TabPane,
-  Badge,
-  CardHeader,
-  Table,
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Button,
-  Col,CardText ,Collapse,UncontrolledCollapse,CardImg,CardSubtitle
-} from 'reactstrap';
-import man from './man.jpg'
+import { Link } from 'react-router-dom';
+
+import './course1.css';
+import useMousetrap from '../../../../hooks/use-mousetrap';
+import man from './man.jpg';
+
+import axiosInstance from '../../../../helpers/axiosInstance';
+import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import Loader from './Loader';
+
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
     if (arr[i][prop] === value) {
@@ -47,23 +26,8 @@ const getIndex = (value, arr, prop) => {
   return -1;
 };
 
-const apiUrl = `${servicePath}/cakes/paging`;
-
-const orderOptions = [
-  { column: 'title', label: 'Product Name' },
-  { column: 'category', label: 'Category' },
-  { column: 'status', label: 'Status' },
-];
-const pageSizes = [4, 8, 12, 20];
-
-const categories = [
-  { label: 'Cakes', value: 'Cakes', key: 0 },
-  { label: 'Cupcakes', value: 'Cupcakes', key: 1 },
-  { label: 'Desserts', value: 'Desserts', key: 2 },
-];
-
-const ImageListPages = ({ match }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+const ImageListPages = ({ match, ...props }) => {
+  console.log(props);
   const [displayMode, setDisplayMode] = useState('imagelist');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPageSize, setSelectedPageSize] = useState(8);
@@ -76,33 +40,65 @@ const ImageListPages = ({ match }) => {
   const [totalItemCount, setTotalItemCount] = useState(0);
   const [totalPage, setTotalPage] = useState(1);
   const [search, setSearch] = useState('');
+
   const [selectedItems, setSelectedItems] = useState([]);
   const [items, setItems] = useState([]);
   const [lastChecked, setLastChecked] = useState(null);
 
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [trainer, setTrainer] = useState({});
+
+  const createMarkup = (data) => {
+    return { __html: data };
+  };
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedPageSize, selectedOrderOption]);
 
   useEffect(() => {
+    if (error)
+      NotificationManager.warning(
+        error,
+        'All Courses Error',
+        3000,
+        null,
+        null,
+        ''
+      );
+  }, [error, setError]);
+
+  useEffect(() => {
+    let id = props.location.state.trainer_id;
+
+    console.log(id);
     async function fetchData() {
-      axios
-        .get(
-          `${apiUrl}?pageSize=${selectedPageSize}&currentPage=${currentPage}&orderBy=${selectedOrderOption.column}&search=${search}`
-        )
-        .then((res) => {
-          return res.data;
-        })
-        .then((data) => {
-          setTotalPage(data.totalPage);
-          setItems(data.data.map(x=>{ return { ...x,img : x.img.replace("img/","img/products/")}}));
-          setSelectedItems([]);
-          setTotalItemCount(data.totalItem);
-          setIsLoaded(true);
-        });
+      try {
+        const result = await axiosInstance.get(
+          `/student/sessions/trainer/${id}`
+        );
+        if (result.data.success) {
+          console.log(result.data.trainerData);
+          setTrainer(result.data.trainerData);
+        } else {
+          try {
+            setError(result.data.error);
+          } catch (er) {
+            setError('Could not fetch details');
+          }
+        }
+      } catch (error) {
+        try {
+          setError(error.response.data.error);
+        } catch (e) {
+          setError('Could not fetch details');
+        }
+      } finally {
+        setIsLoaded(true);
+      }
     }
     fetchData();
-  }, [selectedPageSize, currentPage, selectedOrderOption, search]);
+  }, []);
 
   const onCheckItem = (event, id) => {
     if (
@@ -178,59 +174,112 @@ const ImageListPages = ({ match }) => {
 
   const startIndex = (currentPage - 1) * selectedPageSize;
   const endIndex = currentPage * selectedPageSize;
-
-  return !isLoaded ? (
-    <div className="loading" />
-  ) : (
+  console.log(trainer);
+  if (!isLoaded) return <Loader />;
+  return (
     <>
-    <Link to='/app/pages/product/details'><AiOutlineLeftCircle className="mb-4" style={{fontSize:'30px',cursor:'pointer'}}/></Link>
+      <Link to="/app/pages/product/details">
+        <AiOutlineLeftCircle
+          className="mb-4"
+          style={{ fontSize: '30px', cursor: 'pointer' }}
+        />
+      </Link>
       <Row>
         <Col md="4" xs="12">
-          <Card body style={{height:'268px'}}>
-            <img src={man} className="img1"/>
-            <p className="mx-auto font-weight-bold nameinst" >Udit Narayan</p>
-            <p className="mx-auto desc">Senior Web Developer, Flexor Inc.</p>
-            <p className="mx-auto desc">Bengaluru, India</p>
-            <Row><Button outline className="info ml-auto mr-2">Message</Button>
-            <Button className="info mr-auto ml-2">Contact</Button></Row>
+          <Card body style={{ height: '268px' }}>
+            <img src={man} className="img1" />
+            <p className="mx-auto font-weight-bold nameinst">
+              {trainer.trainer_full_name}
+            </p>
+            <p className="mx-auto desc">{trainer.trainer_occupation}</p>
+            {/* <p className="mx-auto desc">Bengaluru, India</p> */}
+            <Row>
+              <Button outline className="info ml-auto mr-2">
+                Message
+              </Button>
+              <Button className="info mr-auto ml-2">Contact</Button>
+            </Row>
           </Card>
         </Col>
         <Col md="4" xs="12">
-          <Card body style={{height:'268px'}}>
-          {/* <ListGroup> */}
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b>Full Name</b> : Udit Narayan</div>
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b>Email</b> : uditn@gmail.com</div>
+          <Card body style={{ height: '268px' }}>
+            {/* <ListGroup> */}
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              <b>Full Name</b> : {trainer.trainer_full_name}
+            </div>
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              <b>Email</b> : {trainer.trainer_email}
+            </div>
             {/* <div className="px-4 py-2" style={{fontSize:'20px'}}><b>Former Web Developer</b> at Capgemini, 2010 to 2013</div> */}
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b>Former Software Engineer</b> at Infosys, 2013 to 2015</div>
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b>Achievements</b> : Hacktober 2020</div>
-          {/* </ListGroup> */}
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              <b>Former Software Engineer</b> at Infosys, 2013 to 2015
+            </div>
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              {/* <b>Achievements</b> : Hacktober 2020 */}
+              {trainer.trainer_occupation}
+            </div>
+            {/* </ListGroup> */}
           </Card>
         </Col>
         <Col md="4" xs="12">
-          <Card body style={{height:'268px'}}>
-            <div className="px-4 pb-2 pt-1" style={{fontSize:'20px'}}><b><FiGlobe/></b>   www.uideveloper.com</div>
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b><FiGithub/></b>   udit3344</div>
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b><FiTwitter/></b> uditnry</div>
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b><FiFacebook/></b> Udit Narayan</div>
-            <div className="px-4 py-2" style={{fontSize:'20px'}}><b><FiInstagram/></b> udit_narayan</div>
+          <Card body style={{ height: '268px' }}>
+            <div className="px-4 pb-2 pt-1" style={{ fontSize: '20px' }}>
+              <b>
+                <FiGlobe />
+              </b>{' '}
+              {trainer.trainer_website_url}
+            </div>
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              <b>
+                <FiGithub />
+              </b>{' '}
+              udit3344
+            </div>
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              <b>
+                <FiTwitter />
+              </b>{' '}
+              {trainer.trainer_twitter_id}
+            </div>
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              <b>
+                <FiFacebook />
+              </b>{' '}
+              {trainer.trainer_facebook_id}
+            </div>
+            <div className="px-4 py-2" style={{ fontSize: '20px' }}>
+              <b>
+                <FiInstagram />
+              </b>{' '}
+              {trainer.trainer_instagram_id}
+            </div>
           </Card>
         </Col>
       </Row>
       <Row className="mt-3">
         <Col md="6" xs="12">
           <Card body>
-            <h2 className="font-weight-bold mb-4">Career Summary</h2>  
-            <p style={{fontSize:'19px'}}>Full stack web developer responsible for end-to-end web app development and creative cloud engineering. Led three teams of five employees each. Prototyped an average of 25 new product features per year. Drove best practice implementation for 22 employees across multiple departments. Decreased rework by 23% and costs by 15%. Boosted user experience scores by 55% over company-wide previous best.</p>
+            <h2 className="font-weight-bold mb-4">Career Summary</h2>
+            <p
+              style={{ fontSize: '19px' }}
+              dangerouslySetInnerHTML={createMarkup(
+                trainer.trainer_career_summary
+              )}
+            ></p>
           </Card>
         </Col>
         <Col md="6" xs="12">
           <Card body>
-            <h2 className="font-weight-bold mb-4">Experience</h2>  
-            <p style={{fontSize:'19px'}}>Full stack web developer responsible for end-to-end web app development and creative cloud engineering. Led three teams of five employees each. Prototyped an average of 25 new product features per year. Drove best practice implementation for 22 employees across multiple departments. Decreased rework by 23% and costs by 15%. Boosted user experience scores by 55% over company-wide previous best.</p>
+            <h2 className="font-weight-bold mb-4">Experience</h2>
+            <p
+              style={{ fontSize: '19px' }}
+              dangerouslySetInnerHTML={createMarkup(trainer.trainer_experience)}
+            ></p>
           </Card>
         </Col>
       </Row>
-      <br/><br/>
+      <br />
+      <br />
     </>
   );
 };

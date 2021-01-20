@@ -10,11 +10,11 @@ import {
   Spinner,
 } from 'reactstrap';
 import './course1.css';
-import { servicePath } from '../../../../constants/defaultValues';
 import useMousetrap from '../../../../hooks/use-mousetrap';
 import { Route, Link } from 'react-router-dom';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import NoDataFound from '../NoDataFound'
 
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
@@ -193,11 +193,7 @@ const DataListPages = ({ match }) => {
 
   if (!names.length)
     return (
-      <>
-        <div>
-          <h1>No Sessions Found</h1>
-        </div>
-      </>
+     <NoDataFound />
     );
 
   return (

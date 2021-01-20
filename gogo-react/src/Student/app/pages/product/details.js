@@ -58,17 +58,12 @@ const DetailsPages = ({ match, intl, ...props }) => {
     session_fee: '',
     session_duration: '',
     chapter_learnings: [],
+    session_trainer_id: '',
   });
 
-  const [instructor, setInstructor] = ['Udit Narayan'];
-
-  const [work_exp, setWork_exp] = [
-    'Senior Web Developer, Flexor Inc. from 2013 - 2017',
-  ];
-
-  const [about, setAbout] = [
-    'Full stack web developer responsible for end-to-end web app development and creative cloud engineering. Led three teams of five employees each. Prototyped an average of 25 new product features per year. Drove best practice implementation for 22 employees across multiple departments. Decreased rework by 23% and costs by 15%. Boosted user experience scores by 55% over company-wide previous best.',
-  ];
+  const [instructor, setInstructor] = useState('');
+  const [work_exp, setWork_exp] = useState('');
+  const [about, setAbout] = useState('');
 
   const [content, setContent] = useState([]);
 
@@ -93,7 +88,14 @@ const DetailsPages = ({ match, intl, ...props }) => {
         console.log(result);
 
         if (result.data.success) {
+          const trainerData = result.data.trainerData;
           setSession(result.data.session);
+          console.log(session);
+
+          setInstructor(trainerData.trainer_full_name);
+          setWork_exp(trainerData.trainer_occupation);
+          setAbout(trainerData.trainer_career_summary);
+
           setContent(result.data.ans);
           setCartItemStatus(result.data.cart_item_status);
         } else {
@@ -169,9 +171,12 @@ const DetailsPages = ({ match, intl, ...props }) => {
       }
     }
   };
+  const createMarkup = (data) => {
+    return { __html: data };
+  };
 
   if (!isLoaded) return <Loader />;
-
+  console.log(session);
   return (
     <>
       <Modal isOpen={modal} toggle={toggle}>
@@ -318,13 +323,26 @@ const DetailsPages = ({ match, intl, ...props }) => {
               </Col>
               <Col md="8">
                 <CardText className="font-weight-bold">{work_exp}</CardText>
-                <CardText className="">{about}</CardText>
+                <CardText className="">
+                  <p
+                    className="text-center"
+                    style={{ fontSize: '15px' }}
+                    dangerouslySetInnerHTML={createMarkup(about)}
+                  ></p>
+                </CardText>
               </Col>
             </Row>
 
             <Button className="go_to_profile">
               <Route>
-                <Link to="/app/pages/product/image-list">
+                <Link
+                  to={{
+                    pathname: '/app/pages/product/image-list',
+                    state: {
+                      trainer_id: session.session_trainer_id,
+                    },
+                  }}
+                >
                   <p className="mt-3 innertext">See Full Profile</p>
                 </Link>
               </Route>

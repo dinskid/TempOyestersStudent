@@ -12,6 +12,7 @@ import {
 import './course1.css';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import NoDataFound from '../NoDataFound';
 
 const Live_Session = () => {
   const [names, setNames] = useState([]);
@@ -73,14 +74,7 @@ const Live_Session = () => {
       </div>
     );
 
-  if (!names.length)
-    return (
-      <>
-        <div>
-          <h1>No Live Sessions Found</h1>
-        </div>
-      </>
-    );
+  if (!names.length) return <NoDataFound />;
 
   return (
     <Row>
