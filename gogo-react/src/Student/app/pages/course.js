@@ -84,7 +84,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   useEffect(() => {
     const getData = async () => {
       try {
-        if (!props.location.state.session_id)
+        if (isNaN(props.location.state.session_id))
           history.push('/app/pages/mycourses');
       } catch (e) {
         history.push('/app/pages/mycourses');
