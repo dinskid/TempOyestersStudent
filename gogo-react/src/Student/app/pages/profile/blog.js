@@ -196,6 +196,14 @@ const Blog = () => {
           toggleModal();
           setSuccess('Blog Saved Successfully');
           setReload(!reload);
+          setBlog({
+            blog_writer_name: '',
+            blog_writer_email: '',
+            blog_title: '',
+            blog_thumbnail: '',
+            blog_body: '',
+          });
+          setDisplayProfileImage(null);
         } else {
           try {
             setError(result.data.error);
@@ -216,7 +224,7 @@ const Blog = () => {
 
   if (!enabled) return <Disabled />;
   // return <div>Hello</div>;
-
+  const height = !blogList.length ? '80px' : `${blogList.length * 50}px`;
   return (
     <div>
       {modal ? (
@@ -312,7 +320,13 @@ const Blog = () => {
               </Card>
             </Col>
           </Row>
-          <Card className="mx-auto">
+          <Card
+            style={{
+              height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
+              marginBottom: '5rem',
+              paddingBottom: !blogList.length ? '0' : '21rem',
+            }}
+          >
             <CardBody>
               {!blogList.length ? (
                 <Button className="mt-3" onClick={toggleModal}>
@@ -536,7 +550,13 @@ const Blog = () => {
               </Card>
             </Col>
           </Row>
-          <Card className="mx-auto">
+          <Card
+            style={{
+              height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
+              marginBottom: '5rem',
+              paddingBottom: !blogList.length ? '0' : '21rem',
+            }}
+          >
             <CardBody>
               {!blogList.length ? (
                 <Button className="mt-3" onClick={toggleModal}>
