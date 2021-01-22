@@ -18,15 +18,13 @@ import {
 } from 'reactstrap';
 import IntlMessages from '../../../../helpers/IntlMessages';
 
-import UploadPreview from './preview';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import Disabled from './Disabled';
 
 import { IoIosPeople } from 'react-icons/io';
-import { FaUserCheck } from 'react-icons/fa';
-import { HiCurrencyRupee } from 'react-icons/hi';
-import { BiRupee } from 'react-icons/bi';
+import { BiComment } from 'react-icons/bi';
+import { AiFillLike, AiFillEye } from 'react-icons/ai';
 
 import Table from './Table';
 
@@ -50,7 +48,7 @@ const Blog = () => {
   const [totalBlogs, setTotalBlogs] = useState(0);
   const [totalComments, setTotalComments] = useState(0);
   const [totalLikes, setTotalLikes] = useState(0);
-  const [totalEarnings, settotalEarnings] = useState(0);
+  const [totalViews, setTotalViews] = useState(0);
 
   const [reload, setReload] = useState(false);
   const handleReloadTable = () => setReload(!reload);
@@ -149,6 +147,7 @@ const Blog = () => {
           setBlogList(data);
           setTotalLikes('20 Static');
           setTotalComments('20 Static');
+          setTotalViews('0 Static');
         }
       } catch (error) {
         try {
@@ -261,7 +260,7 @@ const Blog = () => {
               >
                 <Row>
                   <Col md="6" xs="6">
-                    <FaUserCheck id="myicon" className="text-light" />
+                    <AiFillLike id="myicon" className="text-light" />
                   </Col>
                   <Col md="6" xs="6">
                     <CardText className="font-weight-bold head text-light">
@@ -283,7 +282,7 @@ const Blog = () => {
               >
                 <Row>
                   <Col md="6" xs="6">
-                    <BiRupee id="myicon" className="text-light" />
+                    <BiComment id="myicon" className="text-light" />
                   </Col>
                   <Col md="6" xs="6" className="mb-3">
                     <CardText className="font-weight-bold head text-light">
@@ -306,14 +305,14 @@ const Blog = () => {
               >
                 <Row>
                   <Col md="6" xs="6">
-                    <HiCurrencyRupee id="myicon" className="text-light" />
+                    <AiFillEye id="myicon" className="text-light" />
                   </Col>
                   <Col md="6" xs="6" className="mb-3">
                     <CardText className="font-weight-bold head text-light">
-                      {totalEarnings}
+                      {totalViews}
                     </CardText>
                     <CardText className="font-weight-bold para text-light">
-                      Total Earnings
+                      Total Views
                     </CardText>
                   </Col>
                 </Row>
@@ -491,7 +490,7 @@ const Blog = () => {
               >
                 <Row>
                   <Col md="6" xs="6">
-                    <FaUserCheck id="myicon" className="text-light" />
+                    <AiFillLike id="myicon" className="text-light" />
                   </Col>
                   <Col md="6" xs="6">
                     <CardText className="font-weight-bold head text-light">
@@ -513,7 +512,7 @@ const Blog = () => {
               >
                 <Row>
                   <Col md="6" xs="6">
-                    <BiRupee id="myicon" className="text-light" />
+                    <BiComment id="myicon" className="text-light" />
                   </Col>
                   <Col md="6" xs="6" className="mb-3">
                     <CardText className="font-weight-bold head text-light">
@@ -536,14 +535,14 @@ const Blog = () => {
               >
                 <Row>
                   <Col md="6" xs="6">
-                    <HiCurrencyRupee id="myicon" className="text-light" />
+                    <AiFillEye id="myicon" className="text-light" />
                   </Col>
                   <Col md="6" xs="6" className="mb-3">
                     <CardText className="font-weight-bold head text-light">
-                      {totalEarnings}
+                      {totalViews}
                     </CardText>
                     <CardText className="font-weight-bold para text-light">
-                      Total Earnings
+                      Total Views
                     </CardText>
                   </Col>
                 </Row>
