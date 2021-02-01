@@ -50,7 +50,7 @@ const loginWithEmailPasswordAsync = async (
 
 function* loginWithEmailPassword({ payload }) {
   const { email, password, using_google = false } = payload.user.values;
-  const { history } = payload.user;
+  const { history, toggleClick } = payload.user;
   console.log(payload);
   try {
     const customer_email = email;
@@ -68,9 +68,11 @@ function* loginWithEmailPassword({ payload }) {
       yield put(loginUserSuccess(item));
       history.push('/app/pages/product/data-list');
     } else {
+      toggleClick();
       yield put(loginUserError(loginUser.error));
     }
   } catch (error) {
+    toggleClick();
     try {
       yield put(loginUserError(error.response.data.error));
     } catch (err) {
@@ -124,7 +126,7 @@ function* registerWithEmailPassword({ payload }) {
     customer_last_name,
     using_google = false,
   } = payload.user.values;
-  const { history } = payload.user;
+  const { history, toggleClick } = payload.user;
   try {
     const registerUser = yield call(
       registerWithEmailPasswordAsync,
@@ -137,6 +139,7 @@ function* registerWithEmailPassword({ payload }) {
       yield put(registerUserSuccess(item));
       history.push('/app/pages/product/data-list');
     } else {
+      toggleClick();
       try {
         yield put(registerUserError(registerUser.error));
       } catch (err) {
@@ -144,6 +147,7 @@ function* registerWithEmailPassword({ payload }) {
       }
     }
   } catch (error) {
+    toggleClick();
     try {
       yield put(registerUserError(error.response.data.error));
     } catch (err) {

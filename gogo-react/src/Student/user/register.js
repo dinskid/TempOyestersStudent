@@ -74,6 +74,9 @@ const Register = ({
 }) => {
   const dispatch = useDispatch();
   const [customer_id, setCustomer_id] = useState(null);
+  const [clicked, setClicked] = useState(false);
+
+  const toggleClick = () => setClicked(false);
 
   useEffect(() => {
     if (error) {
@@ -96,6 +99,7 @@ const Register = ({
 
   const onSuccess = (res) => {
     // console.log('login success', res.profileObj);
+    setClicked(true);
     refreshTokenSetup(res);
     console.log(
       res.profileObj.name,
@@ -111,7 +115,7 @@ const Register = ({
       customer_imageUrl: res.profileObj.imageUrl,
       using_google: true,
     };
-    registerUserAction({ history, values });
+    registerUserAction({ history, values, toggleClick });
   };
   const onFailure = (err) => {
     dispatch(registerUserError(err.error || 'unable to register'));
@@ -127,8 +131,9 @@ const Register = ({
 
   const onSubmit = (values) => {
     console.log(values);
+    setClicked(true);
     values.customer_id = customer_id;
-    registerUserAction({ history, values });
+    registerUserAction({ history, values, toggleClick });
   };
 
   return (
@@ -268,9 +273,22 @@ const Register = ({
                     ) : null}
                   </FormGroup>
                   <div className=" mt-3 d-flex justify-content-between  align-items-center">
-                    <Button color="primary" type="submit" className="register">
-                      Register
-                    </Button>{' '}
+                    <Button
+                      color="primary"
+                      type="submit"
+                      // onClick={onUserLogin}
+                      className={`btn-shadow btn-multiple-state ${
+                        clicked ? 'show-spinner' : ''
+                      }`}
+                      size="lg"
+                    >
+                      <span className="spinner d-inline-block">
+                        <span className="bounce1" />
+                        <span className="bounce2" />
+                        <span className="bounce3" />
+                      </span>
+                      <span className="label">Register</span>
+                    </Button>
                     <br />
                     <br />
                     <NavLink to="/Student/user/login">

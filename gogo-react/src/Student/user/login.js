@@ -32,6 +32,7 @@ const validation = Yup.object().shape({
 
 const Login = ({ history, loading, error, loginUserAction }) => {
   const dispatch = useDispatch();
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -142,7 +143,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                     <Button
                       color="primary"
                       className={`btn-shadow btn-multiple-state ${
-                        isSubmitting ? 'show-spinner' : ''
+                        clicked ? 'show-spinner' : ''
                       }`}
                       size="lg"
                     >
