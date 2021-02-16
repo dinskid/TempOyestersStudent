@@ -36,7 +36,7 @@ const Ui = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "ui" */ './ui'))
 );
 const Menu = React.lazy(() =>
-  retry(() => mport(/* webpackChunkName: "menu" */ './menu'))
+  retry(() => import(/* webpackChunkName: "menu" */ './menu'))
 );
 const BlankPage = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "blank-page" */ './blank-page'))
