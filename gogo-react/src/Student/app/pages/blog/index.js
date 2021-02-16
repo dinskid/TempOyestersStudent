@@ -1,12 +1,14 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../../retry';
+
 const BlogList = React.lazy(() =>
-  import(/* webpackChunkName: "blog-list" */ './blog-list')
+  retry(() => import(/* webpackChunkName: "blog-list" */ './blog-list'))
 );
 
 const BlogDetail = React.lazy(() =>
-  import(/* webpackChunkName: "blog-detail" */ './blog-detail')
+  retry(() => import(/* webpackChunkName: "blog-detail" */ './blog-detail'))
 );
 
 const PagesBlog = ({ match }) => (

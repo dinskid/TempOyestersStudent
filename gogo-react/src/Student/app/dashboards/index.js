@@ -1,17 +1,23 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../retry';
+
 const DashboardDefault = React.lazy(() =>
-  import(/* webpackChunkName: "dashboard-default" */ './default')
+  retry(() => import(/* webpackChunkName: "dashboard-default" */ './default'))
 );
 const ContentDefault = React.lazy(() =>
-  import(/* webpackChunkName: "dashboard-content" */ './content')
+  retry(() => import(/* webpackChunkName: "dashboard-content" */ './content'))
 );
 const AnalyticsDefault = React.lazy(() =>
-  import(/* webpackChunkName: "dashboard-analytics" */ './analytics')
+  retry(() =>
+    import(/* webpackChunkName: "dashboard-analytics" */ './analytics')
+  )
 );
 const EcommerceDefault = React.lazy(() =>
-  import(/* webpackChunkName: "dashboard-ecommerce" */ './ecommerce')
+  retry(() =>
+    import(/* webpackChunkName: "dashboard-ecommerce" */ './ecommerce')
+  )
 );
 
 const Dashboards = ({ match }) => (

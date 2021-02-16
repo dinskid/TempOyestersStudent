@@ -12,24 +12,27 @@ import ColorSwitcher from './components/common/ColorSwitcher';
 import { NotificationContainer } from './components/common/react-notifications';
 import { isMultiColorActive, adminRoot } from './constants/defaultValues';
 import { getDirection } from './helpers/Utils';
+import retry from './retry';
 
 const ViewHome = React.lazy(() =>
-  import(/* webpackChunkName: "views" */ './Student/home')
+  retry(() => import(/* webpackChunkName: "views" */ './Student/home'))
 );
 /* const ViewInst = React.lazy(() =>
   import(/* webpackChunkName: "views"  './views/app/pages/product/Instructor')
 ); */
 const ViewApp = React.lazy(() =>
-  import(/* webpackChunkName: "views-app" */ './Student/app')
+  retry(() => import(/* webpackChunkName: "views-app" */ './Student/app'))
 );
 const ViewUser = React.lazy(() =>
-  import(/* webpackChunkName: "views-user" */ './Student/user')
+  retry(() => import(/* webpackChunkName: "views-user" */ './Student/user'))
 );
 const ViewError = React.lazy(() =>
-  import(/* webpackChunkName: "views-error" */ './Student/error')
+  retry(() => import(/* webpackChunkName: "views-error" */ './Student/error'))
 );
 const ViewUnauthorized = React.lazy(() =>
-  import(/* webpackChunkName: "views-error" */ './Student/unauthorized')
+  retry(() =>
+    import(/* webpackChunkName: "views-error" */ './Student/unauthorized')
+  )
 );
 
 class App extends React.Component {

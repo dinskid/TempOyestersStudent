@@ -1,61 +1,79 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../../retry';
+
 const Alerts = React.lazy(() =>
-  import(/* webpackChunkName: "components-alerts" */ './alerts')
+  retry(() => import(/* webpackChunkName: "components-alerts" */ './alerts'))
 );
 const Badges = React.lazy(() =>
-  import(/* webpackChunkName: "components-badges" */ './badges')
+  retry(() => import(/* webpackChunkName: "components-badges" */ './badges'))
 );
 const Buttons = React.lazy(() =>
-  import(/* webpackChunkName: "components-buttons" */ './buttons')
+  retry(() => import(/* webpackChunkName: "components-buttons" */ './buttons'))
 );
 const Cards = React.lazy(() =>
-  import(/* webpackChunkName: "components-cards" */ './cards')
+  retry(() => import(/* webpackChunkName: "components-cards" */ './cards'))
 );
 const Carousel = React.lazy(() =>
-  import(/* webpackChunkName: "components-carousel" */ './carousel')
+  retry(() =>
+    import(/* webpackChunkName: "components-carousel" */ './carousel')
+  )
 );
 const Charts = React.lazy(() =>
-  import(/* webpackChunkName: "components-charts" */ './charts')
+  retry(() => import(/* webpackChunkName: "components-charts" */ './charts'))
 );
 const Collapse = React.lazy(() =>
-  import(/* webpackChunkName: "components-collapse" */ './collapse')
+  retry(() =>
+    import(/* webpackChunkName: "components-collapse" */ './collapse')
+  )
 );
 const Dropdowns = React.lazy(() =>
-  import(/* webpackChunkName: "components-dropdowns" */ './dropdowns')
+  retry(() =>
+    import(/* webpackChunkName: "components-dropdowns" */ './dropdowns')
+  )
 );
 const Editors = React.lazy(() =>
-  import(/* webpackChunkName: "components-editors" */ './editors')
+  retry(() => import(/* webpackChunkName: "components-editors" */ './editors'))
 );
 const Icons = React.lazy(() =>
-  import(/* webpackChunkName: "components-icons" */ './icons')
+  retry(() => import(/* webpackChunkName: "components-icons" */ './icons'))
 );
 const InputGroups = React.lazy(() =>
-  import(/* webpackChunkName: "components-input-groups" */ './input-groups')
+  retry(() =>
+    import(/* webpackChunkName: "components-input-groups" */ './input-groups')
+  )
 );
 const Jumbotron = React.lazy(() =>
-  import(/* webpackChunkName: "components-jumbotron" */ './jumbotron')
+  retry(() =>
+    import(/* webpackChunkName: "components-jumbotron" */ './jumbotron')
+  )
 );
 const Maps = React.lazy(() =>
-  import(/* webpackChunkName: "components-maps" */ './maps')
+  retry(() => import(/* webpackChunkName: "components-maps" */ './maps'))
 );
 const Modal = React.lazy(() =>
-  import(/* webpackChunkName: "components-modal" */ './modal')
+  retry(() => import(/* webpackChunkName: "components-modal" */ './modal'))
 );
 const Navigation = React.lazy(() =>
-  import(/* webpackChunkName: "components-navigation" */ './navigation')
+  retry(() =>
+    import(/* webpackChunkName: "components-navigation" */ './navigation')
+  )
 );
 const PopoverTooltip = React.lazy(() =>
-  import(
-    /* webpackChunkName: "components-popover-tooltip" */ './popover-tooltip'
+  retry(() =>
+    import(
+      /* webpackChunkName: "components-popover-tool)ip" */ './popover-tooltip'
+    )
   )
 );
 const Sortable = React.lazy(() =>
-  import(/* webpackChunkName: "components-sortable" */ './sortable')
+  retry(() =>
+    import(/* webpackChunkName: "components-sortable" */ './sortable')
+  )
 );
 const Tables = React.lazy(() =>
-  import(/* webpackChunkName: "components-tables" */ './tables')
+  retry(() => import(/* webpackChunkName: "components-tables" */ './tables'))
 );
 
 const Components = ({ match }) => (

@@ -1,11 +1,13 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../retry';
+
 const Forms = React.lazy(() =>
-  import(/* webpackChunkName: "ui-forms" */ './forms')
+  retry(() => import(/* webpackChunkName: "ui-forms" */ './forms'))
 );
 const Components = React.lazy(() =>
-  import(/* webpackChunkName: "ui-components" */ './components')
+  retry(() => import(/* webpackChunkName: "ui-components" */ './components'))
 );
 
 const UI = ({ match }) => (

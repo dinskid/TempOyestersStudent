@@ -1,29 +1,33 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../retry';
+
 const Product = React.lazy(() =>
-  import(/* webpackChunkName: "pages-product" */ './product')
+  retry(() => import(/* webpackChunkName: "pages-product" */ './product'))
 );
 /* const Faq = React.lazy(() =>
   import(/* webpackChunkName: "miscellaneous-faq"  './faq')
 ); */
 const Profile = React.lazy(() =>
-  import(/* webpackChunkName: "pages-profile" */ './profile')
+  retry(() => import(/* webpackChunkName: "pages-profile" */ './profile'))
 );
 const Miscellaneous = React.lazy(() =>
-  import(/* webpackChunkName: "pages-miscellaneous" */ './miscellaneous')
+  retry(() =>
+    import(/* webpackChunkName: "pages-miscellaneous" */ './miscellaneous')
+  )
 );
 const Message = React.lazy(() =>
-  import(/* webpackChunkName: "pages-miscellaneous" */ './Message')
+  retry(() => import(/* webpackChunkName: "pages-miscellaneous" */ './Message'))
 );
 const Blog = React.lazy(() =>
-  import(/* webpackChunkName: "pages-blog" */ './blog')
+  retry(() => import(/* webpackChunkName: "pages-blog" */ './blog'))
 );
 const Faq = React.lazy(() =>
-  import(/* webpackChunkName: "miscellaneous-faq" */ './faq')
+  retry(() => import(/* webpackChunkName: "miscellaneous-faq" */ './faq'))
 );
 const Course = React.lazy(() =>
-  import(/* webpackChunkName: "miscellaneous-faq" */ './course')
+  retry(() => import(/* webpackChunkName: "miscellaneous-faq" */ './course'))
 );
 
 const Pages = ({ match }) => (
@@ -34,7 +38,7 @@ const Pages = ({ match }) => (
         path={`${match.url}/product`}
         render={(props) => <Product {...props} />}
       />
-  {/*     <Route path={`${match.url}/faq`} render={(props) => <Faq {...props} />} /> */}
+      {/*     <Route path={`${match.url}/faq`} render={(props) => <Faq {...props} />} /> */}
       <Route
         path={`${match.url}/profile`}
         render={(props) => <Profile {...props} />}
@@ -56,7 +60,10 @@ const Pages = ({ match }) => (
         render={(props) => <Course {...props} />}
       />
 
-      <Route path={`${match.url}/mycourses`} render={(props) => <Faq {...props} />} />
+      <Route
+        path={`${match.url}/mycourses`}
+        render={(props) => <Faq {...props} />}
+      />
       <Redirect to="/error" />
     </Switch>
   </Suspense>

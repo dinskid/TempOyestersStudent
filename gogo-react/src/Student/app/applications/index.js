@@ -1,17 +1,23 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../retry';
+
 const Todo = React.lazy(() =>
-  import(/* webpackChunkName: "application-todo" */ './todo')
+  retry(() => import(/* webpackChunkName: "application-todo" */ './todo'))
 );
 const Survey = React.lazy(() =>
-  import(/* webpackChunkName: "application-survey" */ './survey')
+  retry(() => import(/* webpackChunkName: "application-survey" */ './survey'))
 );
 const SurveyDetail = React.lazy(() =>
-  import(/* webpackChunkName: "application-survey-detail" */ './survey-detail')
+  retry(() =>
+    import(
+      /* webpackChunkName: "application-survey-detail" */ './survey-detail'
+    )
+  )
 );
 const Chat = React.lazy(() =>
-  import(/* webpackChunkName: "application-chat" */ './chat')
+  retry(() => import(/* webpackChunkName: "application-chat" */ './chat'))
 );
 
 const Applications = ({ match }) => (

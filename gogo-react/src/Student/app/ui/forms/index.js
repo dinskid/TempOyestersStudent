@@ -1,17 +1,21 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../../retry';
+
 const Components = React.lazy(() =>
-  import(/* webpackChunkName: "forms-components" */ './components')
+  retry(() => import(/* webpackChunkName: "forms-components" */ './components'))
 );
 const Layouts = React.lazy(() =>
-  import(/* webpackChunkName: "forms-layouts" */ './layouts')
+  retry(() => import(/* webpackChunkName: "forms-layouts" */ './layouts'))
 );
 const Validations = React.lazy(() =>
-  import(/* webpackChunkName: "forms-validations" */ './validations')
+  retry(() =>
+    import(/* webpackChunkName: "forms-validations" */ './validations')
+  )
 );
 const Wizard = React.lazy(() =>
-  import(/* webpackChunkName: "forms-wizard" */ './wizard')
+  retry(() => import(/* webpackChunkName: "forms-wizard" */ './wizard'))
 );
 
 const Forms = ({ match }) => (

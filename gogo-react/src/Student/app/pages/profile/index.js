@@ -1,20 +1,22 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../../retry';
+
 const Portfolio = React.lazy(() =>
-  import(/* webpackChunkName: "profile-portfolio" */ './portfolio')
+  retry(() => import(/* webpackChunkName: "profile-portfolio" */ './portfolio'))
 );
 const Social = React.lazy(() =>
-  import(/* webpackChunkName: "profile-social" */ './social')
+  retry(() => import(/* webpackChunkName: "profile-social" */ './social'))
 );
 const Setting = React.lazy(() =>
-  import(/* webpackChunkName: "profile-social" */ './setting')
+  retry(() => import(/* webpackChunkName: "profile-social" */ './setting'))
 );
 const Affiliate = React.lazy(() =>
-  import(/* webpackChunkName: "profile-social" */ './affiliate')
+  retry(() => import(/* webpackChunkName: "profile-social" */ './affiliate'))
 );
 const Blog = React.lazy(() =>
-  import(/* webpackChunkName: "profile-social" */ './blog')
+  retry(() => import(/* webpackChunkName: "profile-social" */ './blog'))
 );
 
 const PagesProfile = ({ match }) => (

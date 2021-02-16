@@ -1,14 +1,16 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../../retry';
+
 const ThirdLevel1 = React.lazy(() =>
-  import(/* webpackChunkName: "menu-level-1" */ './third-level-1')
+  retry(() => import(/* webpackChunkName: "menu-level-1" */ './third-level-1'))
 );
 const ThirdLevel2 = React.lazy(() =>
-  import(/* webpackChunkName: "menu-level-2" */ './third-level-2')
+  retry(() => import(/* webpackChunkName: "menu-level-2" */ './third-level-2'))
 );
 const ThirdLevel3 = React.lazy(() =>
-  import(/* webpackChunkName: "menu-level-3" */ './third-level-3')
+  retry(() => import(/* webpackChunkName: "menu-level-3" */ './third-level-3'))
 );
 
 const MenuLevels = ({ match }) => (

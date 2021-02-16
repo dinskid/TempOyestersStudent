@@ -1,23 +1,33 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../../retry';
+
 const DataList = React.lazy(() =>
-  import(/* webpackChunkName: "product-data-list" */ './data-list')
+  retry(() => import(/* webpackChunkName: "product-data-list" */ './data-list'))
 );
 const ImageList = React.lazy(() =>
-  import(/* webpackChunkName: "product-image-list" */ './image-list')
+  retry(() =>
+    import(/* webpackChunkName: "product-image-list" */ './image-list')
+  )
 );
 const ThumbList = React.lazy(() =>
-  import(/* webpackChunkName: "product-thumb-list" */ './thumb-list')
+  retry(() =>
+    import(/* webpackChunkName: "product-thumb-list" */ './thumb-list')
+  )
 );
 const LiveSession = React.lazy(() =>
-  import(/* webpackChunkName: "product-thumb-list" */ './Live_Session')
+  retry(() =>
+    import(/* webpackChunkName: "product-thumb-list" */ './Live_Session')
+  )
 );
 const Details = React.lazy(() =>
-  import(/* webpackChunkName: "product-details" */ './details')
+  retry(() => import(/* webpackChunkName: "product-details" */ './details'))
 );
 const DetailsAlt = React.lazy(() =>
-  import(/* webpackChunkName: "product-details-alt" */ './details-alt')
+  retry(() =>
+    import(/* webpackChunkName: "product-details-alt" */ './details-alt')
+  )
 );
 
 const PagesProduct = ({ match }) => (

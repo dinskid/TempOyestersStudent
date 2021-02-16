@@ -1,18 +1,23 @@
 import React, { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserLayout from '../../layout/UserLayout';
+import retry from '../../retry';
 
 const Login = React.lazy(() =>
-  import(/* webpackChunkName: "user-login" */ './login')
+  retry(() => import(/* webpackChunkName: "user-login" */ './login'))
 );
 const Register = React.lazy(() =>
-  import(/* webpackChunkName: "user-register" */ './register')
+  retry(() => import(/* webpackChunkName: "user-register" */ './register'))
 );
 const ForgotPassword = React.lazy(() =>
-  import(/* webpackChunkName: "user-forgot-password" */ './forgot-password')
+  retry(() =>
+    import(/* webpackChunkName: "user-forgot-password" */ './forgot-password')
+  )
 );
 const ResetPassword = React.lazy(() =>
-  import(/* webpackChunkName: "user-reset-password" */ './reset-password')
+  retry(() =>
+    import(/* webpackChunkName: "user-reset-password" */ './reset-password')
+  )
 );
 
 const User = ({ match }) => {

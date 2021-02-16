@@ -1,29 +1,35 @@
 import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import retry from '../../../../retry';
 
 const Invoice = React.lazy(() =>
-  import(/* webpackChunkName: "miscellaneous-invoice" */ './invoice')
+  retry(() =>
+    import(/* webpackChunkName: "miscellaneous-invoice" */ './invoice')
+  )
 );
 const KnowledgeBase = React.lazy(() =>
-  import(
-    /* webpackChunkName: "miscellaneous-knowledge-base" */ './knowledge-base'
+  retry(() =>
+    import(
+      /* webpackChunkName: "miscellaneous-knowledg)-base" */ './knowledge-base'
+    )
   )
 );
 const Mailing = React.lazy(() =>
-  import(/* webpackChunkName: "miscellaneous-mailing" */ './mailing')
+  retry(() =>
+    import(/* webpackChunkName: "miscellaneous-mailing" */ './mailing')
+  )
 );
 const Prices = React.lazy(() =>
-  import(/* webpackChunkName: "miscellaneous-prices" */ './prices')
+  retry(() => import(/* webpackChunkName: "miscellaneous-prices" */ './prices'))
 );
 const Search = React.lazy(() =>
-  import(/* webpackChunkName: "miscellaneous-search" */ './search')
+  retry(() => import(/* webpackChunkName: "miscellaneous-search" */ './search'))
 );
 
 const PagesMiscellaneous = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
-      
       <Route
         path={`${match.url}/invoice`}
         render={(props) => <Invoice {...props} />}

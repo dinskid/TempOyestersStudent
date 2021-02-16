@@ -3,41 +3,46 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import AppLayout from '../../layout/AppLayout';
+import retry from '../../retry';
 
 const Dashboards = React.lazy(() =>
-  import(/* webpackChunkName: "dashboards" */ './dashboards')
+  retry(() => import(/* webpackChunkName: "dashboards" */ './dashboards'))
 );
 const Pages = React.lazy(() =>
-  import(/* webpackChunkName: "pages" */ './pages')
+  retry(() => import(/* webpackChunkName: "pages" */ './pages'))
 );
 const Applications = React.lazy(() =>
-  import(/* webpackChunkName: "applications" */ './applications')
+  retry(() => import(/* webpackChunkName: "applications" */ './applications'))
 );
 const Privacy = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './privacy')
+  retry(() => import(/* webpackChunkName: "blank-page" */ './privacy'))
 );
 const Cookie = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './cookie')
+  retry(() => import(/* webpackChunkName: "blank-page" */ './cookie'))
 );
 const Terms = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './terms')
+  retry(() => import(/* webpackChunkName: "blank-page" */ './terms'))
 );
 const IRP = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './irp')
+  retry(() => import(/* webpackChunkName: "blank-page" */ './irp'))
 );
 const Anti = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './antispam')
+  retry(() => import(/* webpackChunkName: "blank-page" */ './antispam'))
 );
 const Abuse = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './abuse')
+  retry(() => import(/* webpackChunkName: "blank-page" */ './abuse'))
 );
-const Ui = React.lazy(() => import(/* webpackChunkName: "ui" */ './ui'));
-const Menu = React.lazy(() => import(/* webpackChunkName: "menu" */ './menu'));
+const Ui = React.lazy(() =>
+  retry(() => import(/* webpackChunkName: "ui" */ './ui'))
+);
+const Menu = React.lazy(() =>
+  retry(() => mport(/* webpackChunkName: "menu" */ './menu'))
+);
 const BlankPage = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './blank-page')
+  retry(() => import(/* webpackChunkName: "blank-page" */ './blank-page'))
 );
 
-const Validate = React.lazy(() => import('./Validate'));
+const Validate = React.lazy(() => retry(() => import('./Validate')));
 
 const App = ({ match }) => {
   return (
