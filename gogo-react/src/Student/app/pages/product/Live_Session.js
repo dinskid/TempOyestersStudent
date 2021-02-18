@@ -77,7 +77,7 @@ const Live_Session = () => {
   if (!names.length) return <NoDataFound />;
 
   return (
-    <Row>
+    <Row id="jt_all_course">
       {names.map((name) => {
         return (
           <Col md={3} xs={12}>
@@ -117,20 +117,22 @@ const Live_Session = () => {
               </div>
               {/* </Link></Route> */}
               <CardBody>
+              <div className="jt_cart">
                 <h2 className="font-weight-bold">{name.course}</h2>
                 {/* <h6 className="mb-2 font-weight-bold">{name.genre}</h6> */}
                 <CardText>{name.desc}</CardText>
-                <Row>
-                  {/* <h5 className="mr-auto ml-4">
-                    <b>${name.cost}</b>
-                  </h5> */}
-                  {/* <h5 className="ml-2 mr-4">
-                    <b>Tags:</b> {name.tags}
-                  </h5> */}
-                  {/* {name.tags.split(',').map((tag) => {
-                    return <Badge className="m-1">{tag}</Badge>;
-                  })} */}
-                </Row>
+                <div className="jt_tags">
+                  <Row>
+                    
+                    {/* <h5 className="ml-2 mr-4">
+                      <b>Tags:</b> {name.tags}
+                    </h5> */}
+                    {name.tags.split(',').map((tag) => {
+                      return <Badge className="m-1">{tag}</Badge>;
+                    })}
+                  </Row>
+                </div>
+                </div>
               </CardBody>
             </Card>
           </Col>

@@ -199,7 +199,7 @@ const DataListPages = ({ match }) => {
   return (
     <>
       {/* <div className="container"> */}
-      <Row>
+      <Row id="jt_all_course">
         {names.map((name) => {
           console.log(name.tags.split(','));
           return (
@@ -251,6 +251,7 @@ const DataListPages = ({ match }) => {
                   </Link>
                 </Route>
                 <CardBody>
+                  <div className="jt_cart">
                   <h2 className="font-weight-bold">{name.course}</h2>
                   {/* <ul
                     className="ml-0"
@@ -268,9 +269,12 @@ const DataListPages = ({ match }) => {
                       </li>
                     ))}
                   </ul> */}
-                  <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
+                  {/* classs was here font-weight-bold */}
+                  <h6 className="mb-2 ">{name.genre}</h6>
                   <CardText>{name.desc}</CardText>
-                  <Row>
+                  </div>
+                 <div className="jt_tags">
+                 <Row className="">
                     {/* <h5 className="ml-2 mr-4">
                       <b>Tags:</b> {name.tags}
                     </h5> */}
@@ -278,6 +282,7 @@ const DataListPages = ({ match }) => {
                       return <Badge className="badge-color m-1">{tag}</Badge>;
                     })}
                   </Row>
+                 </div>
                 </CardBody>
               </Card>
             </Col>

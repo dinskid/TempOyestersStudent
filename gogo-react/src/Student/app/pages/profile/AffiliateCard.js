@@ -22,7 +22,7 @@ import { MdEmail } from 'react-icons/md';
 import classnames from 'classnames';
 import axiosInstance from '../../../../helpers/axiosInstance';
 // import Table from './Table';
-
+import "./jt_affilieate.css"
 const visitsData = [
   {
     visits_from_instagram: 10,
@@ -738,7 +738,7 @@ const AffiliateCard = ({ handleTotalRewards }) => {
       <Row>
         <Col md="12" xs="12">
           <Card className="h-100 pl-5  ">
-            <Nav tabs className="card-header-tabs ">
+            <Nav tabs className="card-header-tabs " id="jt_nav_aff">
               <NavItem style={{ marginTop: '40px', marginLeft: 0 }}>
                 <NavLink
                   to="#"

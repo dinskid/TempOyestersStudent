@@ -208,13 +208,13 @@ const DataListPages = ({ match }) => {
             <Col md={3} xs={12}>
               <Card
                 className="mt-2"
-                style={{
-                  width: '100%',
-                  minHeight: '550px',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  marginBottom: '50px',
-                }}
+                // style={{
+                //   width: '100%',
+                //   minHeight: '550px',
+                //   marginLeft: 'auto',
+                //   marginRight: 'auto',
+                //   marginBottom: '50px',
+                // }}
               >
                 <Route>
                   <Link

@@ -345,7 +345,7 @@ class Sidebar extends Component {
             <PerfectScrollbar
               options={{ suppressScrollX: true, wheelPropagation: false }}
             >
-              <Nav vertical className="list-unstyled">
+              <Nav vertical className="list-unstyled" id="#jt_nav_aff">
                 {menuItems &&
                   this.filteredList(menuItems).map((item) => {
                     return (

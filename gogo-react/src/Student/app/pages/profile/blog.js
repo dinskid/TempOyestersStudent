@@ -58,7 +58,7 @@ const Blog = () => {
 
   const blog_columns = [
     {
-      Header: 'Blog Name',
+      Header: 'Blog Title',
       accessor: 'blog_title',
       cellClass: 'text-muted w-45',
       Cell: (props) => (
@@ -66,15 +66,15 @@ const Blog = () => {
       ),
       sortType: 'basic',
     },
-    {
-      Header: 'Blog Writer Email',
-      accessor: 'blog_writer_email',
-      cellClass: 'text-muted w-45',
-      Cell: (props) => (
-        <p style={{ marginLeft: '40px', fontSize: '1rem' }}>{props.value}</p>
-      ),
-      sortType: 'basic',
-    },
+    // {
+    //   Header: 'Blog Writer Email',
+    //   accessor: 'blog_writer_email',
+    //   cellClass: 'text-muted w-45',
+    //   Cell: (props) => (
+    //     <p style={{ marginLeft: '40px', fontSize: '1rem' }}>{props.value}</p>
+    //   ),
+    //   sortType: 'basic',
+    // },
     {
       Header: 'Likes',
       accessor: 'blog_likes',
@@ -85,8 +85,17 @@ const Blog = () => {
       sortType: 'basic',
     },
     {
-      Header: 'Comments',
+      Header: 'Blogs Comments',
       accessor: 'blog_comments',
+      cellClass: 'text-muted w-45',
+      Cell: (props) => (
+        <p style={{ marginLeft: '40px', fontSize: '1rem' }}>{props.value}</p>
+      ),
+      sortType: 'basic',
+    },
+    {
+      Header: 'Blog Views',
+      accessor: 'blog_id',
       cellClass: 'text-muted w-45',
       Cell: (props) => (
         <p style={{ marginLeft: '40px', fontSize: '1rem' }}>{props.value}</p>
@@ -225,7 +234,7 @@ const Blog = () => {
   // return <div>Hello</div>;
   const height = !blogList.length ? '80px' : `${blogList.length * 50}px`;
   return (
-    <div>
+    <div id="jt_blog_css">
       {modal ? (
         <>
           <Row>
@@ -327,6 +336,7 @@ const Blog = () => {
             }}
           >
             <CardBody>
+              {/* <div className="create_button_here"> */}
               {!blogList.length ? (
                 <Button className="mt-3" onClick={toggleModal}>
                   {' '}
@@ -348,6 +358,7 @@ const Blog = () => {
                   />
                 </div>
               )}
+              {/* </div> */}
             </CardBody>
           </Card>{' '}
           <Modal
@@ -549,16 +560,23 @@ const Blog = () => {
               </Card>
             </Col>
           </Row>
-          <Card
+          <Card 
+          className="jt_table"
             style={{
               height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
               marginBottom: '5rem',
               paddingBottom: !blogList.length ? '0' : '21rem',
             }}
           >
-            <CardBody>
+          {console.log(blogList.length*50)}
+            <CardBody  style={{
+              height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
+            }} >
+              {/* <div className="create_button_here"> */}
               {!blogList.length ? (
-                <Button className="mt-3" onClick={toggleModal}>
+                <Button 
+                style={{ position: 'absolute', right: "20px" }}
+                className="mt-3" onClick={toggleModal}>
                   {' '}
                   Create Blog
                 </Button>
@@ -571,14 +589,18 @@ const Blog = () => {
                   >
                     Create Blog
                   </Button>
-
+                  <br/>
+                  <br/>
+        
                   <Table
+                   
                     columns={blog_columns}
                     data={blogList}
                     handleReloadTable={handleReloadTable}
                   />
                 </div>
               )}
+              {/* </div> */}
             </CardBody>
           </Card>{' '}
         </>

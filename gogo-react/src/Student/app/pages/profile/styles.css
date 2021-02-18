@@ -99,3 +99,16 @@
     background-color: #ffffff;
   }
   
+
+  /* jitul */
+
+  #jt_blog_css .card .create_button_here {  
+    display:flex;
+    width: 100%;
+    align-items: center;
+    justify-content:flex-end;
+  }
+
+  .jt_table{
+    /* height: 870px !important;  */
+  }
