@@ -142,7 +142,7 @@ const Blog = () => {
         const result = await axiosInstance.get('/student/blog');
         console.log(result);
         setEnabled(result.data.isEnabled);
-        if (result.data.isEnabled) {
+        // if (result.data.isEnabled) {
           const data = result.data.result.map((doc) => {
             return {
               blog_id: doc.blog_id,
@@ -157,7 +157,7 @@ const Blog = () => {
           setTotalLikes('20 Static');
           setTotalComments('20 Static');
           setTotalViews('0 Static');
-        }
+        // }
       } catch (error) {
         try {
           setError(error.response.data.error);

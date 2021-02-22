@@ -1,0 +1,528 @@
+
+.cardContainer{
+    margin-top:3rem;
+}
+
+
+
+.cardContainer .div1 .Main .foot .price .discount{
+    display: none;
+ text-align:right;
+ padding:0px 5px !important;
+
+}
+
+.cardContainer .div1 .Main .foot .tot span{
+    color:#25c57a;
+    display: none;
+    
+}
+/* div1 */
+.cardContainer .div1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+/*div1 main */
+.cardContainer .div1 .Main{
+    width: 45%;
+    border: 0;
+    box-shadow: 2px 2px 15px 3px #c6cbcf;
+    border-radius: 10px;
+}
+
+
+/*div1 main header */
+.cardContainer .div1 .Main .header{
+    display: grid;
+    grid-template-columns:repeat(1,50% 25% 25%);
+    text-align: center;
+    background: #eee;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding:16px;
+}
+
+
+/*div1 main body*/
+.cardContainer .div1 .Main .body{
+    display: grid;
+    grid-template-columns:repeat(1,50% 25% 25%);
+    text-align: center;
+    padding:24px 16px;
+}
+
+
+/*div1 main body section1*/
+.cardContainer .div1 .Main .body .section1 img{
+    width:80%;
+    
+}
+.cardContainer .div1 .Main .body .section1 .name h5{
+    color: #333;
+    margin:2px;
+    padding: 4px;;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.cardContainer .div1 .Main .body .section1 .qnt{
+    width: 80%;
+    height:40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    display: flex;
+    padding:5px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eee;
+
+}
+.cardContainer .div1 .Main .body .section1 .qnt .func{
+    margin-left: auto ;
+    height:40px;
+    width:100%;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+
+}
+.cardContainer .div1 .Main .body .section1 .qnt .func h5 {
+    font-size: 1rem;
+    margin:0 10px; 
+}
+.cardContainer .div1 .Main .body .section1 .qnt .func button{
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    background: #eee;
+    border-radius: 50%;
+    color: #323232;
+    margin-left: 5px;
+    margin-right: 5px;
+    border:none;
+    outline:none;
+
+}
+
+.cardContainer .div1 .Main .body .section1 .qnt .func button:hover{
+  background-color:#e93838;
+  color:#fff;
+
+}
+
+/*div1 main body section2*/
+.cardContainer .div1 .Main .body .section2{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-weight: 700;
+    color: #777;
+}
+
+
+/*div1 main body section3*/
+.cardContainer .div1 .Main .body .section3{
+    display:list-item;
+    flex-direction:column;
+    list-style-type:none;
+    align-items:stretch;
+    
+}
+
+.cardContainer .div1 .Main .body .section3 div{
+    margin: 30px;
+    color:#868686;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.cardContainer .div1 .Main .body .section3 div:hover{
+    color:#e93838
+}
+
+
+
+/*div1 main foot*/
+
+.cardContainer .div1 .Main .foot .codes #code2{
+    display:none;
+}
+.cardContainer .div1 .Main .foot .codes #code1,#code2{
+    display:none;
+}
+.cardContainer .div1 .Main .foot .codes .wrongCode{
+
+    display:none;
+    color: rgb(238, 95, 95);
+    padding: 0px;
+    font-weight:600;
+    width: 90%;
+    margin: 5px auto;
+    /* text-align: center; */
+
+}
+.cardContainer .div1 .Main .foot .codes .applied{
+    display:none;
+    color: rgb(94, 238, 94);
+    padding: 0px;
+    font-weight:600;
+    width: 90%;
+    margin: 5px auto;
+}
+
+.cardContainer .div1 .Main .foot .codes input,button{
+    margin: 0 10px;
+    padding: 10px;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    box-shadow: none;
+    outline: none;
+        
+}
+
+.cardContainer .div1 .Main .foot .codes button{
+    width: 33%;
+    margin: 0 40px;
+    box-shadow: none;
+    outline: none;
+    border-radius: 5px;
+    background: #e93838;
+    padding: 8px;
+    color: #fff;
+    border: 1px solid #e93838;
+}
+.cardContainer .div1 .Main .foot .codes button:hover{
+    color: #e93838;
+    background-color:#fff;
+}
+.cardContainer .div1 .Main .foot h5 {
+    font-size: 15px;
+    color:#868686;
+    text-align:right;
+    margin: 5px;
+}
+.cardContainer .div1 .Main .foot .tot{
+    display:flex;
+    justify-content:space-between;
+}
+.cardContainer .div1 .Main .foot h4 {
+
+    font-size: 17px;
+    font-weight: bolder;
+    color: #000;
+    /* display:flex; */
+    /* justify-content: space-between; */
+    text-align:right;
+    width: 100%;
+    margin: 5px;
+}
+
+
+/*div1 main pay*/
+.cardContainer .div1 .Main  .pay {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    
+}
+.cardContainer .div1 .Main  .pay button{
+    width:80% !important;
+    outline: none;
+    padding: 10px 20px;
+    box-shadow: none;
+    border: 0;
+    color: #fff;
+    margin-right: 30px;
+    border-radius: 15px;
+    background: linear-gradient(270deg,#5fb0e6,#046bbe);
+    box-shadow: 2px 0 3px 0 #50a9dd;
+    transition: 1s ease;    
+}
+
+.cardContainer .div1 .Main  .pay button:hover{
+    background: linear-gradient(270deg,#046bbe,#5fb0e6);
+}
+
+.cardContainer .div1 .Main  .pay a {
+    text-decoration: none;
+    
+} 
+
+
+/* div2 inner div button */
+.cardContainer .div2 {
+
+    display: flex;
+    justify-content:center;
+    margin: 1.5rem 0;
+}
+.cardContainer .div2 .innerDiv{
+    display: flex;
+    width:45%
+}
+
+.cardContainer .div2 button{
+    padding:18px 25px;
+    border:none;
+    margin: 1px;
+    width:50%;
+    outline:none;
+}
+.cardContainer .div2 .btn1{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: #207ce6;
+    font-size: 17px;
+    transition: .5s ease;
+    
+}
+.cardContainer .div2 .btn1:hover{
+    
+    background-color: #207ce6;
+    color:#fff;
+    transform: translateY(-3px);
+    
+}
+.cardContainer .div2 .btn2{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #25c57a;
+    font-size: 17px;
+    transition: .5s ease;
+}
+.cardContainer .div2 .btn2:hover{
+    
+    background-color: #25c57a;
+    color:#fff;
+    transform: translateY(-3px);
+}
+
+@media  screen and (max-width:1220px){
+    .cardContainer .div1 .Main .body .section1 .qnt{
+        width: 100%;
+        height:40px;
+        padding :0 5px;
+    
+    }
+    .cardContainer .div1 .Main .body .section1 img{
+        width:100%;
+        
+    }
+
+}
+
+@media  screen and (max-width:1180px){
+
+    
+    
+    .cardContainer .div1 .Main .foot .codes input,button{
+        margin: 0px;
+        padding: 10px;
+        border: 1px solid #cdcdcd;
+        border-radius: 5px;
+        box-shadow: none;
+        outline: none;
+            
+    }
+    
+    .cardContainer .div1 .Main .foot .codes button{
+        width: 40%;
+        margin: 0 5px;
+        box-shadow: none;
+        outline: none;
+        border-radius: 5px;
+        background: #e93838;
+        padding: 7px;
+        color: #fff;
+        border: 1px solid #e93838;
+    }
+
+
+
+
+    
+}
+
+@media  screen and (max-width:980px){
+    .cardContainer .div1 .Main .foot {
+        display: flex;
+        justify-content: space-between;
+        border-top: 2px solid #eee;
+        padding: 0 8px;
+    }
+
+}
+
+@media  screen and (max-width:940px){
+
+   
+    .cardContainer .div1 .Main .body .section3 div{
+        margin: 30px 10px;
+        color:#868686;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+    .cardContainer .div1 .Main  .pay button{
+        
+        margin: 0 auto ;
+        width: 100% !important;
+        
+    }
+
+    .cardContainer .div1 .Main{
+        width: 85%;
+        border: 0;
+        box-shadow: 2px 2px 15px 3px #c6cbcf;
+        border-radius: 10px;
+    }
+    .cardContainer .div1{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .cardContainer .div1 .Main .foot {
+        display: block;
+        justify-content: space-between;
+        border-top: 2px solid #eee;
+        padding: 0 8px;
+    }
+    .cardContainer .div1 .Main .foot .codes div{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .cardContainer .div1 .Main .foot .codes input,.codeBtn{
+        
+        margin: 5px 10px;
+        padding: 10px;
+        border: 1px solid #cdcdcd;
+        border-radius: 5px;
+        box-shadow: none;
+        outline: none;
+        width: 60%;
+            
+    }
+    .cardContainer .div1 .Main .foot .codes button{
+        width: 40%;
+        margin: 5px 10px;
+        box-shadow: none;
+        outline: none;
+        border-radius: 5px;
+        background: #e93838;
+        padding: 8px;
+        color: #fff;
+        border: 1px solid #e93838;
+    }
+
+    .cardContainer .div1 .Main .foot .price{
+
+        display:flex;
+        justify-content: center;
+        margin:5px;
+        font-size:2rem;
+    }
+
+
+    .cardContainer .div2 {
+
+        display: block;
+        
+    }
+    .cardContainer .div2 .innerDiv{
+        margin: 1.5rem auto;
+        display: flex;
+        width:80%
+    }
+    
+    
+}
+
+@media  screen and (max-width:545px){
+    .cardContainer .div1 .Main{
+        width: 90%;
+        border: 0;
+        box-shadow: 2px 2px 15px 3px #c6cbcf;
+        border-radius: 10px;
+    }
+    .cardContainer .div1 .Main .body .section3 div{
+        margin: 30px 0px;
+        color:#868686;
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+    .cardContainer .div1 .Main .body .section1 .qnt .func button{
+        padding: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border:none;
+    
+    }
+    .cardContainer .div1 .Main .body .section1 .qnt .func{
+        margin-left: auto;
+        width: 100%;
+        height:40px;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #777;
+    
+    }
+    .cardContainer .div2 {
+
+        display: block;
+        
+    }
+    .cardContainer .div2 .innerDiv{
+        margin: 1.5rem auto;
+        display: block;
+        width:100%
+    }
+    .cardContainer .div2 .innerDiv button{
+        margin: 1.5rem auto;
+        display: block;
+        width:90%
+    }
+    
+}
+
+@media  screen and (max-width:518px){
+ .cardContainer .div1 .Main .body .section1 .qnt .func h5 {
+    margin: 0px;
+ }
+}
+@media  screen and (max-width:440px){
+    .cardContainer .div1 .Main .body .section1 .qnt   {
+        padding: 2px;
+    }
+    .cardContainer .div1 .Main .body .section1 .qnt .func h5 {
+        font-size: .9rem;
+    }
+    .cardContainer .div1 .Main .body .section1 .qnt .func button {
+        font-size:.9rem;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    .cardContainer .div1 .Main .body .section1 .qnt {
+        
+        width: 100%;
+    }
+}

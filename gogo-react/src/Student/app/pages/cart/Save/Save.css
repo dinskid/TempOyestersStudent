@@ -1,0 +1,51 @@
+.Wish{
+  
+    width: 45%;
+    border: 0;
+    /* box-shadow: 2px 2px 15px 3px #c6cbcf;
+    border-radius: 10px; */
+}
+
+.Wish .header h2{
+
+color:#6c757d;
+text-align: center;
+padding: 20px;
+padding-top: 30px;
+
+}
+.Wish .body {
+border: 0;
+box-shadow: 2px 2px 15px 3px #c6cbcf;
+border-radius: 10px;
+margin: 20px 0px;
+display: flex;
+justify-content:space-evenly;
+align-items: center;
+}
+.Wish .body .section1 {
+width:60%;
+display: flex;
+flex-direction: column;
+justify-content:center;
+align-items: center;
+}
+.Wish .body .img_item {
+margin: 10px auto;
+padding: 10px;
+}
+
+.Wish .body .img_item img {
+width:100%
+}
+
+
+.Wish .body .section1 .details {
+width: 80%;
+margin: 0 auto;
+padding: 0 10px;
+/* text-align: center; */
+}
+.Wish  .body .section2 div{
+margin: 10px;
+}

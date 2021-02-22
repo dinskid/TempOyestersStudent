@@ -1,0 +1,79 @@
+.D_header{
+    padding: 15px 20px;
+}
+
+.D_header h2{
+    text-align: center;
+    font-size:1.4rem;
+}
+.Main .add_user{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+.Main .add_user button{
+    outline: none;
+    padding: 10px 20px;
+    box-shadow: none;
+    border: 0;
+   
+    margin-right: 30px;
+    border-radius: 15px;
+    border: 1.5px solid #25c57a;
+    
+    color:#25c57a;
+    background-color:#fff;
+}
+
+.Main .add_user button:hover{
+    background: #25c57a;
+    color: #fff;
+}
+
+.Main .body_next .msg{
+    display:none;
+    color: rgb(238, 95, 95);
+    font-weight:600;
+    width: 90%;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.Main .body_next .add_user_field{
+    margin:0 auto;
+    margin-top: 10px;
+    width: 85%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Main .body_next .add_user_field input{
+    width: 75%;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    padding: 7px 15px;
+    margin-right: 10px;
+}
+.Main .body_next .add_user_field .fas.fa-times{
+    width: 10%;
+    text-align: center;
+    color:rgb(174, 174, 174);
+}
+
+.Main .body_next .add_user_field .fas.fa-times:hover{
+    color:#eb7373;
+    cursor: pointer;
+}
+.Main .add_here{
+    margin: 0 auto;
+    text-align: center;
+    font-size:1.2rem;
+    color:#eb7373
+}

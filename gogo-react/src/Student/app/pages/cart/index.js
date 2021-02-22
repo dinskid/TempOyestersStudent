@@ -8,6 +8,9 @@ import SavedForLater from './SavedForLater';
 import Loader from '../product/Loader';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import  NavBar from "./NavbarCart/NavbarCart";
+import MainCard from "./MainCard/MainCard";
+
 
 const CartIndex = () => {
   const [activeFirstTab, setactiveFirstTab] = useState('1');
@@ -33,7 +36,7 @@ const CartIndex = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const result = await axiosInstance.get('/student/cart');
+        const result = await axiosInstance.get('/student/cart/cart_list');
         let cart = 0,
           cartItemData = [],
           wishItemData = [],
@@ -128,7 +131,7 @@ const CartIndex = () => {
   const handleUpdate = async (session_id, cart_item_status) => {
     try {
       const values = { session_id, cart_item_status };
-      const result = await axiosInstance.post('/student/cart', { values });
+      const result = await axiosInstance.post('/student/cart/', { values });
       console.log(result);
       if (!result.data.success) {
         try {
@@ -149,7 +152,7 @@ const CartIndex = () => {
   if (!loaded) return <Loader />;
   return (
     <>
-      <Nav tabs className="card-header-tabs mb-3">
+      {/* <Nav tabs className="card-header-tabs mb-3">
         <NavItem>
           <NavLink
             to="#"
@@ -195,8 +198,11 @@ const CartIndex = () => {
             <h6>WishList ({wishlistItems})</h6>
           </NavLink>
         </NavItem>
-      </Nav>
-      <TabContent activeTab={activeFirstTab}>
+      </Nav> */}
+
+      <NavBar/>
+      <MainCard/>
+      {/* <TabContent activeTab={activeFirstTab}>
         <TabPane tabId="1">
           <Cart
             handleReload={handleReload}
@@ -223,7 +229,7 @@ const CartIndex = () => {
             handleUpdate={handleUpdate}
           />
         </TabPane>
-      </TabContent>
+      </TabContent> */}
     </>
   );
 };

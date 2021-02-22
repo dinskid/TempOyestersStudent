@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import {
   Row,
   Card,
@@ -14,6 +15,7 @@ import {
   ModalBody,
   ModalFooter,
 } from 'reactstrap';
+
 import { injectIntl } from 'react-intl';
 import { HiOutlineShare } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';
@@ -124,7 +126,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
         session_id,
         cart_item_status: 'wishlist',
       };
-      const result = await axiosInstance.post('/student/cart', { values });
+      const result = await axiosInstance.post('/student/cart/add_to_wish', { values });
       console.log(result);
       if (result.data.success) {
         setCartItemStatus('wishlist');
@@ -149,9 +151,8 @@ const DetailsPages = ({ match, intl, ...props }) => {
     try {
       const values = {
         session_id,
-        cart_item_status: 'cart',
       };
-      const result = await axiosInstance.post('/student/cart', { values });
+      const result = await axiosInstance.post('http://localhost:5000/student/cart/add_to_cart', { values });
       console.log(result);
       if (result.data.success) {
         setCartItemStatus('cart');
@@ -271,7 +272,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
             {cartItemStatus == 'wishlist' ? (
               <Button
                 className="button ml-3"
-                onClick={() => history.push('/app/pages/cart')}
+                onClick={() => history.push('/app/pages/wish')}
               >
                 Go To Wishlist <FiHeart />
               </Button>

@@ -121,17 +121,7 @@ const Live_Session = () => {
                 <h2 className="font-weight-bold">{name.course}</h2>
                 {/* <h6 className="mb-2 font-weight-bold">{name.genre}</h6> */}
                 <CardText>{name.desc}</CardText>
-                <div className="jt_tags">
-                  <Row>
-                    
-                    {/* <h5 className="ml-2 mr-4">
-                      <b>Tags:</b> {name.tags}
-                    </h5> */}
-                    {name.tags.split(',').map((tag) => {
-                      return <Badge className="m-1">{tag}</Badge>;
-                    })}
-                  </Row>
-                </div>
+                
                 </div>
               </CardBody>
             </Card>

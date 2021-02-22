@@ -26,7 +26,7 @@ const BlogDetail = ({ match }) => {
           <Separator className="mb-5" />
         </Colxx>
       </Row>
-
+      
       <Row>
         <Colxx xxs="12" md="12" xl="8" className="col-left">
           <Card className="mb-4">

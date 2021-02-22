@@ -1,0 +1,56 @@
+.CardFromTo{
+    padding:15px;
+    border:1px solid #eee;
+    border-radius: 10px;
+    height:140px;
+    width:18%;
+    font-size: .85rem;
+    font-weight: 600;
+    color: #868686;
+}
+.CardFromTo .header{
+    font-size: 16px;
+}
+.CardFromTo .list{
+    list-style: none;
+    padding: 0;
+}
+.CardFromTo .list li{
+    color:#707c97;
+    margin: 10px  0px 
+}
+@media  screen and (max-width:1111px){
+    .CardFromTo{
+        width:20%;
+        height:160px;
+    }
+}
+@media  screen and (max-width:1050px){
+    .CardFromTo{
+        width:20%;
+       
+    }
+}
+@media  screen and (max-width:940px){
+
+    .CardFromTo{
+       
+        padding:15px;
+        margin: 20px 0;
+        border:1px solid #eee;
+        border-radius: 10px;
+        height:150px;
+        width:85%;
+        font-size: .85rem;
+        font-weight: 600;
+        color: #868686;
+    }
+
+}
+
+@media  screen and (max-width:540px){
+
+    .CardFromTo{
+        width:90%;
+    }
+}
