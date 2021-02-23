@@ -40,7 +40,7 @@ const MainCard=()=>{
             <div className="div2">
                 <div className="innerDiv">
                     <button onClick={()=>{Show1()}} className="btn1">Have a coupon code?</button>
-                    <button onClick={()=>{Show2()}} className="btn2">Have a GSTIN?</button>
+                    {/* <button onClick={()=>{Show2()}} className="btn2">Have a GSTIN?</button> */}
                 </div>
             </div>
         </div>)
