@@ -46,10 +46,12 @@ const Main=(props)=>{
 
             }else{
                 if(totInput[id].length<data[id]){
-
+                    
                 totInput[id].push({inputId:Math.random()})
                 console.log(totInput);
 
+                }else{
+                    msg[id].style.display="block"
                 }
             }
               
@@ -106,7 +108,8 @@ const Main=(props)=>{
                 //   setTotInput(totInput-1) 
             }
             // let msg=document.querySelector(".msg");
-            // msg.style.display="none"; 
+            // msg.style.display="none";
+            msg[index1].style.display="none" 
     }
   
     return(
