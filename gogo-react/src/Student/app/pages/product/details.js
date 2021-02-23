@@ -85,6 +85,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
     const getDetails = async () => {
       try {
         const result = await axiosInstance.get(
+          
           `/student/sessions/details/${session_id}`
         );
         console.log(result);
@@ -152,7 +153,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
       const values = {
         session_id,
       };
-      const result = await axiosInstance.post('http://localhost:5000/student/cart/add_to_cart', { values });
+      const result = await axiosInstance.post(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`, { values });
       console.log(result);
       if (result.data.success) {
         setCartItemStatus('cart');

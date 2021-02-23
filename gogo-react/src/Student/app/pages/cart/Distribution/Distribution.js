@@ -14,7 +14,7 @@ const Main=(props)=>{
         //         return info.no=1;
         //     }));
         // }
-        fetch("http://localhost:5000/student/cart/cart_list",{
+        fetch(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/cart_list`,{
             method:"GET",
             credentials:"include"
         })

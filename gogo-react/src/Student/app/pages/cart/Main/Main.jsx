@@ -175,7 +175,7 @@ const Main=()=>{
         localStorage.setItem("data",JSON.stringify(num))
     }
     useEffect(()=>{
-        const url="http://localhost:5000/student/cart/cart_list"
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/cart_list`
         document.querySelector(".div2").style.display="flex";
         fetch(url,{
             method:"GET",
@@ -228,7 +228,7 @@ const Main=()=>{
     // }
 
     const removeItem=(cart_item_id)=>{
-        const url="http://localhost:5000/student/cart/remove_item_cart_list";
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/remove_item_cart_list`;
         fetch(url,{
             method:"POST",
             headers:{
@@ -248,7 +248,7 @@ const Main=()=>{
 
 const wishItem=(item)=>{
     
-        const url="http://localhost:5000/student/cart/add_to_wish"
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_wish`
         
         fetch(url,{
             method:"POST",
@@ -270,7 +270,7 @@ const wishItem=(item)=>{
 }
 
     const addSave=(item)=>{
-        const url="http://localhost:5000/student/cart/add_to_save";
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_save`;
         
         console.log(item);
         fetch(url,{
@@ -302,7 +302,7 @@ const wishItem=(item)=>{
             alert("Razor pay faild")
             return 
         }
-        const data = await fetch('/pay_item',
+        const data = await fetch(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/pay_item`,
          { method: 'POST' ,
          headers:{
              "Content-Type":"application/json"

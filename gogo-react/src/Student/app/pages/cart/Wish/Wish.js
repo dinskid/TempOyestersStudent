@@ -11,7 +11,7 @@ const Wish=()=>{
    
 
     const removeItem=(wish_item_id)=>{
-        const url="http://localhost:5000/student/cart/remove_item_wish_list";
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/remove_item_wish_list`;
         fetch(url,{
             method:"POST",
             headers:{
@@ -29,7 +29,7 @@ const Wish=()=>{
         .catch(e=>console.log(e))
     }
     const addCart=(item)=>{
-        const url="http://localhost:5000/student/cart/add_to_cart";
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`;
         
         fetch(url,{
             method:"POST",
@@ -51,7 +51,7 @@ const Wish=()=>{
         
     }
     const addSave=(item)=>{
-        const url="http://localhost:5000/student/cart/add_to_save";
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_save`;
         
         console.log(item);
         fetch(url,{
@@ -72,7 +72,7 @@ const Wish=()=>{
         removeItem(item.wish_item_id)
      }
      useEffect( ()=>{
-        const url="http://localhost:5000/student/cart/wish_list"
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/wish_list`
          fetch(url,{
             method:"GET",
             credentials:'include',
