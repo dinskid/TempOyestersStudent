@@ -93,7 +93,7 @@
 }
 .toggle{
     margin-top: 15px;
-    width: 90%;
+    width: 100% !important;
 }
 .toggled{
     width: 90%;
@@ -152,10 +152,10 @@
     display: block;
     width: 90%;
 }
-.prog{
-    font-weight: bold;
-    font-size: 25px;
-    text-align: center;
+.progressbox .prog{
+    font-weight: bold !important;
+    font-size: 1.2rem !important;
+    text-align: center !important;
 }
 .btn3{
     margin-top: 20px;
@@ -165,10 +165,9 @@
     border-radius: 20px;  
 }
 .progressbox{
-    position: fixed;
-    width: 20%;
-    height: 475px;
-}
+    height: auto !important;
+
+}   
 #inside_card{
     width: 90%;
     margin-left: auto;
@@ -194,6 +193,15 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+/* jt_h2 */
+
+.card .card-title.jt_h2{
+    margin: 10px 0 !important;
+}
+
+
+
 @media (max-width: 830px) {
     #scrollme{
         width: 350px;

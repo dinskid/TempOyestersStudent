@@ -310,3 +310,25 @@
   width: 10%;
   height: 10%;
 }
+
+.content1:hover{
+  cursor: pointer !important; 
+  color: #e92828;
+}
+.jt_video_prt1{
+  flex:7;
+}
+.jt_video_prt2{
+  flex:2.5;
+}
+@media (max-width:1300px){
+  .progressbox{
+    width:26% !important;
+  }
+  .jt_video_prt1{
+    width:60% !important ;
+  }
+  .jt_video_prt2{
+    width:70% !important;
+  }
+}

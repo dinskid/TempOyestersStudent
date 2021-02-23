@@ -21,6 +21,7 @@ import {
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import './miscellaneous/course.css';
+import './miscellaneous/course.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classnames from 'classnames';
 import { MdAttachFile } from 'react-icons/md';
@@ -68,7 +69,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   const [courseDetails, setCourseDetails] = useState('');
   const [courseContent, setCourseContent] = useState([]);
   const [videoSrc, setVideoSrc] = useState(null);
-
+  const [colorIs,setColor]=useState(null);
   useEffect(() => {
     if (error)
       NotificationManager.warning(
@@ -125,56 +126,64 @@ const KnowledgeBase = ({ match, ...props }) => {
         <Spinner color="primary" />
       </div>
     );
-
+// const lessonColor=(index)=>{
+//   let lesson=document.querySelectorAll(".lesson-color");
+//   lesson[index].style.backgroundColor="#e92828"
+  
+// }
   return (
     <>
       <Row>
-        <Col md="9">
+        <Col  className="jt_video_prt1">
           <VideoPlayer videoSrc={videoSrc} />
           <p className="mt-3" style={{ fontSize: '15px' }}>
             {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)}
           </p>
-          <h2 className="font-weight-bold">{courseDetails.session_name}</h2>
+          <h2 style={{marginTop:"20px"}} className="jt_h2_content">{courseDetails.session_name}</h2>
           <p>{courseDetails.session_start_time.substring(0, 10)}</p>
         </Col>
-        <Col md="3">
-          <Card body className="progressbox">
+        <Col  className="jt_video_prt2">
+          <Card body className="progressbox" style={{paddingLeft:"14px",paddingRight:"14px"}}>
             <CardTitle tag="h2" className="prog">
               Course Progress
             </CardTitle>
             <Progress value="200" max={500} id="progress" />
-            <div className="text-center mt-3 font-weight-bold">45% of 100%</div>
+            <div  style={{marginTop:"10px",marginBottom:"0"}} className="text-center mt-3 font-weight-bold">45% of 100%</div>
 
-            <CardTitle tag="h5" className="font-weight-bold">
-              Contents
+            <div className="content_all" style={{minHeight:"280px"}}>
+            <CardTitle style={{marginTop:"20px",marginBottom:"0px",textAlign:"center",backgroundColor:"#E6E6E6",padding:"10px 0px"}} tag="h5" className="font-weight-bold jt_h2">
+             Course Contents
             </CardTitle>
-            <Scrollbars style={{ width: 280, height: 350 }}>
+            <Scrollbars style={{ width:"100%",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",backgroundColor:"#f7f8fa"}}>
               {courseContent.map((doc, index) => {
                 const togglerId = `toggler${index}`;
                 return (
                   <>
-                    <Card className="toggle">
+                    <div className="toggle content_jt" style={{margin:"0px",width:"100%",border:"1px solid #E6E6E6"}}>
                       <Button
                         color="link"
                         id={togglerId}
-                        style={{ marginBottom: '1rem' }}
+                        style={{ margin: '10px',padding:"0px" }}
                       >
-                        <p className="p1">
-                          {doc.name}
-                          <FcCheckmark style={{ marginLeft: '80px' }} />
+                        <p className="" style={{display:"flex",justifyContent:"space-between",margin:"10px auto",lineHeight:"none"}}>
+                          <FcCheckmark style={{  }} />
+                          <div style={{padding:"0 10px"}}>
+                            {doc.name}
+                          </div>
                         </p>
                       </Button>
-                    </Card>
+                    </div>
+                   
                     <UncontrolledCollapse toggler={togglerId}>
-                      <Card className="toggled">
-                        <CardBody>
-                          {doc.lesson.map((l) => {
+                      <div className="" style={{paddingLeft:"10px",paddingRight:"10px",display:"flex",justifyContent:"center",alignItem:"center",alignItems:"center"}}>
+                        <CardBody style={{padding:"8px 30px"}}>
+                          {doc.lesson.map((l,index) => {
                             return (
-                              <Row>
+                              <Row  className="lesson-color">
                                 <p
                                   onClick={() => {
-                                    console.log(l.videoUrl);
                                     setVideoSrc(l.videoUrl);
+                                    // lessonColor(index)
                                   }}
                                   target="_blank"
                                   className="content1 m-3"
@@ -189,12 +198,13 @@ const KnowledgeBase = ({ match, ...props }) => {
                             );
                           })}
                         </CardBody>
-                      </Card>
+                      </div>
                     </UncontrolledCollapse>
                   </>
                 );
               })}
             </Scrollbars>
+            </div>
           </Card>
         </Col>
       </Row>
