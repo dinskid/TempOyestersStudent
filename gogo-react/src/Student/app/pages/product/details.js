@@ -123,11 +123,10 @@ const DetailsPages = ({ match, intl, ...props }) => {
 
   const handleWishList = async () => {
     try {
-      const values = {
+      const item = {
         session_id,
-        cart_item_status: 'wishlist',
       };
-      const result = await axiosInstance.post('/student/cart/add_to_wish', { values });
+      const result = await axiosInstance.post(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_wish`, { item });
       
       if (result.data.success) {
         setCartItemStatus('wishlist');
@@ -211,7 +210,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
         <ModalFooter>
           <Button
             color="primary"
-            onClick={() => history.push('/app/pages/cart')}
+            onClick={() => history.push('/app/pages/cart/wish')}
           >
             Visit WishList
           </Button>{' '}

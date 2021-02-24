@@ -83,6 +83,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   }, [error]);
 
   useEffect(() => {
+    
     const getData = async () => {
       try {
         if (isNaN(props.location.state.session_id))
@@ -118,8 +119,24 @@ const KnowledgeBase = ({ match, ...props }) => {
       }
     };
     getData();
+    
   }, []);
 
+  const IMgUpload=(e)=>{
+    let file=e.target.files[0];
+    let sizeis=file.size;
+    if(sizeis<=2000){
+      alert("correct file formate")
+    }else{
+      alert("Warning the file size is more then 2mb unable to uplaod")
+    }
+    // let fileUpload=document.querySelector(".fileUploadIs");
+    // console.log(fileUpload);
+    // fileUpload.addEventListener("change",(e)=>{
+      
+    // })
+
+  }
   if (!isLoaded)
     return (
       <div style={{ marginTop: '30%', marginLeft: '50%' }}>
@@ -137,7 +154,7 @@ const KnowledgeBase = ({ match, ...props }) => {
         <Col  className="jt_video_prt1">
           <VideoPlayer videoSrc={videoSrc} />
           <p className="mt-3" style={{ fontSize: '15px' }}>
-            {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)}
+            {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
           </p>
           <h2 style={{marginTop:"20px"}} className="jt_h2_content">{courseDetails.session_name}</h2>
           <p>{courseDetails.session_start_time.substring(0, 10)}</p>
@@ -285,7 +302,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                 <FormGroup row>
                   <Col md={2}>
                     <label className="input-label-1 ml-4">
-                      <input type="file" className="inp" />
+                      <input  onChange={(e)=>{IMgUpload(e)}} accept="image/*" data-max-sizeIs="2000" type="file" className="inp fileUploadIs" />
                       <MdAttachFile className="icon-cmt" />
                       <p style={{ marginLeft: '25px' }}>Attachments</p>
                     </label>
@@ -294,7 +311,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                     <Input type="textarea" name="text" id="exampleText" />
                   </Col>
                   <Col md={2} className="comment-btn">
-                    <Button className="btn4">Comment</Button>
+                    <Button  className="btn4">Comment</Button>
                   </Col>
                 </FormGroup>
               </TabPane>
