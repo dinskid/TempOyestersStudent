@@ -194,13 +194,13 @@ const Main=()=>{
 
             }
             if(original==0){
-                console.log("Jitul");
+                
                 setOriginal(tot)
             }
             if(price==0){
                 setPrice(tot-discount)
             }
-            console.log("num",num);
+            // console.log("num",num);
             
             // tot=tot+JSON.parse(data.cart[0].courses).totP;
             // console.log(tot);
