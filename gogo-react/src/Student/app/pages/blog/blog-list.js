@@ -18,10 +18,12 @@ import {
   Colxx,
 } from '../../../../components/common/CustomBootstrap';
 import { blogData } from '../../../../data/blog';
+import NoDataFound from '../NoDataFound';
 
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
 const BlogList = ({ match }) => {
+  
   return (
     <>
       <Row>

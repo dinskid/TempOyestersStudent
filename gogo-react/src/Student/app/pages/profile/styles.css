@@ -112,3 +112,7 @@
   .jt_table{
     /* height: 870px !important;  */
   }
+
+  .nodata_jt img{
+    margin-top: 10% !important;
+  }

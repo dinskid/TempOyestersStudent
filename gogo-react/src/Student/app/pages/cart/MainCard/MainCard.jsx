@@ -21,16 +21,16 @@ const MainCard=()=>{
             <div className="div1">
                 <Cards condition="From" name="John" contact="+98 93839232323" email="john@gmail.com" />
                        <Switch>
-                                <Route exact path ="/app/pages/cart">
+                                <Route exact path ="/student/cart">
                                     <Main/>  
                                 </Route>
-                                <Route exact path ="/app/pages/cart/wish">
+                                <Route exact path ="/student/wish">
                                     <Wish/>  
                                 </Route> 
-                                <Route exact path ="/app/pages/cart/save">
+                                <Route exact path ="/student/save">
                                      <Save/>  
                                 </Route>
-                                <Route path="/app/pages/cart/next">
+                                <Route path="/student/next">
                                         <Distribution/>
                                 </Route>
                        </Switch>

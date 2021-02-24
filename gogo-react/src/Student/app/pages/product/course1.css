@@ -49,7 +49,7 @@
 }
 .what_to_learn {
   margin-top: 20px;
-  width: 90%;
+  width: 98%;
 }
 .bicheck {
   margin-left: 40%;
@@ -61,7 +61,7 @@
 }
 .trainer {
   margin-top: 20px;
-  width: 90%;
+  width: 98%;
 }
 .inst_img {
   width: 60%;
@@ -80,6 +80,39 @@
   margin-top: 15px;
   color: #ffffff;
 }
+
+
+
+/* jt details */
+.jt_detail_course{
+  width:100%;
+  margin-top:30px;
+
+}
+.jt_detail_course .font-weight-bold{
+  text-align:center;
+  width: 98%;
+  background-color: #E6E6E6;
+  padding: 12px 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 0;
+}
+
+.toggle {
+  width: 98%;
+  border-radius: 0;
+  text-decoration: none;
+  border:2px solid #E6E6E6 
+}
+
+
+@media (max-width:1280px){
+  .go_to_profile {
+    width: 30%;
+  }
+}
+
 @media (max-width: 830px) {
   .go_to_profile {
     width: 60%;
@@ -90,10 +123,8 @@
   color: #ffffff;
 }
 .toggle {
-  /* margin-top: 15px; */
-  width: 90%;
-  /* background-color: #FBFBF8; */
-  border: 1px solid rgb(179, 179, 179);
+  width: 98%;
+  border-radius: 0;
   text-decoration: none;
 }
 .icon-p {
@@ -101,9 +132,10 @@
 }
 
 .toggled {
-  width: 90%;
+  width: 98%;
   box-shadow: none;
-  border: 0.5px solid rgb(179, 179, 179);
+  border: 1px solid #E6E6E6;
+  padding-left: 5%;
 }
 .p {
   /*     margin-right: 500px; */

@@ -27,7 +27,7 @@ import { BiComment } from 'react-icons/bi';
 import { AiFillLike, AiFillEye } from 'react-icons/ai';
 
 import Table from './Table';
-
+import NoDataFound from "../NoDataFound";
 import './styles.css';
 
 const Blog = () => {
@@ -231,6 +231,9 @@ const Blog = () => {
   };
 
   if (!enabled) return <Disabled />;
+
+ 
+
   // return <div>Hello</div>;
   const height = !blogList.length ? '80px' : `${blogList.length * 50}px`;
   return (
@@ -341,6 +344,7 @@ const Blog = () => {
                 <Button className="mt-3" onClick={toggleModal}>
                   {' '}
                   Create Blog
+                  
                 </Button>
               ) : (
                 <div style={{ position: 'relative' }}>
@@ -560,7 +564,8 @@ const Blog = () => {
               </Card>
             </Col>
           </Row>
-          <Card 
+          {blogList.length?(<>
+            <Card 
           className="jt_table"
             style={{
               height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
@@ -603,6 +608,7 @@ const Blog = () => {
               {/* </div> */}
             </CardBody>
           </Card>{' '}
+          </>):(<div className="nodata_jt"><NoDataFound/></div>)}
         </>
       )}
     </div>

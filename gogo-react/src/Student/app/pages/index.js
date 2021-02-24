@@ -30,7 +30,7 @@ const Course = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "miscellaneous-faq" */ './course'))
 );
 
-const Cart = React.lazy(() => retry(() => import('./cart')));
+
 
 const Pages = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
@@ -61,10 +61,7 @@ const Pages = ({ match }) => (
         path={`${match.url}/course`}
         render={(props) => <Course {...props} />}
       />
-      <Route
-        path={`${match.url}/cart`}
-        render={(props) => <Cart {...props} />}
-      />
+      
 
       <Route
         path={`${match.url}/mycourses`}

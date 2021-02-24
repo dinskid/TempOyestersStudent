@@ -3,7 +3,7 @@ import { useTable, usePagination, useSortBy } from 'react-table';
 import classnames from 'classnames';
 import PopOverItem from './PopOverItem';
 import { Button } from 'reactstrap';
-
+import NoDataFound from "../NoDataFound"
 const Table = ({ columns, data, handleReloadTable }) => {
   // const [handleReloadTable] = useContext(LibraryContext);
   const {
@@ -30,6 +30,9 @@ const Table = ({ columns, data, handleReloadTable }) => {
 
   // console.log(data, page);
 
+  if (data.length){
+    return <NoDataFound/>
+  }
   return (
     <div style={{ marginBottom: '25rem' }}>
       <table

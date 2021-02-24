@@ -34,7 +34,7 @@ const ViewUnauthorized = React.lazy(() =>
     import(/* webpackChunkName: "views-error" */ './Student/unauthorized')
   )
 );
-
+const Cart = React.lazy(() => retry(() => import('./Student/app/pages/cart/index')));
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -88,11 +88,21 @@ class App extends React.Component {
                     // exact
                     render={(props) => <ViewApp {...props} />}
                   />
-                  {/* <Route
-                    path="/instructor"
+                  <Route
+                    path="/student/cart"
                     exact
-                    render={(props) => <ViewInst {...props} />}
-                  /> */}
+                    render={(props) => <Cart {...props} />}
+                  />
+                  <Route
+                    path="/student/wish"
+                    exact
+                    render={(props) => <Cart {...props} />}
+                  />
+                  <Route
+                    path="/student/save"
+                    exact
+                    render={(props) => <Cart {...props} />}
+                  />
 
                   <Redirect exact from="/" to={'/Student/user'} />
 

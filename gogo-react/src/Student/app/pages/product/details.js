@@ -210,9 +210,14 @@ const DetailsPages = ({ match, intl, ...props }) => {
         <ModalFooter>
           <Button
             color="primary"
-            onClick={() => history.push('/app/pages/cart/wish')}
+            
+            target="_blank"
           >
-            Visit WishList
+            <Link 
+            to={"/student/wish"}
+            target="blank"
+            >
+            Visit WishList</Link>
           </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             Cancel
@@ -249,9 +254,13 @@ const DetailsPages = ({ match, intl, ...props }) => {
         <ModalFooter>
           <Button
             color="primary"
-            onClick={() => history.push('/app/pages/cart')}
+            
+            
           >
-            Visit Cart
+          <Link to="/student/cart" target="blank">
+          Visit Cart
+          </Link>
+            
           </Button>{' '}
           <Button color="secondary" onClick={toggleCartModal}>
             Cancel
@@ -349,12 +358,13 @@ const DetailsPages = ({ match, intl, ...props }) => {
               </Route>
             </Button>
           </Card>
-          <h2 className="mt-4 font-weight-bold">Course Content</h2>
+          <div className="jt_detail_course">
+          <h2 className=" font-weight-bold">Course Content</h2>
           {content.map((doc, index) => {
             const togglerId = `toggler${index}`;
             return (
               <>
-                <Card className="toggle">
+                <div className="toggle">
                   <Button
                     color="link"
                     id={togglerId}
@@ -362,27 +372,30 @@ const DetailsPages = ({ match, intl, ...props }) => {
                   >
                     <p className="p">{doc.name}</p>
                   </Button>
-                </Card>
+                </div>
                 <UncontrolledCollapse toggler={togglerId}>
-                  <Card className="toggled">
+                  <div className="toggled">
                     <CardBody>
-                      {doc.lesson.map((l) => {
-                        return (
-                          <Row>
-                            <p className="content m-3">
-                              <AiFillPlayCircle className="iconvid" />
-                              {l.name}
-                            </p>
-                            <p className="content mt-3 ml-auto mr-3">1:44</p>
-                          </Row>
-                        );
-                      })}
+                      <ol>
+                          {doc.lesson.map((l) => {
+                            return (
+                              <li>
+                                <p className="content m-3">
+                                  
+                                  {l.name}
+                                </p>
+                                {/* <p className="content mt-3 ml-auto mr-3">1:44</p> */}
+                              </li>
+                            );
+                          })}
+                      </ol>
                     </CardBody>
-                  </Card>
+                  </div>
                 </UncontrolledCollapse>
               </>
             );
           })}
+          </div>
         </Col>
         <Col md="4">
           <Card className="fixed width ">
@@ -403,9 +416,14 @@ const DetailsPages = ({ match, intl, ...props }) => {
               {cartItemStatus == 'cart' ? (
                 <Button
                   className="btn2 mt-4"
-                  onClick={() => history.push('/app/pages/cart')}
+                  
+                  
                 >
+                  <Link to ="/student/cart"
+                  target="blank"
+                  >
                   Go To Cart
+                  </Link>
                 </Button>
               ) : cartItemStatus == 'purchased' ? (
                 <Button className="btn2 mt-4 disabled">
