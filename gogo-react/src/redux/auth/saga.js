@@ -92,9 +92,10 @@ const registerWithEmailPasswordAsync = async ({
   customer_last_name,
   customer_phone_number,
   using_google = false,
-  customer_id = null,
+  customer_id,
 }) => {
   try {
+    console.log(customer_id);
     const values = {
       student_first_name: customer_first_name,
       student_last_name: customer_last_name,

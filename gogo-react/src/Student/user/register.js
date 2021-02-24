@@ -92,10 +92,17 @@ const Register = ({
   }, [error]);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('customer_id');
-    if (id) setCustomer_id(id);
-  }, []);
+    const params = window.location.href;
+    var url = new URL(params);
+    var id =  url.searchParams.get("tutor_id");
+    
+    if (id)
+    {
+      console.log(id);  
+      setCustomer_id(id);
+    }
+     
+  }, [customer_id]);
 
   const onSuccess = (res) => {
     
@@ -126,9 +133,15 @@ const Register = ({
 
   const onSubmit = (values) => {
     
-    setClicked(true);
+    if(customer_id!=null){
+      setClicked(true);
     values.customer_id = customer_id;
+    console.log(customer_id);
     registerUserAction({ history, values, toggleClick });
+    }
+    else{
+      console.log(customer_id);
+    }
   };
 
   return (
