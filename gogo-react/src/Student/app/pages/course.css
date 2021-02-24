@@ -164,10 +164,7 @@
     height: 10px; 
     border-radius: 20px;  
 }
-.progressbox{
-    height: auto !important;
-
-}   
+   
 #inside_card{
     width: 90%;
     margin-left: auto;

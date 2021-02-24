@@ -12,7 +12,7 @@ export const VideoPlayer = ({ videoSrc }) => {
 
   const videoJSOptions = {
     controls: true,
-    autoplay:true,
+    autoplay:false,
     userActions: { hotkeys: true },
     playbackRates: [0.5, 1, 1.5, 2],
     qualitySelector: true,
@@ -54,7 +54,7 @@ useEffect(()=>{
   return (
     <div className="videoPlayerContainer_jt" onContextMenu={(e) => e.preventDefault()} style={{ width: '100%' }}>
       <video
-        style={{ width: '100%',height:"auto"}}
+        style={{ width: '100%',height:"450px"}}
         ref={videoPlayerRef}
         className="video-js"
       />

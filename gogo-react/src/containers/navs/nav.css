@@ -1,3 +1,6 @@
+.navbar-logo:hover{
+    cursor: default;
+}
 .Logo{
     width: 120%;
 }

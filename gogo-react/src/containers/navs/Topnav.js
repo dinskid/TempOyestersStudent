@@ -261,7 +261,7 @@ const TopNav = ({
         >
           <MobileMenuIcon />
         </NavLink>
-        <NavLink className="navbar-logo" to={adminRoot}>
+        <NavLink className="navbar-logo" to={"#"}>
           <img src={require(`./logo.png`)} className="Logo" />
         </NavLink>
         {/* <BsChatSquareDots className="chat"/> */}

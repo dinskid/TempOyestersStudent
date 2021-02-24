@@ -21,7 +21,6 @@ import {
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import './miscellaneous/course.css';
-import './miscellaneous/course.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classnames from 'classnames';
 import { MdAttachFile } from 'react-icons/md';
@@ -157,7 +156,7 @@ const KnowledgeBase = ({ match, ...props }) => {
             {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
           </p>
           <h2 style={{marginTop:"20px"}} className="jt_h2_content">{courseDetails.session_name}</h2>
-          <p>{courseDetails.session_start_time.substring(0, 10)}</p>
+          {/* <p>{courseDetails.session_start_time.substring(0, 10)}</p> */}
         </Col>
         <Col  className="jt_video_prt2">
           <Card body className="progressbox" style={{paddingLeft:"14px",paddingRight:"14px"}}>
@@ -225,9 +224,9 @@ const KnowledgeBase = ({ match, ...props }) => {
           </Card>
         </Col>
       </Row>
-      <Row className="mt-2">
-        <Col md="9">
-          <Card className="mt-4">
+      <Row >
+        <div className="jt_comment_container">
+          <Card >
             <CardHeader className="mt-4">
               <Nav tabs className="card-header-tabs mt-4">
                 <NavItem className="mr-4">
@@ -263,25 +262,22 @@ const KnowledgeBase = ({ match, ...props }) => {
                 </NavItem>
               </Nav>
             </CardHeader>
-            <TabContent activeTab={activeFirstTab}>
-              <TabPane tabId="1" className="mb-4">
-                <Scrollbars style={{ width: 950, height: 400 }} id="scrollme">
+            <TabContent activeTab={activeFirstTab} className="jt_tab">
+              <TabPane tabId="1" className="jt_tabIs">
+                <Scrollbars style={{ height: 450 }} id="scrollme" className="jt_scroll">
                   {Comments.map((list) => (
                     <div
                       id="comments"
                       role="tabpanel"
-                      className="mb-3"
+                      className="jt_comment"
                       aria-labelledby="home-tab"
                       show
                     >
-                      <Card body className="text-center card-inner">
+                      <Card body className="text-center card-inner jt_comment">
                         <Row>
-                          <Col md={2} xs={12}>
-                            <img
-                              src={require(`./${list.img}.jpg`)}
-                              className="comment_img ml-auto mr-auto"
-                            />
-                            <CardTitle tag="h5" className="card_comment">
+                          <Col md={2} xs={12} className="card_comment">
+                            
+                            <CardTitle tag="h5" className="">
                               {list.name}
                             </CardTitle>
                           </Col>
@@ -299,7 +295,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                     </div>
                   ))}
                 </Scrollbars>
-                <FormGroup row>
+                <FormGroup  className="form_attached">
                   <Col md={2}>
                     <label className="input-label-1 ml-4">
                       <input  onChange={(e)=>{IMgUpload(e)}} accept="image/*" data-max-sizeIs="2000" type="file" className="inp fileUploadIs" />
@@ -324,8 +320,8 @@ const KnowledgeBase = ({ match, ...props }) => {
               aria-labelledby="contact-tab"
             ></div>
           </Card>
-        </Col>
-        <Col md="4"></Col>
+        </div>
+        {/* <Col md="4"></Col> */}
       </Row>
       <br />
     </>

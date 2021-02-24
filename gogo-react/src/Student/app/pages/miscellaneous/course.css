@@ -184,13 +184,40 @@
 }
 
 .card_comment {
-  text-align: center;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  text-align:center;
 }
 .card-inner {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
 }
+
+/* jt comment */
+
+.jt_comment_container{
+  width:72.5%;
+}
+.jt_comment{
+  margin: 10px auto;
+  width:96%;
+}
+.jt_tab{
+width: 100%;
+}
+.jt_scroll{
+  width: 100% !important;
+}
+
+.form_attached{
+  margin: 0 auto ;
+  display: flex;
+  justify-content: space-evenly;
+  width:93%;
+}
+
 @media (max-width: 830px) {
   #scrollme {
     width: 350px;
