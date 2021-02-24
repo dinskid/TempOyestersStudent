@@ -51,7 +51,7 @@ const loginWithEmailPasswordAsync = async (
 function* loginWithEmailPassword({ payload }) {
   const { email, password, using_google = false } = payload.user.values;
   const { history, toggleClick } = payload.user;
-  console.log(payload);
+  // console.log(payload);
   try {
     const customer_email = email;
     const customer_password = password;
@@ -61,7 +61,7 @@ function* loginWithEmailPassword({ payload }) {
       customer_password,
       using_google
     );
-    console.log(loginUser);
+    // console.log(loginUser);
     if (loginUser.success) {
       const item = { uid: loginUser.token };
       setCurrentUser(item);
@@ -132,7 +132,7 @@ function* registerWithEmailPassword({ payload }) {
       registerWithEmailPasswordAsync,
       payload.user.values
     );
-    console.log(registerUser);
+    // console.log(registerUser);
     if (registerUser.success) {
       const item = { uid: registerUser.token };
       setCurrentUser(item);
@@ -188,11 +188,11 @@ const forgotPasswordAsync = async (email) => {
 };
 
 function* forgotPassword({ payload }) {
-  console.log(payload);
+  
   const { email } = payload.forgotUserMail;
   try {
     const forgotPasswordStatus = yield call(forgotPasswordAsync, email);
-    console.log(forgotPasswordStatus);
+    
     if (forgotPasswordStatus.success) {
       yield put(forgotPasswordSuccess('success'));
     } else {
@@ -233,7 +233,7 @@ const resetPasswordAsync = async (resetPasswordCode, newPassword) => {
 };
 
 function* resetPassword({ payload }) {
-  console.log(payload);
+  
   const { newPassword, resetPasswordCode } = payload;
   try {
     const resetPasswordStatus = yield call(
@@ -241,7 +241,7 @@ function* resetPassword({ payload }) {
       resetPasswordCode,
       newPassword
     );
-    console.log(resetPasswordStatus);
+    
     if (resetPasswordStatus.success) {
       yield put(resetPasswordSuccess('success'));
     } else {

@@ -41,19 +41,15 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   }, [error]);
   const onUserLogin = (values) => {
     if (!loading) {
-      console.log(values);
+      
       loginUserAction({ history, values });
     }
   };
 
   const onSuccess = (res) => {
-    console.log('login success', res.profileObj);
+    
     refreshTokenSetup(res);
-    console.log(
-      res.profileObj.name,
-      res.profileObj.email,
-      res.profileObj.imageUrl
-    );
+    
     const values = {
       customer_name: res.profileObj.name,
       email: res.profileObj.email,

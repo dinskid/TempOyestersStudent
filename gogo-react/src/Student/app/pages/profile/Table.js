@@ -28,7 +28,7 @@ const Table = ({ columns, data, handleReloadTable }) => {
     usePagination
   );
 
-  console.log(data, page);
+  // console.log(data, page);
 
   return (
     <div style={{ marginBottom: '25rem' }}>
@@ -61,7 +61,7 @@ const Table = ({ columns, data, handleReloadTable }) => {
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.map((row) => {
-            console.log(row.original);
+            {/* console.log(row.original); */}
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>

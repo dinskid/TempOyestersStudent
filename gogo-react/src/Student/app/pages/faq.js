@@ -85,7 +85,7 @@ const DataListPages = ({ match }) => {
     const fetchData = async () => {
       try {
         const result = await axiosInstance.get('/student/courses');
-        console.log(result);
+        
         if (result.data.success) {
           const data = result.data.courses.map((doc) => ({
             img: doc.session_thumbnail,

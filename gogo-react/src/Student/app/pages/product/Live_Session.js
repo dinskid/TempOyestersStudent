@@ -35,7 +35,7 @@ const Live_Session = () => {
     async function fetchData() {
       try {
         const result = await axiosInstance.get('/student/sessions/live');
-        console.log(result);
+        
         if (result.data.success) {
           const data = result.data.sessions.map((doc) => ({
             img: doc.session_thumbnail,
@@ -45,7 +45,7 @@ const Live_Session = () => {
             cost: doc.session_fee,
             tags: doc.session_tags,
           }));
-          console.log(data);
+          
           setNames(data);
         } else {
           try {

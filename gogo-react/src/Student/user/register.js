@@ -98,14 +98,9 @@ const Register = ({
   }, []);
 
   const onSuccess = (res) => {
-    // console.log('login success', res.profileObj);
+    
     setClicked(true);
     refreshTokenSetup(res);
-    console.log(
-      res.profileObj.name,
-      res.profileObj.email,
-      res.profileObj.imageUrl
-    );
     const values = {
       customer_first_name: res.profileObj.name[0],
       customer_last_name: res.profileObj.name.substr(
@@ -130,7 +125,7 @@ const Register = ({
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    
     setClicked(true);
     values.customer_id = customer_id;
     registerUserAction({ history, values, toggleClick });

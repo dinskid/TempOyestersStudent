@@ -579,7 +579,7 @@ const AffiliateCard = ({ handleTotalRewards }) => {
       accessor: 'share_on',
       cellClass: 'text-muted w-25',
       Cell: (props) => {
-        console.log(props.data);
+        
         return (
           <>
             <Row>
@@ -699,7 +699,7 @@ const AffiliateCard = ({ handleTotalRewards }) => {
     const getLinkData = async () => {
       try {
         const result = await axiosInstance.get(`/student/affiliates`);
-        console.log(result);
+        
         if (result.data.success) {
           let a = 0;
           const data = result.data.finalResult.map((doc) => {

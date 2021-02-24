@@ -140,7 +140,7 @@ const Blog = () => {
     const getData = async () => {
       try {
         const result = await axiosInstance.get('/student/blog');
-        console.log(result);
+        
         setEnabled(result.data.isEnabled);
         // if (result.data.isEnabled) {
           const data = result.data.result.map((doc) => {
@@ -180,7 +180,7 @@ const Blog = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(blog);
+    
     if (!blog.blog_writer_name) setError('Writer name not provided');
     else if (!blog.blog_writer_email) setError('Email not provided');
     else if (
@@ -416,7 +416,7 @@ const Blog = () => {
                       name="customer_profile_picture"
                       accept=".jpg,.jpeg,.png"
                       onChange={(e) => {
-                        console.log(e.target.files[0]);
+                        
                         const file = URL.createObjectURL(e.target.files[0]);
                         const currentImage = e.target.files[0];
                         if (
@@ -568,7 +568,7 @@ const Blog = () => {
               paddingBottom: !blogList.length ? '0' : '21rem',
             }}
           >
-          {console.log(blogList.length*50)}
+          {/* {console.log(blogList.length*50)} */}
             <CardBody  style={{
               height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
             }} >

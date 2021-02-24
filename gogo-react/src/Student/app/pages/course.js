@@ -95,7 +95,7 @@ const KnowledgeBase = ({ match, ...props }) => {
         const result = await axiosInstance.get(
           `/student/mycourses/${props.location.state.session_id}`
         );
-        console.log(result);
+        // console.log(result);
         if (result.data.success) {
           setCourseDetails(result.data.sessionData);
           setCourseContent(result.data.ans);

@@ -48,7 +48,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
   let session_id;
   try {
     session_id = props.location.state.session_id;
-    console.log(session_id);
+    
   } catch (err) {
     history.push('/app/pages/product/data-list');
   }
@@ -88,12 +88,12 @@ const DetailsPages = ({ match, intl, ...props }) => {
           
           `/student/sessions/details/${session_id}`
         );
-        console.log(result);
+        
 
         if (result.data.success) {
           const trainerData = result.data.trainerData;
           setSession(result.data.session);
-          console.log(session);
+          
 
           setInstructor(trainerData.trainer_full_name);
           setWork_exp(trainerData.trainer_occupation);
@@ -128,7 +128,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
         cart_item_status: 'wishlist',
       };
       const result = await axiosInstance.post('/student/cart/add_to_wish', { values });
-      console.log(result);
+      
       if (result.data.success) {
         setCartItemStatus('wishlist');
         toggle();
@@ -154,7 +154,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
         session_id,
       };
       const result = await axiosInstance.post(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`, { values });
-      console.log(result);
+      
       if (result.data.success) {
         setCartItemStatus('cart');
         toggleCartModal();
@@ -178,7 +178,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
   };
 
   if (!isLoaded) return <Loader />;
-  console.log(session);
+  
   return (
     <>
       <Modal isOpen={modal} toggle={toggle}>

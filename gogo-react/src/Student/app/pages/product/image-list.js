@@ -27,7 +27,7 @@ const getIndex = (value, arr, prop) => {
 };
 
 const ImageListPages = ({ match, ...props }) => {
-  console.log(props);
+  
   const [displayMode, setDisplayMode] = useState('imagelist');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPageSize, setSelectedPageSize] = useState(8);
@@ -71,14 +71,14 @@ const ImageListPages = ({ match, ...props }) => {
   useEffect(() => {
     let id = props.location.state.trainer_id;
 
-    console.log(id);
+    
     async function fetchData() {
       try {
         const result = await axiosInstance.get(
           `/student/sessions/trainer/${id}`
         );
         if (result.data.success) {
-          console.log(result.data.trainerData);
+          
           setTrainer(result.data.trainerData);
         } else {
           try {
@@ -174,7 +174,7 @@ const ImageListPages = ({ match, ...props }) => {
 
   const startIndex = (currentPage - 1) * selectedPageSize;
   const endIndex = currentPage * selectedPageSize;
-  console.log(trainer);
+  
   if (!isLoaded) return <Loader />;
   return (
     <>

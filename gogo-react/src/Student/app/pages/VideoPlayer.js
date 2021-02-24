@@ -20,7 +20,7 @@ export const VideoPlayer = ({ videoSrc }) => {
 
   useEffect(() => {
     if (videoPlayerRef) {
-      console.log(videoSrc);
+      
       const player = videojs(videoPlayerRef.current, videoJSOptions, () => {
         player.src(videoSrc);
 

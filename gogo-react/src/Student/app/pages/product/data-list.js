@@ -67,7 +67,7 @@ const DataListPages = ({ match }) => {
     async function fetchData() {
       try {
         const result = await axiosInstance.get('/student/sessions');
-        console.log(result);
+        
         if (result.data.success) {
           const data = result.data.sessions.map((doc) => ({
             id: doc.session_id,
@@ -77,7 +77,7 @@ const DataListPages = ({ match }) => {
             cost: doc.session_fee,
             tags: doc.session_tags,
           }));
-          console.log(data);
+          
           setNames(data);
         } else {
           try {
@@ -201,7 +201,7 @@ const DataListPages = ({ match }) => {
       {/* <div className="container"> */}
       <Row id="jt_all_course">
         {names.map((name) => {
-          console.log(name.tags.split(','));
+          {/* console.log(name.tags.split(',')); */}
           return (
             <Col md={3} xs={12}>
               <Card
