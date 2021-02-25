@@ -8,7 +8,7 @@ const NoDataFound = () => {
         src={logo}
         alt="you don't have any sessions yet logo"
         style={{
-          marginTop: '23%',
+          marginTop: '5%',
           display: 'block',
           marginLeft: 'auto',
           marginRight: 'auto',

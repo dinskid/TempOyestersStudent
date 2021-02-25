@@ -33,33 +33,36 @@ import img from './img2.jpg';
 import { VideoPlayer } from './VideoPlayer';
 import axiosInstance from '../../../helpers/axiosInstance';
 import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
+import NoDataFound from './NoDataFound';
 
-const Comments = [
-  {
-    img: 'img1',
-    comment:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
-    name: 'Wonder woman',
-  },
-  {
-    img: 'img2',
-    comment:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
-    name: 'Ironman',
-  },
-  {
-    img: 'img3',
-    comment:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
-    name: 'Black Cat',
-  },
-  {
-    img: 'img4',
-    comment:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
-    name: 'Mary Jane',
-  },
+const Materials = [
+  // {
+  //   img: 'img1',
+  //   comment:
+  //     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
+  //   name: 'Wonder woman',
+  // },
+  // {
+  //   img: 'img2',
+  //   comment:
+  //     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
+  //   name: 'Ironman',
+  // },
+  // {
+  //   img: 'img3',
+  //   comment:
+  //     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
+  //   name: 'Black Cat',
+  // },
+  // {
+  //   img: 'img4',
+  //   comment:
+  //     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.',
+  //   name: 'Mary Jane',
+  // },
 ];
+
+
 const KnowledgeBase = ({ match, ...props }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeFirstTab, setActiveFirstTab] = useState('1');
@@ -68,7 +71,11 @@ const KnowledgeBase = ({ match, ...props }) => {
   const [courseDetails, setCourseDetails] = useState('');
   const [courseContent, setCourseContent] = useState([]);
   const [videoSrc, setVideoSrc] = useState(null);
+  const [CurrentLesson,setCurrentLesson]=useState(null)
+  const [CurrentChapter,setCurrentChapter]=useState(null)
   const [colorIs,setColor]=useState(null);
+  const [CommnetHere,setComment]=useState("");
+  const [CommentsHere,setCommentIs]=useState([]);
   useEffect(() => {
     if (error)
       NotificationManager.warning(
@@ -95,11 +102,17 @@ const KnowledgeBase = ({ match, ...props }) => {
         const result = await axiosInstance.get(
           `/student/mycourses/${props.location.state.session_id}`
         );
+        const result2=await axiosInstance.get("/student/comment");
+        console.log(result2);
         // console.log(result);
-        if (result.data.success) {
+        if (result.data.success&&result2.data.length!=0) {
           setCourseDetails(result.data.sessionData);
           setCourseContent(result.data.ans);
           setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
+          setCommentIs(result2.data);
+          // new 
+          setCurrentChapter(result.data.ans[0])
+          setCurrentLesson(result.data.ans[0].lesson[0])
         } else {
           try {
             setError(result.data.error);
@@ -118,8 +131,9 @@ const KnowledgeBase = ({ match, ...props }) => {
       }
     };
     getData();
+    console.log(CommentsHere);
     
-  }, []);
+  }, [CommentsHere]);
 
   const IMgUpload=(e)=>{
     let file=e.target.files[0];
@@ -134,6 +148,41 @@ const KnowledgeBase = ({ match, ...props }) => {
     // fileUpload.addEventListener("change",(e)=>{
       
     // })
+
+  }
+
+// http://localhost:5000/student/comment
+// http://localhost:5000/student/auth/login
+  const PostComment= async()=>{
+
+    
+    
+    console.log(videoSrc);
+    console.log(courseDetails,"Jitul Teron");
+    console.log(courseContent);
+    console.log(CurrentLesson.lesson_id);
+    console.log(CurrentChapter.chapter_id);
+    const values={
+          comment_content:CommnetHere,
+          comment_img_url:null,
+          chapter_id:CurrentChapter.chapter_id,
+          lesson_id:CurrentLesson.lesson_id,
+          session_id:courseDetails.session_id,
+          customer_id:courseDetails.customer_id
+        };
+    console.log(values);
+    try{
+      const result=await axiosInstance.post("/student/comment/",{values});
+      console.log(result);
+      if(result.data.success){
+        alert("done")
+      }else{
+        alert("not done")
+      }
+      
+    }catch(err){
+      console.log("Error is here",err);
+    }
 
   }
   if (!isLoaded)
@@ -198,6 +247,8 @@ const KnowledgeBase = ({ match, ...props }) => {
                               <Row  className="lesson-color">
                                 <p
                                   onClick={() => {
+                                    setCurrentLesson(l);
+                                    setCurrentChapter(doc);
                                     setVideoSrc(l.videoUrl);
                                     // lessonColor(index)
                                   }}
@@ -265,26 +316,28 @@ const KnowledgeBase = ({ match, ...props }) => {
             <TabContent activeTab={activeFirstTab} className="jt_tab">
               <TabPane tabId="1" className="jt_tabIs">
                 <Scrollbars style={{ height: 450 }} id="scrollme" className="jt_scroll">
-                  {Comments.map((list) => (
-                    <div
+                  {CommentsHere.result.map((list) => {
+                    return (
+                      <>
+                      <div
                       id="comments"
                       role="tabpanel"
-                      className="jt_comment"
+                      className="jt_comment materials"
                       aria-labelledby="home-tab"
                       show
                     >
-                      <Card body className="text-center card-inner jt_comment">
+                      <Card body className="text-center card-inner jt_comment ">
                         <Row>
                           <Col md={2} xs={12} className="card_comment">
                             
                             <CardTitle tag="h5" className="">
-                              {list.name}
+                              {list.student_first_name} {list.student_last_name} 
                             </CardTitle>
                           </Col>
                           <Col md={10} xs={12}>
                             {' '}
                             <CardText className="mt-4 text-left">
-                              {list.comment}
+                              {list.comment_content}
                             </CardText>
                             <a href={img} download>
                               <FiDownload /> Image.jpg
@@ -293,7 +346,9 @@ const KnowledgeBase = ({ match, ...props }) => {
                         </Row>
                       </Card>
                     </div>
-                  ))}
+                      </>
+                    );
+                  })}
                 </Scrollbars>
                 <FormGroup  className="form_attached">
                   <Col md={2}>
@@ -304,16 +359,53 @@ const KnowledgeBase = ({ match, ...props }) => {
                     </label>
                   </Col>
                   <Col md={7} className="comment_area">
-                    <Input type="textarea" name="text" id="exampleText" />
+                    <Input onChange={(e)=>{setComment(e.target.value)}}  type="textarea" name="text" id="jt_comment_here" />
                   </Col>
                   <Col md={2} className="comment-btn">
-                    <Button  className="btn4">Comment</Button>
+                    <Button  onClick={()=>{PostComment()}} className="btn4">Comment</Button>
                   </Col>
                 </FormGroup>
               </TabPane>
-              <TabPane tabId="2"></TabPane>
+              <TabPane tabId="2">
+                <Scrollbars style={{ height: 450 }}>
+                {
+                  Materials.length!=0?Materials.map((doc)=>{
+                    return(
+                      <>
+                      <div
+                      id="material"
+                      role="tabpanel"
+                      aria-labelledby="contact-tab"
+                      show
+                    >
+                      <Card body className="text-center card-inner jt_comment">
+                        <Row>
+                          <Col md={2} xs={12} className="card_comment">
+                            
+                            <CardTitle tag="h5" className="">
+                              {doc.name}
+                            </CardTitle>
+                          </Col>
+                          <Col md={10} xs={12}>
+                            {' '}
+                            <CardText className="mt-4 text-left">
+                              {doc.comment}
+                            </CardText>
+                            <a href={img} download>
+                              <FiDownload /> CheatSheet.pdf
+                            </a>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </div>
+                    
+                      </>
+                    )
+                  }):<div className="nodatahere"><NoDataFound/></div>
+                }
+                </Scrollbars>
+              </TabPane>
             </TabContent>
-
             <div
               id="material"
               role="tabpanel"

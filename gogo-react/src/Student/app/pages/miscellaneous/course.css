@@ -218,6 +218,9 @@ width: 100%;
   width:93%;
 }
 
+.nodatahere{
+  margin-top:12.5% !important;
+}
 @media (max-width: 830px) {
   #scrollme {
     width: 350px;

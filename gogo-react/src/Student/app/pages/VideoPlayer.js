@@ -50,7 +50,7 @@ useEffect(()=>{
   play.hlsQualitySelector({ displayCurrentQuality: true });
  }
 
-},[play])
+},[play]);
   return (
     <div className="videoPlayerContainer_jt" onContextMenu={(e) => e.preventDefault()} style={{ width: '100%' }}>
       <video
