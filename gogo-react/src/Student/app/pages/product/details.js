@@ -95,9 +95,9 @@ const DetailsPages = ({ match, intl, ...props }) => {
           setSession(result.data.session);
           
 
-          setInstructor(trainerData.trainer_full_name);
-          setWork_exp(trainerData.trainer_occupation);
-          setAbout(trainerData.trainer_career_summary);
+          // setInstructor(trainerData.trainer_full_name);
+          // setWork_exp(trainerData.trainer_occupation);
+          // setAbout(trainerData.trainer_career_summary);
 
           setContent(result.data.ans);
           setCartItemStatus(result.data.cart_item_status);
@@ -105,14 +105,15 @@ const DetailsPages = ({ match, intl, ...props }) => {
           try {
             setError(result.data.error);
           } catch (er) {
-            setError('Could not fetch details');
+            setError('Could not fetch details ');
           }
         }
       } catch (err) {
         try {
-          setError(err.response.data.error);
+          // console.log(err);
+          setError(err);
         } catch (e) {
-          setError('Could not fetch details');
+          setError('Could not fetch details ');
         }
       } finally {
         setIsLoaded(true);

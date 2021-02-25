@@ -68,11 +68,11 @@ function* loginWithEmailPassword({ payload }) {
       yield put(loginUserSuccess(item));
       history.push('/app/pages/product/data-list');
     } else {
-      toggleClick();
+      // console.log(typeof(toggleClick));
       yield put(loginUserError(loginUser.error));
     }
   } catch (error) {
-    toggleClick();
+    // console.log(typeof(toggleClick));
     try {
       yield put(loginUserError(error.response.data.error));
     } catch (err) {
@@ -140,7 +140,7 @@ function* registerWithEmailPassword({ payload }) {
       yield put(registerUserSuccess(item));
       history.push('/app/pages/product/data-list');
     } else {
-      toggleClick();
+      // console.log(typeof(toggleClick));
       try {
         yield put(registerUserError(registerUser.error));
       } catch (err) {
@@ -148,7 +148,7 @@ function* registerWithEmailPassword({ payload }) {
       }
     }
   } catch (error) {
-    toggleClick();
+    // console.log(typeof(toggleClick));
     try {
       yield put(registerUserError(error.response.data.error));
     } catch (err) {

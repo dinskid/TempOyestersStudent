@@ -110,9 +110,13 @@ const KnowledgeBase = ({ match, ...props }) => {
           setCourseContent(result.data.ans);
           setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
           setCommentIs(result2.data);
+          // document.querySelectorAll(".lesson-color")[0].style.backgroundColor="##008ecc";
           // new 
-          setCurrentChapter(result.data.ans[0])
-          setCurrentLesson(result.data.ans[0].lesson[0])
+          if(CurrentChapter==null||CurrentLesson==null){
+            setCurrentChapter(result.data.ans[0])
+            setCurrentLesson(result.data.ans[0].lesson[0])
+          }
+          
         } else {
           try {
             setError(result.data.error);
@@ -171,18 +175,18 @@ const KnowledgeBase = ({ match, ...props }) => {
           customer_id:courseDetails.customer_id
         };
     console.log(values);
-    try{
-      const result=await axiosInstance.post("/student/comment/",{values});
-      console.log(result);
-      if(result.data.success){
-        alert("done")
-      }else{
-        alert("not done")
-      }
+    // try{
+    //   const result=await axiosInstance.post("/student/comment/",{values});
+    //   console.log(result);
+    //   if(result.data.success){
+    //     alert("done")
+    //   }else{
+    //     alert("not done")
+    //   }
       
-    }catch(err){
-      console.log("Error is here",err);
-    }
+    // }catch(err){
+    //   console.log("Error is here",err);
+    // }
 
   }
   if (!isLoaded)
@@ -191,11 +195,16 @@ const KnowledgeBase = ({ match, ...props }) => {
         <Spinner color="primary" />
       </div>
     );
-// const lessonColor=(index)=>{
-//   let lesson=document.querySelectorAll(".lesson-color");
-//   lesson[index].style.backgroundColor="#e92828"
+const lessonColor=(ch,ls,l,doc)=>{
+  setCurrentLesson(l)
+  setCurrentChapter(doc)
+  let lesson=document.querySelector(`.chch${ch}`).childNodes[0].childNodes[0].childNodes[CurrentLesson.id-1];
   
-// }
+  // document.querySelector(`.chch${ch}`).childNodes[0].childNodes[0].childNodes[i].style.backgroundColor="rgb(247, 248, 250)";
+  lesson.style.backgroundColor="red"
+  console.log(CurrentLesson);
+  
+}
   return (
     <>
       <Row>
@@ -212,7 +221,7 @@ const KnowledgeBase = ({ match, ...props }) => {
             <CardTitle tag="h2" className="prog">
               Course Progress
             </CardTitle>
-            <Progress value="200" max={500} id="progress" />
+            <Progress className="bar" value="200" max={500} id="progress" />
             <div  style={{marginTop:"10px",marginBottom:"0"}} className="text-center mt-3 font-weight-bold">45% of 100%</div>
 
             <div className="content_all" style={{minHeight:"280px"}}>
@@ -239,10 +248,10 @@ const KnowledgeBase = ({ match, ...props }) => {
                       </Button>
                     </div>
                    
-                    <UncontrolledCollapse toggler={togglerId}>
+                    <UncontrolledCollapse toggler={togglerId} className={`chch${index}`}>
                       <div className="" style={{paddingLeft:"10px",paddingRight:"10px",display:"flex",justifyContent:"center",alignItem:"center",alignItems:"center"}}>
-                        <CardBody style={{padding:"8px 30px"}}>
-                          {doc.lesson.map((l,index) => {
+                        <CardBody style={{padding:"8px"}}>
+                          {doc.lesson.map((l,ls) => {
                             return (
                               <Row  className="lesson-color">
                                 <p
@@ -250,7 +259,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                     setCurrentLesson(l);
                                     setCurrentChapter(doc);
                                     setVideoSrc(l.videoUrl);
-                                    // lessonColor(index)
+                                    lessonColor(index,ls,l,doc);
                                   }}
                                   target="_blank"
                                   className="content1 m-3"

@@ -1,3 +1,4 @@
+import './auth.css';
 import React, { useState, useEffect } from 'react';
 import { Row, Card, CardTitle, Label, FormGroup, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
@@ -9,7 +10,7 @@ import { loginUser } from '../../redux/actions';
 import { Colxx } from '../../components/common/CustomBootstrap';
 import IntlMessages from '../../helpers/IntlMessages';
 import Logo from './logo.png';
-import './auth.css';
+
 import Google from './google.png';
 
 import { useGoogleLogin } from 'react-google-login';
@@ -36,7 +37,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
 
   useEffect(() => {
     if (error) {
-      NotificationManager.warning(error, 'Login Error', 3000, null, null, '');
+      NotificationManager.warning(error, 'Login Error Jitul', 3000, null, null, '');
     }
   }, [error]);
   const onUserLogin = (values) => {
