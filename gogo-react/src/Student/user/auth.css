@@ -1,36 +1,36 @@
 .register{
-    font-size: 20px;
+    font-size: 20px !important;
 }
 .registerug{
-    width: 40%;
-    height: 50px;
+    width: 40% !important;
+    height: 50px !important;
 }
 .apple{
-    font-size: 20px;
+    font-size: 20px !important;
 }
 .image{
-    width: 40%;
-    margin-bottom: 10% ;
+    width: 40% !important;
+    margin-bottom: 10% !important;
 }
 .logo{
-    width:15%;
-    margin-right: 5%;
+    width:15% !important;
+    margin-right: 5% !important;
 }
 .logo2{
-    width:13%;
-    margin-right: 6%;
-    margin-bottom: 5px;
+    width:13% !important;
+    margin-right: 6% !important;
+    margin-bottom: 5px !important;
 }
 @media screen and (max-width: 820px) {
     #text{
-        font-size: 90%;
+        font-size: 90% !important;
     }
     .registerug{
-        width:70%;
+        width:70% !important;
     }
   }
   #reset{
-      display: flex;
-      margin-left: auto;
-      justify-content: flex-end;
+      display: flex !important;
+      margin-left: auto !important;
+      justify-content: flex-end !important;
   }

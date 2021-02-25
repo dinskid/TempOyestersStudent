@@ -43,6 +43,7 @@ import TopnavNotifications from './Topnav.Notifications';
 import TopnavDarkSwitch from './Topnav.DarkSwitch';
 
 import { getDirection, setDirection } from '../../helpers/Utils';
+import AxiosInstance from '../../helpers/axiosInstance';
 
 const Messages = ({ img, title, date }) => {
   return (
@@ -215,8 +216,12 @@ const TopNav = ({
     setIsInFullScreen(!isFS);
   };
 
-  const handleLogout = () => {
-    history.push('/Student/user/login');
+  const handleLogout = async () => {
+    const result=await AxiosInstance.get("/student/auth/logout");
+    console.log(result);
+    if(result.data.sucess==1){
+      history.push('/Student/user/login');
+    }
   };
 
   const menuButtonClick = (e, _clickCount, _conClassnames) => {
