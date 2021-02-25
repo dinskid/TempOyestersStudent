@@ -252,7 +252,7 @@ const DataListPages = ({ match }) => {
                 </Route>
                 <CardBody>
                   <div className="jt_cart">
-                  <h2 className="font-weight-bold">{name.course}</h2>
+                  <h2 className="font-weight-bold">{name.course.substr(0, 60)}...</h2>
                   {/* <ul
                     className="ml-0"
                     style={{ display: 'flex', listStyleType: 'none' }}
