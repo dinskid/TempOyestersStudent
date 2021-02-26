@@ -174,7 +174,7 @@ const Main=()=>{
         document.querySelector(".div2").style.display="none";
         localStorage.setItem("data",JSON.stringify(num))
     }
-    useEffect(()=>{
+    const fetchData=()=>{
         const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/cart_list`
         document.querySelector(".div2").style.display="flex";
         fetch(url,{
@@ -182,24 +182,25 @@ const Main=()=>{
             credentials:"include"
         }).then(res=>res.json())
         .then(async data=>{
+            console.log(data.dataIs[0][0].session_fee);
+            setCount(data.dataIs)
             
-            setCount(data.result)
-            let tot=0;
-            // localStorage.setItem("tot",)
-            for(let i =0;i<data.result.length;i++){
-                if(num.length<data.result.length){
-                    num.push(1);
-                }                
-                    tot=tot+JSON.parse(data.result[i].session_fee)
+            // let tot=0;
+            // // localStorage.setItem("tot",)
+            // for(let i =0;i<data.result.length;i++){
+            //     if(num.length<data.result.length){
+            //         num.push(1);
+            //     }                
+            //         tot=tot+JSON.parse(data.result[i].session_fee)
 
-            }
-            if(original==0){
+            // }
+            // if(original==0){
                 
-                setOriginal(tot)
-            }
-            if(price==0){
-                setPrice(tot-discount)
-            }
+            //     setOriginal(tot)
+            // }
+            // if(price==0){
+            //     setPrice(tot-discount)
+            // }
             // console.log("num",num);
             
             // tot=tot+JSON.parse(data.cart[0].courses).totP;
@@ -207,8 +208,11 @@ const Main=()=>{
             
         })
         localStorage.setItem("Count",JSON.stringify(count)); 
-      },[count,Code2Apply,Code1Apply,price]);
-      
+    }
+    useEffect(()=>{
+       fetchData()
+      },[]);
+    //   Code2Apply,Code1Apply,price,count
     // const AddItem=(id,place)=>{
     //     let items=JSON.parse(localStorage.getItem(place));
     //     if(items){
@@ -241,7 +245,12 @@ const Main=()=>{
         }).then(res=>res.json())
         .then(data=>{
             console.log(data);
-            alert("done")
+            if(data){
+                fetchData()
+                alert("done")
+            }
+
+            
         })
         .catch(e=>console.log(e))
     }
@@ -249,14 +258,14 @@ const Main=()=>{
 const wishItem=(item)=>{
     
         const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_wish`
-        
+        const values={student_wish_list_items:item.session_id}
         fetch(url,{
-            method:"POST",
+            method:"PUT",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify({
-                item
+                values
             }),
            credentials:"include"
         })
@@ -266,20 +275,20 @@ const wishItem=(item)=>{
             alert("Jitul",data)
         })
         .catch(e=>console.log(e,"Jitul"))
-        removeItem(item.cart_item_id)
+        removeItem(item.session_id)
 }
 
     const addSave=(item)=>{
         const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_save`;
-        
-        console.log(item);
+        const values={student_saved_for_later:item.session_id}
+        console.log(values);
         fetch(url,{
-            method:"POST",
+            method:"PUT",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify({
-                item
+                values
             }),
             credentials:"include"
         })
@@ -288,7 +297,7 @@ const wishItem=(item)=>{
             console.log(data);
         })
         .catch(e=>console.log(e))
-        removeItem(item.cart_item_id)
+        removeItem(item.session_id)
      }
 
      
@@ -361,7 +370,7 @@ const wishItem=(item)=>{
                                     <div className="section1">
                                         <img src={course} />
                                         <div className="name">
-                                            <h5>{item.session_name}</h5>
+                                            <h5>{item[0].session_name}</h5>
                                         </div>
                                         <div className="qnt">
                                             <div className="func">
@@ -373,15 +382,15 @@ const wishItem=(item)=>{
                                         </div>
                                     </div>
                                     
-                                    <div className="section2"><i class="fas fa-rupee-sign"></i>{item.session_fee}</div>
+                                    <div className="section2"><i class="fas fa-rupee-sign"></i>{item[0].session_fee}</div>
                                     <div className="section3">
-                                        <div onClick={()=>{wishItem(item)}}>
+                                        <div onClick={()=>{wishItem(item[0])}}>
                                             Add to WishList
                                         </div>
-                                        <div onClick={()=>{addSave(item)}}>
+                                        <div onClick={()=>{addSave(item[0])}}>
                                             Save for Later
                                         </div>
-                                        <div onClick={()=>{removeItem(item.cart_item_id)}}>
+                                        <div onClick={()=>{removeItem(item[0].session_id)}}>
                                             Remove
                                         </div>
                                     </div>

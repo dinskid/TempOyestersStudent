@@ -24,43 +24,50 @@ const Wish=()=>{
         }).then(res=>res.json())
         .then(data=>{
             console.log(data);
-            alert("done")
+            {
+
+                fetchData();
+                alert("done")
+            }
+            
         })
         .catch(e=>console.log(e))
     }
     const addCart=(item)=>{
         const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`;
         
+        const values={student_cart_items:item.session_id}
         fetch(url,{
-            method:"POST",
+            method:"PUT",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify({
-                values:item
+                values
             }),
             credentials:"include"
         })
         .then(res=>res.json())
         .then(data=>{
-            if(data)
-                {removeItem(item.wish_item_id)}
+            
+                {removeItem(item.session_id)}
+                console.log("Done",data);
         })
         .catch(e=>console.log(e))
-        
+        removeItem(item.session_id)
         
     }
     const addSave=(item)=>{
         const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_save`;
-        
-        console.log(item);
+        const values={student_saved_for_later:item.session_id}
+        console.log(values);
         fetch(url,{
-            method:"POST",
+            method:"PUT",
             headers:{
                 "Content-Type":"application/json"
             },
             body:JSON.stringify({
-                item
+                values
             }),
             credentials:"include"
         })
@@ -69,23 +76,26 @@ const Wish=()=>{
             console.log(data);
         })
         .catch(e=>console.log(e))
-        removeItem(item.wish_item_id)
+        removeItem(item.session_id)
+     }
+     const fetchData=()=>{
+        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/wish_list`
+        fetch(url,{
+           method:"GET",
+           credentials:'include',
+           
+       })
+       .then(res=>res.json())
+       .then(data=>{
+           console.log(data.dataIs);
+           setList(data.dataIs)
+       })
+       .catch(e=>console.log(e))
      }
      useEffect( ()=>{
-        const url=`${window.location.protocol}//${window.location.hostname}:5000/student/cart/wish_list`
-         fetch(url,{
-            method:"GET",
-            credentials:'include',
-            
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data.result);
-            setList(data.result)
-        })
-        .catch(e=>console.log(e))
+       fetchData();
         
-    },[List,count])
+    },[])
     return (
         <>
        <div className="Wish">
@@ -108,19 +118,19 @@ const Wish=()=>{
                                         <img src={course} />
                                     </div>
                                     <div className="details">
-                                        <h5>{item.session_name}</h5>
-                                        <div className="section2"><i class="fas fa-rupee-sign"></i>  {item.session_fee}</div>
+                                        <h5>{item[0].session_name}</h5>
+                                        <div className="section2"><i class="fas fa-rupee-sign"></i>  {item[0].session_fee}</div>
                                         
                                     </div>
                                 </div>
                                 <div className="section2">
-                                    <div onClick={()=>{addCart(item)}}>
+                                    <div onClick={()=>{addCart(item[0])}}>
                                         Add to Cart
                                     </div>
-                                    <div onClick={()=>{addSave(item)}}>
+                                    <div onClick={()=>{addSave(item[0])}}>
                                         Save for Later
                                     </div>
-                                    <div  onClick={()=>{removeItem(item.wish_item_id)}}>
+                                    <div  onClick={()=>{removeItem(item[0].session_id)}}>
                                         Remove
                                     </div>
                                 </div>

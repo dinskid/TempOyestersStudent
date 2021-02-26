@@ -37,7 +37,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
 
   useEffect(() => {
     if (error) {
-      NotificationManager.warning(error, 'Login Error Jitul', 3000, null, null, '');
+      NotificationManager.warning(error, 'Login Error', 3000, null, null, '');
     }
   }, [error]);
   const onUserLogin = (values) => {
@@ -59,8 +59,10 @@ const Login = ({ history, loading, error, loginUserAction }) => {
     loginUserAction({ history, values });
   };
   const onFailure = (err) => {
-    dispatch(loginUserError(err.error || 'unable to register'));
-    console.log(err);
+    if(err){
+      dispatch(loginUserError(err.error || 'unable to register'));
+      console.log(err);
+    }
   };
   const { signIn } = useGoogleLogin({
     onSuccess,

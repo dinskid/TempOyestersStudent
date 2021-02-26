@@ -88,56 +88,58 @@ const KnowledgeBase = ({ match, ...props }) => {
       );
   }, [error]);
 
-  useEffect(() => {
-    
-    const getData = async () => {
-      try {
-        if (isNaN(props.location.state.session_id))
-          history.push('/app/pages/mycourses');
-      } catch (e) {
+   
+  const getData = async () => {
+    try {
+      if (isNaN(props.location.state.session_id))
         history.push('/app/pages/mycourses');
-      }
+    } catch (e) {
+      history.push('/app/pages/mycourses');
+    }
 
-      try {
-        const result = await axiosInstance.get(
-          `/student/mycourses/${props.location.state.session_id}`
-        );
-        const result2=await axiosInstance.get("/student/comment");
-        console.log(result2);
-        // console.log(result);
-        if (result.data.success&&result2.data.length!=0) {
-          setCourseDetails(result.data.sessionData);
-          setCourseContent(result.data.ans);
-          setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
-          setCommentIs(result2.data);
-          // document.querySelectorAll(".lesson-color")[0].style.backgroundColor="##008ecc";
-          // new 
-          if(CurrentChapter==null||CurrentLesson==null){
-            setCurrentChapter(result.data.ans[0])
-            setCurrentLesson(result.data.ans[0].lesson[0])
-          }
-          
-        } else {
-          try {
-            setError(result.data.error);
-          } catch (e) {
-            setError('Unable to fetch courses');
-          }
+    try {
+      const result = await axiosInstance.get(
+        `/student/mycourses/${props.location.state.session_id}`
+      );
+      const result2=await axiosInstance.get("/student/comment");
+      console.log(result2);
+      // console.log(result);
+      if (result.data.success&&result2.data.length!=0) {
+        setCourseDetails(result.data.sessionData);
+        setCourseContent(result.data.ans);
+        setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
+        setCommentIs(result2.data);
+        // document.querySelectorAll(".lesson-color")[0].style.backgroundColor="##008ecc";
+        // new 
+        if(CurrentChapter==null||CurrentLesson==null){
+          setCurrentChapter(result.data.ans[0])
+          setCurrentLesson(result.data.ans[0].lesson[0])
         }
-      } catch (err) {
+        
+      } else {
         try {
-          setError(err.response.data.error);
-        } catch (error) {
+          setError(result.data.error);
+        } catch (e) {
           setError('Unable to fetch courses');
         }
-      } finally {
-        setIsLoaded(true);
       }
-    };
+    } catch (err) {
+      try {
+        setError(err.response.data.error);
+      } catch (error) {
+        setError('Unable to fetch courses');
+      }
+    } finally {
+      setIsLoaded(true);
+    }
+  };
+
+  useEffect(() => {
+   
     getData();
     console.log(CommentsHere);
     
-  }, [CommentsHere]);
+  }, []);
 
   const IMgUpload=(e)=>{
     let file=e.target.files[0];
@@ -175,19 +177,19 @@ const KnowledgeBase = ({ match, ...props }) => {
           customer_id:courseDetails.customer_id
         };
     console.log(values);
-    // try{
-    //   const result=await axiosInstance.post("/student/comment/",{values});
-    //   console.log(result);
-    //   if(result.data.success){
-    //     alert("done")
-    //   }else{
-    //     alert("not done")
-    //   }
+    try{
+      const result=await axiosInstance.post("/student/comment/",{values});
+      console.log(result);
+      if(result.data.success){
+        alert("done")
+      }else{
+        alert("not done")
+      }
       
-    // }catch(err){
-    //   console.log("Error is here",err);
-    // }
-
+    }catch(err){
+      console.log("Error is here",err);
+    }
+    getData();
   }
   if (!isLoaded)
     return (

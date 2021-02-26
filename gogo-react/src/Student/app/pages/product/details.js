@@ -124,10 +124,10 @@ const DetailsPages = ({ match, intl, ...props }) => {
 
   const handleWishList = async () => {
     try {
-      const item = {
-        session_id,
+      const values = {
+        student_wish_list_items:session_id,
       };
-      const result = await axiosInstance.post(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_wish`, { item });
+      const result = await axiosInstance.put(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_wish`, { values });
       
       if (result.data.success) {
         setCartItemStatus('wishlist');
@@ -151,9 +151,9 @@ const DetailsPages = ({ match, intl, ...props }) => {
   const handleAddToCart = async () => {
     try {
       const values = {
-        session_id,
+        student_cart_items:session_id,
       };
-      const result = await axiosInstance.post(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`, { values });
+      const result = await axiosInstance.put(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`, { values });
       
       if (result.data.success) {
         setCartItemStatus('cart');
