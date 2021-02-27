@@ -2,8 +2,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import videojs from 'video.js';
 import videojsqualityselector from 'videojs-hls-quality-selector';
 import 'videojs-contrib-quality-levels';
-import "./video.css"
-export const VideoPlayer = ({ videoSrc }) => {
+import "./video.css";
+import {Scrollbars} from "react-custom-scrollbars"
+export const VideoPlayer = (type) => {
   const videoPlayerRef = useRef(null); // Instead of ID
   const [currentTime, setCurrentTime] = useState(null);
   const [play,setPlay]=useState(null)
@@ -17,12 +18,13 @@ export const VideoPlayer = ({ videoSrc }) => {
     playbackRates: [0.5, 1, 1.5, 2],
     qualitySelector: true,
   };
-
+  console.log(type);
   useEffect(() => {
-    if (videoPlayerRef) {
+    
+    if (videoPlayerRef&&type.videoSrc) {
       
       const player = videojs(videoPlayerRef.current, videoJSOptions, () => {
-        player.src(videoSrc);
+        player.src(type.videoSrc);
 
         // player.hlsQualitySelector({
         //   displayCurrentQuality: true,
@@ -42,24 +44,27 @@ export const VideoPlayer = ({ videoSrc }) => {
     }
 
     return () => {};
-  }, [videoSrc,play]);
+  }, [type.videoSrc,play]);
 
 useEffect(()=>{
- if(play){
+ if(play&&type.videoSrc){
   play.hlsQualitySelector = videojsqualityselector;
   play.hlsQualitySelector({ displayCurrentQuality: true });
  }
 
 },[play]);
-  return (
-    <div className="videoPlayerContainer_jt" onContextMenu={(e) => e.preventDefault()} style={{ width: '100%' }}>
-      <video
-        style={{ width: '100%',height:"450px"}}
-        ref={videoPlayerRef}
-        className="video-js"
-      />
+  
 
-      {/* <GlobalStyle /> */}
-    </div>
-  );
+
+if(type.videoSrc){
+  return(<div className="videoPlayerContainer_jt" onContextMenu={(e) => e.preventDefault()} style={{ width: '100%' }}>
+  <video
+    style={{ width: '100%',height:"450px"}}
+    ref={videoPlayerRef}
+    className="video-js"
+  />
+</div>)
+}
+
+
 };

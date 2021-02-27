@@ -4,3 +4,38 @@
 .videoPlayerContainer_jt{
     min-height:450px;
 }
+
+.quize_assg_jt .content_quiz{
+    padding: 5% 20%;
+    
+}
+.quize_assg_jt .content_quiz h2{
+    font-size:3rem;
+}
+.quize_assg_jt .content_quiz p{
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height:1.6;
+}
+.quize_assg_jt_bottom{
+    background-color:  rgb(230, 230, 230) ;
+    width:100%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.quize_assg_jt_bottom button{
+    width:100px;
+    margin: 5px auto; 
+    height:50px;  
+    border:0 solid;
+    border-radius:50px;
+    color: #008ecc;
+}
+.quize_assg_jt button:hover{
+    color:#fff;
+}
+.content_quize_assg_jt{
+    background-color: #fff;
+}

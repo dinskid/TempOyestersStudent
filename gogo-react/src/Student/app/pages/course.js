@@ -71,6 +71,9 @@ const KnowledgeBase = ({ match, ...props }) => {
   const [courseDetails, setCourseDetails] = useState('');
   const [courseContent, setCourseContent] = useState([]);
   const [videoSrc, setVideoSrc] = useState(null);
+  const [Assign, setAssign] = useState(null);
+  const [Hangouts, setHangouts] = useState(null);
+  const [Quiz, setQuiz] = useState(null);
   const [CurrentLesson,setCurrentLesson]=useState(null)
   const [CurrentChapter,setCurrentChapter]=useState(null)
   const [colorIs,setColor]=useState(null);
@@ -105,9 +108,25 @@ const KnowledgeBase = ({ match, ...props }) => {
       console.log(result2);
       // console.log(result);
       if (result.data.success&&result2.data.length!=0) {
+        console.log(result.data);
         setCourseDetails(result.data.sessionData);
         setCourseContent(result.data.ans);
-        setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
+        if(result.data.ans[0].lesson[0].videoUrl){
+          setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
+        }
+        if(result.data.ans[0].lesson[0].assignmentUrl){
+          setAssign(result.data.ans[0].lesson[0].assignmentUrl);
+        }
+        if(result.data.ans[0].lesson[0].quizUrl){
+          setQuiz(result.data.ans[0].lesson[0].quizUrl);
+        }
+        if(result.data.ans[0].lesson[0].handoutsUrl){
+          setHangouts(result.data.ans[0].lesson[0].handoutsUrl)
+        }
+        
+        
+        
+        
         setCommentIs(result2.data);
         // document.querySelectorAll(".lesson-color")[0].style.backgroundColor="##008ecc";
         // new 
@@ -215,7 +234,96 @@ const lessonColor=(ch,ls,l,doc)=>{
     <>
       <Row>
         <Col  className="jt_video_prt1">
-          <VideoPlayer videoSrc={videoSrc} />
+
+          {videoSrc?<VideoPlayer videoSrc={videoSrc} assignment={Assign} Quiz={Quiz} Hangouts={Hangouts}/>
+          :Assign?(<>
+      
+  
+      <div className="quize_assg_jt" style={{ width: '100%' }}>
+        <Scrollbars
+          style={{ width: '100%',height:"450px"}}
+          className="content_quize_assg_jt"
+        >
+        <div className="content_quiz">
+            <h2>Welcome</h2>
+            <p>
+              Hello my friends,
+            </p>
+            <p>
+            Welcome to this new section on Data Preprocessing in R!
+            </p>
+            <p>
+          
+            Just a quick reminder that it is absolutely not necessary to study the two programming languages Python and R. The only reason why we provided the two trainings in Python and R, was for everyone to be able to learn Machine Learning on their favourite programming language. Therefore if you only want to study Machine Learning in Python, feel absolutely free to skip this section and move on to the next one to tackle the next Machine Learning model in Python.
+            
+            </p>
+            <p>Until then, enjoy Machine Learning!</p>
+            <p>Hadelin</p>
+            <a target="blank" href={Assign}>Click here your assignment</a>
+        </div>
+        </Scrollbars>
+        <div  className="quize_assg_jt_bottom"><button>Next</button></div>
+  
+        
+      </div>
+      </>):Quiz?(<>
+      
+  
+      <div className="quize_assg_jt" style={{ width: '100%' }}>
+        <Scrollbars
+          style={{ width: '100%',height:"450px"}}
+          className="content_quize_assg_jt"
+        >
+        <div className="content_quiz">
+            <h2>Welcome</h2>
+            <p>
+              Hello my friends,
+            </p>
+            <p>
+            Welcome to this new section on Data Preprocessing in R!
+            </p>
+            <p>
+          
+            Just a quick reminder that it is absolutely not necessary to study the two programming languages Python and R. The only reason why we provided the two trainings in Python and R, was for everyone to be able to learn Machine Learning on their favourite programming language. Therefore if you only want to study Machine Learning in Python, feel absolutely free to skip this section and move on to the next one to tackle the next Machine Learning model in Python.
+            
+            </p>
+            <p>Until then, enjoy Machine Learning!</p>
+            <p>Hadelin</p>
+            <a target="blank" href={Quiz}>Click here your Quize</a>
+        </div>
+        </Scrollbars>
+        <div className="quize_assg_jt_bottom"><button>Next</button></div>
+  
+        
+      </div>
+      </>):( <div className="quize_assg_jt" style={{ width: '100%' }}>
+        <Scrollbars
+          style={{ width: '100%',height:"450px"}}
+          className="content_quize_assg_jt"
+        >
+        <div className="content_quiz">
+            <h2>Welcome</h2>
+            <p>
+              Hello my friends,
+            </p>
+            <p>
+            Welcome to this new section on Data Preprocessing in R!
+            </p>
+            <p>
+          
+            Just a quick reminder that it is absolutely not necessary to study the two programming languages Python and R. The only reason why we provided the two trainings in Python and R, was for everyone to be able to learn Machine Learning on their favourite programming language. Therefore if you only want to study Machine Learning in Python, feel absolutely free to skip this section and move on to the next one to tackle the next Machine Learning model in Python.
+            
+            </p>
+            <p>Until then, enjoy Machine Learning!</p>
+            <p>Hadelin</p>
+            <a target="blank" href={Hangouts}>Click here your Hangouts</a>
+        </div>
+        </Scrollbars>
+        <div className="quize_assg_jt_bottom"><button>Next</button></div>
+  
+        
+      </div>)}
+
           <p className="mt-3" style={{ fontSize: '15px' }}>
             {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
           </p>
@@ -264,7 +372,35 @@ const lessonColor=(ch,ls,l,doc)=>{
                                   onClick={() => {
                                     setCurrentLesson(l);
                                     setCurrentChapter(doc);
-                                    setVideoSrc(l.videoUrl);
+                                    if(l.videoUrl){
+                                      setVideoSrc(l.videoUrl);
+                                      setHangouts(null)
+                                      
+                                      setAssign(null)
+                                      setQuiz(null)
+                                    }
+                                    if(l.handoutsUrl){
+                                      setHangouts(l.handoutsUrl)
+                                      setVideoSrc(null);
+                                      setAssign(null)
+                                      setQuiz(null)
+                                    }
+                                    
+                                    if(l.assignmentUrl){
+                                      setAssign(l.assignmentUrl)
+                                      setVideoSrc(null);
+                                      setHangouts(null)
+                                      setQuiz(null)
+                                    }
+                                    
+                                    if(l.quizUrl){
+                                      setQuiz(l.quizUrl)
+                                      setVideoSrc(null);
+                                      setAssign(null)
+                                      setHangouts(null)
+                                    }
+                                    
+
                                     lessonColor(index,ls,l,doc);
                                   }}
                                   target="_blank"
