@@ -79,7 +79,7 @@ const Main=()=>{
         let tot=price;
         // for(let i =0;num.length;i++){
                 
-                tot=tot+JSON.parse(count[id].session_fee)
+                tot=tot+JSON.parse(count[id][0].session_fee)
                 setPrice(tot)
         // }
         
@@ -106,7 +106,7 @@ const Main=()=>{
         if(num[id]>1){
             num[id]=num[id]-1
             let tot=price;
-            tot=tot-JSON.parse(count[id].session_fee)
+            tot=tot-JSON.parse(count[id][0].session_fee)
             setPrice(tot)
         }
 
@@ -182,29 +182,29 @@ const Main=()=>{
             credentials:"include"
         }).then(res=>res.json())
         .then(async data=>{
-            console.log(data.dataIs[0][0].session_fee);
-            setCount(data.dataIs)
             
-            // let tot=0;
-            // // localStorage.setItem("tot",)
-            // for(let i =0;i<data.result.length;i++){
-            //     if(num.length<data.result.length){
-            //         num.push(1);
-            //     }                
-            //         tot=tot+JSON.parse(data.result[i].session_fee)
-
-            // }
-            // if(original==0){
-                
-            //     setOriginal(tot)
-            // }
-            // if(price==0){
-            //     setPrice(tot-discount)
-            // }
-            // console.log("num",num);
+            setCount(data.dataIs)
+            console.log(data.dataIs.length);
+            let tot=0;
+            
+            // localStorage.setItem("tot",)
+            for(let i =0;i<data.dataIs.length;i++){
+                if(num.length<data.dataIs.length){
+                    num.push(1);
+                }                
+                    tot=tot+num[i]*JSON.parse(data.dataIs[i][0].session_fee)
+                    // console.log(tot=tot+JSON.parse(data.result[i][0].session_fee));
+                    setOriginal(tot)
+                    setPrice(tot-discount)
+            }
+            
+            
+            
+            
+            console.log("num",num);
             
             // tot=tot+JSON.parse(data.cart[0].courses).totP;
-            // console.log(tot);
+            console.log(tot);
             
         })
         localStorage.setItem("Count",JSON.stringify(count)); 
