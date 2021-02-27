@@ -460,7 +460,7 @@ const wishItem=(item)=>{
                             </div>
                         </div>
                         <div className="pay">
-                            {price>original?<Link target="_blank"  to="/app/pages/cart/next"><button target="_blank" onClick={()=>{CoupounRemove()}} >Next</button ></Link>:<Link><button onClick={()=>{displayPay()}}>Pay Now</button> </Link>}
+                            {price>original?<Link   to="/student/next"><button onClick={()=>{CoupounRemove()}} >Next</button ></Link>:<Link><button onClick={()=>{displayPay()}}>Pay Now</button> </Link>}
                         </div>
             </div>
         </>)

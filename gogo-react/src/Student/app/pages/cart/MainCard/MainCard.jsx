@@ -41,12 +41,13 @@ const MainCard=()=>{
                                 <Route exact path ="/student/wish">
                                     <Wish/>  
                                 </Route> 
+                                <Route exact path="/student/next">
+                                     <Distribution/>
+                                </Route>
                                 <Route exact path ="/student/save">
                                      <Save/>  
                                 </Route>
-                                <Route path="/student/next">
-                                        <Distribution/>
-                                </Route>
+                                
                        </Switch>
 
                 <Cards condition="To" name={`${info.student_first_name} ${info.student_last_name}`} contact={`${info.student_phone_number}`} email={`${info.student_email}`}/>    

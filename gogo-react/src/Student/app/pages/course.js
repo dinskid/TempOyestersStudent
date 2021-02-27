@@ -198,15 +198,19 @@ const KnowledgeBase = ({ match, ...props }) => {
       </div>
     );
 const lessonColor=(ch,ls,l,doc)=>{
-  setCurrentLesson(l)
-  setCurrentChapter(doc)
-  let lesson=document.querySelector(`.chch${ch}`).childNodes[0].childNodes[0].childNodes[CurrentLesson.id-1];
+  // setCurrentLesson(l)
+  // setCurrentChapter(doc)
+  let lesson1=document.querySelectorAll(`.lesson-color`)
+  for(let i =0;i<lesson1.length;i++){
+    lesson1[i].style.backgroundColor="#f8f8f8"
+  }
+  let lesson2=document.querySelectorAll(`.chch${ch}`)[ls]
+  // console.log(lesson);
   
   // document.querySelector(`.chch${ch}`).childNodes[0].childNodes[0].childNodes[i].style.backgroundColor="rgb(247, 248, 250)";
-  lesson.style.backgroundColor="red"
-  console.log(CurrentLesson);
-  
-}
+  lesson2.style.backgroundColor="#008ecc"
+  // console.log(CurrentLesson);
+ }
   return (
     <>
       <Row>
@@ -250,12 +254,12 @@ const lessonColor=(ch,ls,l,doc)=>{
                       </Button>
                     </div>
                    
-                    <UncontrolledCollapse toggler={togglerId} className={`chch${index}`}>
+                    <UncontrolledCollapse toggler={togglerId} >
                       <div className="" style={{paddingLeft:"10px",paddingRight:"10px",display:"flex",justifyContent:"center",alignItem:"center",alignItems:"center"}}>
                         <CardBody style={{padding:"8px"}}>
                           {doc.lesson.map((l,ls) => {
                             return (
-                              <Row  className="lesson-color">
+                              <Row  className={`lesson-color chch${index}`}>
                                 <p
                                   onClick={() => {
                                     setCurrentLesson(l);

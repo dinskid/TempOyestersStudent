@@ -5,6 +5,22 @@ const Main=(props)=>{
     const [totInput,setTotInput]=useState([[]]);
     const [Inputs,setInputs]=useState([]);
     let [Data,setData]=useState([])
+
+
+    const fetchData=()=>{
+        fetch(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/cart_list`,{
+            method:"GET",
+            credentials:"include"
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data.dataIs);
+            setInputs(data.dataIs);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
     useEffect(()=>{
 
         
@@ -14,20 +30,9 @@ const Main=(props)=>{
         //         return info.no=1;
         //     }));
         // }
-        fetch(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/cart_list`,{
-            method:"GET",
-            credentials:"include"
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data.result);
-            setInputs(data.result);
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-
-    },[Data,Inputs,totInput])
+        
+        fetchData()
+    },[Data,totInput])
 
     const addInput=(id)=>{
         let data =JSON.parse(localStorage.getItem("data"))
@@ -61,8 +66,8 @@ const Main=(props)=>{
         
         // }
         console.log(Inputs);
-        console.log(Data);
-        
+        console.log(totInput[0]);
+        fetchData()
     }
     const removeRow=(index1,index2)=>{
         var indexRemove=0;
@@ -110,6 +115,7 @@ const Main=(props)=>{
             // let msg=document.querySelector(".msg");
             // msg.style.display="none";
             msg[index1].style.display="none" 
+            fetchData()
     }
   
     return(
@@ -120,14 +126,14 @@ const Main=(props)=>{
                            Inputs.length!=0?Inputs.map((input,index)=>{
                               return(<>
                                     <div className="D_header">
-                                            <h2>Cource Name:{input.session_name}</h2>
+                                            <h2>Cource Name:{input[0].session_name}</h2>
                                         </div>
                                     
                                     {/* <div>
                                         {Inputs[0].no}
                                     </div> */}
                                     <div className="body_next" >
-                                        {totInput[index]!=undefined?totInput[index].map((In)=>{
+                                        {totInput[index]?totInput[index].map((In)=>{
                                             return(
                                                 <div className="add_user_field">
                                                     <input  type="email" placeholder="Enter user email ..." />

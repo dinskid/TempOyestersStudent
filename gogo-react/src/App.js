@@ -103,6 +103,11 @@ class App extends React.Component {
                     exact
                     render={(props) => <Cart {...props} />}
                   />
+                  <Route
+                    path="/student/next"
+                    exact
+                    render={(props) => <Cart {...props} />}
+                  />
 
                   <Redirect exact from="/" to={'/Student/user'} />
 
