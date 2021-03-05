@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   @include depth(1);
-
+  width: 100% ;
   .image-side {
     width: 40%;
     background: url('/assets/img/login/balloon.jpg') no-repeat center top;
