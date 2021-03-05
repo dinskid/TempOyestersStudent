@@ -104,8 +104,9 @@ const KnowledgeBase = ({ match, ...props }) => {
       const result = await axiosInstance.get(
         `/student/mycourses/${props.location.state.session_id}`
       );
-      const result2=await axiosInstance.get("/student/comment");
-      console.log(result2);
+      const result2=await axiosInstance.get(`/student/comment/${result.data.ans[0].lesson[0].id}`);
+      console.log(result,"data video and lesson");
+      console.log(result2,"comment data");
       // console.log(result);
       if (result.data.success&&result2.data.length!=0) {
         console.log(result.data);
@@ -142,10 +143,18 @@ const KnowledgeBase = ({ match, ...props }) => {
           setError('Unable to fetch courses');
         }
       }
+
+      
+
+
+
     } catch (err) {
+      console.log(err);
       try {
+
         setError(err.response.data.error);
       } catch (error) {
+        console.log(error);
         setError('Unable to fetch courses');
       }
     } finally {
@@ -199,7 +208,7 @@ const KnowledgeBase = ({ match, ...props }) => {
         };
     console.log(values);
     try{
-      const result=await axiosInstance.post("/student/comment/",{values});
+      const result=await axiosInstance.post(`/student/comment/`,{values});
       console.log(result);
       if(result.data.success){
         alert("done")
@@ -212,12 +221,30 @@ const KnowledgeBase = ({ match, ...props }) => {
     }
     getData();
   }
+
+const getComment=async (l)=>{
+  try{
+    const result2=await axiosInstance.get(`/student/comment/${l.lesson_id}`);
+    console.log(result2);
+    setCommentIs(result2.data)
+  }
+  catch(e){
+    console.log(e);
+  }
+  
+}
+
+
   if (!isLoaded)
     return (
       <div style={{ marginTop: '30%', marginLeft: '50%' }}>
         <Spinner color="primary" />
       </div>
     );
+
+
+
+
 const lessonColor=(ch,ls,l,doc)=>{
   // setCurrentLesson(l)
   // setCurrentChapter(doc)
@@ -372,6 +399,7 @@ const lessonColor=(ch,ls,l,doc)=>{
                               <Row  className={`lesson-color chch${index}`}>
                                 <p
                                   onClick={() => {
+                                    getComment(l)
                                     setCurrentLesson(l);
                                     setCurrentChapter(doc);
                                     if(l.videoUrl){
@@ -469,7 +497,7 @@ const lessonColor=(ch,ls,l,doc)=>{
             <TabContent activeTab={activeFirstTab} className="jt_tab">
               <TabPane tabId="1" className="jt_tabIs">
                 <Scrollbars style={{ height: 450 }} id="scrollme" className="jt_scroll">
-                  {CommentsHere.result.map((list) => {
+                  {CommentsHere.result?CommentsHere.result.map((list) => {
                     return (
                       <>
                       <div
@@ -501,7 +529,7 @@ const lessonColor=(ch,ls,l,doc)=>{
                     </div>
                       </>
                     );
-                  })}
+                  }):<div>Empty</div>}
                 </Scrollbars>
                 <FormGroup  className="form_attached">
                   <Col md={2}>
