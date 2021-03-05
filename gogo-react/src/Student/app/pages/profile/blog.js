@@ -152,6 +152,7 @@ const Blog = () => {
               blog_comments: '30 Static',
             };
           });
+          
           setTotalBlogs(data.length);
           setBlogList(data);
           setTotalLikes('20 Static');
@@ -340,7 +341,7 @@ const Blog = () => {
           >
             <CardBody>
               {/* <div className="create_button_here"> */}
-              {!blogList.length ? (
+              {blogList.length==0 ? (
                 <Button className="mt-3" onClick={toggleModal}>
                   {' '}
                   Create Blog
@@ -564,7 +565,7 @@ const Blog = () => {
               </Card>
             </Col>
           </Row>
-          {blogList.length?(<>
+          {blogList.length!=0?(<>
             <Card 
           className="jt_table"
             style={{
@@ -578,7 +579,7 @@ const Blog = () => {
               height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
             }} >
               {/* <div className="create_button_here"> */}
-              {!blogList.length ? (
+              {blogList.length==0 ? (
                 <Button 
                 style={{ position: 'absolute', right: "20px" }}
                 className="mt-3" onClick={toggleModal}>
@@ -608,7 +609,8 @@ const Blog = () => {
               {/* </div> */}
             </CardBody>
           </Card>{' '}
-          </>):(<div className="nodata_jt"><NoDataFound/></div>)}
+          </>)
+          :(<div className="nodata_jt"><NoDataFound/></div>)}
         </>
       )}
     </div>

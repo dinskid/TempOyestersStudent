@@ -162,17 +162,19 @@ const KnowledgeBase = ({ match, ...props }) => {
 
   const IMgUpload=(e)=>{
     let file=e.target.files[0];
-    let sizeis=file.size;
-    if(sizeis<=2000){
-      alert("correct file formate")
+    console.log(file);
+    let sizeis=file.size/125000;
+    // alert(sizeis)
+    if(sizeis<=2){
+      alert("correct file formate",sizeis)
     }else{
-      alert("Warning the file size is more then 2mb unable to uplaod")
+      alert("Warning the file size is more then 2mb unable to uplaod",sizeis)
     }
-    // let fileUpload=document.querySelector(".fileUploadIs");
-    // console.log(fileUpload);
-    // fileUpload.addEventListener("change",(e)=>{
+    let fileUpload=document.querySelector(".fileUploadIs");
+    console.log(fileUpload);
+    fileUpload.addEventListener("change",(e)=>{
       
-    // })
+    })
 
   }
 
@@ -327,7 +329,7 @@ const lessonColor=(ch,ls,l,doc)=>{
           <p className="mt-3" style={{ fontSize: '15px' }}>
             {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
           </p>
-          <h2 style={{marginTop:"20px"}} className="jt_h2_content">{courseDetails.session_name}</h2>
+          <h2  className="jt_h2_content">{courseDetails.session_name}</h2>
           {/* <p>{courseDetails.session_start_time.substring(0, 10)}</p> */}
         </Col>
         <Col  className="jt_video_prt2">

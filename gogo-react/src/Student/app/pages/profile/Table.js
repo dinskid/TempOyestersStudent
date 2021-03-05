@@ -28,11 +28,11 @@ const Table = ({ columns, data, handleReloadTable }) => {
     usePagination
   );
 
-  // console.log(data, page);
+  console.log(data);
 
-  if (data.length){
-    return <NoDataFound/>
-  }
+  // if (data.length==0){
+  //   return <NoDataFound/>
+  // }
   return (
     <div style={{ marginBottom: '25rem' }}>
       <table

@@ -81,6 +81,51 @@ const DetailsPages = ({ match, intl, ...props }) => {
       );
   }, [error, setError]);
 
+  const checkItem=async ()=>{
+    try{
+      const result = await axiosInstance.get(
+          
+        `/student/sessions/details/${session_id}`
+      );
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+const checkEnrollment=(check)=>{
+  let enrollment=check;
+  if(enrollment.student_wish_list_items.lenght!=0){
+    JSON.parse(enrollment.student_wish_list_items).map((d)=>{
+      if(d==session_id){
+        console.log("We have this");
+        setCartItemStatus('wishlist');
+      }
+      else{
+        console.log("we dont have");
+        // setCartItemStatus('cart');
+      }
+    })
+    
+  }
+  if(enrollment.student_cart_items.lenght!=0){
+    JSON.parse(enrollment.student_cart_items).map((d)=>{
+      if(d==session_id){
+        console.log("We have this");
+        setCartItemStatus('cart');
+      }
+      else{
+        console.log("we dont have");
+        
+      }
+    })
+    
+  }
+  
+  // console.log();
+  
+
+}
   useEffect(() => {
     const getDetails = async () => {
       try {
@@ -89,18 +134,18 @@ const DetailsPages = ({ match, intl, ...props }) => {
           `/student/sessions/details/${session_id}`
         );
         
-
         if (result.data.success) {
           const trainerData = result.data.trainerData;
           setSession(result.data.session);
-          
-
+          console.log(result.data.session);
           // setInstructor(trainerData.trainer_full_name);
           // setWork_exp(trainerData.trainer_occupation);
           // setAbout(trainerData.trainer_career_summary);
-
+          console.log(result.data.enrollment[0].student_cart_items);
+          console.log(result.data.enrollment[0].student_wish_list_items);
           setContent(result.data.ans);
-          setCartItemStatus(result.data.cart_item_status);
+          checkEnrollment(result.data.enrollment[0])
+          
         } else {
           try {
             setError(result.data.error);
@@ -121,6 +166,15 @@ const DetailsPages = ({ match, intl, ...props }) => {
     };
     getDetails();
   }, []);
+
+  // useEffect(()=>{
+  //   let data=JSON.parse(cartItemStatus);
+  //   console.log(data);
+  // },[cartItemStatus])
+
+  
+
+
 
   const handleWishList = async () => {
     try {
@@ -287,7 +341,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 Go To Wishlist <FiHeart />
               </Button>
             ) : cartItemStatus == 'cart' ? (
-              <Button className="button ml-3 disabled" onClick={handleWishList}>
+              <Button className="button ml-3 disabled" >
                 Wishlist <FiHeart />
               </Button>
             ) : cartItemStatus == 'purchased' ? (
@@ -418,7 +472,6 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 <Button
                   className="btn2 mt-4"
                   
-                  
                 >
                   <Link to ="/student/cart"
                   target="blank"
@@ -430,11 +483,13 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 <Button className="btn2 mt-4 disabled">
                   Already Purchased
                 </Button>
-              ) : (
-                <Button className="btn2 mt-4" onClick={handleAddToCart}>
+              ) :cartItemStatus == 'wishlist' ?  (
+                <Button className="btn2 mt-4 disabled"  >
                   Add to Cart
                 </Button>
-              )}
+              ):<Button className="btn2 mt-4"  onClick={handleAddToCart}>
+                  Add to Cart
+                </Button>}
               {cartItemStatus == 'purchased' ? (
                 <Button className="btn2 mt-4 disabled">
                   Already Purchased
