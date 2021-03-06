@@ -127,8 +127,10 @@ const KnowledgeBase = ({ match, ...props }) => {
         
         
         
+        if(CommentsHere.result.length!=0){
+          setCommentIs(result2.data);
+        }
         
-        setCommentIs(result2.data);
         // document.querySelectorAll(".lesson-color")[0].style.backgroundColor="##008ecc";
         // new 
         if(CurrentChapter==null||CurrentLesson==null){
@@ -163,9 +165,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   };
 
   useEffect(() => {
-   
     getData();
-    console.log(CommentsHere);
     
   }, []);
 
@@ -212,6 +212,9 @@ const KnowledgeBase = ({ match, ...props }) => {
       console.log(result);
       if(result.data.success){
         alert("done")
+        const result2=await axiosInstance.get(`/student/comment/${CurrentLesson.lesson_id}`);
+        setCommentIs(result2.data);
+        
       }else{
         alert("not done")
       }
@@ -219,11 +222,12 @@ const KnowledgeBase = ({ match, ...props }) => {
     }catch(err){
       console.log("Error is here",err);
     }
-    getData();
+    
   }
 
 const getComment=async (l)=>{
   try{
+    console.log(l);
     const result2=await axiosInstance.get(`/student/comment/${l.lesson_id}`);
     console.log(result2);
     setCommentIs(result2.data)
