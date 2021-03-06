@@ -17,7 +17,7 @@ const Wish=()=>{
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data.dataIs);
+            console.log(data);
             setList(data.dataIs)
             console.log(count[0].session_name);
         })
@@ -109,7 +109,7 @@ const Wish=()=>{
                             </h2>
                         </div>
                         {
-                            List?List.map((item)=>{
+                            List.length!=0?List.map((item)=>{
                                 return(
                                     <>
                                     <div className="body">

@@ -610,7 +610,15 @@ const Blog = () => {
             </CardBody>
           </Card>{' '}
           </>)
-          :(<div className="nodata_jt"><NoDataFound/></div>)}
+          :(<div className="nodata_jt">
+                <div className="button_create_blog_">
+                  <Button className="mt-3" onClick={toggleModal}>
+                    {' '}
+                    Create Blog
+                  </Button>
+                </div>
+              <NoDataFound/>
+          </div>)}
         </>
       )}
     </div>

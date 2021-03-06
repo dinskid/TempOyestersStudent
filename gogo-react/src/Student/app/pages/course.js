@@ -79,6 +79,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   const [colorIs,setColor]=useState(null);
   const [CommnetHere,setComment]=useState("");
   const [CommentsHere,setCommentIs]=useState([]);
+  const [Material,setMaterial]=useState([]);
   useEffect(() => {
     if (error)
       NotificationManager.warning(
@@ -237,6 +238,19 @@ const getComment=async (l)=>{
   }
   
 }
+
+
+const MaterialsSet=(lesson)=>{
+  // if(lesson.)
+  if(lesson){
+    setMaterial(lesson);
+  }else{
+    setMaterial(null);
+  }
+  
+
+}
+
 
 
   if (!isLoaded)
@@ -406,10 +420,12 @@ const lessonColor=(ch,ls,l,doc)=>{
                                     getComment(l)
                                     setCurrentLesson(l);
                                     setCurrentChapter(doc);
+                                    
+                                    
                                     if(l.videoUrl){
                                       setVideoSrc(l.videoUrl);
                                       setHangouts(null)
-                                      
+                                      MaterialsSet(null)  
                                       setAssign(null)
                                       setQuiz(null)
                                     }
@@ -418,6 +434,7 @@ const lessonColor=(ch,ls,l,doc)=>{
                                       setVideoSrc(null);
                                       setAssign(null)
                                       setQuiz(null)
+                                      MaterialsSet(l.handoutsUrl)
                                     }
                                     
                                     if(l.assignmentUrl){
@@ -425,6 +442,7 @@ const lessonColor=(ch,ls,l,doc)=>{
                                       setVideoSrc(null);
                                       setHangouts(null)
                                       setQuiz(null)
+                                      MaterialsSet(l.assignmentUrl)
                                     }
                                     
                                     if(l.quizUrl){
@@ -432,6 +450,7 @@ const lessonColor=(ch,ls,l,doc)=>{
                                       setVideoSrc(null);
                                       setAssign(null)
                                       setHangouts(null)
+                                      MaterialsSet(l.quizUrl)
                                     }
                                     
 
@@ -554,9 +573,9 @@ const lessonColor=(ch,ls,l,doc)=>{
               <TabPane tabId="2">
                 <Scrollbars style={{ height: 450 }}>
                 {
-                  Materials.length!=0?Materials.map((doc)=>{
-                    return(
-                      <>
+                  Material?
+                  
+                      (<>
                       <div
                       id="material"
                       role="tabpanel"
@@ -568,25 +587,25 @@ const lessonColor=(ch,ls,l,doc)=>{
                           <Col md={2} xs={12} className="card_comment">
                             
                             <CardTitle tag="h5" className="">
-                              {doc.name}
+                              {/* {doc.name} */}
                             </CardTitle>
                           </Col>
                           <Col md={10} xs={12}>
                             {' '}
                             <CardText className="mt-4 text-left">
-                              {doc.comment}
+                              {Material}
+                              
                             </CardText>
-                            <a href={img} download>
+                            <a href={Material} download>
                               <FiDownload /> CheatSheet.pdf
                             </a>
                           </Col>
                         </Row>
                       </Card>
                     </div>
-                    
-                      </>
-                    )
-                  }):<div className="nodatahere"><NoDataFound/></div>
+                    </>
+            
+                  ):<div className="nodatahere"><NoDataFound/></div>
                 }
                 </Scrollbars>
               </TabPane>

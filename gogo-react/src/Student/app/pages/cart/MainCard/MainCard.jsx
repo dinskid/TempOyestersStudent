@@ -27,6 +27,9 @@ const MainCard=()=>{
             .then((data)=>{
                 setInfo(data.result[0]);
             })
+            .catch(e=>{
+                console.log(e);
+            })
         }
         fetchData()
     }, [])

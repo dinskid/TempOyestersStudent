@@ -109,7 +109,7 @@ const Wish=()=>{
 
                         </div>
                         {
-                            List?List.map((item)=>{
+                            List.length!=0?List.map((item)=>{
                                 return(
                                     <>
                                     <div className="body">

@@ -95,7 +95,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
 
 const checkEnrollment=(check)=>{
   let enrollment=check;
-  if(enrollment.student_wish_list_items.lenght!=0){
+  if(enrollment.student_wish_list_items!=0){
     JSON.parse(enrollment.student_wish_list_items).map((d)=>{
       if(d==session_id){
         console.log("We have this");
@@ -108,7 +108,7 @@ const checkEnrollment=(check)=>{
     })
     
   }
-  if(enrollment.student_cart_items.lenght!=0){
+  if(enrollment.student_cart_items!=0){
     JSON.parse(enrollment.student_cart_items).map((d)=>{
       if(d==session_id){
         console.log("We have this");
@@ -334,12 +334,16 @@ const checkEnrollment=(check)=>{
               Share <HiOutlineShare />
             </Button>
             {cartItemStatus == 'wishlist' ? (
-              <Button
-                className="button ml-3"
-                onClick={() => history.push('/app/pages/wish')}
+              <Button className="button ml-3">
+              <Link
+                style={{color:"#fff"}}
+                to='/student/wish'
+                target="_blank"
               >
                 Go To Wishlist <FiHeart />
+                </Link>
               </Button>
+              
             ) : cartItemStatus == 'cart' ? (
               <Button className="button ml-3 disabled" >
                 Wishlist <FiHeart />

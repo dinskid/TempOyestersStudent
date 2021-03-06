@@ -182,7 +182,7 @@ const Main=()=>{
             credentials:"include"
         }).then(res=>res.json())
         .then(async data=>{
-            
+            console.log(data,"Jitul Jtiiisdifsdf");
             setCount(data.dataIs)
             console.log(data.dataIs.length);
             let tot=0;
@@ -206,6 +206,9 @@ const Main=()=>{
             // tot=tot+JSON.parse(data.cart[0].courses).totP;
             console.log(tot);
             
+        })
+        .catch(e=>{
+            console.log(e);
         })
         localStorage.setItem("Count",JSON.stringify(count)); 
     }
@@ -243,14 +246,12 @@ const Main=()=>{
             }),
             credentials:"include"
         }).then(res=>res.json())
-        .then(data=>{
+        .then(async data=>{
             console.log(data);
-            if(data){
-                fetchData()
+            if(data.dataIs){
+               await fetchData()
                 alert("done")
             }
-
-            
         })
         .catch(e=>console.log(e))
     }
@@ -364,7 +365,7 @@ const wishItem=(item)=>{
                             <div>Action</div>
                         </div>
                         {
-                            count?count.map((item,index)=>{
+                            count.length!=0?count.map((item,index)=>{
                                 return(
                                     <div className="body">
                                     <div className="section1">
