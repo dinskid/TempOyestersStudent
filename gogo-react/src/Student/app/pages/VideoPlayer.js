@@ -59,7 +59,7 @@ useEffect(()=>{
 if(type.videoSrc){
   return(<div className="videoPlayerContainer_jt" onContextMenu={(e) => e.preventDefault()} style={{ width: '100%' }}>
   <video
-    style={{ width: '100%',height:"450px"}}
+    style={{ width: '100%',height:"100%"}}
     ref={videoPlayerRef}
     className="video-js"
   />
