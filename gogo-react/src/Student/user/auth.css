@@ -1,48 +1,48 @@
-.register{
-    font-size: 20px !important;
+.register {
+  font-size: 20px !important;
 }
-.registerug{
-    width: 40% !important;
-    height: 50px !important;
+.registerug {
+  width: 40% !important;
+  height: 50px !important;
 }
-.apple{
-    font-size: 20px !important;
+.apple {
+  font-size: 20px !important;
 }
-.image{
-    width: 40% !important;
-    margin-bottom: 10% !important;
+.image {
+  width: 20% !important;
+  margin-bottom: 10% !important;
 }
-.logo{
-    width:15% !important;
-    margin-right: 5% !important;
+.logo {
+  width: 15% !important;
+  margin-right: 5% !important;
 }
-.logo2{
-    width:13% !important;
-    margin-right: 6% !important;
-    margin-bottom: 5px !important;
+.logo2 {
+  width: 13% !important;
+  margin-right: 6% !important;
+  margin-bottom: 5px !important;
 }
 @media screen and (max-width: 820px) {
-    #text{
-        font-size: 90% !important;
-    }
-    .registerug{
-        width:70% !important;
-    }
+  #text {
+    font-size: 90% !important;
   }
-  #reset{
-      display: flex !important;
-      margin-left: auto !important;
-      justify-content: flex-end !important;
+  .registerug {
+    width: 70% !important;
   }
-  .container .card {
-    position: relative !important;
-    max-width: 100% !important;
-    height: 100% !important;
-    background: #ffffff !important;
-    margin: 30px 23px !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: row !important;
-    box-shadow: 0px 5px 20px rgb(0 0 0 / 50%) !important;
-    transition: 0.7s ease-in !important;
+}
+#reset {
+  display: flex !important;
+  margin-left: auto !important;
+  justify-content: flex-end !important;
+}
+.container .card {
+  position: relative !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  background: #ffffff !important;
+  margin: 30px 23px !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  box-shadow: 0px 5px 20px rgb(0 0 0 / 50%) !important;
+  transition: 0.7s ease-in !important;
 }
