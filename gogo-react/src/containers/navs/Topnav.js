@@ -19,6 +19,7 @@ import {
 
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Logo from '../../data/Logo';
 
 import IntlMessages from '../../helpers/IntlMessages';
 import {
@@ -217,9 +218,9 @@ const TopNav = ({
   };
 
   const handleLogout = async () => {
-    const result=await AxiosInstance.get("/student/auth/logout");
+    const result = await AxiosInstance.get('/student/auth/logout');
     console.log(result);
-    if(result.data.sucess==1){
+    if (result.data.sucess == 1) {
       history.push('/Student/user/login');
     }
   };
@@ -266,8 +267,8 @@ const TopNav = ({
         >
           <MobileMenuIcon />
         </NavLink>
-        <NavLink className="navbar-logo" to={"#"}>
-          <img src={require(`./logo.png`)} className="Logo" />
+        <NavLink className="navbar-logo" to={'#'}>
+          <img src={Logo} className="Logo" />
         </NavLink>
         {/* <BsChatSquareDots className="chat"/> */}
         {/* <IoIosNotificationsOutline className="notification"/> */}

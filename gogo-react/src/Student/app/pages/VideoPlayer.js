@@ -2,35 +2,32 @@ import React, { useRef, useState, useEffect } from 'react';
 import videojs from 'video.js';
 import videojsqualityselector from 'videojs-hls-quality-selector';
 import 'videojs-contrib-quality-levels';
-import "./video.css";
-import {Scrollbars} from "react-custom-scrollbars"
+import './video.css';
+import { Scrollbars } from 'react-custom-scrollbars';
 export const VideoPlayer = (type) => {
   const videoPlayerRef = useRef(null); // Instead of ID
   const [currentTime, setCurrentTime] = useState(null);
-  const [play,setPlay]=useState(null)
+  const [play, setPlay] = useState(null);
   // const videoSrc =
   //   'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8';
 
   const videoJSOptions = {
     controls: true,
-    autoplay:false,
+    autoplay: false,
     userActions: { hotkeys: true },
     playbackRates: [0.5, 1, 1.5, 2],
     qualitySelector: true,
   };
   console.log(type);
   useEffect(() => {
-    
-    if (videoPlayerRef&&type.videoSrc) {
-      
+    if (videoPlayerRef && type.videoSrc) {
       const player = videojs(videoPlayerRef.current, videoJSOptions, () => {
         player.src(type.videoSrc);
 
         // player.hlsQualitySelector({
         //   displayCurrentQuality: true,
         // });
-        setPlay(player)
-        
+        setPlay(player);
 
         player.on('ended', () => {
           console.log('ended');
@@ -40,31 +37,31 @@ export const VideoPlayer = (type) => {
         });
         console.log('Player Ready');
       });
-      
     }
 
     return () => {};
-  }, [type.videoSrc,play]);
+  }, [type.videoSrc, play]);
 
-useEffect(()=>{
- if(play&&type.videoSrc){
-  play.hlsQualitySelector = videojsqualityselector;
-  play.hlsQualitySelector({ displayCurrentQuality: true });
- }
+  useEffect(() => {
+    if (play && type.videoSrc) {
+      play.hlsQualitySelector = videojsqualityselector;
+      play.hlsQualitySelector({ displayCurrentQuality: true });
+    }
+  }, [play]);
 
-},[play]);
-  
-
-
-if(type.videoSrc){
-  return(<div className="videoPlayerContainer_jt" onContextMenu={(e) => e.preventDefault()} style={{ width: '100%' }}>
-  <video
-    style={{ width: '100%',height:"100%"}}
-    ref={videoPlayerRef}
-    className="video-js"
-  />
-</div>)
-}
-
-
+  if (type.videoSrc) {
+    return (
+      <div
+        className="videoPlayerContainer_jt"
+        onContextMenu={(e) => e.preventDefault()}
+        style={{ width: '100%' }}
+      >
+        <video
+          style={{ width: '100%', height: '100%' }}
+          ref={videoPlayerRef}
+          className="video-js"
+        />
+      </div>
+    );
+  }
 };
