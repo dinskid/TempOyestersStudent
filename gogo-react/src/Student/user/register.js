@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik';
 import IntlMessages from '../../helpers/IntlMessages';
 //import Google from './google.png'
 import { Colxx } from '../../components/common/CustomBootstrap';
-import Logo from './logo.png';
+import Logo from '../../data/Logo';
 import './auth.css';
 import Google from './google.png';
 import { useGoogleLogin } from 'react-google-login';
@@ -94,18 +94,15 @@ const Register = ({
   useEffect(() => {
     const params = window.location.href;
     var url = new URL(params);
-    var id =  url.searchParams.get("tutor_id");
-    
-    if (id)
-    {
-      console.log(id);  
+    var id = url.searchParams.get('tutor_id');
+
+    if (id) {
+      console.log(id);
       setCustomer_id(id);
     }
-     
   }, [customer_id]);
 
   const onSuccess = (res) => {
-    
     setClicked(true);
     refreshTokenSetup(res);
     const values = {
@@ -132,14 +129,12 @@ const Register = ({
   });
 
   const onSubmit = (values) => {
-    
-    if(customer_id!=null){
+    if (customer_id != null) {
       setClicked(true);
-    values.customer_id = customer_id;
-    console.log(customer_id);
-    registerUserAction({ history, values, toggleClick });
-    }
-    else{
+      values.customer_id = customer_id;
+      console.log(customer_id);
+      registerUserAction({ history, values, toggleClick });
+    } else {
       console.log(customer_id);
     }
   };
@@ -149,7 +144,7 @@ const Register = ({
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2"> Oyesters Training </p>
+            <p className="text-white h2"> ManZeal Academy </p>
             <p className="white mb-0">
               Please use this form to register. <br />
               If you are a member, please

@@ -1,3 +1,3 @@
-import Logo from '../containers/navs/logo.png';
+import Logo from '../containers/navs/Manzeal.jpeg';
 
 export default Logo;

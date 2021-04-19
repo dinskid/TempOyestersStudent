@@ -1,7 +1,7 @@
 .navbar {
   background: $foreground-color;
   height: $navbar-height;
-  padding:  0;
+  padding: 0;
   margin-bottom: 20px;
   @include depth(1);
 
@@ -123,12 +123,11 @@
   }
 
   .navbar-logo {
-    width: 90px;
+    width: 50px;
     height: 35px;
 
     left: 0;
     right: 0;
-
 
     .logo {
       width: 100%;

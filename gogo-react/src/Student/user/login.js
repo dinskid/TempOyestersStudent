@@ -9,7 +9,7 @@ import { NotificationManager } from '../../components/common/react-notifications
 import { loginUser } from '../../redux/actions';
 import { Colxx } from '../../components/common/CustomBootstrap';
 import IntlMessages from '../../helpers/IntlMessages';
-import Logo from './logo.png';
+import Logo from '../../data/Logo';
 
 import Google from './google.png';
 
@@ -42,15 +42,13 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   }, [error]);
   const onUserLogin = (values) => {
     if (!loading) {
-      
       loginUserAction({ history, values });
     }
   };
 
   const onSuccess = (res) => {
-    
     refreshTokenSetup(res);
-    
+
     const values = {
       customer_name: res.profileObj.name,
       email: res.profileObj.email,
@@ -59,7 +57,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
     loginUserAction({ history, values });
   };
   const onFailure = (err) => {
-    if(err){
+    if (err) {
       dispatch(loginUserError(err.error || 'unable to register'));
       console.log(err);
     }
@@ -77,7 +75,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">Oyesters Training</p>
+            <p className="text-white h2">ManZeal Academy</p>
             <p className="white mb-0">
               Please use your credentials to login.
               <br />

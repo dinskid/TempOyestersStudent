@@ -7,7 +7,7 @@ import { Colxx } from '../../components/common/CustomBootstrap';
 import IntlMessages from '../../helpers/IntlMessages';
 import { resetPassword } from '../../redux/actions';
 import { NotificationManager } from '../../components/common/react-notifications';
-import Logo from './logo.png';
+import Logo from '../../data/Logo';
 
 const validateNewPassword = (values) => {
   const { newPassword, newPasswordAgain } = values;
@@ -82,7 +82,7 @@ const ResetPassword = ({
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">Oyesters Training</p>
+            <p className="text-white h2">ManZeal Academy</p>
             <p className="white mb-0">
               Please use your e-mail to reset your password. <br />
               If you are not a member, please{' '}
