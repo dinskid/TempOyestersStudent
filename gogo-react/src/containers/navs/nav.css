@@ -1,76 +1,75 @@
-.navbar-logo:hover{
-    cursor: default;
+.navbar-logo:hover {
+  cursor: default;
 }
-.Logo{
-    width: 120%;
+.Logo {
+  width: 120%;
 }
-.chat{
-    color: #8F9BB3;
-    display: inline-block;
-    font-size: 20px;
-    margin-left: 10%;
-    font-weight: bold;
+.chat {
+  color: #8f9bb3;
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 10%;
+  font-weight: bold;
 }
-.noti{
-    color: #8F9BB3;
-    display: flex;
-    font-size: 24px;
-    margin-left: 15px;
-    margin-bottom: 3px;
-    margin-left: auto;
+.noti {
+  color: #8f9bb3;
+  display: flex;
+  font-size: 24px;
+  margin-left: 15px;
+  margin-bottom: 3px;
+  margin-left: auto;
 }
-#foot{
-    background-color: #232F3E;
-    height: 3%;
-    margin-top: auto;
-    border: none;
+#foot {
+  background-color: #232f3e;
+  height: 3%;
+  margin-top: auto;
+  border: none;
 }
 
-#mob{
-    display:none;
+#mob {
+  display: none;
 }
-.page-footer{
-    border-top:1px solid rgb(190, 190, 190);
-    /* height: 10%; */
-    position: relative;
-    bottom:0;
-    background-color: #30233B;
-    margin-top: 40%;
+.page-footer {
+  border-top: 1px solid rgb(190, 190, 190);
+  /* height: 10%; */
+  position: relative;
+  bottom: 0;
+  background-color: #30233b;
+  margin-top: 40%;
 }
-.copy1{
-    color: #ffffff;
+.copy1 {
+  color: #ffffff;
 }
-.copy{
-    color: #ffffff;
-    font-size: 15px;
+.copy {
+  color: #ffffff;
+  font-size: 15px;
 }
-@media(max-width:830px){
-    #mob{
-        display: inline;
-    }
-    #com{
-        display: none;
-    }
-    .page-footer{
-        border-top:1px solid rgb(190, 190, 190);
-        height: 90px; 
-       margin-top: 0px;
-       background-color: #F8F8F8;
-    }
-    .copy1{
-        color: #30233B;
-    }
-    .copy{
-        color: #30233B;
-    }
-    .Logo{
-        width: 450%;
-        margin-left: 40px;
-    }
+@media (max-width: 830px) {
+  #mob {
+    display: inline;
+  }
+  #com {
+    display: none;
+  }
+  .page-footer {
+    border-top: 1px solid rgb(190, 190, 190);
+    height: 90px;
+    margin-top: 0px;
+    background-color: #f8f8f8;
+  }
+  .copy1 {
+    color: #30233b;
+  }
+  .copy {
+    color: #30233b;
+  }
+  .Logo {
+    width: 200%;
+    margin-left: 40px;
+  }
 }
 
 /* new jt code */
-.nav{
-    margin: 0 !important;
-
+.nav {
+  margin: 0 !important;
 }

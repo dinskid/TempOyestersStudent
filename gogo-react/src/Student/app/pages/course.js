@@ -102,7 +102,7 @@ const KnowledgeBase = ({ match, ...props }) => {
       console.log(result, 'data video and lesson');
       setCommentIs(result2.data);
       console.log(result2, 'comment data');
-      console.log(result2.data.result.length, 'lenght');
+      console.log(result2.data.result.length, 'length');
       if (result.data.success && result2.data.result.length != 0) {
         console.log(result.data);
         setCourseDetails(result.data.sessionData);
@@ -386,7 +386,7 @@ const KnowledgeBase = ({ match, ...props }) => {
           <Card
             body
             className="progressbox"
-            style={{ paddingLeft: '14px', paddingRight: '14px' }}
+            // style={{ paddingLeft: '14px', paddingRight: '14px' }}
           >
             <CardTitle tag="h2" className="prog">
               Course Progress
@@ -399,7 +399,10 @@ const KnowledgeBase = ({ match, ...props }) => {
               45% of 100%
             </div>
 
-            <div className="content_all" style={{ minHeight: '280px' }}>
+            <div
+              className="content_all"
+              style={{ minHeight: '280px', zIndex: '2' }}
+            >
               <CardTitle
                 style={{
                   marginTop: '20px',
@@ -413,7 +416,7 @@ const KnowledgeBase = ({ match, ...props }) => {
               >
                 Course Contents
               </CardTitle>
-              <Scrollbars
+              {/* <Scrollbars
                 style={{
                   width: '100%',
                   display: 'flex',
@@ -421,114 +424,116 @@ const KnowledgeBase = ({ match, ...props }) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   backgroundColor: '#f7f8fa',
+                  position: 'relative',
                 }}
-              >
-                {courseContent.map((doc, index) => {
-                  const togglerId = `toggler${index}`;
-                  return (
-                    <>
-                      <div
-                        className="toggle content_jt"
-                        style={{
-                          margin: '0px',
-                          width: '100%',
-                          border: '1px solid #E6E6E6',
-                        }}
+              > */}
+              {courseContent.map((doc, index) => {
+                const togglerId = `toggler${index}`;
+                return (
+                  <>
+                    <div
+                      className="toggle content_jt"
+                      style={{
+                        margin: '0px',
+                        width: '100%',
+                        border: '1px solid #E6E6E6',
+                        position: 'relative',
+                      }}
+                    >
+                      <Button
+                        color="link"
+                        id={togglerId}
+                        style={{ margin: '10px', padding: '0px' }}
                       >
-                        <Button
-                          color="link"
-                          id={togglerId}
-                          style={{ margin: '10px', padding: '0px' }}
-                        >
-                          <p
-                            className=""
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'space-between',
-                              margin: '10px auto',
-                              lineHeight: 'none',
-                            }}
-                          >
-                            <FcCheckmark style={{}} />
-                            <div style={{ padding: '0 10px' }}>{doc.name}</div>
-                          </p>
-                        </Button>
-                      </div>
-
-                      <UncontrolledCollapse toggler={togglerId}>
-                        <div
+                        <p
                           className=""
                           style={{
-                            paddingLeft: '10px',
-                            paddingRight: '10px',
                             display: 'flex',
-                            justifyContent: 'center',
-                            alignItem: 'center',
-                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            margin: '10px auto',
+                            lineHeight: 'none',
                           }}
                         >
-                          <CardBody style={{ padding: '8px' }}>
-                            {doc.lesson.map((l, ls) => {
-                              return (
-                                <Row className={`lesson-color chch${index}`}>
-                                  <p
-                                    onClick={() => {
-                                      getComment(l);
-                                      setCurrentLesson(l);
-                                      setCurrentChapter(doc);
+                          <FcCheckmark style={{}} />
+                          <div style={{ padding: '0 10px' }}>{doc.name}</div>
+                        </p>
+                      </Button>
+                    </div>
 
-                                      if (l.videoUrl) {
-                                        setVideoSrc(l.videoUrl);
-                                        setHangouts(null);
-                                        MaterialsSet(null);
-                                        setAssign(null);
-                                        setQuiz(null);
-                                      }
-                                      if (l.handoutsUrl) {
-                                        setHangouts(l.handoutsUrl);
-                                        setVideoSrc(null);
-                                        setAssign(null);
-                                        setQuiz(null);
-                                        MaterialsSet(l.handoutsUrl);
-                                      }
+                    <UncontrolledCollapse toggler={togglerId}>
+                      <div
+                        className=""
+                        style={{
+                          paddingLeft: '10px',
+                          paddingRight: '10px',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItem: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <CardBody style={{ padding: '8px' }}>
+                          {doc.lesson.map((l, ls) => {
+                            return (
+                              <Row className={`lesson-color chch${index}`}>
+                                <p
+                                  onClick={() => {
+                                    getComment(l);
+                                    setCurrentLesson(l);
+                                    setCurrentChapter(doc);
 
-                                      if (l.assignmentUrl) {
-                                        setAssign(l.assignmentUrl);
-                                        setVideoSrc(null);
-                                        setHangouts(null);
-                                        setQuiz(null);
-                                        MaterialsSet(l.assignmentUrl);
-                                      }
+                                    if (l.videoUrl) {
+                                      setVideoSrc(l.videoUrl);
+                                      setHangouts(null);
+                                      MaterialsSet(null);
+                                      setAssign(null);
+                                      setQuiz(null);
+                                    }
+                                    if (l.handoutsUrl) {
+                                      setHangouts(l.handoutsUrl);
+                                      setVideoSrc(null);
+                                      setAssign(null);
+                                      setQuiz(null);
+                                      MaterialsSet(l.handoutsUrl);
+                                    }
 
-                                      if (l.quizUrl) {
-                                        setQuiz(l.quizUrl);
-                                        setVideoSrc(null);
-                                        setAssign(null);
-                                        setHangouts(null);
-                                        MaterialsSet(l.quizUrl);
-                                      }
+                                    if (l.assignmentUrl) {
+                                      setAssign(l.assignmentUrl);
+                                      setVideoSrc(null);
+                                      setHangouts(null);
+                                      setQuiz(null);
+                                      MaterialsSet(l.assignmentUrl);
+                                    }
 
-                                      lessonColor(index, ls, l, doc);
-                                    }}
-                                    target="_blank"
-                                    className="content1 m-3"
-                                  >
-                                    <AiFillPlayCircle className="iconvid" />
-                                    {l.name}
-                                  </p>
-                                  <p className="content1 mt-3 ml-auto mr-3">
-                                    <FcCheckmark />
-                                  </p>
-                                </Row>
-                              );
-                            })}
-                          </CardBody>
-                        </div>
-                      </UncontrolledCollapse>
-                    </>
-                  );
-                })}
-              </Scrollbars>
+                                    if (l.quizUrl) {
+                                      setQuiz(l.quizUrl);
+                                      setVideoSrc(null);
+                                      setAssign(null);
+                                      setHangouts(null);
+                                      MaterialsSet(l.quizUrl);
+                                    }
+
+                                    lessonColor(index, ls, l, doc);
+                                  }}
+                                  target="_blank"
+                                  className="content1 m-3"
+                                >
+                                  <AiFillPlayCircle className="iconvid" />
+                                  {l.name}
+                                </p>
+                                <p className="content1 mt-3 ml-auto mr-3">
+                                  <FcCheckmark />
+                                </p>
+                              </Row>
+                            );
+                          })}
+                        </CardBody>
+                      </div>
+                    </UncontrolledCollapse>
+                  </>
+                );
+              })}
+              {/* </Scrollbars> */}
             </div>
           </Card>
         </Col>
