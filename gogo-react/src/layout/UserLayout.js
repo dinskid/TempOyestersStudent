@@ -15,7 +15,7 @@ const UserLayout = ({ children }) => {
     <>
       <div className="fixed-background" />
       <main>
-        <div className="container">{children}</div>
+        <div className="container container-1">{children}</div>
       </main>
     </>
   );
