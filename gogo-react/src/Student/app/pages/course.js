@@ -103,7 +103,7 @@ const KnowledgeBase = ({ match, ...props }) => {
       setCommentIs(result2.data);
       console.log(result2, 'comment data');
       console.log(result2.data.result.length, 'length');
-      if (result.data.success && result2.data.result.length != 0) {
+      if (result.data.success) {
         console.log(result.data);
         setCourseDetails(result.data.sessionData);
         setCourseContent(result.data.ans);
