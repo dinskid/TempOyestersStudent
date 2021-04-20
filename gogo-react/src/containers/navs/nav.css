@@ -2,7 +2,8 @@
   cursor: default;
 }
 .Logo {
-  width: 120%;
+  width: 50px;
+  transform: translateY(-10%);
 }
 .chat {
   color: #8f9bb3;
@@ -64,8 +65,8 @@
     color: #30233b;
   }
   .Logo {
-    width: 50%;
-    margin-left: 40px;
+    width: 38px;
+    margin-left: 25px;
   }
 }
 

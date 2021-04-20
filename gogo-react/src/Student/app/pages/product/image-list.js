@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 import './course1.css';
 import useMousetrap from '../../../../hooks/use-mousetrap';
-import man from './man.jpg';
+import Logo from '../../../../data/Logo';
 
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
@@ -27,7 +27,6 @@ const getIndex = (value, arr, prop) => {
 };
 
 const ImageListPages = ({ match, ...props }) => {
-  
   const [displayMode, setDisplayMode] = useState('imagelist');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPageSize, setSelectedPageSize] = useState(8);
@@ -71,14 +70,12 @@ const ImageListPages = ({ match, ...props }) => {
   useEffect(() => {
     let id = props.location.state.trainer_id;
 
-    
     async function fetchData() {
       try {
         const result = await axiosInstance.get(
           `/student/sessions/trainer/${id}`
         );
         if (result.data.success) {
-          
           setTrainer(result.data.trainerData);
         } else {
           try {
@@ -174,7 +171,7 @@ const ImageListPages = ({ match, ...props }) => {
 
   const startIndex = (currentPage - 1) * selectedPageSize;
   const endIndex = currentPage * selectedPageSize;
-  
+
   if (!isLoaded) return <Loader />;
   return (
     <>
@@ -187,7 +184,7 @@ const ImageListPages = ({ match, ...props }) => {
       <Row>
         <Col md="4" xs="12">
           <Card body style={{ height: '268px' }}>
-            <img src={man} className="img1" />
+            <img src={Logo} className="img1" />
             <p className="mx-auto font-weight-bold nameinst">
               {trainer.trainer_full_name}
             </p>

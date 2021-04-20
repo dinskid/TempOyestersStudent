@@ -30,6 +30,7 @@ import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import Loader from './Loader';
 import { FcOk } from 'react-icons/fc';
+import Logo from '../../../../data/Logo';
 
 const DetailsPages = ({ match, intl, ...props }) => {
   const history = useHistory();
@@ -48,7 +49,6 @@ const DetailsPages = ({ match, intl, ...props }) => {
   let session_id;
   try {
     session_id = props.location.state.session_id;
-    
   } catch (err) {
     history.push('/app/pages/product/data-list');
   }
@@ -81,59 +81,49 @@ const DetailsPages = ({ match, intl, ...props }) => {
       );
   }, [error, setError]);
 
-  const checkItem=async ()=>{
-    try{
+  const checkItem = async () => {
+    try {
       const result = await axiosInstance.get(
-          
         `/student/sessions/details/${session_id}`
       );
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-const checkEnrollment=(check)=>{
-  let enrollment=check;
-  if(enrollment.student_wish_list_items!=0){
-    JSON.parse(enrollment.student_wish_list_items).map((d)=>{
-      if(d==session_id){
-        console.log("We have this");
-        setCartItemStatus('wishlist');
-      }
-      else{
-        console.log("we dont have");
-        // setCartItemStatus('cart');
-      }
-    })
-    
-  }
-  if(enrollment.student_cart_items!=0){
-    JSON.parse(enrollment.student_cart_items).map((d)=>{
-      if(d==session_id){
-        console.log("We have this");
-        setCartItemStatus('cart');
-      }
-      else{
-        console.log("we dont have");
-        
-      }
-    })
-    
-  }
-  
-  // console.log();
-  
+  const checkEnrollment = (check) => {
+    let enrollment = check;
+    if (enrollment.student_wish_list_items != 0) {
+      JSON.parse(enrollment.student_wish_list_items).map((d) => {
+        if (d == session_id) {
+          console.log('We have this');
+          setCartItemStatus('wishlist');
+        } else {
+          console.log('we dont have');
+          // setCartItemStatus('cart');
+        }
+      });
+    }
+    if (enrollment.student_cart_items != 0) {
+      JSON.parse(enrollment.student_cart_items).map((d) => {
+        if (d == session_id) {
+          console.log('We have this');
+          setCartItemStatus('cart');
+        } else {
+          console.log('we dont have');
+        }
+      });
+    }
 
-}
+    // console.log();
+  };
   useEffect(() => {
     const getDetails = async () => {
       try {
         const result = await axiosInstance.get(
-          
           `/student/sessions/details/${session_id}`
         );
-        
+
         if (result.data.success) {
           const trainerData = result.data.trainerData;
           setSession(result.data.session);
@@ -144,8 +134,7 @@ const checkEnrollment=(check)=>{
           console.log(result.data.enrollment[0].student_cart_items);
           console.log(result.data.enrollment[0].student_wish_list_items);
           setContent(result.data.ans);
-          checkEnrollment(result.data.enrollment[0])
-          
+          checkEnrollment(result.data.enrollment[0]);
         } else {
           try {
             setError(result.data.error);
@@ -172,17 +161,16 @@ const checkEnrollment=(check)=>{
   //   console.log(data);
   // },[cartItemStatus])
 
-  
-
-
-
   const handleWishList = async () => {
     try {
       const values = {
-        student_wish_list_items:session_id,
+        student_wish_list_items: session_id,
       };
-      const result = await axiosInstance.put(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_wish`, { values });
-      
+      const result = await axiosInstance.put(
+        `${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_wish`,
+        { values }
+      );
+
       if (result.data.success) {
         setCartItemStatus('wishlist');
         toggle();
@@ -205,10 +193,13 @@ const checkEnrollment=(check)=>{
   const handleAddToCart = async () => {
     try {
       const values = {
-        student_cart_items:session_id,
+        student_cart_items: session_id,
       };
-      const result = await axiosInstance.put(`${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`, { values });
-      
+      const result = await axiosInstance.put(
+        `${window.location.protocol}//${window.location.hostname}:5000/student/cart/add_to_cart`,
+        { values }
+      );
+
       if (result.data.success) {
         setCartItemStatus('cart');
         toggleCartModal();
@@ -232,7 +223,7 @@ const checkEnrollment=(check)=>{
   };
 
   if (!isLoaded) return <Loader />;
-  
+
   return (
     <>
       <Modal isOpen={modal} toggle={toggle}>
@@ -263,16 +254,10 @@ const checkEnrollment=(check)=>{
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button
-            color="primary"
-            
-            target="_blank"
-          >
-            <Link 
-            to={"/student/wish"}
-            target="blank"
-            >
-            Visit WishList</Link>
+          <Button color="primary" target="_blank">
+            <Link to={'/student/wish'} target="blank">
+              Visit WishList
+            </Link>
           </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             Cancel
@@ -307,15 +292,10 @@ const checkEnrollment=(check)=>{
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button
-            color="primary"
-            
-            
-          >
-          <Link to="/student/cart" target="blank">
-          Visit Cart
-          </Link>
-            
+          <Button color="primary">
+            <Link to="/student/cart" target="blank">
+              Visit Cart
+            </Link>
           </Button>{' '}
           <Button color="secondary" onClick={toggleCartModal}>
             Cancel
@@ -335,17 +315,16 @@ const checkEnrollment=(check)=>{
             </Button>
             {cartItemStatus == 'wishlist' ? (
               <Button className="button ml-3">
-              <Link
-                style={{color:"#fff"}}
-                to='/student/wish'
-                target="_blank"
-              >
-                Go To Wishlist <FiHeart />
+                <Link
+                  style={{ color: '#fff' }}
+                  to="/student/wish"
+                  target="_blank"
+                >
+                  Go To Wishlist <FiHeart />
                 </Link>
               </Button>
-              
             ) : cartItemStatus == 'cart' ? (
-              <Button className="button ml-3 disabled" >
+              <Button className="button ml-3 disabled">
                 Wishlist <FiHeart />
               </Button>
             ) : cartItemStatus == 'purchased' ? (
@@ -385,7 +364,7 @@ const checkEnrollment=(check)=>{
             </CardTitle>
             <Row>
               <Col md="4">
-                <img src={Man} className="inst_img" />
+                <img src={Logo} className="inst_img" />
                 <CardText className="inst_name text-center mt-2">
                   {instructor}
                 </CardText>
@@ -418,42 +397,39 @@ const checkEnrollment=(check)=>{
             </Button>
           </Card>
           <div className="jt_detail_course">
-          <h2 className=" font-weight-bold">Course Content</h2>
-          {content.map((doc, index) => {
-            const togglerId = `toggler${index}`;
-            return (
-              <>
-                <div className="toggle">
-                  <Button
-                    color="link"
-                    id={togglerId}
-                    style={{ marginBottom: '1rem' }}
-                  >
-                    <p className="p">{doc.name}</p>
-                  </Button>
-                </div>
-                <UncontrolledCollapse toggler={togglerId}>
-                  <div className="toggled">
-                    <CardBody>
-                      <ol>
+            <h2 className=" font-weight-bold">Course Content</h2>
+            {content.map((doc, index) => {
+              const togglerId = `toggler${index}`;
+              return (
+                <>
+                  <div className="toggle">
+                    <Button
+                      color="link"
+                      id={togglerId}
+                      style={{ marginBottom: '1rem' }}
+                    >
+                      <p className="p">{doc.name}</p>
+                    </Button>
+                  </div>
+                  <UncontrolledCollapse toggler={togglerId}>
+                    <div className="toggled">
+                      <CardBody>
+                        <ol>
                           {doc.lesson.map((l) => {
                             return (
                               <li>
-                                <p className="content m-3">
-                                  
-                                  {l.name}
-                                </p>
+                                <p className="content m-3">{l.name}</p>
                                 {/* <p className="content mt-3 ml-auto mr-3">1:44</p> */}
                               </li>
                             );
                           })}
-                      </ol>
-                    </CardBody>
-                  </div>
-                </UncontrolledCollapse>
-              </>
-            );
-          })}
+                        </ol>
+                      </CardBody>
+                    </div>
+                  </UncontrolledCollapse>
+                </>
+              );
+            })}
           </div>
         </Col>
         <Col md="4">
@@ -473,27 +449,22 @@ const checkEnrollment=(check)=>{
                 days
               </CardText>
               {cartItemStatus == 'cart' ? (
-                <Button
-                  className="btn2 mt-4"
-                  
-                >
-                  <Link to ="/student/cart"
-                  target="blank"
-                  >
-                  Go To Cart
+                <Button className="btn2 mt-4">
+                  <Link to="/student/cart" target="blank">
+                    Go To Cart
                   </Link>
                 </Button>
               ) : cartItemStatus == 'purchased' ? (
                 <Button className="btn2 mt-4 disabled">
                   Already Purchased
                 </Button>
-              ) :cartItemStatus == 'wishlist' ?  (
-                <Button className="btn2 mt-4 disabled"  >
+              ) : cartItemStatus == 'wishlist' ? (
+                <Button className="btn2 mt-4 disabled">Add to Cart</Button>
+              ) : (
+                <Button className="btn2 mt-4" onClick={handleAddToCart}>
                   Add to Cart
                 </Button>
-              ):<Button className="btn2 mt-4"  onClick={handleAddToCart}>
-                  Add to Cart
-                </Button>}
+              )}
               {cartItemStatus == 'purchased' ? (
                 <Button className="btn2 mt-4 disabled">
                   Already Purchased

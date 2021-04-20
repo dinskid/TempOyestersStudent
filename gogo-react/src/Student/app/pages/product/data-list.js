@@ -14,7 +14,8 @@ import useMousetrap from '../../../../hooks/use-mousetrap';
 import { Route, Link } from 'react-router-dom';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
-import NoDataFound from '../NoDataFound'
+import NoDataFound from '../NoDataFound';
+import Logo from '../../../../data/Logo';
 
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
@@ -67,7 +68,7 @@ const DataListPages = ({ match }) => {
     async function fetchData() {
       try {
         const result = await axiosInstance.get('/student/sessions');
-        
+
         if (result.data.success) {
           const data = result.data.sessions.map((doc) => ({
             id: doc.session_id,
@@ -77,7 +78,7 @@ const DataListPages = ({ match }) => {
             cost: doc.session_fee,
             tags: doc.session_tags,
           }));
-          
+
           setNames(data);
         } else {
           try {
@@ -191,17 +192,16 @@ const DataListPages = ({ match }) => {
       </div>
     );
 
-  if (!names.length)
-    return (
-     <NoDataFound />
-    );
+  if (!names.length) return <NoDataFound />;
 
   return (
     <>
       {/* <div className="container"> */}
       <Row id="jt_all_course">
         {names.map((name) => {
-          {/* console.log(name.tags.split(',')); */}
+          {
+            /* console.log(name.tags.split(',')); */
+          }
           return (
             <Col md={3} xs={12}>
               <Card
@@ -226,9 +226,9 @@ const DataListPages = ({ match }) => {
                       style={{
                         width: '100%',
                         position: 'relative',
-                        maxHeight: '250px',
+                        maxHeight: '100%',
                       }}
-                      src={require('./react.png') || name.img}
+                      src={Logo || name.img}
                       alt="Card image cap"
                     />
                     <div
@@ -252,8 +252,10 @@ const DataListPages = ({ match }) => {
                 </Route>
                 <CardBody>
                   <div className="jt_cart">
-                  <h2 className="font-weight-bold">{name.course.substr(0, 60)}...</h2>
-                  {/* <ul
+                    <h2 className="font-weight-bold">
+                      {name.course.substr(0, 60)}...
+                    </h2>
+                    {/* <ul
                     className="ml-0"
                     style={{ display: 'flex', listStyleType: 'none' }}
                   >
@@ -269,20 +271,20 @@ const DataListPages = ({ match }) => {
                       </li>
                     ))}
                   </ul> */}
-                  {/* classs was here font-weight-bold */}
-                  <h6 className="mb-2 ">{name.genre}</h6>
-                  <CardText>{name.desc}</CardText>
+                    {/* classs was here font-weight-bold */}
+                    <h6 className="mb-2 ">{name.genre}</h6>
+                    <CardText>{name.desc}</CardText>
                   </div>
-                 <div className="jt_tags">
-                 <Row className="">
-                    {/* <h5 className="ml-2 mr-4">
+                  <div className="jt_tags">
+                    <Row className="">
+                      {/* <h5 className="ml-2 mr-4">
                       <b>Tags:</b> {name.tags}
                     </h5> */}
-                    {name.tags.split(',').map((tag) => {
-                      return <Badge className="badge-color m-1">{tag}</Badge>;
-                    })}
-                  </Row>
-                 </div>
+                      {name.tags.split(',').map((tag) => {
+                        return <Badge className="badge-color m-1">{tag}</Badge>;
+                      })}
+                    </Row>
+                  </div>
                 </CardBody>
               </Card>
             </Col>

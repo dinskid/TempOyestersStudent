@@ -672,15 +672,15 @@ const KnowledgeBase = ({ match, ...props }) => {
                         aria-labelledby="contact-tab"
                         show
                       >
-                        <Card
+                        {/* <Card
                           body
                           className="text-center card-inner jt_comment"
                         >
                           <Row>
                             <Col md={2} xs={12} className="card_comment">
-                              <CardTitle tag="h5" className="">
-                                {/* {doc.name} */}
-                              </CardTitle>
+                              <CardTitle tag="h5" className=""> */}
+                        {/* {doc.name} */}
+                        {/* </CardTitle>
                             </Col>
                             <Col md={10} xs={12}>
                               {' '}
@@ -692,7 +692,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                               </a>
                             </Col>
                           </Row>
-                        </Card>
+                        </Card> */}
                       </div>
                     </>
                   ) : (

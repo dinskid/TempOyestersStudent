@@ -16,6 +16,7 @@ import { Link, Route } from 'react-router-dom';
 import axiosInstance from '../../../helpers/axiosInstance';
 import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
 import NoDataFound from './NoDataFound';
+import Logo from '../../../data/Logo';
 
 /* import ReactCardFlip from 'react-card-flip'; */
 const getIndex = (value, arr, prop) => {
@@ -85,7 +86,7 @@ const DataListPages = ({ match }) => {
     const fetchData = async () => {
       try {
         const result = await axiosInstance.get('/student/courses');
-        
+
         if (result.data.success) {
           const data = result.data.courses.map((doc) => ({
             img: doc.session_thumbnail,
@@ -226,7 +227,7 @@ const DataListPages = ({ match }) => {
                     <CardImg
                       top
                       style={{ width: '100%', maxHeight: '250px' }}
-                      src={require(`./img2.jpg`)}
+                      src={Logo}
                       alt="Card image cap"
                     />
                     <div

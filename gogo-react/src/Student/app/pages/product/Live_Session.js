@@ -13,6 +13,7 @@ import './course1.css';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import NoDataFound from '../NoDataFound';
+import Logo from '../../../../data/Logo';
 
 const Live_Session = () => {
   const [names, setNames] = useState([]);
@@ -35,7 +36,7 @@ const Live_Session = () => {
     async function fetchData() {
       try {
         const result = await axiosInstance.get('/student/sessions/live');
-        
+
         if (result.data.success) {
           const data = result.data.sessions.map((doc) => ({
             img: doc.session_thumbnail,
@@ -45,7 +46,7 @@ const Live_Session = () => {
             cost: doc.session_fee,
             tags: doc.session_tags,
           }));
-          
+
           setNames(data);
         } else {
           try {
@@ -95,7 +96,7 @@ const Live_Session = () => {
               <CardImg
                 top
                 style={{ width: '100%' }}
-                src={require('./vue.png') || name.img}
+                src={Logo || name.img}
                 alt="Card image cap"
               />
               <div
@@ -117,11 +118,10 @@ const Live_Session = () => {
               </div>
               {/* </Link></Route> */}
               <CardBody>
-              <div className="jt_cart">
-                <h2 className="font-weight-bold">{name.course}</h2>
-                {/* <h6 className="mb-2 font-weight-bold">{name.genre}</h6> */}
-                <CardText>{name.desc}</CardText>
-                
+                <div className="jt_cart">
+                  <h2 className="font-weight-bold">{name.course}</h2>
+                  {/* <h6 className="mb-2 font-weight-bold">{name.genre}</h6> */}
+                  <CardText>{name.desc}</CardText>
                 </div>
               </CardBody>
             </Card>
