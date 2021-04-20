@@ -262,7 +262,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   };
   return (
     <>
-      <Row>
+      <Row className="wrapper">
         <Col className="jt_video_prt1">
           {videoSrc ? (
             <VideoPlayer

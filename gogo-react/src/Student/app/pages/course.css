@@ -307,35 +307,20 @@
 }
 
 @media screen and (max-width: 768px) {
-  .jt_comment_container {
-    width: 100vw;
-  }
-
   .rounded .card {
-    width: 100vw;
+    min-width: 100vw;
   }
 
   .jt_h2_content {
     width: 80vw;
   }
-  .form_attached {
-    display: grid;
-    grid-template-columns: 80px 260px;
-    column-gap: 2rem;
-    padding-bottom: 2rem;
-  }
 
-  .jt_video_prt2 {
-    position: relative;
-  }
-
-  .progressbox {
-    display: block;
-    position: relative;
+  .jt_comment_container {
+    width: 100vw;
   }
 }
 
-.progressbox {
+/* .progressbox {
   padding-left: 14px;
   padding-right: 14px;
-}
+} */

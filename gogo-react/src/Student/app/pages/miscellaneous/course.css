@@ -222,6 +222,18 @@
   margin-top: 12.5% !important;
 }
 @media (max-width: 830px) {
+  .form_attached {
+    display: grid;
+    grid-template-columns: 80px 260px;
+    column-gap: 2rem;
+    padding-bottom: 2rem;
+  }
+  /* 
+  .jt_video_prt2 {
+    position: relative;
+    display: block;
+  } */
+
   #scrollme {
     width: 350px;
   }
@@ -353,13 +365,27 @@
 }
 @media (max-width: 1300px) {
   .progressbox {
-    width: 26%;
+    width: 100vw;
+    position: relative;
   }
   .jt_video_prt1 {
-    width: 60% !important ;
+    width: 60%;
   }
   .jt_video_prt2 {
-    width: 70% !important;
+    width: 70%;
+    position: relative;
+    display: block;
+  }
+  .rounded .card {
+    min-width: 100vw;
+  }
+
+  .jt_h2_content {
+    width: 80vw;
+  }
+
+  .jt_comment_container {
+    width: 100vw;
   }
 }
 
