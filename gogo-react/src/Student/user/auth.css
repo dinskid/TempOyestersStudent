@@ -69,3 +69,9 @@
   box-shadow: 0px 5px 20px rgb(0 0 0 / 50%) !important;
   transition: 0.7s ease-in !important;
 }
+
+@media screen and (max-width: 1310px) {
+  .rounded .card {
+    min-width: none;
+  }
+}

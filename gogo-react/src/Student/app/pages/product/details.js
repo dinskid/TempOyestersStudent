@@ -130,7 +130,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
           console.log(result.data.session);
           // setInstructor(trainerData.trainer_full_name);
           // setWork_exp(trainerData.trainer_occupation);
-          // setAbout(trainerData.trainer_career_summary);
+          setAbout(trainerData.trainer_career_summary);
           console.log(result.data.enrollment[0].student_cart_items);
           console.log(result.data.enrollment[0].student_wish_list_items);
           setContent(result.data.ans);
@@ -381,7 +381,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
               </Col>
             </Row>
 
-            <Button className="go_to_profile">
+            <Button className="go_to_profile" style={{ width: '100%' }}>
               <Route>
                 <Link
                   to={{

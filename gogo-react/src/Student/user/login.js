@@ -18,7 +18,7 @@ import { refreshTokenSetup } from './utils/refreshTokenSetup';
 import { loginUserError } from '../../redux/auth/actions';
 
 const initialvalue = {
-  email: '',
+  email: ''.toLowerCase(),
   password: '',
 };
 
@@ -30,6 +30,18 @@ const validation = Yup.object().shape({
     .min(6, 'Email should have min 7 characters')
     .required('Email is required'),
 });
+
+function validateEmail(value) {
+  let error;
+
+  if (!value) {
+    error = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    error = 'Invalid email address';
+  }
+
+  return error;
+}
 
 const Login = ({ history, loading, error, loginUserAction }) => {
   const dispatch = useDispatch();
@@ -107,9 +119,10 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                       <IntlMessages id="user.email" />
                     </Label>
                     <Field
-                      className="form-control"
+                      className="form-control "
                       name="email"
-                      //validate={validateEmail}
+                      style={{ textTransform: 'lowercase' }}
+                      validate={validateEmail}
                     />
                     {errors.email && touched.email && (
                       <div className="invalid-feedback d-block">
@@ -159,7 +172,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
               )}
             </Formik>
             <Row className="mt-4 d-flex justify-content-center">
-              <div style={{ width: '90%' }}>
+              <div style={{ width: '100%' }}>
                 <Button
                   outline
                   color="secondary"

@@ -81,18 +81,15 @@
   color: #ffffff;
 }
 
-
-
 /* jt details */
-.jt_detail_course{
-  width:100%;
-  margin-top:30px;
-
+.jt_detail_course {
+  width: 100%;
+  margin-top: 30px;
 }
-.jt_detail_course .font-weight-bold{
-  text-align:center;
+.jt_detail_course .font-weight-bold {
+  text-align: center;
   width: 98%;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
   padding: 12px 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -103,11 +100,10 @@
   width: 98%;
   border-radius: 0;
   text-decoration: none;
-  border:2px solid #E6E6E6 
+  border: 2px solid #e6e6e6;
 }
 
-
-@media (max-width:1280px){
+@media (max-width: 1280px) {
   .go_to_profile {
     width: 30%;
   }
@@ -134,7 +130,7 @@
 .toggled {
   width: 98%;
   box-shadow: none;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   padding-left: 5%;
 }
 .p {
@@ -297,63 +293,73 @@
   font-size: 0.8rem;
 }
 
-
 /* nrw code JITUL TERON */
-#jt_all_course .mt-2.card .card-body{
-  position: relative; 
+#jt_all_course .mt-2.card .card-body {
+  position: relative;
 }
 
-
-
-
-.dashboard-wrapper #jt_all_course.row  .card-body{
+.dashboard-wrapper #jt_all_course.row .card-body {
   padding: 1rem;
 }
-.dashboard-wrapper #jt_all_course.row  .card-body .row{
-
+.dashboard-wrapper #jt_all_course.row .card-body .row {
   margin: 0 auto;
 }
-.dashboard-wrapper #jt_all_course.row  .card-body h2.font-weight-bold{
-    font-size:1rem
+.dashboard-wrapper #jt_all_course.row .card-body h2.font-weight-bold {
+  font-size: 1rem;
 }
 
- .dashboard-wrapper #jt_all_course.row .col-12 .card{
+.dashboard-wrapper #jt_all_course.row .col-12 .card {
   width: 100%;
-  
+
   min-height: 480px !important;
   /* height: auto; */
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
-
 }
-.dashboard-wrapper  #jt_all_course .jt_cart{
+.dashboard-wrapper #jt_all_course .jt_cart {
   margin-bottom: 20px;
 }
-.dashboard-wrapper #jt_all_course  .jt_cart> *{
+.dashboard-wrapper #jt_all_course .jt_cart > * {
   width: 100%;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-.dashboard-wrapper #jt_all_course  .jt_cart p{
+.dashboard-wrapper #jt_all_course .jt_cart p {
   font-size: 1rem !important;
 }
 
-.dashboard-wrapper #jt_all_course .jt_tags .row{
-
-position: absolute;
-bottom: 20px;
+.dashboard-wrapper #jt_all_course .jt_tags .row {
+  position: absolute;
+  bottom: 20px;
 }
 
-
 /*  */
-@media  (max-width:1140px){
-  .dashboard-wrapper #jt_all_course.row .col-12 .card{
+@media (max-width: 1140px) {
+  .dashboard-wrapper #jt_all_course.row .col-12 .card {
     min-height: 500px !important;
   }
 }
 
-@media  (max-width:1000px){
-  .dashboard-wrapper #jt_all_course.row .col-12 .card{
+@media (max-width: 1000px) {
+  .dashboard-wrapper #jt_all_course.row .col-12 .card {
     min-height: 530px !important;
+  }
+}
+
+.all_course_card {
+  height: 350px;
+}
+
+.all_course_card-3 {
+  height: 400px;
+}
+
+@media screen and (max-width: 1200px) {
+  .all_course_card-1 {
+    height: 350px;
+  }
+
+  .all_course_card-2 {
+    height: 500px;
   }
 }

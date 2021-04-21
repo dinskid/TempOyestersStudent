@@ -22,7 +22,7 @@ import { refreshTokenSetup } from './utils/refreshTokenSetup';
 const initialValues = {
   customer_first_name: '',
   customer_email: '',
-  customer_phone_number: '',
+  customer_phone_number: '+91',
   customer_last_name: '',
   customer_password: '',
   customer_password_confirm: '',
@@ -208,6 +208,7 @@ const Register = ({
                     <Field
                       className="form-control"
                       name="customer_email" /* value="email" onChange={(e) => setEmail(e.target.value)} */
+                      style={{ textTransform: 'lowercase' }}
                     />
                     {errors.customer_email && touched.customer_email ? (
                       <div className="invalid-feedback d-block">
@@ -301,19 +302,19 @@ const Register = ({
                 </Form>
               )}
             </Formik>
-            <Row className="mt-4 ">
-              <div style={{ width: '90%' }}>
+            {/* <Row className="mt-2 ">
+              <div style={{ width: '100%' }}>
                 <Button
                   outline
                   color="secondary"
                   onClick={signIn}
                   className="mb-2 d-flex align-items-center  registerug"
-                >
-                  {/*<div className={`glyph-icon ${simplelineicons[176]} mr-2 `} />*/}
-                  <img src={Google} className="logo" />
+                > */}
+            {/*<div className={`glyph-icon ${simplelineicons[176]} mr-2 `} />*/}
+            {/* <img src={Google} className="logo" />
                   <span>Continue with Google</span>
-                </Button>
-                {/* <Button
+                </Button> */}
+            {/* <Button
                   outline
                   color="secondary"
                   className="mb-2 d-flex align-items-center p-3 registerug"
@@ -321,8 +322,8 @@ const Register = ({
                   <img src={Apple} className="logo2" />
                   <span>Continue with Apple</span>
                 </Button> */}
-              </div>{' '}
-            </Row>
+            {/* </div>{' '}
+            </Row> */}
           </div>
         </Card>
       </Colxx>

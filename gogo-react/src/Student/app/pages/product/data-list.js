@@ -250,7 +250,7 @@ const DataListPages = ({ match }) => {
                     </div>
                   </Link>
                 </Route>
-                <CardBody>
+                <CardBody style={{ height: '250px' }}>
                   <div className="jt_cart">
                     <h2 className="font-weight-bold">
                       {name.course.substr(0, 60)}...
@@ -272,8 +272,8 @@ const DataListPages = ({ match }) => {
                     ))}
                   </ul> */}
                     {/* classs was here font-weight-bold */}
-                    <h6 className="mb-2 ">{name.genre}</h6>
-                    <CardText>{name.desc}</CardText>
+                    <h6 className="mb-2">{name.genre}</h6>
+                    {/* <CardText>{name.desc}hksdkjdakjsa</CardText> */}
                   </div>
                   <div className="jt_tags">
                     <Row className="">

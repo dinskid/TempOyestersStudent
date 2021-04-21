@@ -99,6 +99,7 @@ const ForgotPassword = ({
                       className="form-control"
                       name="email"
                       validate={validateEmail}
+                      style={{ textTransform: 'lowercase' }}
                     />
                     {errors.email && touched.email && (
                       <div className="invalid-feedback d-block">
