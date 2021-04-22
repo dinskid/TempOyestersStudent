@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { injectIntl } from 'react-intl';
 import { BsChatSquareDots } from 'react-icons/bs';
 import { RiNotification4Line } from 'react-icons/ri';
@@ -20,6 +20,7 @@ import {
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Logo from '../../data/Logo';
+import axiosInstance from '../../helpers/axiosInstance';
 
 import IntlMessages from '../../helpers/IntlMessages';
 import {
@@ -93,6 +94,7 @@ const TopNav = ({
 }) => {
   const [isInFullScreen, setIsInFullScreen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [userName, setUserName] = useState('');
 
   const search = () => {
     history.push(`${searchPath}?key=${searchKeyword}`);
@@ -246,6 +248,15 @@ const TopNav = ({
   };
 
   const { messages } = intl;
+
+  useEffect(() => {
+    const getData = async () => {
+      const result = await axiosInstance.get('/student/auth/profile');
+      setUserName(result.data.result.student_first_name);
+    };
+    getData();
+  }, []);
+
   return (
     <nav className="navbar fixed-top">
       <div className="d-flex align-items-center navbar-left">
@@ -337,7 +348,7 @@ const TopNav = ({
           </button> */}
       {/* </div> */}
       <div className="user d-flex ml-auto mr-4">
-        <UncontrolledDropdown className="ml-auto">
+        {/* <UncontrolledDropdown className="ml-auto">
           <DropdownToggle
             className="header-icon notificationButton"
             color="empty"
@@ -362,14 +373,20 @@ const TopNav = ({
               })}
             </PerfectScrollbar>
           </DropdownMenu>
-        </UncontrolledDropdown>
-
-        <TopnavNotifications className="noti" />
+        </UncontrolledDropdown> */}
+        <h3 style={{ display: 'grid', alignItems: 'center', color: 'red' }}>
+          Hi, {userName}
+        </h3>
+        {/* <TopnavNotifications className="noti" /> */}
         <UncontrolledDropdown className="dropdown-menu-right">
           <DropdownToggle className="p-0" color="empty">
             {/*  <span className="name mr-1">Sarah Kortney</span> */}
             <span>
-              <img alt="Profile" src={require('./user.png')} />
+              <img
+                alt="Profile"
+                src={require('./Asset 1.png')}
+                style={{ borderRadius: '50%', width: '50px', height: '50px' }}
+              />
             </span>
           </DropdownToggle>
           <DropdownMenu className="mt-3" right>

@@ -12017,6 +12017,11 @@
   "resolved" "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz"
   "version" "3.2.0"
 
+"react-favicon@^0.0.20":
+  "integrity" "sha512-AwJ5qmvRI7gEa9YGdAYbJqma+nQoZCOtBA97XM+n0+XoQjKhf6YoxYNrkV3E72lP9CrfIkh4LbLwshBUq+6i7A=="
+  "resolved" "https://registry.npmjs.org/react-favicon/-/react-favicon-0.0.20.tgz"
+  "version" "0.0.20"
+
 "react-google-login@^5.2.1":
   "integrity" "sha512-7yz0yH+JxSFy/KOMBfm5QY8W4xxJTh/qFIi/MNjDjyXKgDtB8JpoVyPsTRMlv8HKdDshFHSZn199KEX9Q2flFA=="
   "resolved" "https://registry.npmjs.org/react-google-login/-/react-google-login-5.2.1.tgz"
@@ -12392,7 +12397,7 @@
     "prop-types" "^15.7.2"
     "react-display-name" "^0.2.5"
 
-"react@^16.0.0", "react@^16.13.1":
+"react@^16.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.13.1":
   "integrity" "sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.13.1.tgz"
   "version" "16.13.1"

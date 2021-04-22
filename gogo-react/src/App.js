@@ -13,6 +13,8 @@ import { NotificationContainer } from './components/common/react-notifications';
 import { isMultiColorActive, adminRoot } from './constants/defaultValues';
 import { getDirection } from './helpers/Utils';
 import retry from './retry';
+import Favicon from 'react-favicon';
+import Logo from './data/Logo';
 
 const ViewHome = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "views" */ './Student/home'))
@@ -56,6 +58,7 @@ class App extends React.Component {
 
     return (
       <div className="h-100">
+        <Favicon url={Logo} />
         <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}

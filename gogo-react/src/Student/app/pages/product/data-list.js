@@ -253,7 +253,7 @@ const DataListPages = ({ match }) => {
                 <CardBody style={{ height: '250px' }}>
                   <div className="jt_cart">
                     <h2 className="font-weight-bold">
-                      {name.course.substr(0, 60)}...
+                      {name.course.substr(0, 28)}
                     </h2>
                     {/* <ul
                     className="ml-0"
@@ -272,7 +272,9 @@ const DataListPages = ({ match }) => {
                     ))}
                   </ul> */}
                     {/* classs was here font-weight-bold */}
-                    <h6 className="mb-2">{name.genre}</h6>
+                    <h6 className="mb-2">
+                      {name.genre ? name.genre.substr(0, 200) : ''}
+                    </h6>
                     {/* <CardText>{name.desc}hksdkjdakjsa</CardText> */}
                   </div>
                   <div className="jt_tags">

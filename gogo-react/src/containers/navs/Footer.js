@@ -5,7 +5,7 @@ import { Colxx } from '../../components/common/CustomBootstrap';
 import './nav.css';
 import { FaFacebook } from 'react-icons/fa';
 import { GrInstagram } from 'react-icons/gr';
-import { AiFillTwitterCircle } from 'react-icons/ai';
+import { AiFillTwitterCircle, AiFillLinkedin } from 'react-icons/ai';
 import mob from './black.png';
 import com from './white.png';
 import { FiInstagram } from 'react-icons/fi';
@@ -21,25 +21,32 @@ const Footer = () => {
             Copyright © Trainer Oyesters Training <br /> All Rights Reserved{' '}
             <br /> <b className="text-center">Contact Trainer at</b>
             <br />
-            <FaFacebook
-              style={{
-                color: '#046DE4',
-                fontSize: '25px',
-                marginRight: '20px',
-                marginTop: '5px',
-              }}
-            />
-            <FiInstagram
-              style={{
-                color: '#ED4956',
-                fontSize: '25px',
-                marginRight: '20px',
-                marginTop: '5px',
-              }}
-            />
-            <AiFillTwitterCircle
-              style={{ color: '#50ABF1', fontSize: '25px', marginTop: '5px' }}
-            />{' '}
+            <a href="https://www.facebook.com/OyestersTraining">
+              {' '}
+              <FaFacebook
+                style={{
+                  color: '#046DE4',
+                  fontSize: '25px',
+                  marginRight: '20px',
+                  marginTop: '5px',
+                }}
+              />
+            </a>
+            <a href="https://www.instagram.com/oyesters_trainings/?hl=en">
+              <FiInstagram
+                style={{
+                  color: '#ED4956',
+                  fontSize: '25px',
+                  marginRight: '20px',
+                  marginTop: '5px',
+                }}
+              />
+            </a>
+            <a href="https://www.linkedin.com/company/oyesterstrainings/">
+              <AiFillLinkedin
+                style={{ color: '#50ABF1', fontSize: '25px', marginTop: '5px' }}
+              />{' '}
+            </a>
           </p>
         </Col>
         <Col md="4" xs="12" className=" col2  text-center">
@@ -77,25 +84,31 @@ const Footer = () => {
           />
           <br />
           <p>Platform by Oyesters</p>
-          <FaFacebook
-            style={{
-              color: '#046DE4',
-              fontSize: '20px',
-              marginRight: '20px',
-              marginTop: '-15px',
-            }}
-          />
-          <FiInstagram
-            style={{
-              color: '#ED4956',
-              fontSize: '20px',
-              marginRight: '20px',
-              marginTop: '-15px',
-            }}
-          />
-          <AiFillTwitterCircle
-            style={{ color: '#50ABF1', fontSize: '20px', marginTop: '-15px' }}
-          />
+          <a href="https://www.facebook.com/OyestersTraining">
+            <FaFacebook
+              style={{
+                color: '#046DE4',
+                fontSize: '20px',
+                marginRight: '20px',
+                marginTop: '-15px',
+              }}
+            />
+          </a>
+          <a href="https://www.instagram.com/oyesters_trainings/?hl=en">
+            <FiInstagram
+              style={{
+                color: '#ED4956',
+                fontSize: '20px',
+                marginRight: '20px',
+                marginTop: '-15px',
+              }}
+            />
+          </a>
+          <a href="https://www.linkedin.com/company/oyesterstrainings/">
+            <AiFillLinkedin
+              style={{ color: '#50ABF1', fontSize: '20px', marginTop: '-15px' }}
+            />
+          </a>
         </Col>
       </Row>
     </footer>

@@ -11,7 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import { AiOutlineLeftCircle } from 'react-icons/ai';
 
-import avatar from './avatar.jpg';
+import avatar from './Asset 1.png';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import Loader from '../product/Loader';
@@ -129,7 +129,7 @@ function Setting() {
           style={{ fontSize: '30px', cursor: 'pointer' }}
         />
       </Link>
-      <Card className="mx-auto" style={{ width: '70%' }}>
+      <Card className="mx-auto" style={{ width: '90vw' }}>
         <CardBody>
           <h2 className=" text-center mx-auto font-weight-bold">
             Your Profile
@@ -151,10 +151,12 @@ function Setting() {
                   //   src={displayProfileImage}
                   style={{
                     borderRadius: '50%',
-                    width: '25%',
+                    width: '150px',
+                    height: '150px',
                     marginLeft: 'auto',
                     marginRight: 'auto',
                     display: 'flex',
+                    border: '1px solid black',
                   }}
                 />
               </Row>
