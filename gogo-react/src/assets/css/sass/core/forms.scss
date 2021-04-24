@@ -76,7 +76,7 @@
 }
 
 .form-control:focus {
-  background: $input-background;
+  background: #ffffff;
   color: $primary-color;
 }
 
@@ -266,7 +266,8 @@ select.form-control:not([size]):not([multiple]) {
   box-shadow: initial !important;
   font-size: 0.8rem;
   border: 1px solid $separator-color;
-  background: $input-background;
+  // background: $input-background;
+  background: #ffffff;
   color: $primary-color;
   height: initial;
   padding: 0.5rem 0.75rem;

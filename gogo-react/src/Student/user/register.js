@@ -33,7 +33,7 @@ const validation = Yup.object().shape({
   customer_first_name: Yup.string()
     .min(2, 'please enter correct name')
     .max(20, 'please enter correct name')
-    .required('Name is required'),
+    .required('First Name is required'),
 
   customer_email: Yup.string()
     .min(7, 'Email should be min 7 characters')
@@ -50,11 +50,11 @@ const validation = Yup.object().shape({
   customer_last_name: Yup.string()
     .min(2, 'please enter correct name')
     .max(20, 'please enter correct name')
-    .required('Name is required'),
+    .required('Last Name is required'),
   customer_password: Yup.string()
     .min(8, 'min 8 characters')
     .max(100, 'please enter correct password')
-    .required('Name is required'),
+    .required('Password is required'),
   customer_password_confirm: Yup.string().oneOf(
     [Yup.ref('customer_password'), null],
     'Passwords must match'
@@ -153,7 +153,7 @@ const Register = ({
               </NavLink>
             </p>
           </div>
-          <div className="form-side">
+          <div className="form-side" style={{ background: '#ffffff' }}>
             <NavLink to="" className="white">
               <img src={Logo} className="image" alt="1111" />
             </NavLink>

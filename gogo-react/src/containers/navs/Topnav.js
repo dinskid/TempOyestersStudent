@@ -29,6 +29,7 @@ import {
   logoutUser,
   changeLocale,
 } from '../../redux/actions';
+import { useLocation } from 'react-router-dom';
 
 import {
   menuHiddenBreakpoint,
@@ -222,7 +223,7 @@ const TopNav = ({
   const handleLogout = async () => {
     const result = await AxiosInstance.get('/student/auth/logout');
     console.log(result);
-    if (result.data.sucess == 1) {
+    if (result.data.sucess === 1) {
       history.push('/Student/user/login');
     }
   };
@@ -248,7 +249,6 @@ const TopNav = ({
   };
 
   const { messages } = intl;
-
   useEffect(() => {
     const getData = async () => {
       const result = await axiosInstance.get('/student/auth/profile');
@@ -374,8 +374,8 @@ const TopNav = ({
             </PerfectScrollbar>
           </DropdownMenu>
         </UncontrolledDropdown> */}
-        <h3 style={{ display: 'grid', alignItems: 'center', color: 'red' }}>
-          Hi, {userName}
+        <h3 style={{ display: 'grid', alignItems: 'center', fontSize: '14px' }}>
+          Hi, {userName.substr(0, 10)}
         </h3>
         {/* <TopnavNotifications className="noti" /> */}
         <UncontrolledDropdown className="dropdown-menu-right">
@@ -395,7 +395,7 @@ const TopNav = ({
             </a>
             {/* <DropdownItem>Features</DropdownItem> */}
             {/* <DropdownItem>History</DropdownItem> */}
-            <DropdownItem>Support</DropdownItem>
+            {/* <DropdownItem>Support</DropdownItem> */}
 
             <DropdownItem divider />
             <DropdownItem onClick={() => handleLogout()}>Sign out</DropdownItem>

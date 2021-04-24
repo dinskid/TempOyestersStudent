@@ -1,30 +1,47 @@
 import React from 'react';
-import logo from '../session.svg';
-
+import disabled from './Disabled.svg';
+import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
 const Disabled = () => {
   return (
     <>
-      <img
-        src={logo}
-        alt="you don't have any sessions yet logo"
+      <div
         style={{
-          marginTop: '23%',
-          display: 'block',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          width: '15%',
-          height: '15%',
+          display: 'grid',
+          justifyContent: 'center',
+          padding: '4rem 0',
         }}
-      />{' '}
-      <h3
-        style={{ marginBottom: '20px', textAlign: 'center', color: 'purple' }}
       >
-        {' '}
-        This Functionality is Disabled By Tutor
-      </h3>
-      <br />
-      <br />
-      <br />
+        <Fade left cascade>
+          <img
+            src={disabled}
+            alt="you don't have any sessions yet logo"
+            style={{
+              marginTop: '2rem',
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: '300px',
+              height: '300px',
+            }}
+          />{' '}
+        </Fade>
+        <Fade right casecade effect="delayOut">
+          <h1
+            style={{
+              // marginBottom: '20px',
+              textAlign: 'center',
+              color: 'purple',
+              fontSize: '35px',
+            }}
+          >
+            Prohibited
+          </h1>
+          <h3 style={{ textAlign: 'center' }}>
+            Contact your Tutor for more details
+          </h3>
+        </Fade>
+      </div>
     </>
   );
 };

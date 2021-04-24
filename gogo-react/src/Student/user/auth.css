@@ -2,7 +2,7 @@
   font-size: 20px !important;
 }
 .registerug {
-  width: 40% !important;
+  width: 40%;
   height: 50px !important;
 }
 .apple {
@@ -26,7 +26,7 @@
     font-size: 90% !important;
   }
   .registerug {
-    width: 70% !important;
+    width: 100% !important;
   }
   .container .card {
     position: relative !important;
@@ -60,7 +60,7 @@
 .container .card {
   position: relative !important;
   max-width: 100vw !important;
-  height: 100vh !important;
+  /* height: 100vh !important; */
   background: #ffffff !important;
   margin: 30px 23px !important;
   padding: 0 !important;

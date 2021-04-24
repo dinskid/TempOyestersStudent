@@ -70,7 +70,7 @@ const Footer = () => {
             Abuse Policy
           </Link>
         </Col>
-        <Col md="3" xs="12" className="text-center  text-light mt-2">
+        <Col md="3" xs="12" className="text-center footer-text  mt-2">
           <p style={{ lineHeight: '0px' }}>Deliver online with Oyesters</p>
           <img
             src={com}

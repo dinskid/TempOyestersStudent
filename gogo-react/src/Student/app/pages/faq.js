@@ -86,7 +86,7 @@ const DataListPages = ({ match }) => {
     const fetchData = async () => {
       try {
         const result = await axiosInstance.get('/student/courses');
-
+        console.log(result);
         if (result.data.success) {
           const data = result.data.courses.map((doc) => ({
             img: doc.session_thumbnail,
@@ -209,13 +209,13 @@ const DataListPages = ({ match }) => {
             <Col md={3} xs={12}>
               <Card
                 className="mt-2"
-                // style={{
-                //   width: '100%',
-                //   minHeight: '550px',
-                //   marginLeft: 'auto',
-                //   marginRight: 'auto',
-                //   marginBottom: '50px',
-                // }}
+                style={{
+                  width: '100%',
+                  minHeight: '500px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  marginBottom: '50px',
+                }}
               >
                 <Route>
                   <Link
@@ -250,10 +250,21 @@ const DataListPages = ({ match }) => {
                   </Link>
                 </Route>
                 <CardBody>
-                  <h2 className="font-weight-bold">{name.course}</h2>
+                  <h2
+                    className="font-weight-bold"
+                    style={{ fontSize: '20px', marginBottom: '1rem' }}
+                  >
+                    {name.course.substr(0, 38)}
+                  </h2>
                   <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
-                  <CardText>{name.desc}</CardText>
-                  <Row>
+                  {/* <CardText>{name.desc}</CardText> */}
+                  <Row
+                    style={{
+                      marginTop: '1rem',
+                      position: 'absolute',
+                      bottom: '5%',
+                    }}
+                  >
                     {/* <h5 className="mr-auto ml-4">
                       <b>RS. {name.cost}</b>
                     </h5> */}

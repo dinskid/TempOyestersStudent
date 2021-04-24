@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   BrowserRouter as Router,
@@ -55,10 +55,11 @@ class App extends React.Component {
   render() {
     const { locale } = this.props;
     const currentAppLocale = AppLocale[locale];
-
+    // console.log(document.title);
     return (
       <div className="h-100">
         <Favicon url={Logo} />
+
         <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}

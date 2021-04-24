@@ -214,46 +214,52 @@ const DataListPages = ({ match }) => {
                   marginBottom: '50px',
                 }}
               >
-                <Route>
-                  <Link
-                    to={{
-                      pathname: '/app/pages/product/details',
-                      state: { session_id: name.id },
-                    }}
-                  >
-                    <CardImg
-                      top
-                      style={{
-                        width: '100%',
-                        position: 'relative',
-                        maxHeight: '100%',
-                      }}
-                      src={Logo || name.img}
-                      alt="Card image cap"
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        right: 0,
-                        height: '30px',
-                        backgroundColor: '#ff0000',
-                        borderRadius: '5px',
+                <div style={{ height: '180px' }}>
+                  <Route>
+                    <Link
+                      to={{
+                        pathname: '/app/pages/product/details',
+                        state: { session_id: name.id },
                       }}
                     >
-                      <p
-                        className="mt-1 mb-2 mr-2 ml-2"
-                        style={{ color: '#fff', fontSize: '16px' }}
+                      <CardImg
+                        top
+                        style={{
+                          width: '100%',
+                          position: 'relative',
+                          maxHeight: '100%',
+                        }}
+                        src={Logo || name.img}
+                        alt="Card image cap"
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          right: 0,
+                          height: '30px',
+                          backgroundColor: '#ff0000',
+                          borderRadius: '5px',
+                        }}
                       >
-                        Rs.{name.cost}
-                      </p>
-                    </div>
-                  </Link>
-                </Route>
+                        <p
+                          className="mt-1 mb-2 mr-2 ml-2"
+                          style={{ color: '#fff', fontSize: '16px' }}
+                        >
+                          Rs.{name.cost}
+                        </p>
+                      </div>
+                    </Link>
+                  </Route>
+                </div>
+
                 <CardBody style={{ height: '250px' }}>
                   <div className="jt_cart">
-                    <h2 className="font-weight-bold">
-                      {name.course.substr(0, 28)}
+                    <h2
+                      className="font-weight-bold"
+                      style={{ fontSize: '22px' }}
+                    >
+                      {name.course.substr(0, 38)}
                     </h2>
                     {/* <ul
                     className="ml-0"

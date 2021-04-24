@@ -450,9 +450,8 @@ const DetailsPages = ({ match, intl, ...props }) => {
               </CardText>
               {cartItemStatus == 'cart' ? (
                 <Button className="btn2 mt-4">
-                  <Link to="/student/cart" target="blank">
-                    Go To Cart
-                  </Link>
+                  {/* <Link to="/student/cart" target="blank"> */}
+                  <Link to="#">Go To Cart</Link>
                 </Button>
               ) : cartItemStatus == 'purchased' ? (
                 <Button className="btn2 mt-4 disabled">

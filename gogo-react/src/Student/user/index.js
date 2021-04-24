@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserLayout from '../../layout/UserLayout';
 import retry from '../../retry';
@@ -20,7 +20,7 @@ const ResetPassword = React.lazy(() =>
   )
 );
 
-const User = ({ match }) => {
+const User = ({ match, location }) => {
   return (
     <UserLayout>
       <Suspense fallback={<div className="loading" />}>

@@ -89,9 +89,8 @@ const KnowledgeBase = ({ match, ...props }) => {
     }
 
     try {
-      const result = await axiosInstance.get(
-        `/student/mycourses/${props.location.state.session_id}`
-      );
+      const result = await axiosInstance.get(`/student/mycourses/16`);
+      console.log(result);
       console.log(
         result.data.ans[0].lesson[0].lesson_id,
         'video lessaion data'
@@ -170,13 +169,13 @@ const KnowledgeBase = ({ match, ...props }) => {
   const IMgUpload = (e) => {
     let file = e.target.files[0];
     console.log(file);
-    let sizeis = file.size / 125000;
-    // alert(sizeis)
-    if (sizeis <= 2) {
-      alert('correct file formate', sizeis);
-    } else {
-      alert('Warning the file size is more then 2mb unable to uplaod', sizeis);
-    }
+    // let sizeis = file.size / 125000;
+    // // alert(sizeis)
+    // if (sizeis <= 2) {
+    //   alert('correct file formate', sizeis);
+    // } else {
+    //   alert('Warning the file size is more then 2mb unable to uplaod', sizeis);
+    // }
     let fileUpload = document.querySelector('.fileUploadIs');
     console.log(fileUpload);
     fileUpload.addEventListener('change', (e) => {});
@@ -578,13 +577,13 @@ const KnowledgeBase = ({ match, ...props }) => {
             </CardHeader>
             <TabContent activeTab={activeFirstTab} className="jt_tab">
               <TabPane tabId="1" className="jt_tabIs">
-                <Scrollbars
-                  style={{ height: 450 }}
-                  id="scrollme"
-                  className="jt_scroll"
-                >
-                  {CommentsHere.result ? (
-                    CommentsHere.result.map((list) => {
+                {CommentsHere.result.length === 0 ? (
+                  <Scrollbars
+                    style={{ height: '0px', backgroundColor: 'red' }}
+                    id="scrollme"
+                    className="jt_scroll"
+                  >
+                    {CommentsHere.result.map((list) => {
                       return (
                         <>
                           <div
@@ -619,11 +618,59 @@ const KnowledgeBase = ({ match, ...props }) => {
                           </div>
                         </>
                       );
-                    })
-                  ) : (
-                    <div>Empty</div>
-                  )}
-                </Scrollbars>
+                    })}
+                  </Scrollbars>
+                ) : (
+                  <Scrollbars
+                    style={{ height: '450px' }}
+                    id="scrollme"
+                    className="jt_scroll"
+                  >
+                    {CommentsHere.result ? (
+                      CommentsHere.result.map((list) => {
+                        return (
+                          <>
+                            <div
+                              id="comments"
+                              role="tabpanel"
+                              className="jt_comment materials"
+                              aria-labelledby="home-tab"
+                              show
+                            >
+                              <Card
+                                body
+                                className="text-center card-inner jt_comment "
+                              >
+                                <Row>
+                                  <Col md={2} xs={12} className="card_comment">
+                                    <CardTitle tag="h5" className="">
+                                      {list.student_first_name}{' '}
+                                      {list.student_last_name}
+                                    </CardTitle>
+                                  </Col>
+                                  <Col md={10} xs={12}>
+                                    {' '}
+                                    <CardText className="mt-4 text-left">
+                                      {list.comment_content}
+                                    </CardText>
+                                    {list.student}
+                                    {list.comment_img_url && (
+                                      <a href={img} download>
+                                        <FiDownload /> Image.jpg
+                                      </a>
+                                    )}
+                                  </Col>
+                                </Row>
+                              </Card>
+                            </div>
+                          </>
+                        );
+                      })
+                    ) : (
+                      <div>hello</div>
+                    )}
+                  </Scrollbars>
+                )}
                 <FormGroup className="form_attached">
                   <Col md={2}>
                     <label className="input-label-1 ml-4">

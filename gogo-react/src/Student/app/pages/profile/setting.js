@@ -30,7 +30,9 @@ function Setting() {
     student_youtube_url: '',
   });
 
-  const [displayProfileImage, setDisplayProfileImage] = useState(avatar);
+  const [displayProfileImage, setDisplayProfileImage] = useState(
+    student.student_profile_picture
+  );
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -97,13 +99,13 @@ function Setting() {
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
-      if (student.student_profile_picture)
-        formData.append(
-          'student_profile_picture',
-          student.student_profile_picture
-        );
+      formData.append(
+        'student_profile_picture',
+        student.student_profile_picture
+      );
       formData.append('values', JSON.stringify(student));
       const result = await axiosInstance.put('/student/auth/profile', formData);
+      console.log(result);
       if (result.data.success) setSuccess('Profile Updated Successfully');
       else {
         try {
@@ -129,7 +131,7 @@ function Setting() {
           style={{ fontSize: '30px', cursor: 'pointer' }}
         />
       </Link>
-      <Card className="mx-auto" style={{ width: '90vw' }}>
+      <Card className="mx-auto" style={{ width: '100%' }}>
         <CardBody>
           <h2 className=" text-center mx-auto font-weight-bold">
             Your Profile
@@ -147,8 +149,8 @@ function Setting() {
               </Row>
               <Row>
                 <img
-                  src={avatar}
-                  //   src={displayProfileImage}
+                  // src={avatar}
+                  src={displayProfileImage}
                   style={{
                     borderRadius: '50%',
                     width: '150px',
@@ -163,6 +165,8 @@ function Setting() {
               <Row className="mx-auto d-flex align-items-center">
                 <Input
                   type="file"
+                  accept="image/*"
+                  data-max-sizeIs="2000"
                   onChange={(e) => {
                     console.log(e.target.files[0]);
                     const file = URL.createObjectURL(e.target.files[0]);
