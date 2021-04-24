@@ -256,7 +256,9 @@ const DataListPages = ({ match }) => {
                   >
                     {name.course.substr(0, 38)}
                   </h2>
-                  <h6 className="mb-2 font-weight-bold">{name.genre}</h6>
+                  <h6 className="mb-2" style={{ fontSize: '1rem' }}>
+                    {name.genre}
+                  </h6>
                   {/* <CardText>{name.desc}</CardText> */}
                   <Row
                     style={{

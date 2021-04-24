@@ -9,7 +9,7 @@ const Disabled = () => {
         style={{
           display: 'grid',
           justifyContent: 'center',
-          padding: '4rem 0',
+          padding: '0rem 0',
         }}
       >
         <Fade left cascade>
@@ -17,7 +17,6 @@ const Disabled = () => {
             src={disabled}
             alt="you don't have any sessions yet logo"
             style={{
-              marginTop: '2rem',
               display: 'block',
               marginLeft: 'auto',
               marginRight: 'auto',

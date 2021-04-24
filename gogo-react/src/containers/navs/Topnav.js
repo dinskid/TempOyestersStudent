@@ -249,6 +249,7 @@ const TopNav = ({
   };
 
   const { messages } = intl;
+
   useEffect(() => {
     const getData = async () => {
       const result = await axiosInstance.get('/student/auth/profile');
@@ -374,7 +375,7 @@ const TopNav = ({
             </PerfectScrollbar>
           </DropdownMenu>
         </UncontrolledDropdown> */}
-        <h3 style={{ display: 'grid', alignItems: 'center', fontSize: '14px' }}>
+        <h3 style={{ display: 'grid', alignItems: 'center', fontSize: '18px' }}>
           Hi, {userName.substr(0, 10)}
         </h3>
         {/* <TopnavNotifications className="noti" /> */}

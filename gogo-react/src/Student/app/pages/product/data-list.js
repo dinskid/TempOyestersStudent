@@ -257,7 +257,7 @@ const DataListPages = ({ match }) => {
                   <div className="jt_cart">
                     <h2
                       className="font-weight-bold"
-                      style={{ fontSize: '22px' }}
+                      style={{ fontSize: '20px' }}
                     >
                       {name.course.substr(0, 38)}
                     </h2>

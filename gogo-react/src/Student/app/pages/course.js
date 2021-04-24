@@ -89,7 +89,9 @@ const KnowledgeBase = ({ match, ...props }) => {
     }
 
     try {
-      const result = await axiosInstance.get(`/student/mycourses/16`);
+      const result = await axiosInstance.get(
+        `/student/mycourses/${props.location.state.session_id}`
+      );
       console.log(result);
       console.log(
         result.data.ans[0].lesson[0].lesson_id,
@@ -710,7 +712,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                 </FormGroup>
               </TabPane>
               <TabPane tabId="2">
-                <Scrollbars style={{ height: 450 }}>
+                <Scrollbars style={{ height: 0 }}>
                   {Material ? (
                     <>
                       <div

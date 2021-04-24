@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700");
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700');
 html {
   width: 100%;
   height: 100%;
@@ -50,7 +50,8 @@ body.background main .container {
 }
 
 .fixed-background {
-  background: url("/assets/img/login/balloon-lg.jpg") no-repeat center center fixed;
+  background: url('/assets/img/login/balloon-lg.jpg') no-repeat center center
+    fixed;
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -205,7 +206,7 @@ hr {
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 1.75em;
   width: 2em;
   text-align: center;
@@ -221,14 +222,15 @@ hr {
   border-color: transparent transparent transparent #38688b;
 }
 
-.video-play-icon:hover span, .video-play-icon:active span {
+.video-play-icon:hover span,
+.video-play-icon:active span {
   background: rgba(255, 255, 255, 0.85);
 }
 
 .logo-single {
   width: 110px;
   height: 35px;
-  background: url("/assets/logos/white.svg") no-repeat;
+  background: url('/assets/logos/white.svg') no-repeat;
   background-position: center center;
   display: inline-block;
   margin-bottom: 60px;
@@ -296,7 +298,8 @@ a {
   transition: color 200ms;
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
   text-decoration: initial;
   color: #38688b;
 }
@@ -408,7 +411,8 @@ p {
   fill: #707070;
 }
 
-#displayOptions .view-icon:hover .view-icon-svg, #displayOptions .view-icon.active .view-icon-svg {
+#displayOptions .view-icon:hover .view-icon-svg,
+#displayOptions .view-icon.active .view-icon-svg {
   fill: #38688b;
 }
 
@@ -620,19 +624,19 @@ p {
 @media (max-width: 1199px) {
   .rtl .app-menu {
     -webkit-transform: translateX(-280px);
-            transform: translateX(-280px);
+    transform: translateX(-280px);
   }
 }
 
 .rtl .app-menu.shown {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 .rtl .app-menu .app-menu-button {
   left: calc(280px - 2px);
   -webkit-box-shadow: 4px 0 5px rgba(0, 0, 0, 0.04);
-          box-shadow: 4px 0 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 4px 0 5px rgba(0, 0, 0, 0.04);
 }
 
 .rtl .ps__rail-y {
@@ -750,13 +754,15 @@ p {
 }
 
 .depth-1 {
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
 }
 
 .depth-2 {
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .min-width-zero {
@@ -1219,9 +1225,9 @@ button {
   border-radius: 50px;
   outline: initial !important;
   -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   font-size: 0.8rem;
   padding: 0.5rem 1.25rem 0.5rem 1.25rem;
   -webkit-transition: background-color box-shadow 0.1s linear;
@@ -1229,15 +1235,18 @@ button {
 }
 
 .btn-shadow {
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 1px 3px 1px rgba(0, 0, 0, 0.15) !important;
-          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 1px 3px 1px rgba(0, 0, 0, 0.15) !important;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15),
+    0 1px 3px 1px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 1px 3px 1px rgba(0, 0, 0, 0.15) !important;
   -webkit-transition: background-color box-shadow 0.1s linear;
   transition: background-color box-shadow 0.1s linear;
 }
 
-.btn-shadow:hover, .btn-shadow:focus {
-  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 4px 6px 2px rgba(0, 0, 0, 0.15) !important;
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 4px 6px 2px rgba(0, 0, 0, 0.15) !important;
+.btn-shadow:hover,
+.btn-shadow:focus {
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15),
+    0 4px 6px 2px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 4px 6px 2px rgba(0, 0, 0, 0.15) !important;
 }
 
 .btn-empty {
@@ -1339,36 +1348,72 @@ button {
 }
 
 .btn-primary.btn-primary-gradient {
-  background: -webkit-gradient(linear, left top, right top, from(#38688b), to(#223f54));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#38688b),
+    to(#223f54)
+  );
   background: linear-gradient(to right, #38688b, #223f54);
 }
 
 .btn-primary.btn-primary-gradient:hover {
-  background: -webkit-gradient(linear, left top, right top, from(#38688b), to(#2c526e));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#38688b),
+    to(#2c526e)
+  );
   background: linear-gradient(to right, #38688b, #2c526e);
 }
 
 .btn-primary-gradient:not(:disabled):not(.disabled):active,
 .btn-primary-gradient:not(:disabled):not(.disabled).active,
 .show > .btn-primary-gradient.dropdown-toggle {
-  background: -webkit-gradient(linear, left top, right top, from(#38688b), to(#223f54));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#38688b),
+    to(#223f54)
+  );
   background: linear-gradient(to right, #38688b, #223f54);
 }
 
 .btn-secondary-gradient {
-  background: -webkit-gradient(linear, left top, right top, from(#3e8ab9), to(#2b5f80));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#3e8ab9),
+    to(#2b5f80)
+  );
   background: linear-gradient(to right, #3e8ab9, #2b5f80);
 }
 
 .btn-secondary-gradient:hover {
-  background: -webkit-gradient(linear, left top, right top, from(#3e8ab9), to(#34739a));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#3e8ab9),
+    to(#34739a)
+  );
   background: linear-gradient(to right, #3e8ab9, #34739a);
 }
 
 .btn-secondary-gradient:not(:disabled):not(.disabled):active,
 .btn-secondary-gradient:not(:disabled):not(.disabled).active,
 .show > .btn-secondary-gradient.dropdown-toggle {
-  background: -webkit-gradient(linear, left top, right top, from(#3e8ab9), to(#2b5f80));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#3e8ab9),
+    to(#2b5f80)
+  );
   background: linear-gradient(to right, #3e8ab9, #2b5f80);
 }
 
@@ -1619,7 +1664,8 @@ button {
   text-decoration: underline;
 }
 
-.white-underline-link:hover, .white-underline-link:active {
+.white-underline-link:hover,
+.white-underline-link:active {
   color: #d0d0d0;
   text-decoration: initial;
 }
@@ -1640,7 +1686,7 @@ button {
   visibility: hidden;
   top: 50%;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   -webkit-transition: opacity 500ms;
   transition: opacity 500ms;
   color: #d0d0d0;
@@ -1739,8 +1785,8 @@ button {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 }
 
@@ -1750,14 +1796,14 @@ button {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     margin-right: 5px;
   }
 }
@@ -1768,8 +1814,8 @@ button {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
     margin-right: 5px;
   }
 }
@@ -1778,8 +1824,9 @@ button {
   border: initial;
   background: #1e2022;
   border-radius: calc(0.15rem - 1px);
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card .card-header .card-icon {
@@ -1839,7 +1886,7 @@ button {
   border-radius: calc(0.25rem - 1px);
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   max-height: 200px;
   width: unset;
 }
@@ -1847,7 +1894,7 @@ button {
 .card-img-fluid {
   border-radius: calc(0.25rem - 1px);
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .card-img-bottom {
@@ -1868,7 +1915,7 @@ button {
   border-bottom-left-radius: calc(0.15rem - 1px);
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .card-img-right {
@@ -1877,7 +1924,7 @@ button {
   border-bottom-right-radius: calc(0.15rem - 1px);
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .card-img-overlay {
@@ -1921,7 +1968,7 @@ button {
   max-width: unset;
   height: 85px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   width: unset !important;
 }
 
@@ -1997,14 +2044,14 @@ button {
   height: 85px;
   background: #38688b;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   font-size: 1.25rem;
   color: #d0d0d0;
 }
@@ -2180,8 +2227,9 @@ button {
 }
 
 .card.active {
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .modal .modal-header,
@@ -2210,8 +2258,9 @@ button {
 }
 
 .modal-dialog {
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .modal-right {
@@ -2255,18 +2304,18 @@ button {
 
 .modal-right .modal-footer {
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .modal-right .modal.fade .modal-dialog {
   -webkit-transform: translate(25%, 0) !important;
-          transform: translate(25%, 0) !important;
+  transform: translate(25%, 0) !important;
 }
 
 .modal-right .modal.show .modal-dialog {
   -webkit-transform: translate(0, 0) !important;
-          transform: translate(0, 0) !important;
+  transform: translate(0, 0) !important;
 }
 
 .rtl .modal .modal-header,
@@ -2573,10 +2622,11 @@ button {
   left: initial;
   right: 0;
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
-.tooltip-right-bottom .invalid-feedback::before, .tooltip-right-bottom .invalid-feedback::after {
+.tooltip-right-bottom .invalid-feedback::before,
+.tooltip-right-bottom .invalid-feedback::after {
   left: initial;
   right: 25px;
   margin-left: 0;
@@ -2586,10 +2636,11 @@ button {
   left: 0;
   right: initial;
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
-.tooltip-left-bottom .invalid-feedback::before, .tooltip-left-bottom .invalid-feedback::after {
+.tooltip-left-bottom .invalid-feedback::before,
+.tooltip-left-bottom .invalid-feedback::after {
   left: 25px;
   right: initial;
   margin-left: 0;
@@ -2598,7 +2649,7 @@ button {
 .tooltip-center-top .invalid-feedback {
   bottom: 80%;
   -webkit-transform: translateX(-50%) translateY(50%);
-          transform: translateX(-50%) translateY(50%);
+  transform: translateX(-50%) translateY(50%);
   top: initial;
 }
 
@@ -2623,7 +2674,7 @@ button {
 .tooltip-right-top .invalid-feedback {
   bottom: 80%;
   -webkit-transform: translateX(0) translateY(50%);
-          transform: translateX(0) translateY(50%);
+  transform: translateX(0) translateY(50%);
   top: initial;
   left: initial;
   right: 0;
@@ -2656,7 +2707,7 @@ button {
 .tooltip-left-top .invalid-feedback {
   bottom: 80%;
   -webkit-transform: translateX(0) translateY(50%);
-          transform: translateX(0) translateY(50%);
+  transform: translateX(0) translateY(50%);
   top: initial;
   left: 0;
   right: initial;
@@ -2688,7 +2739,7 @@ button {
 
 .tooltip-label-right .invalid-feedback {
   -webkit-transform: translateX(0) translateY(-50%);
-          transform: translateX(0) translateY(-50%);
+  transform: translateX(0) translateY(-50%);
   top: 16px;
   left: 50px;
 }
@@ -2814,7 +2865,7 @@ button {
   top: 0;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 .nav-tabs.separator-tabs .nav-link.active::before,
@@ -2829,7 +2880,7 @@ button {
   bottom: 0;
   top: unset;
   -webkit-transform: initial;
-          transform: initial;
+  transform: initial;
 }
 
 .nav-tabs.separator-tabs .nav-link {
@@ -2863,8 +2914,9 @@ button {
   height: 100px;
   padding: 0;
   margin-bottom: 20px;
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar #notificationDropdown {
@@ -2899,7 +2951,8 @@ button {
   line-height: 14px;
 }
 
-.navbar .icon-menu-item:hover, .navbar .icon-menu-item:focus {
+.navbar .icon-menu-item:hover,
+.navbar .icon-menu-item:focus {
   color: #38688b;
 }
 
@@ -2967,12 +3020,12 @@ button {
 
 .navbar .navbar-left {
   -ms-flex-preferred-size: 40%;
-      flex-basis: 40%;
+  flex-basis: 40%;
 }
 
 .navbar .navbar-right {
   -ms-flex-preferred-size: 40%;
-      flex-basis: 40%;
+  flex-basis: 40%;
   text-align: right;
 }
 
@@ -3012,14 +3065,14 @@ button {
 .navbar .navbar-logo .logo {
   width: 100%;
   height: 100%;
-  background: url("/assets/logos/white.svg") no-repeat;
+  background: url('/assets/logos/white.svg') no-repeat;
   background-position: center center;
 }
 
 .navbar .navbar-logo .logo-mobile {
   width: 100%;
   height: 100%;
-  background: url("/assets/logos/mobile.svg") no-repeat;
+  background: url('/assets/logos/mobile.svg') no-repeat;
   background-position: center center;
   background-size: contain;
 }
@@ -3143,7 +3196,7 @@ button {
   .navbar .search.mobile-view span {
     top: 50%;
     -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
     right: 25px;
   }
 }
@@ -3376,8 +3429,9 @@ button {
 
 .app-menu {
   z-index: 1;
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
   width: 280px;
   float: right;
   background: #1e2022;
@@ -3402,7 +3456,7 @@ button {
   .app-menu {
     top: 80px;
     -webkit-transform: translateX(280px);
-            transform: translateX(280px);
+    transform: translateX(280px);
     height: calc(100% - 80px);
   }
 }
@@ -3425,7 +3479,7 @@ button {
 
 .app-menu.shown {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 .app-menu .app-menu-button {
@@ -3438,7 +3492,7 @@ button {
   border-radius: 0.2rem;
   color: #707070 !important;
   -webkit-box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.04);
-          box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.04);
   font-size: 15px;
   line-height: 0;
 }
@@ -3538,9 +3592,10 @@ button {
   margin-top: -0.5rem;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
 }
 
 .invalid-feedback::before {
@@ -3625,7 +3680,7 @@ select.form-control:not([size]):not([multiple]) {
 .custom-control-input {
   outline: initial !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .was-validated .custom-control-input:invalid ~ .custom-control-label::before,
@@ -3651,15 +3706,15 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .custom-checkbox
-.custom-control-input:indeterminate
-~ .custom-control-label::before {
+  .custom-control-input:indeterminate
+  ~ .custom-control-label::before {
   background-color: #38688b;
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #38688b;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   border: 1px solid #38688b;
 }
 
@@ -3667,20 +3722,20 @@ select.form-control:not([size]):not([multiple]) {
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #38688b;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before,
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #38688b;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .custom-control-label::after,
 .custom-control-label::before {
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   outline: initial !important;
 }
 
@@ -3693,7 +3748,8 @@ select.form-control:not([size]):not([multiple]) {
   line-height: initial !important;
 }
 
-.check-all label.custom-control-label:before, .check-all label.custom-control-label:after {
+.check-all label.custom-control-label:before,
+.check-all label.custom-control-label:after {
   border: initial !important;
   background: initial !important;
 }
@@ -3736,7 +3792,7 @@ select.form-control:not([size]):not([multiple]) {
 
 .btn.rotate i {
   -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .btn .custom-control-label::before {
@@ -3769,7 +3825,7 @@ select.form-control:not([size]):not([multiple]) {
   border-radius: 0.1rem;
   outline: initial !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   font-size: 0.8rem;
   border: 1px solid #424242;
   background: #232223;
@@ -3799,9 +3855,9 @@ textarea.form-control {
 
 input:-webkit-autofill {
   -webkit-animation-name: autofill;
-          animation-name: autofill;
+  animation-name: autofill;
   -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 input:-webkit-autofill {
@@ -3835,7 +3891,7 @@ input:-webkit-autofill {
 .input-group > .custom-select:not(:first-child) {
   outline: initial !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .custom-select {
@@ -3858,7 +3914,7 @@ input:-webkit-autofill {
 
 .custom-file-input {
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .custom-file-label {
@@ -3868,7 +3924,7 @@ input:-webkit-autofill {
 
 .custom-file-label {
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   border-radius: 0.1rem;
   height: calc(2.5rem + 2px);
   padding: 0.75rem 0.75rem 0.5rem 0.75rem;
@@ -3978,12 +4034,14 @@ select:-webkit-autofill:focus {
   margin-right: 2px;
 }
 
-.rtl .input-group
-> .input-group-append:last-child
-> .btn:not(:last-child):not(.dropdown-toggle),
-.rtl .input-group
-> .input-group-append:last-child
-> .input-group-text:not(:last-child),
+.rtl
+  .input-group
+  > .input-group-append:last-child
+  > .btn:not(:last-child):not(.dropdown-toggle),
+.rtl
+  .input-group
+  > .input-group-append:last-child
+  > .input-group-text:not(:last-child),
 .rtl .input-group > .input-group-append:not(:last-child) > .btn,
 .rtl .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .rtl .input-group > .input-group-prepend > .btn,
@@ -4010,9 +4068,10 @@ select:-webkit-autofill:focus {
 .rtl .input-group > .input-group-append > .btn,
 .rtl .input-group > .input-group-append > .input-group-text,
 .rtl .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
-.rtl .input-group
-> .input-group-prepend:first-child
-> .input-group-text:not(:first-child),
+.rtl
+  .input-group
+  > .input-group-prepend:first-child
+  > .input-group-text:not(:first-child),
 .rtl .input-group > .input-group-prepend:not(:first-child) > .btn,
 .rtl .input-group > .input-group-prepend:not(:first-child) > .input-group-text {
   border-radius: 0.1rem;
@@ -4027,12 +4086,14 @@ select:-webkit-autofill:focus {
   margin-left: -1px;
 }
 
-.rtl .input-group
-> .input-group-append:last-child
-> .btn:not(:last-child):not(.dropdown-toggle),
-.rtl .input-group
-> .input-group-append:last-child
-> .input-group-text:not(:last-child),
+.rtl
+  .input-group
+  > .input-group-append:last-child
+  > .btn:not(:last-child):not(.dropdown-toggle),
+.rtl
+  .input-group
+  > .input-group-append:last-child
+  > .input-group-text:not(:last-child),
 .rtl .input-group > .input-group-append:not(:last-child) > .btn,
 .rtl .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .rtl .input-group > .input-group-prepend > .btn,
@@ -4043,20 +4104,23 @@ select:-webkit-autofill:focus {
 .rtl .input-group > .input-group-append > .btn,
 .rtl .input-group > .input-group-append > .input-group-text,
 .rtl .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
-.rtl .input-group
-> .input-group-prepend:first-child
-> .input-group-text:not(:first-child),
+.rtl
+  .input-group
+  > .input-group-prepend:first-child
+  > .input-group-text:not(:first-child),
 .rtl .input-group > .input-group-prepend:not(:first-child) > .btn,
 .rtl .input-group > .input-group-prepend:not(:first-child) > .input-group-text {
   border-radius: 50px;
 }
 
-.rtl .input-group
-> .input-group-append:last-child
-> .btn:not(:last-child):not(.dropdown-toggle),
-.rtl .input-group
-> .input-group-append:last-child
-> .input-group-text:not(:last-child),
+.rtl
+  .input-group
+  > .input-group-append:last-child
+  > .btn:not(:last-child):not(.dropdown-toggle),
+.rtl
+  .input-group
+  > .input-group-append:last-child
+  > .input-group-text:not(:last-child),
 .rtl .input-group > .input-group-append:not(:last-child) > .btn,
 .rtl .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .rtl .input-group > .input-group-prepend > .btn,
@@ -4074,9 +4138,10 @@ select:-webkit-autofill:focus {
   border-bottom-right-radius: 0;
 }
 
-.rtl .input-group
-> .input-group-append:last-child
-> .btn:not(:last-child):not(.dropdown-toggle) {
+.rtl
+  .input-group
+  > .input-group-append:last-child
+  > .btn:not(:last-child):not(.dropdown-toggle) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -4146,7 +4211,10 @@ select:-webkit-autofill:focus {
   left: -28px;
 }
 
-.rtl .custom-switch-small .custom-switch-input:checked + .custom-switch-btn:after {
+.rtl
+  .custom-switch-small
+  .custom-switch-input:checked
+  + .custom-switch-btn:after {
   left: -18px;
 }
 
@@ -4225,7 +4293,7 @@ select:-webkit-autofill:focus {
 .page-item .page-link {
   outline: initial !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   line-height: 1.7;
   border-radius: 40px !important;
   min-width: 38px;
@@ -4249,20 +4317,23 @@ select:-webkit-autofill:focus {
   border: 1px solid #38688b;
 }
 
-.page-item .page-link.prev, .page-item .page-link.prev {
+.page-item .page-link.prev,
+.page-item .page-link.prev {
   background: #38688b;
   border: 1px solid #38688b;
   color: #1e2022;
 }
 
-.page-item .page-link.first, .page-item .page-link.last {
+.page-item .page-link.first,
+.page-item .page-link.last {
   background: transparent;
   color: #38688b;
   border: 1px solid #38688b;
   border-radius: 30px;
 }
 
-.page-item .page-link.first:hover, .page-item .page-link.last:hover {
+.page-item .page-link.first:hover,
+.page-item .page-link.last:hover {
   background: #38688b;
   color: #1e2022;
   border: 1px solid #38688b;
@@ -4524,7 +4595,7 @@ footer.page-footer .footer-content {
 .calendar-next-btn {
   outline: initial !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   border-radius: 40px !important;
   text-align: center;
   min-width: 30px;
@@ -4678,7 +4749,9 @@ footer.page-footer .footer-content {
   display: inline-block;
 }
 
-.slider-nav .btn:hover, .slider-nav .btn:focus, .slider-nav .btn:active {
+.slider-nav .btn:hover,
+.slider-nav .btn:focus,
+.slider-nav .btn:active {
   text-decoration: initial;
 }
 
@@ -4739,7 +4812,7 @@ footer.page-footer .footer-content {
 
 .react-contextmenu {
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   border-radius: 0.1rem;
   background: #232223;
   border: 1px solid rgba(143, 143, 143, 0.15);
@@ -4782,8 +4855,9 @@ footer.page-footer .footer-content {
 }
 
 .card.react-contextmenu--visible {
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .rtl .react-contextmenu-item span {
@@ -4805,23 +4879,23 @@ footer.page-footer .footer-content {
   top: 3px !important;
   margin-left: 3px !important;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   -webkit-transform: initial !important;
-          transform: initial !important;
+  transform: initial !important;
   -webkit-animation-name: unset !important;
-          animation-name: unset !important;
+  animation-name: unset !important;
   background: #1e2022 !important;
 }
 
 .custom-switch.rc-switch:after {
   -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .custom-switch.rc-switch-checked:after {
   left: 30px !important;
   -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .custom-switch.rc-switch-checked.custom-switch-primary {
@@ -4862,7 +4936,7 @@ footer.page-footer .footer-content {
 
 .rc-switch:focus {
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .custom-switch .custom-switch-input + .custom-switch-btn {
@@ -4870,54 +4944,54 @@ footer.page-footer .footer-content {
 }
 
 .custom-switch.custom-switch-primary
-.custom-switch-input:checked
-+ .custom-switch-btn {
+  .custom-switch-input:checked
+  + .custom-switch-btn {
   background: #38688b !important;
   border: 1px solid #38688b !important;
 }
 
 .custom-switch.custom-switch-secondary
-.custom-switch-input:checked
-+ .custom-switch-btn {
+  .custom-switch-input:checked
+  + .custom-switch-btn {
   background: #3e8ab9 !important;
   border: 1px solid #3e8ab9 !important;
 }
 
 .custom-switch.custom-switch-primary-inverse
-.custom-switch-input
-+ .custom-switch-btn {
+  .custom-switch-input
+  + .custom-switch-btn {
   border: 1px solid #424242 !important;
 }
 
 .custom-switch.custom-switch-primary-inverse
-.custom-switch-input:checked
-+ .custom-switch-btn {
+  .custom-switch-input:checked
+  + .custom-switch-btn {
   background: #232223 !important;
   border: 1px solid #38688b !important;
 }
 
 .custom-switch.custom-switch-primary-inverse
-.custom-switch-input:checked
-+ .custom-switch-btn:after {
+  .custom-switch-input:checked
+  + .custom-switch-btn:after {
   background: #38688b !important;
 }
 
 .custom-switch.custom-switch-secondary-inverse
-.custom-switch-input
-+ .custom-switch-btn {
+  .custom-switch-input
+  + .custom-switch-btn {
   border: 1px solid #424242 !important;
 }
 
 .custom-switch.custom-switch-secondary-inverse
-.custom-switch-input:checked
-+ .custom-switch-btn {
+  .custom-switch-input:checked
+  + .custom-switch-btn {
   background: #232223 !important;
   border: 1px solid #3e8ab9 !important;
 }
 
 .custom-switch.custom-switch-secondary-inverse
-.custom-switch-input:checked
-+ .custom-switch-btn:after {
+  .custom-switch-input:checked
+  + .custom-switch-btn:after {
   background: #3e8ab9 !important;
 }
 
@@ -4959,14 +5033,14 @@ footer.page-footer .footer-content {
   height: 58px !important;
   width: 100% !important;
   -o-object-fit: cover !important;
-     object-fit: cover !important;
+  object-fit: cover !important;
 }
 
 .dropzone.dz-clickable .dz-message,
 .dropzone.dz-clickable .dz-message * {
   position: relative;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   top: 24px !important;
   margin: 0;
 }
@@ -4987,7 +5061,7 @@ footer.page-footer .footer-content {
   -webkit-transition: initial !important;
   transition: initial !important;
   -webkit-animation: initial !important;
-          animation: initial !important;
+  animation: initial !important;
   margin-left: 0;
   margin-top: 0;
   position: relative;
@@ -5003,7 +5077,7 @@ footer.page-footer .footer-content {
   left: 50%;
   top: 29px;
   -webkit-transform: translateX(-50%) translateY(-50%) !important;
-          transform: translateX(-50%) translateY(-50%) !important;
+  transform: translateX(-50%) translateY(-50%) !important;
   height: 22px;
 }
 
@@ -5158,7 +5232,7 @@ footer.page-footer .footer-content {
   right: 50%;
   left: initial;
   -webkit-transform: translateX(50%);
-          transform: translateX(50%);
+  transform: translateX(50%);
 }
 
 .rtl .dropzone .dz-preview.dz-file-preview .remove,
@@ -5191,7 +5265,7 @@ footer.page-footer .footer-content {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   padding-left: initial;
   padding: initial;
   background: initial;
@@ -5271,7 +5345,7 @@ footer.page-footer .footer-content {
   z-index: 1;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   bottom: -6px;
 }
 
@@ -5291,7 +5365,7 @@ footer.page-footer .footer-content {
   z-index: 2;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   bottom: -2px;
 }
 
@@ -5395,24 +5469,27 @@ footer.page-footer .footer-content {
 }
 
 .has-float-label
-.form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+  .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
   opacity: 0;
 }
 
 .has-float-label
-.form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
+  .form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
   opacity: 0;
 }
 
-.has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+.has-float-label
+  .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
   opacity: 0;
 }
 
-.has-float-label .form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
+.has-float-label
+  .form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
   opacity: 0;
 }
 
-.has-float-label .form-control:placeholder-shown:not(:focus)::-ms-input-placeholder {
+.has-float-label
+  .form-control:placeholder-shown:not(:focus)::-ms-input-placeholder {
   opacity: 0;
 }
 
@@ -5532,24 +5609,27 @@ footer.page-footer .footer-content {
 }
 
 .has-top-label
-.form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+  .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
   opacity: 0;
 }
 
 .has-top-label
-.form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
+  .form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
   opacity: 0;
 }
 
-.has-top-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+.has-top-label
+  .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
   opacity: 0;
 }
 
-.has-top-label .form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
+.has-top-label
+  .form-control:placeholder-shown:not(:focus):-ms-input-placeholder {
   opacity: 0;
 }
 
-.has-top-label .form-control:placeholder-shown:not(:focus)::-ms-input-placeholder {
+.has-top-label
+  .form-control:placeholder-shown:not(:focus)::-ms-input-placeholder {
   opacity: 0;
 }
 
@@ -5785,8 +5865,9 @@ footer.page-footer .footer-content {
 
 .notification {
   border-radius: 0.1rem;
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
   padding: 25px 25px 25px 25px;
 }
 
@@ -5965,7 +6046,7 @@ footer.page-footer .footer-content {
 
 .notification-container {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   right: 0;
@@ -5979,7 +6060,7 @@ footer.page-footer .footer-content {
 
 .notification {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding: 15px 15px 15px 58px;
   border-radius: 2px;
   cursor: pointer;
@@ -6005,13 +6086,13 @@ footer.page-footer .footer-content {
 .notification-enter {
   visibility: hidden;
   -webkit-transform: translate3d(100%, 0, 0);
-          transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
 }
 
 .notification-enter.notification-enter-active {
   visibility: visible;
   -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
@@ -6019,13 +6100,13 @@ footer.page-footer .footer-content {
 .notification-leave {
   visibility: visible;
   -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .notification-leave.notification-leave-active {
   visibility: hidden;
   -webkit-transform: translate3d(100%, 0, 0);
-          transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
@@ -6070,7 +6151,14 @@ footer.page-footer .footer-content {
 
 .progress-banner {
   height: 200px;
-  background-image: -webkit-gradient(linear, left bottom, right top, from(#38688b), color-stop(#427599), to(#46789b));
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#38688b),
+    color-stop(#427599),
+    to(#46789b)
+  );
   background-image: linear-gradient(to right top, #38688b, #427599, #46789b);
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -6111,7 +6199,10 @@ footer.page-footer .footer-content {
   height: 120px;
 }
 
-.progress-banner .progress-bar-circle.progress-bar-banner svg path:last-of-type {
+.progress-banner
+  .progress-bar-circle.progress-bar-banner
+  svg
+  path:last-of-type {
   stroke: #b7b7b7;
 }
 
@@ -6167,7 +6258,8 @@ footer.page-footer .footer-content {
   float: left !important;
 }
 
-.react-rater-star.is-active, .react-rater-star.will-be-active {
+.react-rater-star.is-active,
+.react-rater-star.will-be-active {
   color: #38688b !important;
 }
 
@@ -6183,13 +6275,13 @@ footer.page-footer .footer-content {
   border-radius: 0.1rem;
   z-index: 20;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   margin-top: -1px;
   background: #1e2022;
   position: absolute;
   width: 100%;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   top: 100%;
 }
 
@@ -6209,7 +6301,8 @@ footer.page-footer .footer-content {
   color: #8f8f8f !important;
 }
 
-.react-autosuggest__suggestion:hover, .react-autosuggest__suggestion:active {
+.react-autosuggest__suggestion:hover,
+.react-autosuggest__suggestion:active {
   background: #4783af !important;
   color: #1e2022 !important;
 }
@@ -6303,7 +6396,7 @@ footer.page-footer .footer-content {
 }
 
 .react-datepicker-popper[data-placement^='bottom']
-.react-datepicker__triangle::before {
+  .react-datepicker__triangle::before {
   border-bottom-color: #424242 !important;
 }
 
@@ -6346,7 +6439,7 @@ footer.page-footer .footer-content {
 }
 
 .react-datepicker-popper[data-placement^='top']
-.react-datepicker__triangle::before,
+  .react-datepicker__triangle::before,
 .react-datepicker__year-read-view--down-arrow::before,
 .react-datepicker__month-read-view--down-arrow::before,
 .react-datepicker__month-year-read-view--down-arrow::before {
@@ -6354,26 +6447,26 @@ footer.page-footer .footer-content {
 }
 
 .react-datepicker__time-container
-.react-datepicker__time
-.react-datepicker__time-box
-ul.react-datepicker__time-list
-li.react-datepicker__time-list-item:hover {
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:hover {
   background: #18191b !important;
 }
 
 .react-datepicker__time-container
-.react-datepicker__time
-.react-datepicker__time-box
-ul.react-datepicker__time-list
-li.react-datepicker__time-list-item {
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
   text-align: center;
 }
 
 .react-datepicker__time-container
-.react-datepicker__time
-.react-datepicker__time-box
-ul.react-datepicker__time-list
-li.react-datepicker__time-list-item--selected:hover {
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected:hover {
   background: #38688b !important;
 }
 
@@ -6408,24 +6501,24 @@ li.react-datepicker__time-list-item--selected:hover {
 }
 
 .react-datepicker__time-container
-.react-datepicker__time
-.react-datepicker__time-box {
+  .react-datepicker__time
+  .react-datepicker__time-box {
   width: 85px !important;
 }
 
 .react-datepicker__time-container
-.react-datepicker__time
-.react-datepicker__time-box
-ul.react-datepicker__time-list {
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
   padding-left: 0 !important;
   padding-right: 30px !important;
 }
 
 .react-datepicker__time-container
-.react-datepicker__time
-.react-datepicker__time-box
-ul.react-datepicker__time-list
-li.react-datepicker__time-list-item--selected {
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected {
   background: #38688b !important;
 }
 
@@ -6435,10 +6528,11 @@ li.react-datepicker__time-list-item--selected {
   color: #d0d0d0 !important;
 }
 
-.rtl .react-datepicker__time-container
-.react-datepicker__time
-.react-datepicker__time-box
-ul.react-datepicker__time-list {
+.rtl
+  .react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
   padding-left: 30px !important;
   padding-right: 0 !important;
 }
@@ -6457,7 +6551,7 @@ ul.react-datepicker__time-list {
   bottom: unset !important;
   padding: 5px !important;
   -webkit-transform: translateX(-50%) !important;
-          transform: translateX(-50%) !important;
+  transform: translateX(-50%) !important;
 }
 
 .rc-slider-handle {
@@ -6468,7 +6562,7 @@ ul.react-datepicker__time-list {
   cursor: default !important;
   border: 1px solid #424242 !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .rc-slider-track,
@@ -6493,13 +6587,13 @@ ul.react-datepicker__time-list {
 .react-select {
   outline: initial !important;
   -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .react-select__value-container {
   outline: initial !important;
   -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
   padding: 0.75rem 0.75rem 0.4rem 0.75rem !important;
   background: #1e2022 !important;
   padding-top: 2px !important;
@@ -6528,39 +6622,41 @@ ul.react-datepicker__time-list {
 
 .react-select .react-select__dropdown-indicator,
 .react-select
-.react-select__control--is-focused
-.react-select__dropdown-indicator,
+  .react-select__control--is-focused
+  .react-select__dropdown-indicator,
 .react-select .react-select__clear-indicator,
 .react-select
-.react-select__control--is-focused
-.react-select__clear-indicator {
+  .react-select__control--is-focused
+  .react-select__clear-indicator {
   outline: initial;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
 }
 
-.react-select .react-select__dropdown-indicator:active, .react-select .react-select__dropdown-indicator:focus, .react-select .react-select__dropdown-indicator:hover,
+.react-select .react-select__dropdown-indicator:active,
+.react-select .react-select__dropdown-indicator:focus,
+.react-select .react-select__dropdown-indicator:hover,
 .react-select
-.react-select__control--is-focused
-.react-select__dropdown-indicator:active,
+  .react-select__control--is-focused
+  .react-select__dropdown-indicator:active,
 .react-select
-.react-select__control--is-focused
-.react-select__dropdown-indicator:focus,
+  .react-select__control--is-focused
+  .react-select__dropdown-indicator:focus,
 .react-select
-.react-select__control--is-focused
-.react-select__dropdown-indicator:hover,
+  .react-select__control--is-focused
+  .react-select__dropdown-indicator:hover,
 .react-select .react-select__clear-indicator:active,
 .react-select .react-select__clear-indicator:focus,
 .react-select .react-select__clear-indicator:hover,
 .react-select
-.react-select__control--is-focused
-.react-select__clear-indicator:active,
+  .react-select__control--is-focused
+  .react-select__clear-indicator:active,
 .react-select
-.react-select__control--is-focused
-.react-select__clear-indicator:focus,
+  .react-select__control--is-focused
+  .react-select__clear-indicator:focus,
 .react-select
-.react-select__control--is-focused
-.react-select__clear-indicator:hover {
+  .react-select__control--is-focused
+  .react-select__clear-indicator:hover {
   color: #38688b !important;
 }
 
@@ -6570,7 +6666,7 @@ ul.react-datepicker__time-list {
   background: #232223 !important;
   outline: initial !important;
   -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .react-select__indicator-separator {
@@ -6587,7 +6683,8 @@ ul.react-datepicker__time-list {
   color: #8f8f8f !important;
 }
 
-.react-select__option:hover, .react-select__option:active {
+.react-select__option:hover,
+.react-select__option:active {
   background: #38688b !important;
   color: #d0d0d0 !important;
 }
@@ -6616,7 +6713,7 @@ ul.react-datepicker__time-list {
   border-radius: 0.1rem !important;
   z-index: 20 !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
   border: 1px solid rgba(56, 104, 139, 0.6) !important;
   border-top: initial !important;
   margin-top: -1px !important;
@@ -6646,7 +6743,7 @@ ul.react-datepicker__time-list {
 
 .r-table thead th {
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   border: initial;
   text-align: left;
   font-weight: 700;
@@ -6654,12 +6751,12 @@ ul.react-datepicker__time-list {
 
 .r-table thead th.sorted-asc {
   -webkit-box-shadow: inset 0 3px 0 0 #38688b;
-          box-shadow: inset 0 3px 0 0 #38688b;
+  box-shadow: inset 0 3px 0 0 #38688b;
 }
 
 .r-table thead th.sorted-desc {
   -webkit-box-shadow: inset 0 -3px 0 0 #38688b;
-          box-shadow: inset 0 -3px 0 0 #38688b;
+  box-shadow: inset 0 -3px 0 0 #38688b;
 }
 
 .r-table tr td,
@@ -6711,23 +6808,25 @@ ul.react-datepicker__time-list {
   margin-bottom: initial;
 }
 
-.table-divided tbody > tr[role="row"] > td:first-child:before,
-.table-divided tbody > tr[role="row"] > th:first-child:before {
+.table-divided tbody > tr[role='row'] > td:first-child:before,
+.table-divided tbody > tr[role='row'] > th:first-child:before {
   top: unset;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   background-color: #38688b;
   font-size: 22px;
 }
 
 .table-divided tbody tr {
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table-divided tbody tr.selected {
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .table-divided tbody tr.child td {
@@ -6744,8 +6843,9 @@ ul.react-datepicker__time-list {
   border: initial;
 }
 
-.table-divided th.empty:before, .table-divided th.empty:after {
-  content: "";
+.table-divided th.empty:before,
+.table-divided th.empty:after {
+  content: '';
 }
 
 .table-divided .itemCheck {
@@ -6761,12 +6861,12 @@ ul.react-datepicker__time-list {
 
 .order-with-arrow thead th.sorted-asc {
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .order-with-arrow thead th.sorted-desc {
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .order-with-arrow thead .sortable,
@@ -6805,7 +6905,7 @@ ul.react-datepicker__time-list {
 .order-with-arrow thead .sorted-asc_disabled:before,
 .order-with-arrow thead .sorted-desc_disabled:before {
   right: 1em;
-  content: "\2191";
+  content: '\2191';
 }
 
 .order-with-arrow thead .sortable:after,
@@ -6814,7 +6914,7 @@ ul.react-datepicker__time-list {
 .order-with-arrow thead .sorted-asc_disabled:after,
 .order-with-arrow thead .sorted-desc_disabled:after {
   right: 0.5em;
-  content: "\2193";
+  content: '\2193';
 }
 
 .rounded .table-divided tr {
@@ -6904,7 +7004,7 @@ ul.react-datepicker__time-list {
   border: 1px solid #424242 !important;
   outline: initial !important;
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .react-tagsinput--focused {
@@ -6966,7 +7066,7 @@ ul.react-datepicker__time-list {
 
 .sidebar .main-menu.main-hidden {
   -webkit-transform: translateX(-150px);
-          transform: translateX(-150px);
+  transform: translateX(-150px);
 }
 
 .sidebar .main-menu ul li {
@@ -6986,14 +7086,14 @@ ul.react-datepicker__time-list {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -7005,7 +7105,8 @@ ul.react-datepicker__time-list {
   transition: background 300ms;
 }
 
-.sidebar .main-menu ul li a:hover, .sidebar .main-menu ul li a:focus {
+.sidebar .main-menu ul li a:hover,
+.sidebar .main-menu ul li a:focus {
   color: #38688b;
 }
 
@@ -7027,7 +7128,7 @@ ul.react-datepicker__time-list {
   height: 90px;
   top: 50%;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   left: 0;
 }
 
@@ -7074,8 +7175,9 @@ ul.react-datepicker__time-list {
   position: fixed;
   left: 150px;
   border-left: 1px solid #313131;
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
   -webkit-transition: -webkit-transform 300ms;
   transition: -webkit-transform 300ms;
   transition: transform 300ms;
@@ -7140,7 +7242,7 @@ ul.react-datepicker__time-list {
   height: 4px;
   top: 50%;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   left: -16px;
 }
 
@@ -7180,12 +7282,12 @@ ul.react-datepicker__time-list {
   transition: transform 200ms;
   transition: transform 200ms, -webkit-transform 200ms;
   -webkit-transform: rotate(0);
-          transform: rotate(0);
+  transform: rotate(0);
 }
 
 .sidebar .sub-menu ul .rotate-arrow-icon.collapsed i {
   -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 @media (max-width: 1439px) {
@@ -7230,8 +7332,9 @@ ul.react-datepicker__time-list {
   .sidebar {
     padding-top: 70px;
     height: calc(100% - 70px);
-    -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+      0 1px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -7251,7 +7354,7 @@ ul.react-datepicker__time-list {
 .menu-sub-hidden .sub-menu,
 .menu-hidden .sub-menu {
   -webkit-transform: translateX(-230px);
-          transform: translateX(-230px);
+  transform: translateX(-230px);
 }
 
 @media (max-width: 1439px) {
@@ -7259,7 +7362,7 @@ ul.react-datepicker__time-list {
   .menu-sub-hidden .sub-menu,
   .menu-hidden .sub-menu {
     -webkit-transform: translateX(-230px);
-            transform: translateX(-230px);
+    transform: translateX(-230px);
   }
 }
 
@@ -7268,7 +7371,7 @@ ul.react-datepicker__time-list {
   .menu-sub-hidden .sub-menu,
   .menu-hidden .sub-menu {
     -webkit-transform: translateX(-230px);
-            transform: translateX(-230px);
+    transform: translateX(-230px);
   }
 }
 
@@ -7277,21 +7380,21 @@ ul.react-datepicker__time-list {
   .menu-sub-hidden .sub-menu,
   .menu-hidden .sub-menu {
     -webkit-transform: translateX(-230px);
-            transform: translateX(-230px);
+    transform: translateX(-230px);
   }
 }
 
 .main-hidden .main-menu,
 .menu-hidden .main-menu {
   -webkit-transform: translateX(-150px);
-          transform: translateX(-150px);
+  transform: translateX(-150px);
 }
 
 @media (max-width: 1439px) {
   .main-hidden .main-menu,
   .menu-hidden .main-menu {
     -webkit-transform: translateX(-110px);
-            transform: translateX(-110px);
+    transform: translateX(-110px);
   }
 }
 
@@ -7299,7 +7402,7 @@ ul.react-datepicker__time-list {
   .main-hidden .main-menu,
   .menu-hidden .main-menu {
     -webkit-transform: translateX(-100px);
-            transform: translateX(-100px);
+    transform: translateX(-100px);
   }
 }
 
@@ -7307,21 +7410,21 @@ ul.react-datepicker__time-list {
   .main-hidden .main-menu,
   .menu-hidden .main-menu {
     -webkit-transform: translateX(-90px);
-            transform: translateX(-90px);
+    transform: translateX(-90px);
   }
 }
 
 .main-hidden.sub-hidden .sub-menu,
 .menu-hidden .sub-menu {
   -webkit-transform: translateX(-380px);
-          transform: translateX(-380px);
+  transform: translateX(-380px);
 }
 
 @media (max-width: 1439px) {
   .main-hidden.sub-hidden .sub-menu,
   .menu-hidden .sub-menu {
     -webkit-transform: translateX(-340px);
-            transform: translateX(-340px);
+    transform: translateX(-340px);
   }
 }
 
@@ -7329,7 +7432,7 @@ ul.react-datepicker__time-list {
   .main-hidden.sub-hidden .sub-menu,
   .menu-hidden .sub-menu {
     -webkit-transform: translateX(-330px);
-            transform: translateX(-330px);
+    transform: translateX(-330px);
   }
 }
 
@@ -7337,63 +7440,63 @@ ul.react-datepicker__time-list {
   .main-hidden.sub-hidden .sub-menu,
   .menu-hidden .sub-menu {
     -webkit-transform: translateX(-320px);
-            transform: translateX(-320px);
+    transform: translateX(-320px);
   }
 }
 
 .menu-mobile .main-menu {
   -webkit-transform: translateX(-90px);
-          transform: translateX(-90px);
+  transform: translateX(-90px);
 }
 
 .menu-mobile .sub-menu {
   -webkit-transform: translateX(-370px);
-          transform: translateX(-370px);
+  transform: translateX(-370px);
 }
 
 .main-show-temporary .main-menu {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 .main-show-temporary .sub-menu {
   -webkit-transform: translateX(-230px);
-          transform: translateX(-230px);
+  transform: translateX(-230px);
 }
 
 @media (max-width: 1439px) {
   .main-show-temporary .main-menu {
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
   .main-show-temporary .sub-menu {
     -webkit-transform: translateX(-230px);
-            transform: translateX(-230px);
+    transform: translateX(-230px);
   }
 }
 
 @media (max-width: 1199px) {
   .main-show-temporary .main-menu {
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
   .main-show-temporary .sub-menu {
     -webkit-transform: translateX(-230px);
-            transform: translateX(-230px);
+    transform: translateX(-230px);
   }
 }
 
 @media (max-width: 767px) {
   .main-show-temporary .sub-menu {
     -webkit-transform: translateX(-230px);
-            transform: translateX(-230px);
+    transform: translateX(-230px);
   }
 }
 
 .sub-show-temporary .sub-menu,
 .menu-mobile.sub-show-temporary .sub-menu {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 .sub-hidden main,
@@ -7461,8 +7564,9 @@ ul.react-datepicker__time-list {
   left: initial;
   right: 150px;
   border-right: 1px solid #313131;
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .rtl .sidebar .sub-menu ul li {
@@ -7515,7 +7619,7 @@ ul.react-datepicker__time-list {
 .rtl .menu-sub-hidden .sub-menu,
 .rtl .menu-hidden .sub-menu {
   -webkit-transform: translateX(230px);
-          transform: translateX(230px);
+  transform: translateX(230px);
 }
 
 @media (max-width: 1439px) {
@@ -7523,7 +7627,7 @@ ul.react-datepicker__time-list {
   .rtl .menu-sub-hidden .sub-menu,
   .rtl .menu-hidden .sub-menu {
     -webkit-transform: translateX(230px);
-            transform: translateX(230px);
+    transform: translateX(230px);
   }
 }
 
@@ -7532,7 +7636,7 @@ ul.react-datepicker__time-list {
   .rtl .menu-sub-hidden .sub-menu,
   .rtl .menu-hidden .sub-menu {
     -webkit-transform: translateX(230px);
-            transform: translateX(230px);
+    transform: translateX(230px);
   }
 }
 
@@ -7541,21 +7645,21 @@ ul.react-datepicker__time-list {
   .rtl .menu-sub-hidden .sub-menu,
   .rtl .menu-hidden .sub-menu {
     -webkit-transform: translateX(230px);
-            transform: translateX(230px);
+    transform: translateX(230px);
   }
 }
 
 .rtl .main-hidden .main-menu,
 .rtl .menu-hidden .main-menu {
   -webkit-transform: translateX(150px);
-          transform: translateX(150px);
+  transform: translateX(150px);
 }
 
 @media (max-width: 1439px) {
   .rtl .main-hidden .main-menu,
   .rtl .menu-hidden .main-menu {
     -webkit-transform: translateX(110px);
-            transform: translateX(110px);
+    transform: translateX(110px);
   }
 }
 
@@ -7563,7 +7667,7 @@ ul.react-datepicker__time-list {
   .rtl .main-hidden .main-menu,
   .rtl .menu-hidden .main-menu {
     -webkit-transform: translateX(100px);
-            transform: translateX(100px);
+    transform: translateX(100px);
   }
 }
 
@@ -7571,21 +7675,21 @@ ul.react-datepicker__time-list {
   .rtl .main-hidden .main-menu,
   .rtl .menu-hidden .main-menu {
     -webkit-transform: translateX(90px);
-            transform: translateX(90px);
+    transform: translateX(90px);
   }
 }
 
 .rtl .main-hidden.sub-hidden .sub-menu,
 .rtl .menu-hidden .sub-menu {
   -webkit-transform: translateX(380px);
-          transform: translateX(380px);
+  transform: translateX(380px);
 }
 
 @media (max-width: 1439px) {
   .rtl .main-hidden.sub-hidden .sub-menu,
   .rtl .menu-hidden .sub-menu {
     -webkit-transform: translateX(340px);
-            transform: translateX(340px);
+    transform: translateX(340px);
   }
 }
 
@@ -7593,7 +7697,7 @@ ul.react-datepicker__time-list {
   .rtl .main-hidden.sub-hidden .sub-menu,
   .rtl .menu-hidden .sub-menu {
     -webkit-transform: translateX(330px);
-            transform: translateX(330px);
+    transform: translateX(330px);
   }
 }
 
@@ -7601,7 +7705,7 @@ ul.react-datepicker__time-list {
   .rtl .main-hidden.sub-hidden .sub-menu,
   .rtl .menu-hidden .sub-menu {
     -webkit-transform: translateX(320px);
-            transform: translateX(320px);
+    transform: translateX(320px);
   }
 }
 
@@ -7615,50 +7719,50 @@ ul.react-datepicker__time-list {
 
 .rtl .menu-mobile .main-menu {
   -webkit-transform: translateX(90px);
-          transform: translateX(90px);
+  transform: translateX(90px);
 }
 
 .rtl .menu-mobile .sub-menu {
   -webkit-transform: translateX(370px);
-          transform: translateX(370px);
+  transform: translateX(370px);
 }
 
 .rtl .main-show-temporary .main-menu {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 .rtl .main-show-temporary .sub-menu {
   -webkit-transform: translateX(230px);
-          transform: translateX(230px);
+  transform: translateX(230px);
 }
 
 @media (max-width: 1439px) {
   .rtl .main-show-temporary .main-menu {
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
   .rtl .main-show-temporary .sub-menu {
     -webkit-transform: translateX(230px);
-            transform: translateX(230px);
+    transform: translateX(230px);
   }
 }
 
 @media (max-width: 1199px) {
   .rtl .main-show-temporary .main-menu {
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
   .rtl .main-show-temporary .sub-menu {
     -webkit-transform: translateX(230px);
-            transform: translateX(230px);
+    transform: translateX(230px);
   }
 }
 
 @media (max-width: 767px) {
   .rtl .main-show-temporary .sub-menu {
     -webkit-transform: translateX(230px);
-            transform: translateX(230px);
+    transform: translateX(230px);
   }
 }
 
@@ -7666,7 +7770,7 @@ ul.react-datepicker__time-list {
 .rtl .menu-mobile.sub-show-temporary .sub-menu,
 .rtl .menu-main-hidden.menu-mobile.main-show-temporary .sub-menu {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 .rtl .sub-hidden main,
@@ -7923,10 +8027,11 @@ ul.react-datepicker__time-list {
   top: 50%;
   right: 0;
   background: #1e2022;
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
   -webkit-transform: translate(280px, -50%);
-          transform: translate(280px, -50%);
+  transform: translate(280px, -50%);
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -7939,11 +8044,11 @@ ul.react-datepicker__time-list {
   border-radius: 0.2rem;
   color: #8f8f8f;
   -webkit-box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.04);
-          box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.04);
+  box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.04);
   font-size: 20px;
   top: 50%;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   color: #38688b;
 }
 
@@ -7956,7 +8061,8 @@ ul.react-datepicker__time-list {
   transition: background 0.25s;
 }
 
-.theme-colors .theme-color.active, .theme-colors .theme-color:hover {
+.theme-colors .theme-color.active,
+.theme-colors .theme-color:hover {
   background: #1e2022;
 }
 
@@ -8012,7 +8118,7 @@ ul.react-datepicker__time-list {
 
 .theme-colors.shown {
   -webkit-transform: translate(0, calc(-50% + 0.5px));
-          transform: translate(0, calc(-50% + 0.5px));
+  transform: translate(0, calc(-50% + 0.5px));
   -webkit-transition: -webkit-transform 0.4s ease-out;
   transition: -webkit-transform 0.4s ease-out;
   transition: transform 0.4s ease-out;
@@ -8021,7 +8127,7 @@ ul.react-datepicker__time-list {
 
 .theme-colors.hidden {
   -webkit-transform: translate(280px, -50%);
-          transform: translate(280px, -50%);
+  transform: translate(280px, -50%);
   -webkit-transition: -webkit-transform 0.4s ease-out;
   transition: -webkit-transform 0.4s ease-out;
   transition: transform 0.4s ease-out;
@@ -8030,7 +8136,7 @@ ul.react-datepicker__time-list {
 
 .rtl .theme-colors {
   -webkit-transform: translate(-280px, -50%);
-          transform: translate(-280px, -50%);
+  transform: translate(-280px, -50%);
   left: 0;
   right: initial;
 }
@@ -8038,12 +8144,12 @@ ul.react-datepicker__time-list {
 .rtl .theme-colors .theme-button {
   left: 278px;
   -webkit-box-shadow: 3px 0 5px rgba(0, 0, 0, 0.04);
-          box-shadow: 3px 0 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 3px 0 5px rgba(0, 0, 0, 0.04);
 }
 
 .rtl .theme-colors.shown {
   -webkit-transform: translate(0, -50%);
-          transform: translate(0, -50%);
+  transform: translate(0, -50%);
 }
 
 .video-js .vjs-big-play-button {
@@ -8054,7 +8160,7 @@ ul.react-datepicker__time-list {
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 3.5em;
   width: 2.5em;
   border: 0.06666em solid #232223;
@@ -8073,7 +8179,7 @@ ul.react-datepicker__time-list {
 .vjs-tech {
   background: initial;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .video-js:hover .vjs-big-play-button,
@@ -8100,21 +8206,23 @@ ul.react-datepicker__time-list {
   background: #232223;
   color: #38688b;
   border-radius: 15px;
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .video-js .vjs-control-bar .vjs-progress-control.vjs-control {
   background: #232223;
   border-radius: 15px;
   margin-right: 0.5em;
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .video-js .vjs-control-bar .vjs-mute-control.vjs-control {
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
 }
 
 .video-js .vjs-control-bar .vjs-progress-holder {
@@ -8184,18 +8292,20 @@ ul.react-datepicker__time-list {
 .video-js.audio .vjs-control.vjs-button,
 .video-js.audio .vjs-remaining-time,
 .video-js.audio .vjs-volume-panel {
-  -webkit-box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15), 0 0px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15), 0 0px 1px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15),
+    0 0px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15), 0 0px 1px rgba(0, 0, 0, 0.2);
 }
 
 .video-js.audio .vjs-progress-control.vjs-control {
-  -webkit-box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15), 0 0px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15), 0 0px 1px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15),
+    0 0px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15), 0 0px 1px rgba(0, 0, 0, 0.2);
 }
 
 .video-js.audio .vjs-mute-control {
   -webkit-box-shadow: initial !important;
-          box-shadow: initial !important;
+  box-shadow: initial !important;
 }
 
 .video-js.audio .vjs-loading-spinner {
@@ -8211,7 +8321,7 @@ ul.react-datepicker__time-list {
 
 .video-js.side-bar-video video {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .video-js.side-bar-video .vjs-poster {
@@ -8228,7 +8338,7 @@ ul.react-datepicker__time-list {
 
 .video-js.video-content video {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .video-js.video-content .vjs-poster {
@@ -8246,15 +8356,16 @@ ul.react-datepicker__time-list {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
 }
 
 .auth-card .image-side {
   width: 40%;
-  background: url("/assets/img/login/balloon.jpg") no-repeat center top;
+  background: url('/assets/img/login/balloon.jpg') no-repeat center top;
   background-size: cover;
   padding: 80px 40px;
 }
@@ -8272,8 +8383,8 @@ ul.react-datepicker__time-list {
   .auth-card {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
   .auth-card .image-side {
     width: 100%;
@@ -8295,8 +8406,8 @@ ul.react-datepicker__time-list {
   .auth-card {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
   .auth-card .image-side {
     padding: 35px 30px;
@@ -8416,7 +8527,14 @@ ul.react-datepicker__time-list {
 }
 
 .dashboard-sq-banner {
-  background-image: -webkit-gradient(linear, left bottom, right top, from(#38688b), color-stop(#427599), to(#46789b));
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#38688b),
+    color-stop(#427599),
+    to(#46789b)
+  );
   background-image: linear-gradient(to right top, #38688b, #427599, #46789b);
   background-size: cover;
   height: 385px;
@@ -8462,7 +8580,7 @@ ul.react-datepicker__time-list {
   display: -ms-flexbox;
   display: flex;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   width: 100%;
 }
 
@@ -8492,7 +8610,7 @@ ul.react-datepicker__time-list {
   height: 400px;
   border-radius: 0.1rem;
   -webkit-box-shadow: 0px -10px 15px 0px rgba(0, 0, 0, 0.04);
-          box-shadow: 0px -10px 15px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px -10px 15px 0px rgba(0, 0, 0, 0.04);
   padding: 2rem;
   background-color: #1e2022;
 }
@@ -8579,8 +8697,9 @@ ul.react-datepicker__time-list {
   left: 0;
   right: 0;
   bottom: 0;
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
   -webkit-transition: padding 300ms;
   transition: padding 300ms;
   padding-left: 440px;
@@ -8810,7 +8929,8 @@ ul.react-datepicker__time-list {
   transition: opacity 200ms;
 }
 
-.glide.thumbs .glide__slide.active, .glide.thumbs .glide__slide:hover {
+.glide.thumbs .glide__slide.active,
+.glide.thumbs .glide__slide:hover {
   opacity: 1;
 }
 
@@ -8832,7 +8952,7 @@ ul.react-datepicker__time-list {
   border: initial;
   background: initial;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   top: 23px;
   left: -50px;
   font-size: 20px;
@@ -8843,7 +8963,7 @@ ul.react-datepicker__time-list {
   border: initial;
   background: initial;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   top: 23px;
   right: -50px;
   font-size: 20px;
@@ -8958,16 +9078,17 @@ ul.react-datepicker__time-list {
   bottom: 0;
   right: 0;
   -webkit-transform: translateX(300px);
-          transform: translateX(300px);
+  transform: translateX(300px);
   z-index: 25;
   width: 300px;
   background: #18191b;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   -webkit-transition: -webkit-transform 0.5s, -webkit-box-shadow 0.5s;
   transition: -webkit-transform 0.5s, -webkit-box-shadow 0.5s;
   transition: transform 0.5s, box-shadow 0.5s;
-  transition: transform 0.5s, box-shadow 0.5s, -webkit-transform 0.5s, -webkit-box-shadow 0.5s;
+  transition: transform 0.5s, box-shadow 0.5s, -webkit-transform 0.5s,
+    -webkit-box-shadow 0.5s;
 }
 
 .landing-page .logo-mobile {
@@ -8983,7 +9104,7 @@ ul.react-datepicker__time-list {
   display: inline-block;
   width: 100px;
   height: 30px;
-  background: url("/assets/logos/white-full.svg");
+  background: url('/assets/logos/white-full.svg');
   background-repeat: no-repeat;
 }
 
@@ -8993,15 +9114,16 @@ ul.react-datepicker__time-list {
 
 .landing-page.show-mobile-menu .mobile-menu {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  transform: translateX(0);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .landing-page.show-mobile-menu .main-container .content-container,
 .landing-page.show-mobile-menu .main-container nav {
   -webkit-transform: translateX(-300px);
-          transform: translateX(-300px);
+  transform: translateX(-300px);
 }
 
 .landing-page .content-container {
@@ -9080,7 +9202,8 @@ ul.react-datepicker__time-list {
   background: transparent;
 }
 
-.landing-page .btn-outline-semi-light:hover, .landing-page .btn-outline-semi-light:active {
+.landing-page .btn-outline-semi-light:hover,
+.landing-page .btn-outline-semi-light:active {
   border: 1px solid #294d67;
   background: #294d67;
 }
@@ -9092,7 +9215,7 @@ ul.react-datepicker__time-list {
   width: 100%;
   background: transparent;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
 }
 
 .landing-page .landing-page-nav nav {
@@ -9103,10 +9226,13 @@ ul.react-datepicker__time-list {
 }
 
 .landing-page .landing-page-nav .headroom {
-  -webkit-transition: top 0.5s, background 0.5s, -webkit-box-shadow 0.2s, -webkit-transform 0.5s !important;
-  transition: top 0.5s, background 0.5s, -webkit-box-shadow 0.2s, -webkit-transform 0.5s !important;
+  -webkit-transition: top 0.5s, background 0.5s, -webkit-box-shadow 0.2s,
+    -webkit-transform 0.5s !important;
+  transition: top 0.5s, background 0.5s, -webkit-box-shadow 0.2s,
+    -webkit-transform 0.5s !important;
   transition: top 0.5s, background 0.5s, box-shadow 0.2s, transform 0.5s !important;
-  transition: top 0.5s, background 0.5s, box-shadow 0.2s, transform 0.5s, -webkit-box-shadow 0.2s, -webkit-transform 0.5s !important;
+  transition: top 0.5s, background 0.5s, box-shadow 0.2s, transform 0.5s,
+    -webkit-box-shadow 0.2s, -webkit-transform 0.5s !important;
 }
 
 .landing-page .landing-page-nav .container {
@@ -9154,14 +9280,14 @@ ul.react-datepicker__time-list {
   display: inline-block;
   width: 120px;
   height: 40px;
-  background: url("/assets/logos/white-full.svg");
+  background: url('/assets/logos/white-full.svg');
   background-repeat: no-repeat;
 }
 
 .landing-page .landing-page-nav .navbar-logo .dark {
   width: 120px;
   height: 40px;
-  background: url("/assets/logos/white-full.svg");
+  background: url('/assets/logos/white-full.svg');
   background-repeat: no-repeat;
   display: none;
 }
@@ -9185,8 +9311,8 @@ ul.react-datepicker__time-list {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .landing-page .landing-page-nav .navbar-nav li {
@@ -9232,9 +9358,28 @@ ul.react-datepicker__time-list {
   margin-top: 0;
 }
 
-.landing-page .landing-page-nav .navbar-nav .nav-item:not(.active) > a:hover:not(.btn), .landing-page .landing-page-nav .navbar-nav .nav-item:not(.active) > a:active:not(.btn),
-.landing-page .landing-page-nav .navbar-nav .nav-item:not(.active) .dropdown > a:hover:not(.btn),
-.landing-page .landing-page-nav .navbar-nav .nav-item:not(.active) .dropdown > a:active:not(.btn) {
+.landing-page
+  .landing-page-nav
+  .navbar-nav
+  .nav-item:not(.active)
+  > a:hover:not(.btn),
+.landing-page
+  .landing-page-nav
+  .navbar-nav
+  .nav-item:not(.active)
+  > a:active:not(.btn),
+.landing-page
+  .landing-page-nav
+  .navbar-nav
+  .nav-item:not(.active)
+  .dropdown
+  > a:hover:not(.btn),
+.landing-page
+  .landing-page-nav
+  .navbar-nav
+  .nav-item:not(.active)
+  .dropdown
+  > a:active:not(.btn) {
   opacity: 0.8;
 }
 
@@ -9247,7 +9392,11 @@ ul.react-datepicker__time-list {
   display: block;
 }
 
-.landing-page .landing-page-nav .navbar-nav .dropdown > .dropdown-toggle:active {
+.landing-page
+  .landing-page-nav
+  .navbar-nav
+  .dropdown
+  > .dropdown-toggle:active {
   pointer-events: none;
 }
 
@@ -9262,14 +9411,16 @@ ul.react-datepicker__time-list {
   padding-bottom: 0.5rem;
 }
 
-.landing-page .landing-page-nav .navbar-nav .dropdown a.dropdown-item.active, .landing-page .landing-page-nav .navbar-nav .dropdown a.dropdown-item:active {
+.landing-page .landing-page-nav .navbar-nav .dropdown a.dropdown-item.active,
+.landing-page .landing-page-nav .navbar-nav .dropdown a.dropdown-item:active {
   color: #d0d0d0;
 }
 
 .landing-page .landing-page-nav .headroom--pinned {
   background: #1e2022;
-  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.1);
 }
 
 .landing-page .landing-page-nav .headroom--pinned .navbar-logo .white {
@@ -9284,25 +9435,47 @@ ul.react-datepicker__time-list {
   color: #8f8f8f;
 }
 
-.landing-page .landing-page-nav .headroom--pinned .navbar-nav a:hover, .landing-page .landing-page-nav .headroom--pinned .navbar-nav a:active {
+.landing-page .landing-page-nav .headroom--pinned .navbar-nav a:hover,
+.landing-page .landing-page-nav .headroom--pinned .navbar-nav a:active {
   color: #38688b;
 }
 
-.landing-page .landing-page-nav .headroom--pinned .navbar-nav a.dropdown-item:focus {
+.landing-page
+  .landing-page-nav
+  .headroom--pinned
+  .navbar-nav
+  a.dropdown-item:focus {
   color: #d0d0d0;
 }
 
-.landing-page .landing-page-nav .headroom--pinned .navbar-nav li.active::before {
+.landing-page
+  .landing-page-nav
+  .headroom--pinned
+  .navbar-nav
+  li.active::before {
   content: ' ';
   background-color: #38688b;
 }
 
-.landing-page .landing-page-nav .headroom--pinned .navbar-nav .btn-outline-semi-light {
+.landing-page
+  .landing-page-nav
+  .headroom--pinned
+  .navbar-nav
+  .btn-outline-semi-light {
   border: 1px solid rgba(56, 104, 139, 0.3);
   color: #38688b;
 }
 
-.landing-page .landing-page-nav .headroom--pinned .navbar-nav .btn-outline-semi-light:hover, .landing-page .landing-page-nav .headroom--pinned .navbar-nav .btn-outline-semi-light:active {
+.landing-page
+  .landing-page-nav
+  .headroom--pinned
+  .navbar-nav
+  .btn-outline-semi-light:hover,
+.landing-page
+  .landing-page-nav
+  .headroom--pinned
+  .navbar-nav
+  .btn-outline-semi-light:active {
   border: 1px solid #38688b;
   background: #38688b;
   color: #d0d0d0;
@@ -9462,7 +9635,7 @@ ul.react-datepicker__time-list {
 .landing-page .mobile-hero {
   margin-left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   max-width: 135%;
   margin-bottom: 3rem;
 }
@@ -9614,8 +9787,9 @@ ul.react-datepicker__time-list {
 
 .landing-page .newsletter-input-container .input-group {
   border-radius: 50px;
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
 }
 
 .landing-page .newsletter-input-container input {
@@ -9679,7 +9853,8 @@ ul.react-datepicker__time-list {
   color: #d0d0d0;
 }
 
-.landing-page .footer .footer-menu a:hover, .landing-page .footer .footer-menu a:focus {
+.landing-page .footer .footer-menu a:hover,
+.landing-page .footer .footer-menu a:focus {
   color: #1b3242;
 }
 
@@ -9688,7 +9863,8 @@ ul.react-datepicker__time-list {
   margin-left: 5px;
 }
 
-.landing-page .footer .footer-menu .collapse-button:hover, .landing-page .footer .footer-menu .collapse-button:focus {
+.landing-page .footer .footer-menu .collapse-button:hover,
+.landing-page .footer .footer-menu .collapse-button:focus {
   color: #d0d0d0;
 }
 
@@ -9714,7 +9890,8 @@ ul.react-datepicker__time-list {
   font-size: 1.2rem;
 }
 
-.landing-page .footer .social-icons li a:hover, .landing-page .footer .social-icons li a:active {
+.landing-page .footer .social-icons li a:hover,
+.landing-page .footer .social-icons li a:active {
   color: rgba(208, 208, 208, 0.7);
 }
 
@@ -9727,7 +9904,7 @@ ul.react-datepicker__time-list {
   .landing-page .feature-image-right {
     margin-left: 50%;
     -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    transform: translateX(-50%);
     max-width: 115%;
     float: initial;
   }
@@ -9769,7 +9946,7 @@ ul.react-datepicker__time-list {
   padding: initial;
   margin: initial;
   -webkit-transform: initial !important;
-          transform: initial !important;
+  transform: initial !important;
   margin-top: 0.5rem;
 }
 
@@ -9778,7 +9955,8 @@ ul.react-datepicker__time-list {
   padding-bottom: 0.5rem;
 }
 
-.landing-page .mobile-menu .dropdown a.dropdown-item.active, .landing-page .mobile-menu .dropdown a.dropdown-item:active {
+.landing-page .mobile-menu .dropdown a.dropdown-item.active,
+.landing-page .mobile-menu .dropdown a.dropdown-item:active {
   color: #d0d0d0;
 }
 
@@ -9801,7 +9979,7 @@ ul.react-datepicker__time-list {
 .landing-page .listing-card-container {
   background: initial;
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
 }
 
 .landing-page .listing-card-container .listing-heading {
@@ -9829,7 +10007,7 @@ ul.react-datepicker__time-list {
 
 .landing-page .table-heading {
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   background: initial;
 }
 
@@ -9852,7 +10030,8 @@ ul.react-datepicker__time-list {
   color: #d0d0d0;
 }
 
-.landing-page form.dark-background .bootstrap-tagsinput:focus, .landing-page form.dark-background .bootstrap-tagsinput:active,
+.landing-page form.dark-background .bootstrap-tagsinput:focus,
+.landing-page form.dark-background .bootstrap-tagsinput:active,
 .landing-page form.dark-background .form-control:focus,
 .landing-page form.dark-background .form-control:active {
   border-color: rgba(208, 208, 208, 0.6);
@@ -9921,8 +10100,9 @@ ul.react-datepicker__time-list {
 
 .landing-page .app-image {
   width: 100%;
-  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3),
+    0 3px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3), 0 3px 24px rgba(0, 0, 0, 0.3);
   border-radius: 1.2rem;
 }
 
@@ -9974,7 +10154,8 @@ ul.react-datepicker__time-list {
   margin: 0.5rem;
 }
 
-.landing-page .feedback-container a:hover, .landing-page .feedback-container a:active {
+.landing-page .feedback-container a:hover,
+.landing-page .feedback-container a:active {
   color: #38688b;
 }
 
@@ -9996,7 +10177,7 @@ ul.react-datepicker__time-list {
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 1.75em;
   width: 2em;
   text-align: center;
@@ -10007,7 +10188,8 @@ ul.react-datepicker__time-list {
   content: '\f101';
 }
 
-.landing-page .video-play-icon:hover span, .landing-page .video-play-icon:active span {
+.landing-page .video-play-icon:hover span,
+.landing-page .video-play-icon:active span {
   background: rgba(255, 255, 255, 0.85);
 }
 
@@ -10019,7 +10201,7 @@ ul.react-datepicker__time-list {
   position: relative;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 @media (max-width: 991px) {
@@ -10059,8 +10241,8 @@ ul.react-datepicker__time-list {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: stretch;
-      -ms-flex-pack: stretch;
-          justify-content: stretch;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
   border-radius: 1rem;
   background-color: initial;
 }
@@ -10325,7 +10507,7 @@ ul.react-datepicker__time-list {
   left: initial;
   right: 50%;
   -webkit-transform: translateX(50%);
-          transform: translateX(50%);
+  transform: translateX(50%);
 }
 
 .rtl .landing-page .feature-image-left {
@@ -10338,7 +10520,7 @@ ul.react-datepicker__time-list {
     margin-left: initial;
     margin-right: 50%;
     -webkit-transform: translateX(50%);
-            transform: translateX(50%);
+    transform: translateX(50%);
   }
 }
 
@@ -10355,7 +10537,7 @@ ul.react-datepicker__time-list {
 .rtl .landing-page .mobile-hero {
   margin-left: initial;
   -webkit-transform: translateX(50%);
-          transform: translateX(50%);
+  transform: translateX(50%);
   margin-right: 50%;
 }
 
@@ -10413,14 +10595,14 @@ ul.react-datepicker__time-list {
 
 .equal-height-container .col-item .price-feature-list {
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .equal-height-container .col-item .price-feature-list ul {
   margin: 0 auto;
   -ms-flex-item-align: start;
-      align-self: flex-start;
+  align-self: flex-start;
   margin-bottom: 1rem;
 }
 
@@ -10430,7 +10612,7 @@ ul.react-datepicker__time-list {
 
 .table-heading {
   -webkit-box-shadow: initial;
-          box-shadow: initial;
+  box-shadow: initial;
   background: initial;
 }
 
@@ -10460,7 +10642,7 @@ i.large-icon {
   width: 100%;
   height: 380px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   max-height: 380px;
 }
 
@@ -10471,7 +10653,7 @@ i.large-icon {
   left: 50%;
   z-index: 1;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   top: -75px;
 }
 
@@ -10489,7 +10671,8 @@ i.large-icon {
   font-size: 1.2rem;
 }
 
-.social-icons li a:hover, .social-icons li a:active {
+.social-icons li a:hover,
+.social-icons li a:active {
   color: rgba(112, 112, 112, 0.7);
 }
 
@@ -10507,9 +10690,9 @@ i.large-icon {
 .comment-likes {
   text-align: right;
   -ms-flex-preferred-size: 90px;
-      flex-basis: 90px;
+  flex-basis: 90px;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .comment-container input {

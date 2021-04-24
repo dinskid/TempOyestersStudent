@@ -164,7 +164,7 @@
 .progressbox {
   position: fixed;
   width: 20%;
-  height: 475px;
+  /* height: 475px; */
 }
 #inside_card {
   width: 90%;

@@ -21,6 +21,9 @@ const ResetPassword = React.lazy(() =>
 );
 
 const User = ({ match, location }) => {
+  const params = window.location.search;
+  console.log(params);
+
   return (
     <UserLayout>
       <Suspense fallback={<div className="loading" />}>

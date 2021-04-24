@@ -82,6 +82,9 @@ const Login = ({ history, loading, error, loginUserAction }) => {
     accessType: 'offline',
   });
 
+  const params = window.location.search;
+  console.log(params);
+
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
@@ -92,7 +95,10 @@ const Login = ({ history, loading, error, loginUserAction }) => {
               Please use your credentials to login.
               <br />
               If you are not a member, please{' '}
-              <NavLink to="/student/user/register" className="black">
+              <NavLink
+                to={`/student/user/register/${params}`}
+                className="black"
+              >
                 register
               </NavLink>
               .

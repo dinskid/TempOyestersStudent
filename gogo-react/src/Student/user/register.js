@@ -139,6 +139,8 @@ const Register = ({
     }
   };
 
+  const params = window.location.search;
+
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
@@ -148,7 +150,7 @@ const Register = ({
             <p className="white mb-0">
               Please use this form to register. <br />
               If you are a member, please
-              <NavLink to="/Student/user/login" className="black">
+              <NavLink to={`/Student/user/login${params}`} className="black">
                 <b> login </b>
               </NavLink>
             </p>
