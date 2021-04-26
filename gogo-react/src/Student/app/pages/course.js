@@ -669,6 +669,10 @@ const KnowledgeBase = ({ match, ...props }) => {
                                       <a href={list.comment_img_url} download>
                                         <FiDownload /> Image.jpg
                                       </a>
+                                      // <img
+                                      //   src={list.comment_img_url}
+                                      //   alt="img"
+                                      // />
                                     )}
                                   </Col>
                                 </Row>

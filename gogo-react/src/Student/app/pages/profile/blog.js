@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
@@ -44,13 +44,13 @@ const Blog = () => {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(false);
 
   const [totalBlogs, setTotalBlogs] = useState(0);
   const [totalComments, setTotalComments] = useState(0);
   const [totalLikes, setTotalLikes] = useState(0);
   const [totalViews, setTotalViews] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [reload, setReload] = useState(false);
   const handleReloadTable = () => setReload(!reload);
@@ -140,11 +140,12 @@ const Blog = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
+      setLoading(false);
       try {
         const result = await axiosInstance.get('/student/blog');
         const result2 = await axiosInstance.get('/student/auth/enabled');
-        setEnabled(result2.data.result.customer_blogs);
+        console.log(result2);
+        setEnabled(false);
         setLoading(false);
         // if (result.data.isEnabled) {
         const data = result.data.result.map((doc) => {
@@ -242,6 +243,7 @@ const Blog = () => {
     );
   }
 
+  console.log(enabled);
   if (!enabled) return <Disabled />;
 
   // return <div>Hello</div>;

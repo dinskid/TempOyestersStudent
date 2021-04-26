@@ -93,9 +93,10 @@ const Register = ({
 
   useEffect(() => {
     const params = window.location.href;
-    var url = new URL(params);
-    var id = url.searchParams.get('tutor_id');
-
+    const url = new URL(params);
+    console.log(url);
+    const id = url.searchParams.get('tutor_id');
+    console.log(id);
     if (id) {
       console.log(id);
       setCustomer_id(id);

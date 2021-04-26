@@ -22,13 +22,16 @@ const ResetPassword = React.lazy(() =>
 
 const User = ({ match, location }) => {
   const params = window.location.search;
-  console.log(params);
 
   return (
     <UserLayout>
       <Suspense fallback={<div className="loading" />}>
         <Switch>
-          <Redirect exact from={`${match.url}/`} to={`${match.url}/login`} />
+          <Redirect
+            exact
+            from={`${match.url}/`}
+            to={`${match.url}/login?tutor_id=1`}
+          />
           <Route
             path={`${match.url}/login`}
             render={(props) => <Login {...props} />}

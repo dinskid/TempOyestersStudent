@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import retry from '../../../../retry';
+import UrlParams from '../../../../data/urlparams';
 
 const DataList = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "product-data-list" */ './data-list'))

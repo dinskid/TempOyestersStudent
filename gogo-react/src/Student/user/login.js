@@ -10,12 +10,14 @@ import { loginUser } from '../../redux/actions';
 import { Colxx } from '../../components/common/CustomBootstrap';
 import IntlMessages from '../../helpers/IntlMessages';
 import Logo from '../../data/Logo';
-
 import Google from './google.png';
-
+import Url from '../../data/urlparams';
 import { useGoogleLogin } from 'react-google-login';
 import { refreshTokenSetup } from './utils/refreshTokenSetup';
 import { loginUserError } from '../../redux/auth/actions';
+import urlParams from '../../data/urlparams';
+import Query from '../../data/query';
+import { useGlobalContext } from '../../context';
 
 const initialvalue = {
   email: ''.toLowerCase(),
@@ -46,6 +48,8 @@ function validateEmail(value) {
 const Login = ({ history, loading, error, loginUserAction }) => {
   const dispatch = useDispatch();
   const [clicked, setClicked] = useState(false);
+  const [URLParams, setURLParams] = useState('');
+  const { query, setQuery } = useGlobalContext();
 
   useEffect(() => {
     if (error) {
@@ -82,8 +86,10 @@ const Login = ({ history, loading, error, loginUserAction }) => {
     accessType: 'offline',
   });
 
-  const params = window.location.search;
-  console.log(params);
+  setQuery(Query);
+
+  console.log(Query);
+  console.log(query);
 
   return (
     <Row className="h-100">
@@ -95,13 +101,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
               Please use your credentials to login.
               <br />
               If you are not a member, please{' '}
-              <NavLink
-                to={`/student/user/register/${params}`}
-                className="black"
-              >
-                register
-              </NavLink>
-              .
+              <NavLink to={`/student/user/register/${Url}`}>register</NavLink>.
             </p>
           </div>
           <div className="form-side">

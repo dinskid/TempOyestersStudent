@@ -47,6 +47,9 @@ import TopnavDarkSwitch from './Topnav.DarkSwitch';
 
 import { getDirection, setDirection } from '../../helpers/Utils';
 import AxiosInstance from '../../helpers/axiosInstance';
+import UrlParams from '../../data/urlparams';
+import Query from '../../data/query';
+import { useGlobalContext, UseGlobalContext } from '../../context';
 
 const Messages = ({ img, title, date }) => {
   return (
@@ -97,6 +100,7 @@ const TopNav = ({
   const [searchKeyword, setSearchKeyword] = useState('');
   const [userName, setUserName] = useState('');
   const [profilePic, setProfilePic] = useState('');
+  const [ID, setID] = useState('');
 
   const search = () => {
     history.push(`${searchPath}?key=${searchKeyword}`);
@@ -223,9 +227,9 @@ const TopNav = ({
 
   const handleLogout = async () => {
     const result = await AxiosInstance.get('/student/auth/logout');
-    console.log(result);
-    if (result.data.sucess === 1) {
-      history.push('/Student/user/login');
+    console.log(result.data);
+    if (result.data.success === 1) {
+      history.push(`/Student/user/login${UrlParams}`);
     }
   };
 
@@ -250,10 +254,12 @@ const TopNav = ({
   };
 
   const { messages } = intl;
+  const { query } = useGlobalContext();
 
   useEffect(() => {
     const getData = async () => {
       const result = await axiosInstance.get('/student/auth/profile');
+      console.log(result);
       setUserName(result.data.result.student_first_name);
       setProfilePic(result.data.result.student_profile_picture);
     };
@@ -262,7 +268,7 @@ const TopNav = ({
 
   useEffect(() => {
     const Data = async () => {
-      const result = await axiosInstance.get('/student/clientDetails/1');
+      const result = await axiosInstance.get(`/student/clientDetails/1`);
       console.log(result);
     };
     Data();

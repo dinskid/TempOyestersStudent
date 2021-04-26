@@ -4,17 +4,20 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { configureStore } from './redux/store';
 import retry from './retry';
+import { AppProvider } from './context';
 
 const App = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "App" */ './App'))
 );
 
 ReactDOM.render(
-  <Provider store={configureStore()}>
-    <Suspense fallback={<div className="loading" />}>
-      <App />
-    </Suspense>
-  </Provider>,
+  <AppProvider>
+    <Provider store={configureStore()}>
+      <Suspense fallback={<div className="loading" />}>
+        <App />
+      </Suspense>
+    </Provider>
+  </AppProvider>,
   document.getElementById('root')
 );
 /*
