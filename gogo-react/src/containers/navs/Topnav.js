@@ -96,6 +96,7 @@ const TopNav = ({
   const [isInFullScreen, setIsInFullScreen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [userName, setUserName] = useState('');
+  const [profilePic, setProfilePic] = useState('');
 
   const search = () => {
     history.push(`${searchPath}?key=${searchKeyword}`);
@@ -254,8 +255,17 @@ const TopNav = ({
     const getData = async () => {
       const result = await axiosInstance.get('/student/auth/profile');
       setUserName(result.data.result.student_first_name);
+      setProfilePic(result.data.result.student_profile_picture);
     };
     getData();
+  }, []);
+
+  useEffect(() => {
+    const Data = async () => {
+      const result = await axiosInstance.get('/student/clientDetails/1');
+      console.log(result);
+    };
+    Data();
   }, []);
 
   return (
@@ -385,7 +395,7 @@ const TopNav = ({
             <span>
               <img
                 alt="Profile"
-                src={require('./Asset 1.png')}
+                src={profilePic || require('./Asset 1.png')}
                 style={{ borderRadius: '50%', width: '50px', height: '50px' }}
               />
             </span>

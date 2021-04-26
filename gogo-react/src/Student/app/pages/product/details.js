@@ -123,6 +123,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
         const result = await axiosInstance.get(
           `/student/sessions/details/${session_id}`
         );
+        console.log(result);
 
         if (result.data.success) {
           const trainerData = result.data.trainerData;

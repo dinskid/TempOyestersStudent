@@ -79,6 +79,7 @@ const KnowledgeBase = ({ match, ...props }) => {
   const [CommnetHere, setComment] = useState('');
   const [CommentsHere, setCommentIs] = useState([]);
   const [Material, setMaterial] = useState([]);
+  const [Image, setImage] = useState('');
 
   const getData = async () => {
     try {
@@ -169,18 +170,23 @@ const KnowledgeBase = ({ match, ...props }) => {
   }, [error]);
 
   const IMgUpload = (e) => {
-    let file = e.target.files[0];
-    console.log(file);
-    // let sizeis = file.size / 125000;
-    // // alert(sizeis)
-    // if (sizeis <= 2) {
-    //   alert('correct file formate', sizeis);
-    // } else {
-    //   alert('Warning the file size is more then 2mb unable to uplaod', sizeis);
-    // }
-    let fileUpload = document.querySelector('.fileUploadIs');
-    console.log(fileUpload);
-    fileUpload.addEventListener('change', (e) => {});
+    const file = URL.createObjectURL(e.target.files[0]);
+    const currentImage = e.target.files[0];
+    console.log(currentImage);
+    setImage(currentImage.name);
+
+    // let file = e.target.files[0];
+    // console.log(file);
+    // // let sizeis = file.size / 125000;
+    // // // alert(sizeis)
+    // // if (sizeis <= 2) {
+    // //   alert('correct file formate', sizeis);
+    // // } else {
+    // //   alert('Warning the file size is more then 2mb unable to uplaod', sizeis);
+    // // }
+    // let fileUpload = document.querySelector('.fileUploadIs');
+    // console.log(fileUpload);
+    // fileUpload.addEventListener('change', (e) => {});
   };
 
   // http://localhost:5000/student/comment
@@ -193,7 +199,7 @@ const KnowledgeBase = ({ match, ...props }) => {
     console.log(CurrentChapter.chapter_id);
     const values = {
       comment_content: CommnetHere,
-      comment_img_url: null,
+      comment_img_url: Image,
       chapter_id: CurrentChapter.chapter_id,
       lesson_id: CurrentLesson.lesson_id,
       session_id: courseDetails.session_id,
@@ -201,7 +207,7 @@ const KnowledgeBase = ({ match, ...props }) => {
     };
     console.log(values);
     try {
-      const result = await axiosInstance.post(`/student/comment/`, { values });
+      const result = await axiosInstance.put(`/student/comment/`, { values });
       console.log(result);
       if (result.data.success) {
         alert('done');
@@ -660,7 +666,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                     </CardText>
                                     {list.student}
                                     {list.comment_img_url && (
-                                      <a href={img} download>
+                                      <a href={list.comment_img_url} download>
                                         <FiDownload /> Image.jpg
                                       </a>
                                     )}

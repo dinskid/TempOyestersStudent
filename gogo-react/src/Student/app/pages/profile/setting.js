@@ -150,7 +150,7 @@ function Setting() {
               <Row>
                 <img
                   // src={avatar}
-                  src={displayProfileImage}
+                  src={displayProfileImage || avatar}
                   style={{
                     borderRadius: '50%',
                     width: '150px',
