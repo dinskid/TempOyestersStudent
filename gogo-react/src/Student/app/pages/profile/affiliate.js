@@ -5,7 +5,7 @@ import { FaUserGraduate } from 'react-icons/fa';
 import { IoIosPaper } from 'react-icons/io';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import AffiliateCard from './AffiliateCard';
-
+import { Spinner } from 'reactstrap';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import Disabled from './Disabled';
@@ -14,6 +14,7 @@ function Affiliate() {
   const [enabled, setEnabled] = useState(true);
   const [error, setError] = useState(null);
   const [totalRewards, setTotalRewards] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const handleTotalRewards = (num) => setTotalRewards(num);
 
@@ -29,20 +30,31 @@ function Affiliate() {
     const getData = async () => {
       try {
         const result = await axiosInstance.get('/student/auth/enabled');
+        console.log(result);
         setEnabled(result.data.result.customer_affiliate);
+        setLoading(false);
       } catch (error) {
         try {
           setError(error.response.data.error);
+          setLoading(false);
         } catch (error) {
           setError('Unable to find blogs');
+          setLoading(false);
         }
       }
     };
     getData();
   }, []);
 
-  if (!enabled) return <Disabled />;
+  if (loading) {
+    return (
+      <div style={{ marginTop: '30%', marginLeft: '50%' }}>
+        <Spinner color="primary" />
+      </div>
+    );
+  }
 
+  if (!enabled) return <Disabled />;
   return (
     <div>
       <Row>

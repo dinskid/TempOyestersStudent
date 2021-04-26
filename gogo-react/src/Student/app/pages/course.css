@@ -310,3 +310,10 @@
   padding-left: 14px;
   padding-right: 14px;
 } */
+
+@media print {
+  html,
+  body {
+    display: none;
+  }
+}

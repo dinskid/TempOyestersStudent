@@ -15,6 +15,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner,
 } from 'reactstrap';
 import IntlMessages from '../../../../helpers/IntlMessages';
 
@@ -27,7 +28,7 @@ import { BiComment } from 'react-icons/bi';
 import { AiFillLike, AiFillEye } from 'react-icons/ai';
 
 import Table from './Table';
-import NoDataFound from "../NoDataFound";
+import NoDataFound from '../NoDataFound';
 import './styles.css';
 
 const Blog = () => {
@@ -49,6 +50,7 @@ const Blog = () => {
   const [totalComments, setTotalComments] = useState(0);
   const [totalLikes, setTotalLikes] = useState(0);
   const [totalViews, setTotalViews] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const [reload, setReload] = useState(false);
   const handleReloadTable = () => setReload(!reload);
@@ -138,26 +140,28 @@ const Blog = () => {
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       try {
         const result = await axiosInstance.get('/student/blog');
-        
-        setEnabled(result.data.isEnabled);
+        const result2 = await axiosInstance.get('/student/auth/enabled');
+        setEnabled(result2.data.result.customer_blogs);
+        setLoading(false);
         // if (result.data.isEnabled) {
-          const data = result.data.result.map((doc) => {
-            return {
-              blog_id: doc.blog_id,
-              blog_title: doc.blog_title,
-              blog_writer_email: doc.blog_writer_email,
-              blog_likes: '20 Static',
-              blog_comments: '30 Static',
-            };
-          });
-          
-          setTotalBlogs(data.length);
-          setBlogList(data);
-          setTotalLikes('20 Static');
-          setTotalComments('20 Static');
-          setTotalViews('0 Static');
+        const data = result.data.result.map((doc) => {
+          return {
+            blog_id: doc.blog_id,
+            blog_title: doc.blog_title,
+            blog_writer_email: doc.blog_writer_email,
+            blog_likes: '20 Static',
+            blog_comments: '30 Static',
+          };
+        });
+
+        setTotalBlogs(data.length);
+        setBlogList(data);
+        setTotalLikes('20 Static');
+        setTotalComments('20 Static');
+        setTotalViews('0 Static');
         // }
       } catch (error) {
         try {
@@ -181,7 +185,6 @@ const Blog = () => {
   };
 
   const handleSubmit = async () => {
-    
     if (!blog.blog_writer_name) setError('Writer name not provided');
     else if (!blog.blog_writer_email) setError('Email not provided');
     else if (
@@ -231,9 +234,15 @@ const Blog = () => {
     }
   };
 
-  if (!enabled) return <Disabled />;
+  if (loading) {
+    return (
+      <div style={{ marginTop: '30%', marginLeft: '50%' }}>
+        <Spinner color="primary" />
+      </div>
+    );
+  }
 
- 
+  if (!enabled) return <Disabled />;
 
   // return <div>Hello</div>;
   const height = !blogList.length ? '80px' : `${blogList.length * 50}px`;
@@ -341,11 +350,10 @@ const Blog = () => {
           >
             <CardBody>
               {/* <div className="create_button_here"> */}
-              {blogList.length==0 ? (
+              {blogList.length == 0 ? (
                 <Button className="mt-3" onClick={toggleModal}>
                   {' '}
                   Create Blog
-                  
                 </Button>
               ) : (
                 <div style={{ position: 'relative' }}>
@@ -421,7 +429,6 @@ const Blog = () => {
                       name="customer_profile_picture"
                       accept=".jpg,.jpeg,.png"
                       onChange={(e) => {
-                        
                         const file = URL.createObjectURL(e.target.files[0]);
                         const currentImage = e.target.files[0];
                         if (
@@ -565,60 +572,70 @@ const Blog = () => {
               </Card>
             </Col>
           </Row>
-          {blogList.length!=0?(<>
-            <Card 
-          className="jt_table"
-            style={{
-              height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
-              marginBottom: '5rem',
-              paddingBottom: !blogList.length ? '0' : '21rem',
-            }}
-          >
-          {/* {console.log(blogList.length*50)} */}
-            <CardBody  style={{
-              height: !blogList.length ? '120px' : `${blogList.length * 100}px`,
-            }} >
-              {/* <div className="create_button_here"> */}
-              {blogList.length==0 ? (
-                <Button 
-                style={{ position: 'absolute', right: "20px" }}
-                className="mt-3" onClick={toggleModal}>
+          {blogList.length != 0 ? (
+            <>
+              <Card
+                className="jt_table"
+                style={{
+                  height: !blogList.length
+                    ? '120px'
+                    : `${blogList.length * 100}px`,
+                  marginBottom: '5rem',
+                  paddingBottom: !blogList.length ? '0' : '21rem',
+                }}
+              >
+                {/* {console.log(blogList.length*50)} */}
+                <CardBody
+                  style={{
+                    height: !blogList.length
+                      ? '120px'
+                      : `${blogList.length * 100}px`,
+                  }}
+                >
+                  {/* <div className="create_button_here"> */}
+                  {blogList.length == 0 ? (
+                    <Button
+                      style={{ position: 'absolute', right: '20px' }}
+                      className="mt-3"
+                      onClick={toggleModal}
+                    >
+                      {' '}
+                      Create Blog
+                    </Button>
+                  ) : (
+                    <div style={{ position: 'relative' }}>
+                      <Button
+                        className="mt-3"
+                        style={{ position: 'absolute', right: 0 }}
+                        onClick={toggleModal}
+                      >
+                        Create Blog
+                      </Button>
+                      <br />
+                      <br />
+
+                      <Table
+                        columns={blog_columns}
+                        data={blogList}
+                        handleReloadTable={handleReloadTable}
+                      />
+                    </div>
+                  )}
+                  {/* </div> */}
+                </CardBody>
+              </Card>{' '}
+            </>
+          ) : (
+            <div className="nodata_jt">
+              <div className="button_create_blog_">
+                <Button className="mt-3" onClick={toggleModal}>
                   {' '}
                   Create Blog
                 </Button>
-              ) : (
-                <div style={{ position: 'relative' }}>
-                  <Button
-                    className="mt-3"
-                    style={{ position: 'absolute', right: 0 }}
-                    onClick={toggleModal}
-                  >
-                    Create Blog
-                  </Button>
-                  <br/>
-                  <br/>
-        
-                  <Table
-                   
-                    columns={blog_columns}
-                    data={blogList}
-                    handleReloadTable={handleReloadTable}
-                  />
-                </div>
-              )}
-              {/* </div> */}
-            </CardBody>
-          </Card>{' '}
-          </>)
-          :(<div className="nodata_jt">
-                <div className="button_create_blog_">
-                  <Button className="mt-3" onClick={toggleModal}>
-                    {' '}
-                    Create Blog
-                  </Button>
-                </div>
-              <NoDataFound/>
-          </div>)}
+              </div>
+              <NoDataFound />
+            </div>
+          )}
         </>
       )}
     </div>

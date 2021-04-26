@@ -380,14 +380,19 @@ const KnowledgeBase = ({ match, ...props }) => {
           <p className="mt-3" style={{ fontSize: '15px' }}>
             {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
           </p>
-          <h2 className="jt_h2_content">{courseDetails.session_name}</h2>
+          <h2 className="jt_h2_content">{courseDetails.session_nam}</h2>
           {/* <p>{courseDetails.session_start_time.substring(0, 10)}</p> */}
         </Col>
         <Col className="jt_video_prt2">
           <Card
             body
             className="progressbox"
-            // style={{ paddingLeft: '14px', paddingRight: '14px' }}
+            style={{
+              paddingLeft: '14px',
+              paddingRight: '14px',
+              overflow: 'scroll',
+              height: '475px',
+            }}
           >
             <CardTitle tag="h2" className="prog">
               Course Progress
@@ -402,7 +407,11 @@ const KnowledgeBase = ({ match, ...props }) => {
 
             <div
               className="content_all"
-              style={{ minHeight: '280px', zIndex: '2' }}
+              style={{
+                width: '100%',
+                minHeight: '280px',
+                zIndex: '2',
+              }}
             >
               <CardTitle
                 style={{
@@ -418,15 +427,9 @@ const KnowledgeBase = ({ match, ...props }) => {
                 Course Contents
               </CardTitle>
               {/* <Scrollbars
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#f7f8fa',
-                  position: 'relative',
-                }}
+                style={{ height: '0px', backgroundColor: 'red' }}
+                id="scrollme"
+                className="jt_scroll"
               > */}
               {courseContent.map((doc, index) => {
                 const togglerId = `toggler${index}`;
@@ -534,7 +537,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                   </>
                 );
               })}
-              {/* </Scrollbars> */}
+              {/* </Scrollbars>  */}
             </div>
           </Card>
         </Col>
