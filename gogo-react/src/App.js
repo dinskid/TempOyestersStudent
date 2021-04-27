@@ -15,6 +15,7 @@ import { getDirection } from './helpers/Utils';
 import retry from './retry';
 import Favicon from 'react-favicon';
 import Logo from './data/Logo';
+import { useGlobalContext } from './context';
 
 const ViewHome = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "views" */ './Student/home'))
@@ -55,11 +56,9 @@ class App extends React.Component {
   render() {
     const { locale } = this.props;
     const currentAppLocale = AppLocale[locale];
-    // console.log(document.title);
+
     return (
       <div className="h-100">
-        <Favicon url={Logo} />
-
         <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}

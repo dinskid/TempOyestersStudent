@@ -76,7 +76,7 @@ const Register = ({
   const dispatch = useDispatch();
   const [customer_id, setCustomer_id] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const { name, params, query } = useGlobalContext();
+  const { name, params, query, logo } = useGlobalContext();
 
   const toggleClick = () => setClicked(false);
 
@@ -160,7 +160,7 @@ const Register = ({
           </div>
           <div className="form-side" style={{ background: '#ffffff' }}>
             <NavLink to="" className="white">
-              <img src={Logo} className="image" alt="1111" />
+              <img src={logo} className="image" alt="1111" />
             </NavLink>
             <CardTitle className="mb-4">
               <IntlMessages id="user.register" />

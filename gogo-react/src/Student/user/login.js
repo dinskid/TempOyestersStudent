@@ -48,7 +48,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   const dispatch = useDispatch();
   const [clicked, setClicked] = useState(false);
   const [URLParams, setURLParams] = useState('');
-  const { query, name, params } = useGlobalContext();
+  const { query, name, params, logo } = useGlobalContext();
 
   console.log(query);
 
@@ -115,7 +115,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
           <div className="form-side">
             <NavLink to="/" className="white">
               {/* <span className="logo-single" /> */}
-              <img src={Logo} className="image" alt="1111" />
+              <img src={logo} className="image" alt="1111" />
             </NavLink>
             <CardTitle className="mb-4">
               <IntlMessages id="user.login-title" />

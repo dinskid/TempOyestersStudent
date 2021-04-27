@@ -59,7 +59,7 @@ const ForgotPassword = ({
   }, [error, forgotUserMail, loading]);
 
   const initialValues = { email };
-  const { query, name } = useGlobalContext();
+  const { query, name, logo } = useGlobalContext();
 
   return (
     <Row className="h-100">
@@ -80,7 +80,7 @@ const ForgotPassword = ({
             <NavLink to="/" className="white">
               {/* <span className="logo-single" /> */}
               <img
-                src={Logo}
+                src={logo}
                 className="image mb-5"
                 style={{ width: '40%' }}
                 alt="1111"

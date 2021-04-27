@@ -101,7 +101,7 @@ const TopNav = ({
   const [userName, setUserName] = useState('');
   const [profilePic, setProfilePic] = useState('');
   const [ID, setID] = useState('');
-  const { params } = useGlobalContext();
+  const { params, logo } = useGlobalContext();
 
   const search = () => {
     history.push(`${searchPath}?key=${searchKeyword}`);
@@ -299,7 +299,7 @@ const TopNav = ({
           <MobileMenuIcon />
         </NavLink>
         <NavLink className="navbar-logo" to={'#'}>
-          <img src={Logo} className="Logo" />
+          <img src={logo} className="Logo" />
         </NavLink>
         {/* <BsChatSquareDots className="chat"/> */}
         {/* <IoIosNotificationsOutline className="notification"/> */}
