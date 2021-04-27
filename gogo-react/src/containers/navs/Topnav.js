@@ -232,7 +232,7 @@ const TopNav = ({
     const result = await AxiosInstance.get('/student/auth/logout');
     console.log(result.data);
     if (result.data.success === 1) {
-      history.push(`/Student/user/login${params}`);
+      history.push(`/Student/user/login${query}`);
     }
   };
 
@@ -269,15 +269,13 @@ const TopNav = ({
     getData();
   }, []);
 
-  console.log(query);
-
-  useEffect(() => {
-    const Data = async () => {
-      const result = await axiosInstance.get(`/student/clientDetails/${query}`);
-      console.log(result);
-    };
-    Data();
-  }, []);
+  // useEffect(() => {
+  //   const Data = async () => {
+  //     const result = await axiosInstance.get(`/student/clientDetails/${query}`);
+  //     console.log(result);
+  //   };
+  //   Data();
+  // }, []);
 
   return (
     <nav className="navbar fixed-top">

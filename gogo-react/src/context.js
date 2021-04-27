@@ -1,27 +1,24 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axiosInstance from './helpers/axiosInstance';
+import Cookies from 'universal-cookie';
 
 const AppContext = createContext();
-const value = localStorage.getItem('params');
-const Params = localStorage.getItem('url');
 
 const AppProvider = ({ children }) => {
-  const [query, setQuery] = useState(value);
-  const [params, setParams] = useState(Params);
+  const [query, setQuery] = useState('');
+  const [params, setParams] = useState('');
   const [name, setName] = useState('');
 
-  console.log(query);
+  const cookies = new Cookies();
+
+  console.log(`/student/clientDetails/${params}`);
+  const Test = cookies.get('Value');
 
   const getData = async () => {
-    const result = await axiosInstance.get(`/student/clientDetails/${query}`);
+    const result = await axiosInstance.get(`/student/clientDetails/${Test}`);
     console.log(result);
     setName(result.data.customer_institute_name);
   };
-
-  const search = window.location.search;
-  const location = window.location.href;
-  const url = new URL(location);
-  const id = url.searchParams.get('tutor_id');
 
   // useEffect(() => {
   //   sessionStorage.setItem('params', id);
@@ -29,10 +26,12 @@ const AppProvider = ({ children }) => {
   // }, []);
 
   useEffect(() => {
-    localStorage.setItem('params', 1);
-    localStorage.setItem('url', '?tutor_id=1');
+    setQuery(cookies.get('Params'));
+    setParams(cookies.get('Value'));
     getData();
   }, []);
+
+  console.log(query);
 
   return (
     <AppContext.Provider value={{ query, params, name }}>

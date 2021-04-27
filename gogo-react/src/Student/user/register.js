@@ -149,11 +149,11 @@ const Register = ({
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">ManZeal Academy</p>
+            <p className="text-white h2">{name}</p>
             <p className="white mb-0">
               Please use this form to register. <br />
               If you are a member, please
-              <NavLink to={`/Student/user/login${params}`} className="black">
+              <NavLink to={`/Student/user/login${query}`} className="black">
                 <b> login </b>
               </NavLink>
             </p>
@@ -300,7 +300,7 @@ const Register = ({
                     </Button>
                     <br />
                     <br />
-                    <NavLink to={`/Student/user/login${params}`}>
+                    <NavLink to={`/Student/user/login${query}`}>
                       Already Registered?
                     </NavLink>
                   </div>

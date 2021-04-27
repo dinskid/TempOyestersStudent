@@ -16,6 +16,7 @@ import { useGoogleLogin } from 'react-google-login';
 import { refreshTokenSetup } from './utils/refreshTokenSetup';
 import { loginUserError } from '../../redux/auth/actions';
 import { useGlobalContext } from '../../context';
+import Cookies from 'universal-cookie';
 
 const initialvalue = {
   email: ''.toLowerCase(),
@@ -48,6 +49,8 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   const [clicked, setClicked] = useState(false);
   const [URLParams, setURLParams] = useState('');
   const { query, name, params } = useGlobalContext();
+
+  console.log(query);
 
   useEffect(() => {
     if (error) {
@@ -84,28 +87,28 @@ const Login = ({ history, loading, error, loginUserAction }) => {
     accessType: 'offline',
   });
 
-  // const params = window.location.href;
-  // const url = new URL(params);
-  // const id = url.searchParams.get('tutor_id');
+  const cookies = new Cookies();
+  const optionalParams = window.location.search;
+  const search = window.location.href;
+  const url = new URL(search);
+  const id = url.searchParams.get('tutor_id');
 
-  // useEffect(() => {
-  //   sessionStorage.setItem('params', id);
-  //   sessionStorage.setItem('url', Url);
-  // }, []);
+  useEffect(() => {
+    cookies.set('Params', optionalParams);
+    cookies.set('Value', id);
+  }, []);
 
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">Manzeal Academy</p>
+            <p className="text-white h2">{name}</p>
             <p className="white mb-0">
               Please use your credentials to login.
               <br />
               If you are not a member, please{' '}
-              <NavLink to={`/student/user/register/${params}`}>
-                register
-              </NavLink>
+              <NavLink to={`/student/user/register/${query}`}>register</NavLink>
               .
             </p>
           </div>
@@ -158,7 +161,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                     )}
                   </FormGroup>
                   <div className="d-flex justify-content-between align-items-center">
-                    <NavLink to={`/Student/user/forgot-password${params}`}>
+                    <NavLink to={`/Student/user/forgot-password${query}`}>
                       <IntlMessages id="user.forgot-password-question" />
                     </NavLink>
                     <Button

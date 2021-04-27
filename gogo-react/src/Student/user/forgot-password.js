@@ -59,18 +59,18 @@ const ForgotPassword = ({
   }, [error, forgotUserMail, loading]);
 
   const initialValues = { email };
-  const { params, name } = useGlobalContext();
+  const { query, name } = useGlobalContext();
 
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">Manzeal Academy</p>
+            <p className="text-white h2">{name}</p>
             <p className="white mb-0">
               Please use your e-mail to reset your password. <br />
               If you are not a member, please{' '}
-              <NavLink to={`/Student/user/register${params}`} className="black">
+              <NavLink to={`/Student/user/register${query}`} className="black">
                 register
               </NavLink>
               .
