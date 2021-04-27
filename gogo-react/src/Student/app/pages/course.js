@@ -746,7 +746,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                 </FormGroup>
               </TabPane>
               <TabPane tabId="2">
-                <Scrollbars style={{ height: '200px' }}>
+                <Scrollbars style={{ height: '0px' }}>
                   {Material ? (
                     <>
                       <div
@@ -755,7 +755,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                         aria-labelledby="contact-tab"
                         show
                       >
-                        <Card
+                        {/* <Card
                           body
                           className="text-center card-inner jt_comment"
                         >
@@ -773,7 +773,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                               </a>
                             </Col>
                           </Row>
-                        </Card>
+                        </Card> */}
                       </div>
                     </>
                   ) : (

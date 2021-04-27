@@ -20,6 +20,13 @@ const AppProvider = ({ children }) => {
     setName(result.data.customer_institute_name);
   };
 
+  window.onload = function () {
+    if (!window.location.hash) {
+      window.location = window.location + '#loaded';
+      window.location.reload();
+    }
+  };
+
   // useEffect(() => {
   //   sessionStorage.setItem('params', id);
   //   sessionStorage.setItem('url', Url);

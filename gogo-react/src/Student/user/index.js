@@ -31,6 +31,7 @@ const User = ({ match, location }) => {
             exact
             from={`${match.url}/`}
             to={`${match.url}/login?tutor_id=1`}
+            refresh="true"
           />
           <Route
             path={`${match.url}/login`}
