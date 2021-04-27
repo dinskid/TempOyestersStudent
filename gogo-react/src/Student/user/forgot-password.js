@@ -8,6 +8,7 @@ import IntlMessages from '../../helpers/IntlMessages';
 import { forgotPassword } from '../../redux/actions';
 import { NotificationManager } from '../../components/common/react-notifications';
 import Logo from '../../data/Logo';
+import { useGlobalContext } from '../../context';
 
 const validateEmail = (value) => {
   let error;
@@ -58,17 +59,18 @@ const ForgotPassword = ({
   }, [error, forgotUserMail, loading]);
 
   const initialValues = { email };
+  const { params, name } = useGlobalContext();
 
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">ManZeal Academy</p>
+            <p className="text-white h2">Manzeal Academy</p>
             <p className="white mb-0">
               Please use your e-mail to reset your password. <br />
               If you are not a member, please{' '}
-              <NavLink to="/Student/user/register" className="black">
+              <NavLink to={`/Student/user/register${params}`} className="black">
                 register
               </NavLink>
               .

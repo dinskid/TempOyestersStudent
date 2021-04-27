@@ -21,7 +21,7 @@ const ResetPassword = React.lazy(() =>
 );
 
 const User = ({ match, location }) => {
-  const params = window.location.search;
+  // const params = window.location.search;
 
   return (
     <UserLayout>

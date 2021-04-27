@@ -49,7 +49,7 @@ import { getDirection, setDirection } from '../../helpers/Utils';
 import AxiosInstance from '../../helpers/axiosInstance';
 import UrlParams from '../../data/urlparams';
 import Query from '../../data/query';
-import { useGlobalContext, UseGlobalContext } from '../../context';
+import { useGlobalContext } from '../../context';
 
 const Messages = ({ img, title, date }) => {
   return (
@@ -101,6 +101,7 @@ const TopNav = ({
   const [userName, setUserName] = useState('');
   const [profilePic, setProfilePic] = useState('');
   const [ID, setID] = useState('');
+  const { params } = useGlobalContext();
 
   const search = () => {
     history.push(`${searchPath}?key=${searchKeyword}`);
@@ -225,11 +226,13 @@ const TopNav = ({
     setIsInFullScreen(!isFS);
   };
 
+  console.log(params);
+
   const handleLogout = async () => {
     const result = await AxiosInstance.get('/student/auth/logout');
     console.log(result.data);
     if (result.data.success === 1) {
-      history.push(`/Student/user/login${UrlParams}`);
+      history.push(`/Student/user/login${params}`);
     }
   };
 
@@ -266,9 +269,11 @@ const TopNav = ({
     getData();
   }, []);
 
+  console.log(query);
+
   useEffect(() => {
     const Data = async () => {
-      const result = await axiosInstance.get(`/student/clientDetails/1`);
+      const result = await axiosInstance.get(`/student/clientDetails/${query}`);
       console.log(result);
     };
     Data();

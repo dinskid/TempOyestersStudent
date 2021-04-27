@@ -18,6 +18,7 @@ import { NotificationManager } from '../../components/common/react-notifications
 import { registerUser } from '../../redux/actions';
 import { registerUserError } from '../../redux/auth/actions';
 import { refreshTokenSetup } from './utils/refreshTokenSetup';
+import { useGlobalContext } from '../../context';
 
 const initialValues = {
   customer_first_name: '',
@@ -75,6 +76,7 @@ const Register = ({
   const dispatch = useDispatch();
   const [customer_id, setCustomer_id] = useState(null);
   const [clicked, setClicked] = useState(false);
+  const { name, params, query } = useGlobalContext();
 
   const toggleClick = () => setClicked(false);
 
@@ -92,14 +94,14 @@ const Register = ({
   }, [error]);
 
   useEffect(() => {
-    const params = window.location.href;
-    const url = new URL(params);
-    console.log(url);
-    const id = url.searchParams.get('tutor_id');
-    console.log(id);
-    if (id) {
-      console.log(id);
-      setCustomer_id(id);
+    // const params = window.location.href;
+    // const url = new URL(params);
+    // console.log(url);
+    // const id = url.searchParams.get('tutor_id');
+    // console.log(id);
+    if (query) {
+      console.log(query);
+      setCustomer_id(query);
     }
   }, [customer_id]);
 
@@ -140,14 +142,14 @@ const Register = ({
     }
   };
 
-  const params = window.location.search;
+  console.log(params);
 
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2"> ManZeal Academy </p>
+            <p className="text-white h2">ManZeal Academy</p>
             <p className="white mb-0">
               Please use this form to register. <br />
               If you are a member, please
@@ -298,7 +300,7 @@ const Register = ({
                     </Button>
                     <br />
                     <br />
-                    <NavLink to="/Student/user/login">
+                    <NavLink to={`/Student/user/login${params}`}>
                       Already Registered?
                     </NavLink>
                   </div>

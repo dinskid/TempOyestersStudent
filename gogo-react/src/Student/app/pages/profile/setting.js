@@ -104,6 +104,7 @@ function Setting() {
         student.student_profile_picture
       );
       formData.append('values', JSON.stringify(student));
+      console.log(formData);
       const result = await axiosInstance.put('/student/auth/profile', formData);
       console.log(result);
       if (result.data.success) setSuccess('Profile Updated Successfully');

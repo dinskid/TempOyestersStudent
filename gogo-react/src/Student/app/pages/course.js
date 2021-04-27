@@ -79,8 +79,13 @@ const KnowledgeBase = ({ match, ...props }) => {
   const [CommnetHere, setComment] = useState('');
   const [CommentsHere, setCommentIs] = useState([]);
   const [Material, setMaterial] = useState([]);
-  const [Image, setImage] = useState('');
-
+  const [newComment, setNewComment] = useState({
+    courseContent: CommnetHere,
+    comment_img_url: '',
+    session_id: courseDetails.session_id,
+    customer_id: courseDetails.customer_id,
+  });
+  const [Image, setImage] = useState(newComment.comment_img_url);
   const getData = async () => {
     try {
       if (isNaN(props.location.state.session_id))
@@ -157,6 +162,8 @@ const KnowledgeBase = ({ match, ...props }) => {
     getData();
   }, []);
 
+  console.log(Assign, Hangouts);
+
   useEffect(() => {
     if (error)
       NotificationManager.warning(
@@ -172,8 +179,22 @@ const KnowledgeBase = ({ match, ...props }) => {
   const IMgUpload = (e) => {
     const file = URL.createObjectURL(e.target.files[0]);
     const currentImage = e.target.files[0];
+    console.log(file);
     console.log(currentImage);
-    setImage(currentImage.name);
+    if (
+      currentImage.type != 'image/jpg' &&
+      currentImage.type != 'image/jpeg' &&
+      currentImage.type != 'image/png' &&
+      currentImage.type != 'image/webp'
+    )
+      setError('only jpg,jpeg,png,webp formats are allowed');
+    else {
+      setNewComment((prevState) => ({
+        ...prevState,
+        comment_img_url: currentImage,
+      }));
+      setImage(file);
+    }
 
     // let file = e.target.files[0];
     // console.log(file);
@@ -512,7 +533,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                       setVideoSrc(null);
                                       setHangouts(null);
                                       setQuiz(null);
-                                      MaterialsSet(l.assignmentUrl);
+                                      MaterialsSet(l.assignment);
                                     }
 
                                     if (l.quizUrl) {
@@ -725,7 +746,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                 </FormGroup>
               </TabPane>
               <TabPane tabId="2">
-                <Scrollbars style={{ height: 0 }}>
+                <Scrollbars style={{ height: '200px' }}>
                   {Material ? (
                     <>
                       <div
@@ -734,15 +755,13 @@ const KnowledgeBase = ({ match, ...props }) => {
                         aria-labelledby="contact-tab"
                         show
                       >
-                        {/* <Card
+                        <Card
                           body
                           className="text-center card-inner jt_comment"
                         >
                           <Row>
                             <Col md={2} xs={12} className="card_comment">
-                              <CardTitle tag="h5" className=""> */}
-                        {/* {doc.name} */}
-                        {/* </CardTitle>
+                              <CardTitle tag="h5" className=""></CardTitle>
                             </Col>
                             <Col md={10} xs={12}>
                               {' '}
@@ -750,11 +769,11 @@ const KnowledgeBase = ({ match, ...props }) => {
                                 {Material}
                               </CardText>
                               <a href={Material} download>
-                                <FiDownload /> CheatSheet.pdf
+                                <FiDownload /> Download
                               </a>
                             </Col>
                           </Row>
-                        </Card> */}
+                        </Card>
                       </div>
                     </>
                   ) : (
