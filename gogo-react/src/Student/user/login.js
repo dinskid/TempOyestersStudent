@@ -92,7 +92,9 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   const search = window.location.href;
   const url = new URL(search);
   const id = url.searchParams.get('tutor_id');
+  console.log(id);
 
+  console.log(query);
   useEffect(() => {
     cookies.set('Params', optionalParams);
     cookies.set('Value', id);

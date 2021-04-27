@@ -589,7 +589,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                     Comments
                   </NavLink>
                 </NavItem>
-
+                {/* 
                 <NavItem className="ml-4">
                   <NavLink
                     to="#"
@@ -604,7 +604,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                   >
                     Material
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
               </Nav>
             </CardHeader>
             <TabContent activeTab={activeFirstTab} className="jt_tab">
@@ -745,8 +745,8 @@ const KnowledgeBase = ({ match, ...props }) => {
                   </Col>
                 </FormGroup>
               </TabPane>
-              <TabPane tabId="2">
-                <Scrollbars style={{ height: '0px' }}>
+              {/* <TabPane tabId="2">
+                <Scrollbars style={{ height: '200px' }}>
                   {Material ? (
                     <>
                       <div
@@ -755,7 +755,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                         aria-labelledby="contact-tab"
                         show
                       >
-                        {/* <Card
+                        <Card
                           body
                           className="text-center card-inner jt_comment"
                         >
@@ -773,7 +773,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                               </a>
                             </Col>
                           </Row>
-                        </Card> */}
+                        </Card>
                       </div>
                     </>
                   ) : (
@@ -782,7 +782,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                     </div>
                   )}
                 </Scrollbars>
-              </TabPane>
+              </TabPane> */}
             </TabContent>
             <div
               id="material"

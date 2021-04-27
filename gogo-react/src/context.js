@@ -7,8 +7,8 @@ import Logo from './data/Logo';
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [query, setQuery] = useState('');
-  const [params, setParams] = useState('');
+  const [query, setQuery] = useState('?tutor_id=1');
+  const [params, setParams] = useState(1);
   const [name, setName] = useState('');
   const [logo, setLogo] = useState('');
   const [favicon, setFavicon] = useState('');
@@ -36,20 +36,29 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     setQuery(cookies.get('Params'));
     setParams(cookies.get('Value'));
+    // const search = window.location.search;
+    // const href = window.location.href;
+    // const url = new URL(href);
+    // const id = url.searchParams.get('tutor_id');
+    // if (search) {
+    //   setQuery(search);
+    //   setParams(id);
+    // } else {
+    //   setQuery((old) => {
+    //     return old;
+    //   });
+    //   setParams((old) => {
+    //     return old;
+    //   });
+
     getData();
-    window.onload = function () {
-      if (!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-      }
-    };
   }, []);
 
   console.log(query);
 
   return (
     <AppContext.Provider value={{ query, params, name, logo, favicon }}>
-      <Favicon url={logo} />
+      <Favicon url={favicon} />
       {children}
     </AppContext.Provider>
   );
