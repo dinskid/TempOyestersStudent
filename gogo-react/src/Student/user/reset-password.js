@@ -8,7 +8,7 @@ import IntlMessages from '../../helpers/IntlMessages';
 import { resetPassword } from '../../redux/actions';
 import { NotificationManager } from '../../components/common/react-notifications';
 import Logo from '../../data/Logo';
-
+import { useGlobalContext } from '../../context';
 const validateNewPassword = (values) => {
   const { newPassword, newPasswordAgain } = values;
   const errors = {};
@@ -76,17 +76,18 @@ const ResetPassword = ({
   };
 
   const initialValues = { newPassword, newPasswordAgain };
+  const { name, query, logo } = useGlobalContext();
 
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">ManZeal Academy</p>
+            <p className="text-white h2">{name}</p>
             <p className="white mb-0">
               Please use your e-mail to reset your password. <br />
               If you are not a member, please{' '}
-              <NavLink to="/Student/user/register" className="black">
+              <NavLink to={`/Student/user/register${query}`} className="black">
                 register
               </NavLink>
               .
@@ -96,7 +97,7 @@ const ResetPassword = ({
             <NavLink to="/" className="white">
               {/* <span className="logo-single" /> */}
               <img
-                src={Logo}
+                src={logo}
                 className="image mb-5"
                 style={{ width: '40%' }}
                 alt="1111"
@@ -140,7 +141,7 @@ const ResetPassword = ({
                   </FormGroup>
 
                   <div className="d-flex justify-content-between align-items-center">
-                    <NavLink to="/Student/user/login">
+                    <NavLink to={`/Student/user/login${query}`}>
                       <IntlMessages id="user.login-title" />
                     </NavLink>
                     <Button

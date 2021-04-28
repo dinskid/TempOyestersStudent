@@ -94,16 +94,18 @@ const Register = ({
   }, [error]);
 
   useEffect(() => {
-    // const params = window.location.href;
-    // const url = new URL(params);
-    // console.log(url);
-    // const id = url.searchParams.get('tutor_id');
-    // console.log(id);
+    const params = window.location.href;
+    const url = new URL(params);
+    console.log(url);
+    const id = url.searchParams.get('tutor_id');
+    console.log(id);
     if (query) {
       console.log(query);
-      setCustomer_id(query);
+      setCustomer_id(id);
     }
   }, [customer_id]);
+
+  console.log(customer_id);
 
   const onSuccess = (res) => {
     setClicked(true);

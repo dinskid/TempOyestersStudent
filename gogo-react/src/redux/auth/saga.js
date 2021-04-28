@@ -174,9 +174,11 @@ export function* watchForgotPassword() {
 const forgotPasswordAsync = async (email) => {
   try {
     const values = { email };
+    console.log(values);
     const result = await axiosInstance.post('/student/auth/forgotPassword', {
       values,
     });
+    console.log(result);
     return result.data;
   } catch (error) {
     try {
@@ -189,11 +191,10 @@ const forgotPasswordAsync = async (email) => {
 };
 
 function* forgotPassword({ payload }) {
-  
   const { email } = payload.forgotUserMail;
   try {
     const forgotPasswordStatus = yield call(forgotPasswordAsync, email);
-    
+
     if (forgotPasswordStatus.success) {
       yield put(forgotPasswordSuccess('success'));
     } else {
@@ -234,7 +235,6 @@ const resetPasswordAsync = async (resetPasswordCode, newPassword) => {
 };
 
 function* resetPassword({ payload }) {
-  
   const { newPassword, resetPasswordCode } = payload;
   try {
     const resetPasswordStatus = yield call(
@@ -242,7 +242,7 @@ function* resetPassword({ payload }) {
       resetPasswordCode,
       newPassword
     );
-    
+
     if (resetPasswordStatus.success) {
       yield put(resetPasswordSuccess('success'));
     } else {
