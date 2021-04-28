@@ -50,8 +50,6 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   const [URLParams, setURLParams] = useState('');
   const { query, name, params, logo } = useGlobalContext();
 
-  console.log(query);
-
   useEffect(() => {
     if (error) {
       NotificationManager.warning(error, 'Login Error', 3000, null, null, '');
@@ -92,7 +90,6 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   const search = window.location.href;
   const url = new URL(search);
   const id = url.searchParams.get('tutor_id');
-  console.log(id);
 
   console.log(query);
   useEffect(() => {

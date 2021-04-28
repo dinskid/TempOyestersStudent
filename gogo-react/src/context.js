@@ -19,7 +19,7 @@ const AppProvider = ({ children }) => {
   const Test = cookies.get('Value');
 
   const getData = async () => {
-    const result = await axiosInstance.get(`/student/clientDetails/${Test}`);
+    const result = await axiosInstance.get(`/student/clientDetails/${params}`);
     console.log(result);
     setName(result.data.customer_institute_name);
     setFavicon(result.data.customer_institute_logo_favicon_icon_url);
@@ -32,27 +32,36 @@ const AppProvider = ({ children }) => {
   //   sessionStorage.setItem('params', id);
   //   sessionStorage.setItem('url', Url);
   // }, []);
+  const search = window.location.search;
+  const href = window.location.href;
+  const url = new URL(href);
+  const id = url.searchParams.get('tutor_id');
 
   useEffect(() => {
-    setQuery(cookies.get('Params'));
-    setParams(cookies.get('Value'));
-    // const search = window.location.search;
-    // const href = window.location.href;
-    // const url = new URL(href);
-    // const id = url.searchParams.get('tutor_id');
-    // if (search) {
-    //   setQuery(search);
-    //   setParams(id);
-    // } else {
-    //   setQuery((old) => {
-    //     return old;
-    //   });
-    //   setParams((old) => {
-    //     return old;
-    //   });
+    // setQuery(cookies.get('Params'));
+    // setParams(cookies.get('Value'));
+    if (search) {
+      setQuery(search);
+      setParams(id);
+      console.log(params);
+    } else {
+      setQuery((old) => {
+        return old;
+      });
+      setParams((old) => {
+        return old;
+      });
+    }
 
     getData();
-  }, []);
+    // window.onload = function () {
+    //   if (!window.location.hash) {
+    //     window.location = window.location + '#loaded';
+    //     window.location.reload();
+    //     window.location.reload();
+    //   }
+    // };
+  }, [query]);
 
   console.log(query);
 
