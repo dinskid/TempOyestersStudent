@@ -105,8 +105,6 @@ const Register = ({
     }
   }, [customer_id]);
 
-  console.log(customer_id);
-
   const onSuccess = (res) => {
     setClicked(true);
     refreshTokenSetup(res);

@@ -66,7 +66,7 @@ function* loginWithEmailPassword({ payload }) {
       const item = { uid: loginUser.token };
       setCurrentUser(item);
       yield put(loginUserSuccess(item));
-      history.push('/app/pages/product/data-list');
+      history.push('/app/pages/mycourses');
     } else {
       // console.log(typeof(toggleClick));
       yield put(loginUserError(loginUser.error));
@@ -138,7 +138,7 @@ function* registerWithEmailPassword({ payload }) {
       const item = { uid: registerUser.token };
       setCurrentUser(item);
       yield put(registerUserSuccess(item));
-      history.push('/app/pages/product/data-list');
+      history.push('/app/pages/mycourses');
     } else {
       // console.log(typeof(toggleClick));
       try {

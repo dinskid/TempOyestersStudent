@@ -127,6 +127,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
 
         if (result.data.success) {
           const trainerData = result.data.trainerData;
+          console.log(trainerData);
           setSession(result.data.session);
           console.log(result.data.session);
           // setInstructor(trainerData.trainer_full_name);
