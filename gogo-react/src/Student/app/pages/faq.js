@@ -227,7 +227,7 @@ const DataListPages = ({ match }) => {
                     <CardImg
                       top
                       style={{ width: '100%', maxHeight: '250px' }}
-                      src={Logo}
+                      src={name.img || Logo}
                       alt="Card image cap"
                     />
                     <div

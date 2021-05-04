@@ -109,6 +109,7 @@ const registerWithEmailPasswordAsync = async ({
       values,
     });
     return result.data;
+    console.log(result);
   } catch (error) {
     try {
       const result = error.response;
@@ -138,7 +139,7 @@ function* registerWithEmailPassword({ payload }) {
       const item = { uid: registerUser.token };
       setCurrentUser(item);
       yield put(registerUserSuccess(item));
-      history.push('/app/pages/mycourses');
+      history.push('/app/pages/product/data-list');
     } else {
       // console.log(typeof(toggleClick));
       try {

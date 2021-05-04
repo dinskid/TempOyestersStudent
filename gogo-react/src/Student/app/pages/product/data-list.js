@@ -68,7 +68,7 @@ const DataListPages = ({ match }) => {
     async function fetchData() {
       try {
         const result = await axiosInstance.get('/student/sessions');
-
+        console.log(result);
         if (result.data.success) {
           const data = result.data.sessions.map((doc) => ({
             id: doc.session_id,
@@ -229,7 +229,7 @@ const DataListPages = ({ match }) => {
                           position: 'relative',
                           maxHeight: '100%',
                         }}
-                        src={Logo || name.img}
+                        src={name.img || Logo}
                         alt="Card image cap"
                       />
                       <div

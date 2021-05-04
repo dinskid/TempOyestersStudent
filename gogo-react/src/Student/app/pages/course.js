@@ -162,7 +162,7 @@ const KnowledgeBase = ({ match, ...props }) => {
     getData();
   }, []);
 
-  console.log(Assign, Hangouts);
+  console.log(Material);
 
   useEffect(() => {
     if (error)
@@ -421,7 +421,7 @@ const KnowledgeBase = ({ match, ...props }) => {
               height: '475px',
             }}
           >
-            <CardTitle tag="h2" className="prog">
+            {/* <CardTitle tag="h2" className="prog">
               Course Progress
             </CardTitle>
             <Progress className="bar" value="200" max={500} id="progress" />
@@ -430,7 +430,7 @@ const KnowledgeBase = ({ match, ...props }) => {
               className="text-center mt-3 font-weight-bold"
             >
               45% of 100%
-            </div>
+            </div> */}
 
             <div
               className="content_all"
@@ -550,11 +550,11 @@ const KnowledgeBase = ({ match, ...props }) => {
                                   className="content1 m-3"
                                 >
                                   <AiFillPlayCircle className="iconvid" />
-                                  {l.name}
+                                  {l.name.substr(0, 20)}
                                 </p>
-                                <p className="content1 mt-3 ml-auto mr-3">
+                                {/* <p className="content1 mt-3 ml-auto mr-3">
                                   <FcCheckmark />
-                                </p>
+                                </p> */}
                               </Row>
                             );
                           })}
@@ -589,7 +589,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                     Comments
                   </NavLink>
                 </NavItem>
-                {/* 
+
                 <NavItem className="ml-4">
                   <NavLink
                     to="#"
@@ -604,7 +604,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                   >
                     Material
                   </NavLink>
-                </NavItem> */}
+                </NavItem>
               </Nav>
             </CardHeader>
             <TabContent activeTab={activeFirstTab} className="jt_tab">
@@ -745,8 +745,8 @@ const KnowledgeBase = ({ match, ...props }) => {
                   </Col>
                 </FormGroup>
               </TabPane>
-              {/* <TabPane tabId="2">
-                <Scrollbars style={{ height: '200px' }}>
+              <TabPane tabId="2" className="jt_tabIs">
+                <Scrollbars style={{ height: '300px' }}>
                   {Material ? (
                     <>
                       <div
@@ -768,8 +768,12 @@ const KnowledgeBase = ({ match, ...props }) => {
                               <CardText className="mt-4 text-left">
                                 {Material}
                               </CardText>
-                              <a href={Material} download>
-                                <FiDownload /> Download
+                              <a
+                                href={Material}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <FiDownload /> View
                               </a>
                             </Col>
                           </Row>
@@ -782,7 +786,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                     </div>
                   )}
                 </Scrollbars>
-              </TabPane> */}
+              </TabPane>
             </TabContent>
             <div
               id="material"
