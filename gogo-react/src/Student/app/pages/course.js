@@ -421,6 +421,7 @@ const KnowledgeBase = ({ match, ...props }) => {
               height: '475px',
             }}
           >
+            {/* course progress bar */}
             {/* <CardTitle tag="h2" className="prog">
               Course Progress
             </CardTitle>
