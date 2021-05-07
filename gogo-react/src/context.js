@@ -3,6 +3,8 @@ import axiosInstance from './helpers/axiosInstance';
 import Cookies from 'universal-cookie';
 import Favicon from 'react-favicon';
 import Logo from './data/Logo';
+import axios from 'axios';
+import axiosInstance2 from './helpers/axiosInstance2';
 
 const AppContext = createContext();
 
@@ -65,8 +67,62 @@ const AppProvider = ({ children }) => {
 
   console.log(query);
 
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [quiz_time, setQuiz_time] = useState('');
+  const [quiz_questions, setQuiz_questions] = useState('');
+  const [quiz_name, setQuiz_name] = useState('');
+  const [userName, setUserName] = useState('');
+  const [ProfilePicture, setProfilePicture] = useState('');
+
+  const fetchQuestions = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance2.get('/getQuiz/demo');
+      console.log(response);
+      setData(response.data);
+      setQuiz_time(response.data.quiz_timer_time);
+      setQuiz_questions(response.data.quiz_all_question);
+      setQuiz_name(response.data.quiz_name);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(true);
+    }
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      const result = await axiosInstance.get('/student/auth/profile');
+      console.log(result);
+      setUserName(result.data.result.student_first_name);
+      setProfilePicture(result.data.result.student_profile_picture);
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
   return (
-    <AppContext.Provider value={{ query, params, name, logo, favicon }}>
+    <AppContext.Provider
+      value={{
+        query,
+        params,
+        name,
+        logo,
+        favicon,
+        data,
+        loading,
+        quiz_time,
+        quiz_questions,
+        quiz_name,
+        userName,
+        ProfilePicture,
+        fetchQuestions,
+      }}
+    >
       <Favicon url={favicon} />
       {children}
     </AppContext.Provider>

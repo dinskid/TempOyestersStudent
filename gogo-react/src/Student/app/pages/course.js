@@ -34,6 +34,7 @@ import { VideoPlayer } from './VideoPlayer';
 import axiosInstance from '../../../helpers/axiosInstance';
 import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
 import NoDataFound from './NoDataFound';
+import { useGlobalContext } from '../../../context';
 
 const Materials = [
   // {
@@ -86,6 +87,14 @@ const KnowledgeBase = ({ match, ...props }) => {
     customer_id: courseDetails.customer_id,
   });
   const [Image, setImage] = useState(newComment.comment_img_url);
+
+  const {
+    fetchQuestions,
+    quiz_questions,
+    quiz_time,
+    data,
+  } = useGlobalContext();
+
   const getData = async () => {
     try {
       if (isNaN(props.location.state.session_id))
@@ -288,6 +297,15 @@ const KnowledgeBase = ({ match, ...props }) => {
     lesson2.style.backgroundColor = '#008ecc';
     // console.log(CurrentLesson);
   };
+
+  const startQuiz = () => {
+    fetchQuestions();
+    localStorage.setItem('DATA', JSON.stringify(quiz_questions));
+    localStorage.setItem('TIME', JSON.stringify(quiz_time));
+    localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
+    history.push('/quiz');
+  };
+
   return (
     <>
       <Row className="wrapper">
@@ -422,6 +440,7 @@ const KnowledgeBase = ({ match, ...props }) => {
             }}
           >
             {/* course progress bar */}
+
             {/* <CardTitle tag="h2" className="prog">
               Course Progress
             </CardTitle>
@@ -432,7 +451,13 @@ const KnowledgeBase = ({ match, ...props }) => {
             >
               45% of 100%
             </div> */}
-
+            <button
+              className="btn-secondary"
+              style={{ border: 'none' }}
+              onClick={startQuiz}
+            >
+              StartQuiz
+            </button>
             <div
               className="content_all"
               style={{

@@ -40,6 +40,8 @@ const ViewUnauthorized = React.lazy(() =>
 const Cart = React.lazy(() =>
   retry(() => import('./Student/app/pages/cart/index'))
 );
+
+const Quiz = React.lazy(() => retry(() => import('./Student/Quiz')));
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -112,6 +114,18 @@ class App extends React.Component {
                     path="/student/next"
                     exact
                     render={(props) => <Cart {...props} />}
+                  />
+
+                  <Route
+                    path="/student/next"
+                    exact
+                    render={(props) => <Cart {...props} />}
+                  />
+
+                  <Route
+                    path="/quiz"
+                    exact
+                    render={(props) => <Quiz {...props} />}
                   />
 
                   <Redirect exact from="/" to={'/Student/user'} />
