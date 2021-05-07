@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useGlobalContext } from '../context';
 import './quiz.css';
 import axiosInstance2 from '../helpers/axiosInstance2';
+import { useHistory } from 'react-router-dom';
 
 function Quiz() {
   const {
@@ -16,6 +17,8 @@ function Quiz() {
     ProfilePicture,
   } = useGlobalContext();
 
+  let history = useHistory();
+
   const [authorOpen, setAuthorOpen] = useState(false);
   const [sectionOpen, setSectionOpen] = useState(false);
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -25,6 +28,7 @@ function Quiz() {
   const [totalTime, setTotalTime] = useState(
     JSON.parse(localStorage.getItem('TIME'))
   );
+
   const [second, setSecond] = useState(60);
 
   const [quizData, setQuizData] = useState(
@@ -100,7 +104,7 @@ function Quiz() {
     setTotalTime((old) => {
       let newValue = old - 1;
       if (newValue < 0) {
-        return 0;
+        return -1;
       }
       return newValue;
     });
@@ -109,12 +113,6 @@ function Quiz() {
   useEffect(() => {
     const sec = setInterval(() => setSecond(second - 1), 1000);
     return () => clearInterval(sec);
-  }, [second]);
-
-  useEffect(() => {
-    if (second < 0) {
-      setSecond(60);
-    }
   }, [second]);
 
   // select answer event
@@ -147,8 +145,12 @@ function Quiz() {
   const finalSubmit = async () => {
     console.log(finalValues);
     try {
-      const submit = await axiosInstance2.post('/submitQuiz', finalValues);
+      const submit = await axios.post(
+        'http:localhost:4003/submitQuiz',
+        finalValues
+      );
       console.log(submit);
+      history.push('/app/pages/mycourses');
     } catch (error) {
       console.log(Error);
     }
@@ -179,6 +181,19 @@ function Quiz() {
       return 'option-btn';
     }
   };
+
+  useEffect(() => {
+    if (second < 0) {
+      setSecond(60);
+    }
+  }, [second]);
+
+  useEffect(() => {
+    if (totalTime < 0) {
+      finalSubmit();
+      history.push('/app/pages/mycourses');
+    }
+  }, [totalTime]);
 
   if (!quizData) {
     return <h1>Loading...</h1>;
