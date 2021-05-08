@@ -93,6 +93,7 @@ const KnowledgeBase = ({ match, ...props }) => {
     quiz_questions,
     quiz_time,
     data,
+    quizStartTime,
   } = useGlobalContext();
 
   const getData = async () => {
@@ -451,13 +452,15 @@ const KnowledgeBase = ({ match, ...props }) => {
             >
               45% of 100%
             </div> */}
-            <button
-              className="btn-secondary"
-              style={{ border: 'none' }}
-              onClick={startQuiz}
-            >
-              StartQuiz
-            </button>
+            {quizStartTime && (
+              <button
+                className="btn-secondary"
+                style={{ border: 'none' }}
+                onClick={startQuiz}
+              >
+                StartQuiz
+              </button>
+            )}
             <div
               className="content_all"
               style={{

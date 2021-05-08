@@ -14,6 +14,7 @@ const AppProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [logo, setLogo] = useState('');
   const [favicon, setFavicon] = useState('');
+  const [quizStartTime, setQuizStartTime] = useState('');
 
   const cookies = new Cookies();
 
@@ -105,6 +106,17 @@ const AppProvider = ({ children }) => {
     fetchQuestions();
   }, []);
 
+  useEffect(() => {
+    const getQuizStartTime = async () => {
+      const result = await axiosInstance.get(
+        'http://localhost:4003/canQuizStart/demo'
+      );
+      console.log(result);
+      setQuizStartTime(result.data);
+    };
+    getQuizStartTime();
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -121,6 +133,7 @@ const AppProvider = ({ children }) => {
         userName,
         ProfilePicture,
         fetchQuestions,
+        quizStartTime,
       }}
     >
       <Favicon url={favicon} />
