@@ -134,7 +134,8 @@ body {
 
 .option-btn {
   width: 300px;
-  height: 40px;
+  height: auto;
+  padding: 0.4rem;
   text-align: center;
   font-size: 18px;
   font-weight: 500;

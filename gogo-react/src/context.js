@@ -14,7 +14,9 @@ const AppProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [logo, setLogo] = useState('');
   const [favicon, setFavicon] = useState('');
-  const [quizStartTime, setQuizStartTime] = useState('');
+  const [quizStartTime, setQuizStartTime] = useState(
+    localStorage.getItem('STARTQUIZ')
+  );
 
   const cookies = new Cookies();
 
@@ -79,7 +81,9 @@ const AppProvider = ({ children }) => {
   const fetchQuestions = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:4003/getQuiz/demo');
+      const response = await axios.get(
+        `${window.location.protocol}//${window.location.hostname}:4003/getQuiz/Geographypaper2`
+      );
       console.log(response);
       setData(response.data);
       setQuiz_time(response.data.quiz_timer_time);
@@ -109,10 +113,10 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     const getQuizStartTime = async () => {
       const result = await axiosInstance.get(
-        'http://localhost:4003/canQuizStart/demo'
+        `${window.location.protocol}//${window.location.hostname}:4003/canQuizStart/demo`
       );
       console.log(result);
-      setQuizStartTime(result.data);
+      localStorage.setItem('STARTQUIZ', result.data);
     };
     getQuizStartTime();
   }, []);

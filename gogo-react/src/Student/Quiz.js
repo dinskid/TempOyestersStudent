@@ -146,7 +146,7 @@ function Quiz() {
     console.log(finalValues);
     try {
       const submit = await axios.post(
-        'http:localhost:4003/submitQuiz',
+        `${window.location.protocol}//${window.location.hostname}:4003/submitQuiz`,
         finalValues
       );
       console.log(submit);
