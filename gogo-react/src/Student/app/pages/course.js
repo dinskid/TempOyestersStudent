@@ -19,6 +19,8 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
+import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
 import { NavLink } from 'react-router-dom';
 import './miscellaneous/course.css';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -35,6 +37,7 @@ import axiosInstance from '../../../helpers/axiosInstance';
 import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
 import NoDataFound from './NoDataFound';
 import { useGlobalContext } from '../../../context';
+import NoCourseImg from './no-course.svg';
 
 const Materials = [
   // {
@@ -309,139 +312,146 @@ const KnowledgeBase = ({ match, ...props }) => {
 
   return (
     <>
-      <Row className="wrapper">
-        <Col className="jt_video_prt1">
-          {videoSrc ? (
-            <VideoPlayer
-              videoSrc={videoSrc}
-              assignment={Assign}
-              Quiz={Quiz}
-              Hangouts={Hangouts}
-            />
-          ) : Assign ? (
-            <>
-              <div className="quize_assg_jt" style={{ width: '100%' }}>
-                <Scrollbars
-                  style={{ width: '100%', height: '450px' }}
-                  className="content_quize_assg_jt"
-                >
-                  <div className="content_quiz">
-                    <h2>Welcome</h2>
-                    <p>Hello my friends,</p>
-                    <p>
-                      Welcome to this new section on Data Preprocessing in R!
-                    </p>
-                    <p>
-                      Just a quick reminder that it is absolutely not necessary
-                      to study the two programming languages Python and R. The
-                      only reason why we provided the two trainings in Python
-                      and R, was for everyone to be able to learn Machine
-                      Learning on their favourite programming language.
-                      Therefore if you only want to study Machine Learning in
-                      Python, feel absolutely free to skip this section and move
-                      on to the next one to tackle the next Machine Learning
-                      model in Python.
-                    </p>
-                    <p>Until then, enjoy Machine Learning!</p>
-                    <p>Hadelin</p>
-                    <a target="blank" href={Assign}>
-                      Click here your assignment
-                    </a>
+      {courseContent ? (
+        <div>
+          <Row className="wrapper">
+            <Col className="jt_video_prt1">
+              {videoSrc ? (
+                <VideoPlayer
+                  videoSrc={videoSrc}
+                  assignment={Assign}
+                  Quiz={Quiz}
+                  Hangouts={Hangouts}
+                />
+              ) : Assign ? (
+                <>
+                  <div className="quize_assg_jt" style={{ width: '100%' }}>
+                    <Scrollbars
+                      style={{ width: '100%', height: '450px' }}
+                      className="content_quize_assg_jt"
+                    >
+                      <div className="content_quiz">
+                        <h2>Welcome</h2>
+                        <p>Hello my friends,</p>
+                        <p>
+                          Welcome to this new section on Data Preprocessing in
+                          R!
+                        </p>
+                        <p>
+                          Just a quick reminder that it is absolutely not
+                          necessary to study the two programming languages
+                          Python and R. The only reason why we provided the two
+                          trainings in Python and R, was for everyone to be able
+                          to learn Machine Learning on their favourite
+                          programming language. Therefore if you only want to
+                          study Machine Learning in Python, feel absolutely free
+                          to skip this section and move on to the next one to
+                          tackle the next Machine Learning model in Python.
+                        </p>
+                        <p>Until then, enjoy Machine Learning!</p>
+                        <p>Hadelin</p>
+                        <a target="blank" href={Assign}>
+                          Click here your assignment
+                        </a>
+                      </div>
+                    </Scrollbars>
+                    <div className="quize_assg_jt_bottom">
+                      <button>Next</button>
+                    </div>
                   </div>
-                </Scrollbars>
-                <div className="quize_assg_jt_bottom">
-                  <button>Next</button>
-                </div>
-              </div>
-            </>
-          ) : Quiz ? (
-            <>
-              <div className="quize_assg_jt" style={{ width: '100%' }}>
-                <Scrollbars
-                  style={{ width: '100%', height: '450px' }}
-                  className="content_quize_assg_jt"
-                >
-                  <div className="content_quiz">
-                    <h2>Welcome</h2>
-                    <p>Hello my friends,</p>
-                    <p>
-                      Welcome to this new section on Data Preprocessing in R!
-                    </p>
-                    <p>
-                      Just a quick reminder that it is absolutely not necessary
-                      to study the two programming languages Python and R. The
-                      only reason why we provided the two trainings in Python
-                      and R, was for everyone to be able to learn Machine
-                      Learning on their favourite programming language.
-                      Therefore if you only want to study Machine Learning in
-                      Python, feel absolutely free to skip this section and move
-                      on to the next one to tackle the next Machine Learning
-                      model in Python.
-                    </p>
-                    <p>Until then, enjoy Machine Learning!</p>
-                    <p>Hadelin</p>
-                    <a target="blank" href={Quiz}>
-                      Click here your Quize
-                    </a>
+                </>
+              ) : Quiz ? (
+                <>
+                  <div className="quize_assg_jt" style={{ width: '100%' }}>
+                    <Scrollbars
+                      style={{ width: '100%', height: '450px' }}
+                      className="content_quize_assg_jt"
+                    >
+                      <div className="content_quiz">
+                        <h2>Welcome</h2>
+                        <p>Hello my friends,</p>
+                        <p>
+                          Welcome to this new section on Data Preprocessing in
+                          R!
+                        </p>
+                        <p>
+                          Just a quick reminder that it is absolutely not
+                          necessary to study the two programming languages
+                          Python and R. The only reason why we provided the two
+                          trainings in Python and R, was for everyone to be able
+                          to learn Machine Learning on their favourite
+                          programming language. Therefore if you only want to
+                          study Machine Learning in Python, feel absolutely free
+                          to skip this section and move on to the next one to
+                          tackle the next Machine Learning model in Python.
+                        </p>
+                        <p>Until then, enjoy Machine Learning!</p>
+                        <p>Hadelin</p>
+                        <a target="blank" href={Quiz}>
+                          Click here your Quize
+                        </a>
+                      </div>
+                    </Scrollbars>
+                    <div className="quize_assg_jt_bottom">
+                      <button>Next</button>
+                    </div>
                   </div>
-                </Scrollbars>
-                <div className="quize_assg_jt_bottom">
-                  <button>Next</button>
+                </>
+              ) : (
+                <div className="quize_assg_jt" style={{ width: '100%' }}>
+                  <Scrollbars
+                    style={{ width: '100%', height: '450px' }}
+                    className="content_quize_assg_jt"
+                  >
+                    <div className="content_quiz">
+                      <h2>Welcome</h2>
+                      <p>Hello my friends,</p>
+                      <p>
+                        Welcome to this new section on Data Preprocessing in R!
+                      </p>
+                      <p>
+                        Just a quick reminder that it is absolutely not
+                        necessary to study the two programming languages Python
+                        and R. The only reason why we provided the two trainings
+                        in Python and R, was for everyone to be able to learn
+                        Machine Learning on their favourite programming
+                        language. Therefore if you only want to study Machine
+                        Learning in Python, feel absolutely free to skip this
+                        section and move on to the next one to tackle the next
+                        Machine Learning model in Python.
+                      </p>
+                      <p>Until then, enjoy Machine Learning!</p>
+                      <p>Hadelin</p>
+                      <a target="blank" href={Hangouts}>
+                        Click here your Hangouts
+                      </a>
+                    </div>
+                  </Scrollbars>
+                  <div className="quize_assg_jt_bottom">
+                    <button>Next</button>
+                  </div>
                 </div>
-              </div>
-            </>
-          ) : (
-            <div className="quize_assg_jt" style={{ width: '100%' }}>
-              <Scrollbars
-                style={{ width: '100%', height: '450px' }}
-                className="content_quize_assg_jt"
-              >
-                <div className="content_quiz">
-                  <h2>Welcome</h2>
-                  <p>Hello my friends,</p>
-                  <p>Welcome to this new section on Data Preprocessing in R!</p>
-                  <p>
-                    Just a quick reminder that it is absolutely not necessary to
-                    study the two programming languages Python and R. The only
-                    reason why we provided the two trainings in Python and R,
-                    was for everyone to be able to learn Machine Learning on
-                    their favourite programming language. Therefore if you only
-                    want to study Machine Learning in Python, feel absolutely
-                    free to skip this section and move on to the next one to
-                    tackle the next Machine Learning model in Python.
-                  </p>
-                  <p>Until then, enjoy Machine Learning!</p>
-                  <p>Hadelin</p>
-                  <a target="blank" href={Hangouts}>
-                    Click here your Hangouts
-                  </a>
-                </div>
-              </Scrollbars>
-              <div className="quize_assg_jt_bottom">
-                <button>Next</button>
-              </div>
-            </div>
-          )}
+              )}
 
-          <p className="mt-3" style={{ fontSize: '15px' }}>
-            {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
-          </p>
-          <h2 className="jt_h2_content">{courseDetails.session_nam}</h2>
-          {/* <p>{courseDetails.session_start_time.substring(0, 10)}</p> */}
-        </Col>
-        <Col className="jt_video_prt2">
-          <Card
-            body
-            className="progressbox"
-            style={{
-              paddingLeft: '14px',
-              paddingRight: '14px',
-              overflow: 'scroll',
-              height: '475px',
-            }}
-          >
-            {/* course progress bar */}
-            {/* <CardTitle tag="h2" className="prog">
+              <p className="mt-3" style={{ fontSize: '15px' }}>
+                {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
+              </p>
+              <h2 className="jt_h2_content">{courseDetails.session_name}</h2>
+              {/* <p>{courseDetails.session_start_time.substring(0, 10)}</p> */}
+            </Col>
+            <Col className="jt_video_prt2">
+              <Card
+                body
+                className="progressbox"
+                style={{
+                  paddingLeft: '14px',
+                  paddingRight: '14px',
+                  overflow: 'scroll',
+                  height: '475px',
+                }}
+              >
+                {/* course progress bar */}
+                {/* <CardTitle tag="h2" className="prog">
               Course Progress
             </CardTitle>
             <Progress className="bar" value="200" max={500} id="progress" />
@@ -451,381 +461,424 @@ const KnowledgeBase = ({ match, ...props }) => {
             >
               45% of 100%
             </div> */}
-            {quizStartTime && (
-              <button
-                className="btn-secondary"
-                style={{ border: 'none' }}
-                onClick={startQuiz}
-              >
-                StartQuiz
-              </button>
-            )}
-            <div
-              className="content_all"
-              style={{
-                width: '100%',
-                minHeight: '280px',
-                zIndex: '2',
-              }}
-            >
-              <CardTitle
-                style={{
-                  marginTop: '20px',
-                  marginBottom: '0px',
-                  textAlign: 'center',
-                  backgroundColor: '#E6E6E6',
-                  padding: '10px 0px',
-                }}
-                tag="h5"
-                className="font-weight-bold jt_h2"
-              >
-                Course Contents
-              </CardTitle>
-              {/* <Scrollbars
+                {quizStartTime && (
+                  <button
+                    className="btn-secondary"
+                    style={{ border: 'none', width: '100%' }}
+                    onClick={startQuiz}
+                  >
+                    StartQuiz
+                  </button>
+                )}
+                <div
+                  className="content_all"
+                  style={{
+                    width: '100%',
+                    minHeight: '280px',
+                    zIndex: '2',
+                  }}
+                >
+                  <CardTitle
+                    style={{
+                      marginTop: '20px',
+                      marginBottom: '0px',
+                      textAlign: 'center',
+                      // backgroundColor: '#E6E6E6',
+                      padding: '10px 0px',
+                      border: '1px solid #E6E6E6',
+                    }}
+                    tag="h5"
+                    className="font-weight-bold jt_h2"
+                  >
+                    Course Contents
+                  </CardTitle>
+                  {/* <Scrollbars
                 style={{ height: '0px', backgroundColor: 'red' }}
                 id="scrollme"
                 className="jt_scroll"
               > */}
-              {courseContent.map((doc, index) => {
-                const togglerId = `toggler${index}`;
-                return (
-                  <>
-                    <div
-                      className="toggle content_jt"
-                      style={{
-                        margin: '0px',
-                        width: '100%',
-                        border: '1px solid #E6E6E6',
-                        position: 'relative',
-                      }}
-                    >
-                      <Button
-                        color="link"
-                        id={togglerId}
-                        style={{ margin: '10px', padding: '0px' }}
-                      >
-                        <p
-                          className=""
+                  {courseContent.map((doc, index) => {
+                    const togglerId = `toggler${index}`;
+                    return (
+                      <>
+                        <div
+                          className="toggle content_jt"
                           style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            margin: '10px auto',
-                            lineHeight: 'none',
+                            margin: '0px',
+                            width: '100%',
+                            border: '1px solid #E6E6E6',
+                            position: 'relative',
                           }}
                         >
-                          <FcCheckmark style={{}} />
-                          <div style={{ padding: '0 10px' }}>{doc.name}</div>
-                        </p>
-                      </Button>
-                    </div>
+                          <Button
+                            color="link"
+                            id={togglerId}
+                            style={{ margin: '10px', padding: '0px' }}
+                          >
+                            <p
+                              className=""
+                              style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                margin: '10px auto',
+                                lineHeight: 'none',
+                              }}
+                            >
+                              <FcCheckmark style={{}} />
+                              <div style={{ padding: '0 10px' }}>
+                                {doc.name}
+                              </div>
+                            </p>
+                          </Button>
+                        </div>
 
-                    <UncontrolledCollapse toggler={togglerId}>
-                      <div
-                        className=""
-                        style={{
-                          paddingLeft: '10px',
-                          paddingRight: '10px',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItem: 'center',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <CardBody style={{ padding: '8px' }}>
-                          {doc.lesson.map((l, ls) => {
-                            return (
-                              <Row className={`lesson-color chch${index}`}>
-                                <p
-                                  onClick={() => {
-                                    getComment(l);
-                                    setCurrentLesson(l);
-                                    setCurrentChapter(doc);
+                        <UncontrolledCollapse toggler={togglerId}>
+                          <div
+                            className=""
+                            style={{
+                              paddingLeft: '10px',
+                              paddingRight: '10px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItem: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <CardBody style={{ padding: '8px' }}>
+                              {doc.lesson.map((l, ls) => {
+                                return (
+                                  <Row className={`lesson-color chch${index}`}>
+                                    <p
+                                      onClick={() => {
+                                        getComment(l);
+                                        setCurrentLesson(l);
+                                        setCurrentChapter(doc);
 
-                                    if (l.videoUrl) {
-                                      setVideoSrc(l.videoUrl);
-                                      setHangouts(null);
-                                      MaterialsSet(null);
-                                      setAssign(null);
-                                      setQuiz(null);
-                                    }
-                                    if (l.handoutsUrl) {
-                                      setHangouts(l.handoutsUrl);
-                                      setVideoSrc(null);
-                                      setAssign(null);
-                                      setQuiz(null);
-                                      MaterialsSet(l.handoutsUrl);
-                                    }
+                                        if (l.videoUrl) {
+                                          setVideoSrc(l.videoUrl);
+                                          setHangouts(null);
+                                          MaterialsSet(null);
+                                          setAssign(null);
+                                          setQuiz(null);
+                                        }
+                                        if (l.handoutsUrl) {
+                                          setHangouts(l.handoutsUrl);
+                                          setVideoSrc(null);
+                                          setAssign(null);
+                                          setQuiz(null);
+                                          MaterialsSet(l.handoutsUrl);
+                                        }
 
-                                    if (l.assignmentUrl) {
-                                      setAssign(l.assignmentUrl);
-                                      setVideoSrc(null);
-                                      setHangouts(null);
-                                      setQuiz(null);
-                                      MaterialsSet(l.assignment);
-                                    }
+                                        if (l.assignmentUrl) {
+                                          setAssign(l.assignmentUrl);
+                                          setVideoSrc(null);
+                                          setHangouts(null);
+                                          setQuiz(null);
+                                          MaterialsSet(l.assignment);
+                                        }
 
-                                    if (l.quizUrl) {
-                                      setQuiz(l.quizUrl);
-                                      setVideoSrc(null);
-                                      setAssign(null);
-                                      setHangouts(null);
-                                      MaterialsSet(l.quizUrl);
-                                    }
+                                        if (l.quizUrl) {
+                                          setQuiz(l.quizUrl);
+                                          setVideoSrc(null);
+                                          setAssign(null);
+                                          setHangouts(null);
+                                          MaterialsSet(l.quizUrl);
+                                        }
 
-                                    lessonColor(index, ls, l, doc);
-                                  }}
-                                  target="_blank"
-                                  className="content1 m-3"
-                                >
-                                  <AiFillPlayCircle className="iconvid" />
-                                  {l.name.substr(0, 20)}
-                                </p>
-                                {/* <p className="content1 mt-3 ml-auto mr-3">
+                                        lessonColor(index, ls, l, doc);
+                                      }}
+                                      target="_blank"
+                                      className="content1 m-3"
+                                    >
+                                      <AiFillPlayCircle className="iconvid" />
+                                      {l.name}
+                                    </p>
+                                    {/* <p className="content1 mt-3 ml-auto mr-3">
                                   <FcCheckmark />
                                 </p> */}
-                              </Row>
-                            );
-                          })}
-                        </CardBody>
-                      </div>
-                    </UncontrolledCollapse>
-                  </>
-                );
-              })}
-              {/* </Scrollbars>  */}
-            </div>
-          </Card>
-        </Col>
-      </Row>
-      <Row>
-        <div className="jt_comment_container">
-          <Card>
-            <CardHeader className="mt-4">
-              <Nav tabs className="card-header-tabs mt-4">
-                <NavItem className="mr-4">
-                  <NavLink
-                    to="#"
-                    location={{}}
-                    className={classnames({
-                      active: activeFirstTab === '1',
-                      'nav-link': true,
-                    })}
-                    onClick={() => {
-                      setActiveFirstTab('1');
-                    }}
-                  >
-                    Comments
-                  </NavLink>
-                </NavItem>
+                                  </Row>
+                                );
+                              })}
+                            </CardBody>
+                          </div>
+                        </UncontrolledCollapse>
+                      </>
+                    );
+                  })}
+                  {/* </Scrollbars>  */}
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          <Row>
+            <div className="jt_comment_container">
+              <Card>
+                <CardHeader className="mt-4">
+                  <Nav tabs className="card-header-tabs mt-4">
+                    <NavItem className="mr-4">
+                      <NavLink
+                        to="#"
+                        location={{}}
+                        className={classnames({
+                          active: activeFirstTab === '1',
+                          'nav-link': true,
+                        })}
+                        onClick={() => {
+                          setActiveFirstTab('1');
+                        }}
+                      >
+                        Comments
+                      </NavLink>
+                    </NavItem>
 
-                <NavItem className="ml-4">
-                  <NavLink
-                    to="#"
-                    location={{}}
-                    className={classnames({
-                      active: activeFirstTab === '2',
-                      'nav-link': true,
-                    })}
-                    onClick={() => {
-                      setActiveFirstTab('2');
-                    }}
-                  >
-                    Material
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </CardHeader>
-            <TabContent activeTab={activeFirstTab} className="jt_tab">
-              <TabPane tabId="1" className="jt_tabIs">
-                {CommentsHere.result.length === 0 ? (
-                  <Scrollbars
-                    style={{ height: '0px', backgroundColor: 'red' }}
-                    id="scrollme"
-                    className="jt_scroll"
-                  >
-                    {CommentsHere.result.map((list) => {
-                      return (
+                    <NavItem className="ml-4">
+                      <NavLink
+                        to="#"
+                        location={{}}
+                        className={classnames({
+                          active: activeFirstTab === '2',
+                          'nav-link': true,
+                        })}
+                        onClick={() => {
+                          setActiveFirstTab('2');
+                        }}
+                      >
+                        Material
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
+                </CardHeader>
+                <TabContent activeTab={activeFirstTab} className="jt_tab">
+                  <TabPane tabId="1" className="jt_tabIs">
+                    {CommentsHere.result.length === 0 ? (
+                      <Scrollbars
+                        style={{ height: '0px', backgroundColor: 'red' }}
+                        id="scrollme"
+                        className="jt_scroll"
+                      >
+                        {CommentsHere.result.map((list) => {
+                          return (
+                            <>
+                              <div
+                                id="comments"
+                                role="tabpanel"
+                                className="jt_comment materials"
+                                aria-labelledby="home-tab"
+                                show
+                              >
+                                <Card
+                                  body
+                                  className="text-center card-inner jt_comment "
+                                >
+                                  <Row>
+                                    <Col
+                                      md={2}
+                                      xs={12}
+                                      className="card_comment"
+                                    >
+                                      <CardTitle tag="h5" className="">
+                                        {list.student_first_name}{' '}
+                                        {list.student_last_name}
+                                      </CardTitle>
+                                    </Col>
+                                    <Col md={10} xs={12}>
+                                      {' '}
+                                      <CardText className="mt-4 text-left">
+                                        {list.comment_content}
+                                      </CardText>
+                                      <a href={img} download>
+                                        <FiDownload /> Image.jpg
+                                      </a>
+                                    </Col>
+                                  </Row>
+                                </Card>
+                              </div>
+                            </>
+                          );
+                        })}
+                      </Scrollbars>
+                    ) : (
+                      <Scrollbars
+                        style={{ height: '450px' }}
+                        id="scrollme"
+                        className="jt_scroll"
+                      >
+                        {CommentsHere.result ? (
+                          CommentsHere.result.map((list) => {
+                            return (
+                              <>
+                                <div
+                                  id="comments"
+                                  role="tabpanel"
+                                  className="jt_comment materials"
+                                  aria-labelledby="home-tab"
+                                  show
+                                >
+                                  <Card
+                                    body
+                                    className="text-center card-inner jt_comment "
+                                  >
+                                    <Row>
+                                      <Col
+                                        md={2}
+                                        xs={12}
+                                        className="card_comment"
+                                      >
+                                        <CardTitle tag="h5" className="">
+                                          {list.student_first_name}{' '}
+                                          {list.student_last_name}
+                                        </CardTitle>
+                                      </Col>
+                                      <Col md={10} xs={12}>
+                                        {' '}
+                                        <CardText className="mt-4 text-left">
+                                          {list.comment_content}
+                                        </CardText>
+                                        {list.student}
+                                        {list.comment_img_url && (
+                                          <a
+                                            href={list.comment_img_url}
+                                            download
+                                          >
+                                            <FiDownload /> Image.jpg
+                                          </a>
+                                          // <img
+                                          //   src={list.comment_img_url}
+                                          //   alt="img"
+                                          // />
+                                        )}
+                                      </Col>
+                                    </Row>
+                                  </Card>
+                                </div>
+                              </>
+                            );
+                          })
+                        ) : (
+                          <div>hello</div>
+                        )}
+                      </Scrollbars>
+                    )}
+                    <FormGroup className="form_attached">
+                      <Col md={2}>
+                        <label className="input-label-1 ml-4">
+                          <input
+                            onChange={(e) => {
+                              IMgUpload(e);
+                            }}
+                            accept="image/*"
+                            data-max-sizeIs="2000"
+                            type="file"
+                            className="inp fileUploadIs"
+                          />
+                          <MdAttachFile className="icon-cmt" />
+                          <p style={{ marginLeft: '25px' }}>Attachments</p>
+                        </label>
+                      </Col>
+                      <Col md={7} className="comment_area">
+                        <Input
+                          onChange={(e) => {
+                            setComment(e.target.value);
+                          }}
+                          type="textarea"
+                          name="text"
+                          id="jt_comment_here"
+                        />
+                      </Col>
+                      <Col md={2} className="comment-btn">
+                        <Button
+                          onClick={() => {
+                            PostComment();
+                          }}
+                          className="btn4"
+                        >
+                          Comment
+                        </Button>
+                      </Col>
+                    </FormGroup>
+                  </TabPane>
+                  <TabPane tabId="2" className="jt_tabIs">
+                    <Scrollbars style={{ height: '300px' }}>
+                      {Material ? (
                         <>
                           <div
-                            id="comments"
+                            id="material"
                             role="tabpanel"
-                            className="jt_comment materials"
-                            aria-labelledby="home-tab"
+                            aria-labelledby="contact-tab"
                             show
                           >
                             <Card
                               body
-                              className="text-center card-inner jt_comment "
+                              className="text-center card-inner jt_comment"
                             >
                               <Row>
                                 <Col md={2} xs={12} className="card_comment">
-                                  <CardTitle tag="h5" className="">
-                                    {list.student_first_name}{' '}
-                                    {list.student_last_name}
-                                  </CardTitle>
+                                  <CardTitle tag="h5" className=""></CardTitle>
                                 </Col>
                                 <Col md={10} xs={12}>
                                   {' '}
                                   <CardText className="mt-4 text-left">
-                                    {list.comment_content}
+                                    {Material}
                                   </CardText>
-                                  <a href={img} download>
-                                    <FiDownload /> Image.jpg
+                                  <a
+                                    href={Material}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <FiDownload /> View
                                   </a>
                                 </Col>
                               </Row>
                             </Card>
                           </div>
                         </>
-                      );
-                    })}
-                  </Scrollbars>
-                ) : (
-                  <Scrollbars
-                    style={{ height: '450px' }}
-                    id="scrollme"
-                    className="jt_scroll"
-                  >
-                    {CommentsHere.result ? (
-                      CommentsHere.result.map((list) => {
-                        return (
-                          <>
-                            <div
-                              id="comments"
-                              role="tabpanel"
-                              className="jt_comment materials"
-                              aria-labelledby="home-tab"
-                              show
-                            >
-                              <Card
-                                body
-                                className="text-center card-inner jt_comment "
-                              >
-                                <Row>
-                                  <Col md={2} xs={12} className="card_comment">
-                                    <CardTitle tag="h5" className="">
-                                      {list.student_first_name}{' '}
-                                      {list.student_last_name}
-                                    </CardTitle>
-                                  </Col>
-                                  <Col md={10} xs={12}>
-                                    {' '}
-                                    <CardText className="mt-4 text-left">
-                                      {list.comment_content}
-                                    </CardText>
-                                    {list.student}
-                                    {list.comment_img_url && (
-                                      <a href={list.comment_img_url} download>
-                                        <FiDownload /> Image.jpg
-                                      </a>
-                                      // <img
-                                      //   src={list.comment_img_url}
-                                      //   alt="img"
-                                      // />
-                                    )}
-                                  </Col>
-                                </Row>
-                              </Card>
-                            </div>
-                          </>
-                        );
-                      })
-                    ) : (
-                      <div>hello</div>
-                    )}
-                  </Scrollbars>
-                )}
-                <FormGroup className="form_attached">
-                  <Col md={2}>
-                    <label className="input-label-1 ml-4">
-                      <input
-                        onChange={(e) => {
-                          IMgUpload(e);
-                        }}
-                        accept="image/*"
-                        data-max-sizeIs="2000"
-                        type="file"
-                        className="inp fileUploadIs"
-                      />
-                      <MdAttachFile className="icon-cmt" />
-                      <p style={{ marginLeft: '25px' }}>Attachments</p>
-                    </label>
-                  </Col>
-                  <Col md={7} className="comment_area">
-                    <Input
-                      onChange={(e) => {
-                        setComment(e.target.value);
-                      }}
-                      type="textarea"
-                      name="text"
-                      id="jt_comment_here"
-                    />
-                  </Col>
-                  <Col md={2} className="comment-btn">
-                    <Button
-                      onClick={() => {
-                        PostComment();
-                      }}
-                      className="btn4"
-                    >
-                      Comment
-                    </Button>
-                  </Col>
-                </FormGroup>
-              </TabPane>
-              <TabPane tabId="2" className="jt_tabIs">
-                <Scrollbars style={{ height: '300px' }}>
-                  {Material ? (
-                    <>
-                      <div
-                        id="material"
-                        role="tabpanel"
-                        aria-labelledby="contact-tab"
-                        show
-                      >
-                        <Card
-                          body
-                          className="text-center card-inner jt_comment"
-                        >
-                          <Row>
-                            <Col md={2} xs={12} className="card_comment">
-                              <CardTitle tag="h5" className=""></CardTitle>
-                            </Col>
-                            <Col md={10} xs={12}>
-                              {' '}
-                              <CardText className="mt-4 text-left">
-                                {Material}
-                              </CardText>
-                              <a
-                                href={Material}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <FiDownload /> View
-                              </a>
-                            </Col>
-                          </Row>
-                        </Card>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="nodatahere">
-                      <NoDataFound />
-                    </div>
-                  )}
-                </Scrollbars>
-              </TabPane>
-            </TabContent>
-            <div
-              id="material"
-              role="tabpanel"
-              aria-labelledby="contact-tab"
-            ></div>
-          </Card>
+                      ) : (
+                        <div className="nodatahere">
+                          <NoDataFound />
+                        </div>
+                      )}
+                    </Scrollbars>
+                  </TabPane>
+                </TabContent>
+                <div
+                  id="material"
+                  role="tabpanel"
+                  aria-labelledby="contact-tab"
+                ></div>
+              </Card>
+            </div>
+            {/* <Col md="4"></Col> */}
+          </Row>
+          <br />
         </div>
-        {/* <Col md="4"></Col> */}
-      </Row>
-      <br />
+      ) : (
+        <div
+          style={{
+            display: 'grid',
+            justifyContent: 'center',
+            padding: '0rem 0',
+          }}
+        >
+          <Fade left cascade>
+            <img
+              src={NoCourseImg}
+              alt="you don't have any course yet logo"
+              style={{
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                width: '300px',
+                height: '300px',
+              }}
+            />{' '}
+          </Fade>
+          <Fade right casecade effect="delayOut">
+            <h3 style={{ textAlign: 'center' }}>
+              Tutor is yet to add Course Content
+            </h3>
+          </Fade>
+        </div>
+      )}
     </>
   );
 };

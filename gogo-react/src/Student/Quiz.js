@@ -6,6 +6,8 @@ import { useGlobalContext } from '../context';
 import './quiz.css';
 import axiosInstance2 from '../helpers/axiosInstance2';
 import { useHistory } from 'react-router-dom';
+import avatar from './app/pages/profile/Asset 1.png';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 function Quiz() {
   const {
@@ -60,6 +62,9 @@ function Quiz() {
     ...item,
     checked: false,
   }));
+
+  const [progress, setProgress] = useState(100);
+  const [modal, setModal] = useState(false);
 
   // handle next and prev buttons
 
@@ -195,6 +200,33 @@ function Quiz() {
     }
   }, [totalTime]);
 
+  document.addEventListener(
+    'contextmenu',
+    function (e) {
+      e.preventDefault();
+    },
+    false
+  );
+
+  useEffect(() => {
+    const progressBar = setInterval(() => setProgress(progress - 1), 1000);
+    return () => clearInterval(progressBar);
+  }, [progress]);
+
+  const openPopup = () => {
+    setModal(true);
+  };
+
+  const closePopup = () => {
+    setModal(false);
+  };
+
+  useEffect(() => {
+    if (totalTime < 5) {
+      setModal(true);
+    }
+  }, [totalTime]);
+
   if (!quizData) {
     return <h1>Loading...</h1>;
   }
@@ -228,7 +260,7 @@ function Quiz() {
                 </h4>
               </div>
               {quizData.length - 1 === questionIndex ? (
-                <button className="quiz-btn" onClick={() => finalSubmit()}>
+                <button className="quiz-btn" onClick={() => openPopup()}>
                   Submit
                 </button>
               ) : (
@@ -318,7 +350,7 @@ function Quiz() {
               {quizData.length - 1 === questionIndex ? (
                 <button
                   className="mobile-btn quiz-btn"
-                  onClick={() => finalSubmit()}
+                  onClick={() => openPopup()}
                 >
                   Submit
                 </button>
@@ -335,7 +367,12 @@ function Quiz() {
                 <h4>TIME LEFT</h4>
                 <div className="timer">
                   <div className="present-time">
-                    <div className="progress-bar"></div>
+                    <div className="progress-bar">
+                      <div
+                        className="bar"
+                        style={{ width: `${progress}%` }}
+                      ></div>
+                    </div>
                     <h2>
                       {totalTime}:{second}
                     </h2>
@@ -350,18 +387,14 @@ function Quiz() {
                 }`}
               >
                 <div className="img">
-                  {ProfilePicture ? (
-                    <img
-                      src={ProfilePicture}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                      }}
-                      alt="profile-pic"
-                    />
-                  ) : (
-                    <MdPerson className="author" />
-                  )}
+                  <img
+                    src={ProfilePicture || avatar}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                    alt="profile-pic"
+                  />
                 </div>
                 <h5>{userName ? userName : 'lorem ipsum'}</h5>
               </div>
@@ -442,6 +475,21 @@ function Quiz() {
             </div>
           </div>
         </section>
+        <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
+          <h3>
+            {totalTime < 5
+              ? `Your quiz will be automatically submitted after ${totalTime}:${second} minutes`
+              : 'Do you want to submit your quiz ? '}
+          </h3>
+          <div className="submit-btn-container">
+            <button className="btn-submit" onClick={closePopup}>
+              No
+            </button>
+            <button className="btn-submit" onClick={() => finalSubmit()}>
+              YES
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );
