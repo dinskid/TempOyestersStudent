@@ -38,6 +38,7 @@ import NotificationManager from '../../../components/common/react-notifications/
 import NoDataFound from './NoDataFound';
 import { useGlobalContext } from '../../../context';
 import NoCourseImg from './no-course.svg';
+import NoVideoImg from './noVideo.svg';
 
 const Materials = [
   // {
@@ -175,7 +176,21 @@ const KnowledgeBase = ({ match, ...props }) => {
     getData();
   }, []);
 
+  // useEffect(() => {
+  //   if (Assign) {
+  //     setMaterial([Assign]);
+  //   }
+  //   if (Hangouts) {
+  //     setMaterial([Hangouts]);
+  //   }
+  //   if (Assign && Hangouts) {
+  //     setMaterial([Assign, Hangouts]);
+  //   }
+  // }, [Assign, Hangouts]);
+
   console.log(Material);
+  console.log('Handout', Hangouts);
+  console.log('Assign', Assign);
 
   useEffect(() => {
     if (error)
@@ -273,11 +288,12 @@ const KnowledgeBase = ({ match, ...props }) => {
 
   const MaterialsSet = (lesson) => {
     // if(lesson.)
-    if (lesson) {
-      setMaterial(lesson);
-    } else {
-      setMaterial(null);
-    }
+    // console.log(lesson);
+    // if (lesson) {
+    //   setMaterial([]);
+    // } else {
+    //   setMaterial(null);
+    // }
   };
 
   if (!isLoaded)
@@ -312,7 +328,7 @@ const KnowledgeBase = ({ match, ...props }) => {
 
   return (
     <>
-      {courseContent ? (
+      {courseContent.length ? (
         <div>
           <Row className="wrapper">
             <Col className="jt_video_prt1">
@@ -323,120 +339,23 @@ const KnowledgeBase = ({ match, ...props }) => {
                   Quiz={Quiz}
                   Hangouts={Hangouts}
                 />
-              ) : Assign ? (
-                <>
-                  <div className="quize_assg_jt" style={{ width: '100%' }}>
-                    <Scrollbars
-                      style={{ width: '100%', height: '450px' }}
-                      className="content_quize_assg_jt"
-                    >
-                      <div className="content_quiz">
-                        <h2>Welcome</h2>
-                        <p>Hello my friends,</p>
-                        <p>
-                          Welcome to this new section on Data Preprocessing in
-                          R!
-                        </p>
-                        <p>
-                          Just a quick reminder that it is absolutely not
-                          necessary to study the two programming languages
-                          Python and R. The only reason why we provided the two
-                          trainings in Python and R, was for everyone to be able
-                          to learn Machine Learning on their favourite
-                          programming language. Therefore if you only want to
-                          study Machine Learning in Python, feel absolutely free
-                          to skip this section and move on to the next one to
-                          tackle the next Machine Learning model in Python.
-                        </p>
-                        <p>Until then, enjoy Machine Learning!</p>
-                        <p>Hadelin</p>
-                        <a target="blank" href={Assign}>
-                          Click here your assignment
-                        </a>
-                      </div>
-                    </Scrollbars>
-                    <div className="quize_assg_jt_bottom">
-                      <button>Next</button>
-                    </div>
-                  </div>
-                </>
-              ) : Quiz ? (
-                <>
-                  <div className="quize_assg_jt" style={{ width: '100%' }}>
-                    <Scrollbars
-                      style={{ width: '100%', height: '450px' }}
-                      className="content_quize_assg_jt"
-                    >
-                      <div className="content_quiz">
-                        <h2>Welcome</h2>
-                        <p>Hello my friends,</p>
-                        <p>
-                          Welcome to this new section on Data Preprocessing in
-                          R!
-                        </p>
-                        <p>
-                          Just a quick reminder that it is absolutely not
-                          necessary to study the two programming languages
-                          Python and R. The only reason why we provided the two
-                          trainings in Python and R, was for everyone to be able
-                          to learn Machine Learning on their favourite
-                          programming language. Therefore if you only want to
-                          study Machine Learning in Python, feel absolutely free
-                          to skip this section and move on to the next one to
-                          tackle the next Machine Learning model in Python.
-                        </p>
-                        <p>Until then, enjoy Machine Learning!</p>
-                        <p>Hadelin</p>
-                        <a target="blank" href={Quiz}>
-                          Click here your Quize
-                        </a>
-                      </div>
-                    </Scrollbars>
-                    <div className="quize_assg_jt_bottom">
-                      <button>Next</button>
-                    </div>
-                  </div>
-                </>
               ) : (
-                <div className="quize_assg_jt" style={{ width: '100%' }}>
-                  <Scrollbars
-                    style={{ width: '100%', height: '450px' }}
-                    className="content_quize_assg_jt"
-                  >
-                    <div className="content_quiz">
-                      <h2>Welcome</h2>
-                      <p>Hello my friends,</p>
-                      <p>
-                        Welcome to this new section on Data Preprocessing in R!
-                      </p>
-                      <p>
-                        Just a quick reminder that it is absolutely not
-                        necessary to study the two programming languages Python
-                        and R. The only reason why we provided the two trainings
-                        in Python and R, was for everyone to be able to learn
-                        Machine Learning on their favourite programming
-                        language. Therefore if you only want to study Machine
-                        Learning in Python, feel absolutely free to skip this
-                        section and move on to the next one to tackle the next
-                        Machine Learning model in Python.
-                      </p>
-                      <p>Until then, enjoy Machine Learning!</p>
-                      <p>Hadelin</p>
-                      <a target="blank" href={Hangouts}>
-                        Click here your Hangouts
-                      </a>
-                    </div>
-                  </Scrollbars>
-                  <div className="quize_assg_jt_bottom">
-                    <button>Next</button>
-                  </div>
+                <div>
+                  <img
+                    src={NoVideoImg}
+                    style={{ width: '100%', height: '100%' }}
+                    alt="noVideo"
+                  />
+                  <h2>No Course Video Available Right now</h2>
                 </div>
               )}
 
-              <p className="mt-3" style={{ fontSize: '15px' }}>
-                {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
-              </p>
-              <h2 className="jt_h2_content">{courseDetails.session_name}</h2>
+              {/* <p className="mt-3" style={{ fontSize: '15px' }}> */}
+              {/* {courseDetails.session_tags.split(',').map((tag) => `# ${tag}`)} */}
+              {/* </p> */}
+              <h2 className="jt_h2_content course-name">
+                {courseDetails.session_name}
+              </h2>
               {/* <p>{courseDetails.session_start_time.substring(0, 10)}</p> */}
             </Col>
             <Col className="jt_video_prt2">
@@ -564,26 +483,26 @@ const KnowledgeBase = ({ match, ...props }) => {
                                         if (l.handoutsUrl) {
                                           setHangouts(l.handoutsUrl);
                                           setVideoSrc(null);
-                                          setAssign(null);
+                                          //  setAssign(null);
                                           setQuiz(null);
-                                          MaterialsSet(l.handoutsUrl);
+                                          setMaterial([l.handoutsUrl]);
                                         }
 
                                         if (l.assignmentUrl) {
                                           setAssign(l.assignmentUrl);
                                           setVideoSrc(null);
-                                          setHangouts(null);
+                                          // setHangouts(null);
                                           setQuiz(null);
-                                          MaterialsSet(l.assignment);
+                                          setMaterial([l.assignmentUrl]);
                                         }
 
-                                        if (l.quizUrl) {
-                                          setQuiz(l.quizUrl);
-                                          setVideoSrc(null);
-                                          setAssign(null);
-                                          setHangouts(null);
-                                          MaterialsSet(l.quizUrl);
-                                        }
+                                        // if (l.quizUrl) {
+                                        //   setQuiz(l.quizUrl);
+                                        //   setVideoSrc(null);
+                                        //   setAssign(null);
+                                        //   setHangouts(null);
+                                        //   MaterialsSet(l.quizUrl);
+                                        // }
 
                                         lessonColor(index, ls, l, doc);
                                       }}
@@ -650,13 +569,13 @@ const KnowledgeBase = ({ match, ...props }) => {
                 </CardHeader>
                 <TabContent activeTab={activeFirstTab} className="jt_tab">
                   <TabPane tabId="1" className="jt_tabIs">
-                    {CommentsHere.result.length === 0 ? (
-                      <Scrollbars
-                        style={{ height: '0px', backgroundColor: 'red' }}
-                        id="scrollme"
-                        className="jt_scroll"
-                      >
-                        {CommentsHere.result.map((list) => {
+                    <Scrollbars
+                      style={{ height: '300px' }}
+                      id="scrollme"
+                      className="jt_scroll"
+                    >
+                      {CommentsHere.result ? (
+                        CommentsHere.result.map((list) => {
                           return (
                             <>
                               <div
@@ -686,79 +605,29 @@ const KnowledgeBase = ({ match, ...props }) => {
                                       <CardText className="mt-4 text-left">
                                         {list.comment_content}
                                       </CardText>
-                                      <a href={img} download>
-                                        <FiDownload /> Image.jpg
-                                      </a>
+                                      {list.student}
+                                      {list.comment_img_url && (
+                                        <a href={list.comment_img_url} download>
+                                          <FiDownload /> Image.jpg
+                                        </a>
+                                        // <img
+                                        //   src={list.comment_img_url}
+                                        //   alt="img"
+                                        // />
+                                      )}
                                     </Col>
                                   </Row>
                                 </Card>
                               </div>
                             </>
                           );
-                        })}
-                      </Scrollbars>
-                    ) : (
-                      <Scrollbars
-                        style={{ height: '450px' }}
-                        id="scrollme"
-                        className="jt_scroll"
-                      >
-                        {CommentsHere.result ? (
-                          CommentsHere.result.map((list) => {
-                            return (
-                              <>
-                                <div
-                                  id="comments"
-                                  role="tabpanel"
-                                  className="jt_comment materials"
-                                  aria-labelledby="home-tab"
-                                  show
-                                >
-                                  <Card
-                                    body
-                                    className="text-center card-inner jt_comment "
-                                  >
-                                    <Row>
-                                      <Col
-                                        md={2}
-                                        xs={12}
-                                        className="card_comment"
-                                      >
-                                        <CardTitle tag="h5" className="">
-                                          {list.student_first_name}{' '}
-                                          {list.student_last_name}
-                                        </CardTitle>
-                                      </Col>
-                                      <Col md={10} xs={12}>
-                                        {' '}
-                                        <CardText className="mt-4 text-left">
-                                          {list.comment_content}
-                                        </CardText>
-                                        {list.student}
-                                        {list.comment_img_url && (
-                                          <a
-                                            href={list.comment_img_url}
-                                            download
-                                          >
-                                            <FiDownload /> Image.jpg
-                                          </a>
-                                          // <img
-                                          //   src={list.comment_img_url}
-                                          //   alt="img"
-                                          // />
-                                        )}
-                                      </Col>
-                                    </Row>
-                                  </Card>
-                                </div>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <div>hello</div>
-                        )}
-                      </Scrollbars>
-                    )}
+                        })
+                      ) : (
+                        <div className="nodatahere">
+                          <NoDataFound />
+                        </div>
+                      )}
+                    </Scrollbars>
                     <FormGroup className="form_attached">
                       <Col md={2}>
                         <label className="input-label-1 ml-4">
@@ -799,7 +668,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                   </TabPane>
                   <TabPane tabId="2" className="jt_tabIs">
                     <Scrollbars style={{ height: '300px' }}>
-                      {Material ? (
+                      {Assign || Hangouts ? (
                         <>
                           <div
                             id="material"
@@ -815,10 +684,40 @@ const KnowledgeBase = ({ match, ...props }) => {
                                 <Col md={2} xs={12} className="card_comment">
                                   <CardTitle tag="h5" className=""></CardTitle>
                                 </Col>
-                                <Col md={10} xs={12}>
+                                {Assign && (
+                                  <Col md={12} xs={12}>
+                                    {' '}
+                                    <CardText className="mt-4 text-left">
+                                      Assignment
+                                    </CardText>
+                                    <a
+                                      href={`${Assign}#toolbar=0`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <FiDownload /> View
+                                    </a>
+                                  </Col>
+                                )}
+                                {Hangouts && (
+                                  <Col md={12} xs={12}>
+                                    {' '}
+                                    <CardText className="mt-4 text-left">
+                                      Hangouts
+                                    </CardText>
+                                    <a
+                                      href={`${Hangouts}#toolbar=0`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <FiDownload /> View
+                                    </a>
+                                  </Col>
+                                )}
+                                {/* <Col md={10} xs={12}>
                                   {' '}
                                   <CardText className="mt-4 text-left">
-                                    {Material}
+                                    Document
                                   </CardText>
                                   <a
                                     href={Material}
@@ -827,7 +726,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                   >
                                     <FiDownload /> View
                                   </a>
-                                </Col>
+                                </Col> */}
                               </Row>
                             </Card>
                           </div>

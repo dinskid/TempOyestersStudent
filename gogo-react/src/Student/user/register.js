@@ -90,6 +90,15 @@ const Register = ({
         null,
         ''
       );
+    } else {
+      NotificationManager.success(
+        error,
+        'Registration Successfull',
+        3000,
+        null,
+        null,
+        ''
+      );
     }
   }, [error]);
 

@@ -68,7 +68,6 @@ function* loginWithEmailPassword({ payload }) {
       yield put(loginUserSuccess(item));
       history.push('/app/pages/mycourses');
     } else {
-      // console.log(typeof(toggleClick));
       yield put(loginUserError(loginUser.error));
     }
   } catch (error) {

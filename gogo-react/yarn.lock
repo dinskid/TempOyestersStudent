@@ -12154,6 +12154,13 @@
     "uncontrollable" "^7.0.0"
     "warning" "^4.0.3"
 
+"react-page-visibility@^6.4.0":
+  "integrity" "sha512-5vQ0zQU2DvKCQAxle9l5V6uxw2m180Lk7Jem+obmTeQ503fvMJLSUzFgWtTEgUVynhUx2pd+RzafnuMAG8uD6A=="
+  "resolved" "https://registry.npmjs.org/react-page-visibility/-/react-page-visibility-6.4.0.tgz"
+  "version" "6.4.0"
+  dependencies:
+    "prop-types" "^15.7.2"
+
 "react-perfect-scrollbar@^1.5.8":
   "integrity" "sha512-bQ46m70gp/HJtiBOF3gRzBISSZn8FFGNxznTdmTG8AAwpxG1bJCyn7shrgjEvGSQ5FJEafVEiosY+ccER11OSA=="
   "resolved" "https://registry.npmjs.org/react-perfect-scrollbar/-/react-perfect-scrollbar-1.5.8.tgz"
@@ -12409,7 +12416,7 @@
     "prop-types" "^15.7.2"
     "react-display-name" "^0.2.5"
 
-"react@^15.3.0 || ^16.0.0", "react@^16.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.13.1":
+"react@^15.3.0 || ^16.0.0", "react@^16.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.13.1", "react@^16.13.1 || ^17.0.0":
   "integrity" "sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.13.1.tgz"
   "version" "16.13.1"

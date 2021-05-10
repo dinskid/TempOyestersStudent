@@ -8,6 +8,8 @@ import axiosInstance2 from '../helpers/axiosInstance2';
 import { useHistory } from 'react-router-dom';
 import avatar from './app/pages/profile/Asset 1.png';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { usePageVisibility } from 'react-page-visibility';
+import Cookies from 'universal-cookie';
 
 function Quiz() {
   const {
@@ -65,6 +67,12 @@ function Quiz() {
 
   const [progress, setProgress] = useState(100);
   const [modal, setModal] = useState(false);
+  const [warningCount, setWarningCount] = useState(0);
+  const [warningModal, setWarningModal] = useState(false);
+
+  const isVisibleTab = usePageVisibility();
+
+  const cookies = new Cookies();
 
   // handle next and prev buttons
 
@@ -227,6 +235,30 @@ function Quiz() {
     }
   }, [totalTime]);
 
+  useEffect(() => {
+    if (!isVisibleTab) {
+      setWarningCount(warningCount + 1);
+    }
+
+    console.log(warningCount);
+  }, [isVisibleTab]);
+
+  useEffect(() => {
+    if (warningCount > 0) {
+      setWarningModal(true);
+    }
+    if (warningCount > 3) {
+      finalSubmit();
+      history.push('/app/pages/mycourses');
+    }
+  }, [warningCount]);
+
+  const closeWarningModal = () => {
+    setWarningModal(false);
+  };
+
+  const newTime = cookies.get('refreshTime');
+
   if (!quizData) {
     return <h1>Loading...</h1>;
   }
@@ -370,7 +402,11 @@ function Quiz() {
                     <div className="progress-bar">
                       <div
                         className="bar"
-                        style={{ width: `${progress}%` }}
+                        style={{
+                          width: `${
+                            (totalTime / localStorage.getItem('TIME')) * 100
+                          }%`,
+                        }}
                       ></div>
                     </div>
                     <h2>
@@ -386,7 +422,7 @@ function Quiz() {
                     : 'profile-container'
                 }`}
               >
-                <div className="img">
+                <div className="img-profile">
                   <img
                     src={ProfilePicture || avatar}
                     style={{
@@ -475,18 +511,54 @@ function Quiz() {
             </div>
           </div>
         </section>
-        <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
+        {totalTime < 5 ? (
+          <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
+            <h3>
+              Your quiz will be automatically submitted after {totalTime}:
+              {second} minutes
+            </h3>
+            <div
+              className="submit-btn-container"
+              style={{
+                display: 'grid',
+                placeItems: 'center',
+                gridTemplateColumns: '1fr',
+              }}
+            >
+              <button className="btn-submit" onClick={closePopup}>
+                CANCEL
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
+            <h3>Do you want to submit your quiz ?</h3>
+            <div className="submit-btn-container">
+              <button className="btn-submit" onClick={closePopup}>
+                No
+              </button>
+              <button className="btn-submit" onClick={() => finalSubmit()}>
+                YES
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className={`${warningModal ? 'popup popup-active' : 'popup'}`}>
           <h3>
-            {totalTime < 5
-              ? `Your quiz will be automatically submitted after ${totalTime}:${second} minutes`
-              : 'Do you want to submit your quiz ? '}
+            Tab Shifting was detected. Test will be automatically submitted
+            after tab shifting was detected {3 - warningCount} more time
           </h3>
-          <div className="submit-btn-container">
-            <button className="btn-submit" onClick={closePopup}>
-              No
-            </button>
-            <button className="btn-submit" onClick={() => finalSubmit()}>
-              YES
+          <div
+            className="submit-btn-container"
+            style={{
+              display: 'grid',
+              placeItems: 'center',
+              gridTemplateColumns: '1fr',
+            }}
+          >
+            <button className="btn-submit" onClick={closeWarningModal}>
+              CANCEL
             </button>
           </div>
         </div>

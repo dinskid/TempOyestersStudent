@@ -303,13 +303,14 @@ On mouse-over, add a grey background color */
   color: #009efd;
 }
 
-.img {
+.img-profile {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   color: white;
+  border: 1px solid white;
 }
 
 .author {
