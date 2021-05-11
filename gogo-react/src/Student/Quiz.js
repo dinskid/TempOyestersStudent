@@ -19,6 +19,7 @@ function Quiz() {
     quiz_questions,
     userName,
     ProfilePicture,
+    studentId,
   } = useGlobalContext();
 
   let history = useHistory();
@@ -47,6 +48,7 @@ function Quiz() {
   const [finalValues, setFinalValues] = useState({
     quiz_name: data.quiz_name,
     quiz_id: data.quiz_id,
+    student_id: studentId,
   });
 
   // creating new object properties
@@ -62,17 +64,16 @@ function Quiz() {
 
   const Option = quizData[questionIndex].question_options.map((item) => ({
     ...item,
-    checked: false,
+    answer: -1,
   }));
 
   const [progress, setProgress] = useState(100);
   const [modal, setModal] = useState(false);
   const [warningCount, setWarningCount] = useState(0);
   const [warningModal, setWarningModal] = useState(false);
+  const [submitPopup, setSubmitPopup] = useState(false);
 
   const isVisibleTab = usePageVisibility();
-
-  const cookies = new Cookies();
 
   // handle next and prev buttons
 
@@ -131,7 +132,6 @@ function Quiz() {
   // select answer event
 
   const handleSelectAnswer = (e, index, item) => {
-    setAnswerSelectID(index);
     setSelectedAnswers([
       ...selectedAnswers,
       {
@@ -144,14 +144,19 @@ function Quiz() {
       },
     ]);
     sectionStyle[questionIndex].Answered = true;
-    item.checked = true;
+    let changedTo;
+    if (!e.target.checked && index === answerSelectID) {
+      changedTo = -1;
+    } else {
+      changedTo = index;
+      setAnswerSelectID(changedTo);
+      quizData[questionIndex].question_match_options = changedTo;
+    }
   };
 
-  // console.log(option);
-
   useEffect(() => {
-    setAnswerSelectID(-1);
-  }, [questionIndex]);
+    setAnswerSelectID(quizData[questionIndex].question_match_options);
+  }, [questionIndex, quizData[questionIndex]]);
 
   // final submission
 
@@ -159,11 +164,23 @@ function Quiz() {
     console.log(finalValues);
     try {
       const submit = await axios.post(
-        `${window.location.protocol}//${window.location.hostname}:4003/submitQuiz`,
+        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/submitQuiz`,
         finalValues
       );
       console.log(submit);
-      history.push('/app/pages/mycourses');
+      if (submit.status === 200) {
+        setSubmitPopup(true);
+      } else {
+        setSubmitPopup(false);
+      }
+
+      // history.push('/app/pages/mycourses');
+      // if (document.exitFullscreen) {
+      //   document.exitFullscreen();
+      // } else if (document.webkitExitFullscreen) {
+      //   /* Safari */
+      //   document.webkitExitFullscreen();
+      // }
     } catch (error) {
       console.log(Error);
     }
@@ -187,14 +204,6 @@ function Quiz() {
     }
   };
 
-  const optionStyle = (item, index) => {
-    if (item.checked) {
-      return 'option-btn option-btn-active';
-    } else {
-      return 'option-btn';
-    }
-  };
-
   useEffect(() => {
     if (second < 0) {
       setSecond(60);
@@ -204,7 +213,7 @@ function Quiz() {
   useEffect(() => {
     if (totalTime < 0) {
       finalSubmit();
-      history.push('/app/pages/mycourses');
+      setSubmitPopup(true);
     }
   }, [totalTime]);
 
@@ -249,7 +258,8 @@ function Quiz() {
     }
     if (warningCount > 3) {
       finalSubmit();
-      history.push('/app/pages/mycourses');
+      setSubmitPopup(true);
+      setWarningModal(false);
     }
   }, [warningCount]);
 
@@ -257,7 +267,15 @@ function Quiz() {
     setWarningModal(false);
   };
 
-  const newTime = cookies.get('refreshTime');
+  const closeSubmitPopup = () => {
+    history.push('/app/pages/mycourses');
+    // if (document.exitFullscreen) {
+    //   document.exitFullscreen();
+    // } else if (document.webkitExitFullscreen) {
+    //   /* Safari */
+    //   document.webkitExitFullscreen();
+    // }
+  };
 
   if (!quizData) {
     return <h1>Loading...</h1>;
@@ -316,16 +334,16 @@ function Quiz() {
                 )}
               </div>
               <div className="quiz-options option-container">
-                {Option.map((item, index) => {
+                {quizData[questionIndex].question_options.map((item, index) => {
                   return (
                     <div class="option-container">
                       <button
-                        // className={`${
-                        //   index === answerSelectID
-                        //     ? "option-btn option-btn-active"
-                        //     : "option-btn"
-                        // }`}
-                        className={optionStyle(item, index)}
+                        className={`${
+                          index === answerSelectID
+                            ? 'option-btn option-btn-active'
+                            : 'option-btn'
+                        }`}
+                        // className={optionStyle(item, index)}
                         key={index}
                         value={item.option_body}
                         onClick={(e) => handleSelectAnswer(e, index, item)}
@@ -526,7 +544,7 @@ function Quiz() {
               }}
             >
               <button className="btn-submit" onClick={closePopup}>
-                CANCEL
+                OK
               </button>
             </div>
           </div>
@@ -558,7 +576,22 @@ function Quiz() {
             }}
           >
             <button className="btn-submit" onClick={closeWarningModal}>
-              CANCEL
+              OK
+            </button>
+          </div>
+        </div>
+        <div className={`${submitPopup ? 'popup popup-active' : 'popup'}`}>
+          <h3>Your Quiz Have been submitted Sucessfully</h3>
+          <div
+            className="submit-btn-container"
+            style={{
+              display: 'grid',
+              placeItems: 'center',
+              gridTemplateColumns: '1fr',
+            }}
+          >
+            <button className="btn-submit" onClick={closeSubmitPopup}>
+              OK
             </button>
           </div>
         </div>

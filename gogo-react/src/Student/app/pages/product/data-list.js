@@ -85,6 +85,7 @@ const DataListPages = ({ match }) => {
             setError(result.data.error);
           } catch (e) {
             setError('Unable to fetch data');
+            console.log(e);
           }
         }
       } catch (err) {
@@ -195,112 +196,36 @@ const DataListPages = ({ match }) => {
   if (!names.length) return <NoDataFound />;
 
   return (
-    <>
-      {/* <div className="container"> */}
-      <Row id="jt_all_course">
-        {names.map((name) => {
-          {
-            /* console.log(name.tags.split(',')); */
-          }
-          return (
-            <Col md={3} xs={12}>
-              <Card
-                className="mt-2"
-                style={{
-                  width: '100%',
-                  minHeight: '550px',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  marginBottom: '50px',
+    <div className="card-container">
+      {names.map((name, index) => {
+        return (
+          <div className="card">
+            <Route>
+              <Link
+                to={{
+                  pathname: '/app/pages/product/details',
+                  state: { session_id: name.id },
                 }}
               >
-                <div style={{ height: '180px' }}>
-                  <Route>
-                    <Link
-                      to={{
-                        pathname: '/app/pages/product/details',
-                        state: { session_id: name.id },
-                      }}
-                    >
-                      <CardImg
-                        top
-                        style={{
-                          width: '100%',
-                          position: 'relative',
-                          maxHeight: '100%',
-                        }}
-                        src={name.img || Logo}
-                        alt="Card image cap"
-                      />
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          right: 0,
-                          height: '30px',
-                          backgroundColor: '#ff0000',
-                          borderRadius: '5px',
-                        }}
-                      >
-                        <p
-                          className="mt-1 mb-2 mr-2 ml-2"
-                          style={{ color: '#fff', fontSize: '16px' }}
-                        >
-                          Rs.{name.cost}
-                        </p>
-                      </div>
-                    </Link>
-                  </Route>
+                <p className="card-price"> Rs.{name.cost}</p>
+                <div className="img-container">
+                  <img src={name.img || Logo} alt="Card image cap" />
                 </div>
-
-                <CardBody style={{ height: '250px' }}>
-                  <div className="jt_cart">
-                    <h2
-                      className="font-weight-bold"
-                      style={{ fontSize: '20px' }}
-                    >
-                      {name.course.substr(0, 38)}
-                    </h2>
-                    {/* <ul
-                    className="ml-0"
-                    style={{ display: 'flex', listStyleType: 'none' }}
-                  >
-                    {name.tags.split(',').map((tag) => (
-                      <li
-                        style={{
-                          color: 'blue',
-                          fontSize: '.9rem',
-                          opacity: '.7',
-                        }}
-                      >
-                        #{tag}
-                      </li>
-                    ))}
-                  </ul> */}
-                    {/* classs was here font-weight-bold */}
-                    <h6 className="mb-2">
-                      {name.genre ? name.genre.substr(0, 200) : ''}
-                    </h6>
-                    {/* <CardText>{name.desc}hksdkjdakjsa</CardText> */}
-                  </div>
-                  <div className="jt_tags">
-                    <Row className="">
-                      {/* <h5 className="ml-2 mr-4">
-                      <b>Tags:</b> {name.tags}
-                    </h5> */}
-                      {name.tags.split(',').map((tag) => {
-                        return <Badge className="badge-color m-1">{tag}</Badge>;
-                      })}
-                    </Row>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-          );
-        })}
-      </Row>
-      {/* </div> */}
-    </>
+              </Link>
+            </Route>
+            <div className="card-content">
+              <h2>{name.course.substr(0, 38)}</h2>
+              <p>{name.genre ? name.genre.substr(0, 200) : ''}</p>
+            </div>
+            <div className="card-tags">
+              {name.tags.split(',').map((tag) => {
+                return <Badge className="badge-color m-1">{tag}</Badge>;
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

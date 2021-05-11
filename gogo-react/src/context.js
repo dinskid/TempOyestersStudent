@@ -17,7 +17,6 @@ const AppProvider = ({ children }) => {
   const [quizStartTime, setQuizStartTime] = useState(
     localStorage.getItem('STARTQUIZ')
   );
-
   const cookies = new Cookies();
 
   console.log(`/student/clientDetails/${params}`);
@@ -82,7 +81,7 @@ const AppProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${window.location.protocol}//${window.location.hostname}:4003/getQuiz/Geographypaper2`
+        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/Geographypaper2`
       );
       console.log(response);
       setData(response.data);
@@ -96,12 +95,15 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const [studentId, setStudentId] = useState('');
+
   useEffect(() => {
     const getData = async () => {
       const result = await axiosInstance.get('/student/auth/profile');
       console.log(result);
       setUserName(result.data.result.student_first_name);
       setProfilePicture(result.data.result.student_profile_picture);
+      setStudentId(result.data.result.student_id);
     };
     getData();
   }, []);
@@ -113,7 +115,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     const getQuizStartTime = async () => {
       const result = await axiosInstance.get(
-        `${window.location.protocol}//${window.location.hostname}:4003/canQuizStart/demo`
+        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/canQuizStart/demo`
       );
       console.log(result);
       localStorage.setItem('STARTQUIZ', result.data);
@@ -138,6 +140,7 @@ const AppProvider = ({ children }) => {
         ProfilePicture,
         fetchQuestions,
         quizStartTime,
+        studentId,
       }}
     >
       <Favicon url={favicon} />

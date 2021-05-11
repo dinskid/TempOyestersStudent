@@ -113,6 +113,7 @@ const KnowledgeBase = ({ match, ...props }) => {
         `/student/mycourses/${props.location.state.session_id}`
       );
       console.log(result);
+
       console.log(
         result.data.ans[0].lesson[0].lesson_id,
         'video lessaion data'
@@ -324,6 +325,12 @@ const KnowledgeBase = ({ match, ...props }) => {
     localStorage.setItem('TIME', JSON.stringify(quiz_time));
     localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
     history.push('/quiz');
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      /* Safari */
+      document.documentElement.webkitRequestFullscreen();
+    }
   };
 
   return (

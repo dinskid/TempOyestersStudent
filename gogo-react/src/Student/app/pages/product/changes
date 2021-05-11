@@ -1,0 +1,84 @@
+    <>
+      {/*   <h1>My Courses</h1>
+      <Separator className="mb-5" /> */}
+      <Row>
+        {names.map((name) => {
+          return (
+            <Col md={3} xs={12}>
+              <Card
+                className="mt-2"
+                style={{
+                  width: '100%',
+                  minHeight: '500px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  marginBottom: '50px',
+                }}
+              >
+                <Route>
+                  <Link
+                    to={{
+                      pathname: 'course',
+                      state: { session_id: name.session_id },
+                    }}
+                  >
+                    <CardImg
+                      top
+                      style={{ width: '100%', maxHeight: '250px' }}
+                      src={name.img || Logo}
+                      alt="Card image cap"
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        height: '30px',
+                        backgroundColor: '#ff0000',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      <p
+                        className="mt-1 mb-2 mr-2 ml-2"
+                        style={{ color: '#fff', fontSize: '16px' }}
+                      >
+                        Rs.{name.cost}
+                      </p>
+                    </div>
+                  </Link>
+                </Route>
+                <CardBody>
+                  <h2
+                    className="font-weight-bold"
+                    style={{ fontSize: '20px', marginBottom: '1rem' }}
+                  >
+                    {name.course.substr(0, 38)}
+                  </h2>
+                  <h6 className="mb-2" style={{ fontSize: '1rem' }}>
+                    {name.genre}
+                  </h6>
+                  {/* <CardText>{name.desc}</CardText> */}
+                  <Row
+                    style={{
+                      marginTop: '1rem',
+                      position: 'absolute',
+                      bottom: '5%',
+                    }}
+                  >
+                    {/* <h5 className="mr-auto ml-4">
+                      <b>RS. {name.cost}</b>
+                    </h5> */}
+                    {/* <h5 className="ml-2 mr-4">
+                      <b>Tags:</b> {name.tags}
+                    </h5> */}
+                    {name.tags.split(',').map((tag) => {
+                      return <Badge className="m-1">{tag}</Badge>;
+                    })}
+                  </Row>
+                </CardBody>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+    </>

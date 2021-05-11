@@ -37,6 +37,7 @@ const loginWithEmailPasswordAsync = async (
       using_google,
     };
     const result = await axiosInstance.post('/student/auth/login', { values });
+    console.log(result.data);
     return result.data;
   } catch (err) {
     try {

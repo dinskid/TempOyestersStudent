@@ -95,6 +95,7 @@ body {
 
 .quiz-question h4 {
   font-weight: 500;
+  user-select: none;
 }
 
 .quiz-question h4 span {
