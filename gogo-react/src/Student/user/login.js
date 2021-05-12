@@ -14,7 +14,7 @@ import Google from './google.png';
 import Url from '../../data/urlparams';
 import { useGoogleLogin } from 'react-google-login';
 import { refreshTokenSetup } from './utils/refreshTokenSetup';
-import { loginUserError } from '../../redux/auth/actions';
+import { loginUserError, loginUserSuccess } from '../../redux/auth/actions';
 import { useGlobalContext } from '../../context';
 import Cookies from 'universal-cookie';
 
@@ -44,15 +44,24 @@ function validateEmail(value) {
   return error;
 }
 
-const Login = ({ history, loading, error, loginUserAction }) => {
+const Login = ({ history, loading, error, loginUserAction, currentUser }) => {
   const dispatch = useDispatch();
   const [clicked, setClicked] = useState(false);
   const [URLParams, setURLParams] = useState('');
   const { query, name, params, logo } = useGlobalContext();
 
+  console.log(error);
+
   useEffect(() => {
-    if (error) {
-      NotificationManager.warning(error, 'Login Error', 3000, null, null, '');
+    if (error === undefined) {
+      NotificationManager.error(
+        error,
+        'username or password is incorrect',
+        3000,
+        null,
+        null,
+        ''
+      );
     }
   }, [error]);
   const onUserLogin = (values) => {
@@ -213,8 +222,9 @@ const Login = ({ history, loading, error, loginUserAction }) => {
   );
 };
 const mapStateToProps = ({ authUser }) => {
-  const { loading, error } = authUser;
-  return { loading, error };
+  const { loading, error, currentUser } = authUser;
+  console.log(authUser);
+  return { loading, error, currentUser };
 };
 
 export default connect(mapStateToProps, {

@@ -66,7 +66,7 @@ function* loginWithEmailPassword({ payload }) {
     if (loginUser.success) {
       const item = { uid: loginUser.token };
       setCurrentUser(item);
-      yield put(loginUserSuccess(item));
+      yield put(loginUserSuccess(loginUser));
       history.push('/app/pages/mycourses');
     } else {
       yield put(loginUserError(loginUser.error));
@@ -108,8 +108,8 @@ const registerWithEmailPasswordAsync = async ({
     const result = await axiosInstance.post('/student/auth/register', {
       values,
     });
-    return result.data;
     console.log(result);
+    return result.data;
   } catch (error) {
     try {
       const result = error.response;
