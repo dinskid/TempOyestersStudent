@@ -434,9 +434,18 @@
 .no-video {
   width: 100vw;
 }
+.nodata-img {
+  width: 330px;
+  margin-top: 40%;
+  margin-bottom: 2rem;
+}
 
 @media screen and (min-width: 768px) {
   .no-video {
     width: 60%;
+  }
+  .nodata-img {
+    margin-top: 3%;
+    width: 40%;
   }
 }

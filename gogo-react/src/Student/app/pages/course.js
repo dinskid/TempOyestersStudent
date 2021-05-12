@@ -332,12 +332,6 @@ const KnowledgeBase = ({ match, ...props }) => {
     localStorage.setItem('TIME', JSON.stringify(quiz_time));
     localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
     history.push('/quiz');
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-      /* Safari */
-      document.documentElement.webkitRequestFullscreen();
-    }
   };
 
   return (

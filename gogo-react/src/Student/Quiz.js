@@ -22,8 +22,6 @@ function Quiz() {
     studentId,
   } = useGlobalContext();
 
-  console.log(ProfilePicture, userName);
-
   let history = useHistory();
 
   const [authorOpen, setAuthorOpen] = useState(false);
@@ -194,7 +192,7 @@ function Quiz() {
       answers: selectedAnswers,
       remaining_time: `${totalTime}:${second}`,
     });
-  }, [selectedAnswers, totalTime]);
+  }, [selectedAnswers, totalTime, second]);
 
   const Style = (item) => {
     if (item.Answered) {

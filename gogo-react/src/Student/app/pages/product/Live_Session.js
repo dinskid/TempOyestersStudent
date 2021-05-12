@@ -12,7 +12,7 @@ import {
 import './course1.css';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
-import NoDataFound from '../NoDataFound';
+import NoDataFound from './noDataLive';
 import Logo from '../../../../data/Logo';
 
 const Live_Session = () => {

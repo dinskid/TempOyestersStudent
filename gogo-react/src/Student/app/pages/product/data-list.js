@@ -14,7 +14,7 @@ import useMousetrap from '../../../../hooks/use-mousetrap';
 import { Route, Link } from 'react-router-dom';
 import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
-import NoDataFound from '../NoDataFound';
+import NoDataFound from './NoDataAllCourse';
 import Logo from '../../../../data/Logo';
 
 const getIndex = (value, arr, prop) => {
