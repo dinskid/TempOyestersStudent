@@ -20,6 +20,7 @@ import {
 
 import { setCurrentUser } from '../../helpers/Utils';
 import axiosInstance from '../../helpers/axiosInstance';
+import register from '../../Student/user/register';
 
 export function* watchLoginUser() {
   yield takeEvery(LOGIN_USER, loginWithEmailPassword);
@@ -134,14 +135,14 @@ function* registerWithEmailPassword({ payload }) {
       registerWithEmailPasswordAsync,
       payload.user.values
     );
-    // console.log(registerUser);
+    yield put(registerUserSuccess(registerUser.error));
     if (registerUser.success) {
       const item = { uid: registerUser.token };
       setCurrentUser(item);
       yield put(registerUserSuccess(item));
       history.push('/app/pages/product/data-list');
     } else {
-      // console.log(typeof(toggleClick));
+      console.log('no sucessfull');
       try {
         yield put(registerUserError(registerUser.error));
       } catch (err) {

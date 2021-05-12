@@ -333,6 +333,8 @@ const KnowledgeBase = ({ match, ...props }) => {
     }
   };
 
+  console.log(videoSrc, 'Video');
+
   return (
     <>
       {courseContent.length ? (

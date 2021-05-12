@@ -16,7 +16,10 @@ import { useGoogleLogin } from 'react-google-login';
 import Apple from './apple.png';
 import { NotificationManager } from '../../components/common/react-notifications';
 import { registerUser } from '../../redux/actions';
-import { registerUserError } from '../../redux/auth/actions';
+import {
+  registerUserError,
+  registerUserSuccess,
+} from '../../redux/auth/actions';
 import { refreshTokenSetup } from './utils/refreshTokenSetup';
 import { useGlobalContext } from '../../context';
 
@@ -346,6 +349,7 @@ const Register = ({
 };
 const mapStateToProps = ({ authUser }) => {
   const { loading, error } = authUser;
+  console.log(authUser);
   return { loading, error };
 };
 export default connect(mapStateToProps, {

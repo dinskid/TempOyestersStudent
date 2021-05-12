@@ -81,7 +81,7 @@ const AppProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/Geographypaper2`
+        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/1`
       );
       console.log(response);
       setData(response.data);
@@ -115,7 +115,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     const getQuizStartTime = async () => {
       const result = await axiosInstance.get(
-        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/canQuizStart/demo`
+        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/canQuizStart/1`
       );
       console.log(result);
       localStorage.setItem('STARTQUIZ', result.data);
