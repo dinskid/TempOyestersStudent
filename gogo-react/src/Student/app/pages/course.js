@@ -334,8 +334,6 @@ const KnowledgeBase = ({ match, ...props }) => {
     }
   };
 
-  console.log(videoSrc, 'Video');
-
   return (
     <>
       {courseContent.length ? (
@@ -390,7 +388,7 @@ const KnowledgeBase = ({ match, ...props }) => {
             >
               45% of 100%
             </div> */}
-                {quizStartTime && (
+                {localStorage.getItem("STARTQUIZ") && (
                   <button
                     className="btn-secondary"
                     style={{ border: 'none', width: '100%' }}
@@ -484,6 +482,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                         setCurrentChapter(doc);
 
                                         if (l.videoUrl) {
+                                          console.log("hello")
                                           setVideoSrc(l.videoUrl);
                                           setHangouts(null);
                                           MaterialsSet(null);
@@ -492,7 +491,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                         }
                                         if (l.handoutsUrl) {
                                           setHangouts(l.handoutsUrl);
-                                          setVideoSrc(null);
+                                          // setVideoSrc(null);
                                           //  setAssign(null);
                                           setQuiz(null);
                                           setMaterial([l.handoutsUrl]);
@@ -500,7 +499,7 @@ const KnowledgeBase = ({ match, ...props }) => {
 
                                         if (l.assignmentUrl) {
                                           setAssign(l.assignmentUrl);
-                                          setVideoSrc(null);
+                                          // setVideoSrc(null);
                                           // setHangouts(null);
                                           setQuiz(null);
                                           setMaterial([l.assignmentUrl]);

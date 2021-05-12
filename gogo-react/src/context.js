@@ -117,7 +117,6 @@ const AppProvider = ({ children }) => {
       const result = await axiosInstance.get(
         `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/canQuizStart/1`
       );
-      console.log(result);
       localStorage.setItem('STARTQUIZ', result.data);
     };
     getQuizStartTime();
