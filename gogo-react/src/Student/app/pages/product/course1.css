@@ -370,7 +370,7 @@
   display: grid;
   gap: 1rem;
   padding: 2rem 0;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
 }
 
 .course-card {

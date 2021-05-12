@@ -98,14 +98,20 @@ const AppProvider = ({ children }) => {
   const [studentId, setStudentId] = useState('');
 
   useEffect(() => {
-    const getData = async () => {
+    const getProfile = async () => {
       const result = await axiosInstance.get('/student/auth/profile');
       console.log(result);
       setUserName(result.data.result.student_first_name);
       setProfilePicture(result.data.result.student_profile_picture);
       setStudentId(result.data.result.student_id);
+      localStorage.setItem('STUDENTID', result.data.result.student_id);
+      localStorage.setItem('USERNAME', result.data.result.student_first_name);
+      localStorage.setItem(
+        'PROFILEPICTURE',
+        result.data.result.student_profile_picture
+      );
     };
-    getData();
+    getProfile();
   }, []);
 
   useEffect(() => {
@@ -114,9 +120,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const getQuizStartTime = async () => {
-      const result = await axiosInstance.get(
-        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/canQuizStart/1`
-      );
+      const result = await axiosInstance.get(`/student/quiz/canQuizStart/1`);
       localStorage.setItem('STARTQUIZ', result.data);
     };
     getQuizStartTime();

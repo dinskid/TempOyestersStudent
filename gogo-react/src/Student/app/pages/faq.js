@@ -17,6 +17,7 @@ import axiosInstance from '../../../helpers/axiosInstance';
 import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
 import NoDataFound from './NoDataFound';
 import Logo from '../../../data/Logo';
+import Cookies from 'universal-cookie';
 
 /* import ReactCardFlip from 'react-card-flip'; */
 const getIndex = (value, arr, prop) => {

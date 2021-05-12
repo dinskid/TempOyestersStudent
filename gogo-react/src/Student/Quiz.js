@@ -22,6 +22,8 @@ function Quiz() {
     studentId,
   } = useGlobalContext();
 
+  console.log(ProfilePicture, userName);
+
   let history = useHistory();
 
   const [authorOpen, setAuthorOpen] = useState(false);
@@ -48,7 +50,7 @@ function Quiz() {
   const [finalValues, setFinalValues] = useState({
     quiz_name: data.quiz_name,
     quiz_id: data.quiz_id,
-    student_id: studentId,
+    student_id: localStorage.getItem('STUDENTID'),
   });
 
   // creating new object properties
@@ -192,7 +194,7 @@ function Quiz() {
       answers: selectedAnswers,
       remaining_time: `${totalTime}:${second}`,
     });
-  }, [selectedAnswers]);
+  }, [selectedAnswers, totalTime]);
 
   const Style = (item) => {
     if (item.Answered) {
@@ -256,7 +258,7 @@ function Quiz() {
     if (warningCount > 0) {
       setWarningModal(true);
     }
-    if (warningCount > 3) {
+    if (warningCount > 2) {
       finalSubmit();
       setSubmitPopup(true);
       setWarningModal(false);
@@ -442,7 +444,7 @@ function Quiz() {
               >
                 <div className="img-profile">
                   <img
-                    src={ProfilePicture || avatar}
+                    src={localStorage.getItem('PROFILEPICTURE') || avatar}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -450,7 +452,11 @@ function Quiz() {
                     alt="profile-pic"
                   />
                 </div>
-                <h5>{userName ? userName : 'lorem ipsum'}</h5>
+                <h5>
+                  {localStorage.getItem('USERNAME')
+                    ? localStorage.getItem('USERNAME')
+                    : 'lorem ipsum'}
+                </h5>
               </div>
             </div>
             <div
@@ -564,8 +570,8 @@ function Quiz() {
 
         <div className={`${warningModal ? 'popup popup-active' : 'popup'}`}>
           <h3>
-            Tab Shifting was detected. Test will be automatically submitted
-            after tab shifting was detected {3 - warningCount} more time
+            Tab Shifting was detected. test will be submitted automatically
+            after {3 - warningCount} more time.
           </h3>
           <div
             className="submit-btn-container"

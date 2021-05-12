@@ -78,57 +78,23 @@ const Live_Session = () => {
   if (!names.length) return <NoDataFound />;
 
   return (
-    <Row id="jt_all_course">
-      {names.map((name) => {
+    <div className="course-card-container">
+      {names.map((name, index) => {
         return (
-          <Col md={3} xs={12}>
-            <Card
-              className="mt-2"
-              style={{
-                width: '100%',
-                minHeight: '550px',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                marginBottom: '50px',
-              }}
-            >
-              {/* <Route><Link to="details"> */}
-              <CardImg
-                top
-                style={{ width: '100%' }}
-                src={Logo || name.img}
-                alt="Card image cap"
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  height: '30px',
-                  backgroundColor: '#ff0000',
-                  borderRadius: '5px',
-                }}
-              >
-                <p
-                  className="mt-1 mb-2 mr-2 ml-2"
-                  style={{ color: '#fff', fontSize: '16px' }}
-                >
-                  Rs.{name.cost}
-                </p>
-              </div>
-              {/* </Link></Route> */}
-              <CardBody>
-                <div className="jt_cart">
-                  <h2 className="font-weight-bold">{name.course}</h2>
-                  {/* <h6 className="mb-2 font-weight-bold">{name.genre}</h6> */}
-                  <CardText>{name.desc}</CardText>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
+          <div className="course-card">
+            <p className="course-card-price"> Rs.{name.cost}</p>
+            <div className="img-container">
+              <img src={name.img || Logo} alt="Card image cap" />
+            </div>
+            <div className="course-card-content">
+              <h2>{name.course.substr(0, 38)}</h2>
+              <p>{name.genre ? name.genre.substr(0, 200) : ''}</p>
+              <p>{name.desc}</p>
+            </div>
+          </div>
         );
       })}
-    </Row>
+    </div>
   );
 };
 

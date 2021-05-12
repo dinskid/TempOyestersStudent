@@ -56,7 +56,7 @@ const Login = ({ history, loading, error, loginUserAction, currentUser }) => {
     if (error === undefined) {
       NotificationManager.error(
         error,
-        'Username or Password is incorrect',
+        'Email or Password is incorrect',
         3000,
         null,
         null,

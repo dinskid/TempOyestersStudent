@@ -135,9 +135,9 @@ function* registerWithEmailPassword({ payload }) {
       registerWithEmailPasswordAsync,
       payload.user.values
     );
-    yield put(registerUserSuccess(registerUser.error));
     if (registerUser.success) {
       const item = { uid: registerUser.token };
+      console.log(item);
       setCurrentUser(item);
       yield put(registerUserSuccess(item));
       history.push('/app/pages/product/data-list');
@@ -150,7 +150,7 @@ function* registerWithEmailPassword({ payload }) {
       }
     }
   } catch (error) {
-    // console.log(typeof(toggleClick));
+    console.log(typeof toggleClick);
     try {
       yield put(registerUserError(error.response.data.error));
     } catch (err) {

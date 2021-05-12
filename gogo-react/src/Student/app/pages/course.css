@@ -330,7 +330,7 @@
   display: grid;
   gap: 1rem;
   padding: 2rem 0;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
 }
 
 .course-card {
@@ -428,5 +428,15 @@
 @media screen and (min-width: 820px) {
   .course-card-container {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.no-video {
+  width: 100vw;
+}
+
+@media screen and (min-width: 768px) {
+  .no-video {
+    width: 60%;
   }
 }

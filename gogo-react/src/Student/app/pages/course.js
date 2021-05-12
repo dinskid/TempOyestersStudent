@@ -134,13 +134,19 @@ const KnowledgeBase = ({ match, ...props }) => {
           setVideoSrc(result.data.ans[0].lesson[0].videoUrl);
         }
         if (result.data.ans[0].lesson[0].assignmentUrl) {
-          setAssign(result.data.ans[0].lesson[0].assignmentUrl);
+          setAssign([
+            result.data.ans[0].lesson[0].assignmentUrl,
+            result.data.ans[0].lesson[0].assignment,
+          ]);
         }
         if (result.data.ans[0].lesson[0].quizUrl) {
           setQuiz(result.data.ans[0].lesson[0].quizUrl);
         }
         if (result.data.ans[0].lesson[0].handoutsUrl) {
-          setHangouts(result.data.ans[0].lesson[0].handoutsUrl);
+          setHangouts([
+            result.data.ans[0].lesson[0].handoutsUrl,
+            result.data.ans[0].lesson[0].handouts,
+          ]);
         }
 
         // if(CommentsHere.result.length!=0){
@@ -348,13 +354,11 @@ const KnowledgeBase = ({ match, ...props }) => {
                   Hangouts={Hangouts}
                 />
               ) : (
-                <div>
-                  <img
-                    src={NoVideoImg}
-                    style={{ width: '100%', height: '100%' }}
-                    alt="noVideo"
-                  />
-                  <h2>No Course Video Available Right now</h2>
+                <div style={{ display: 'grid', placeItems: 'center' }}>
+                  <img src={NoVideoImg} className="no-video" alt="noVideo" />
+                  <h2 style={{ textAlign: 'center' }}>
+                    No Course Video Available Right now
+                  </h2>
                 </div>
               )}
 
@@ -388,7 +392,7 @@ const KnowledgeBase = ({ match, ...props }) => {
             >
               45% of 100%
             </div> */}
-                {localStorage.getItem("STARTQUIZ") && (
+                {localStorage.getItem('STARTQUIZ') && (
                   <button
                     className="btn-secondary"
                     style={{ border: 'none', width: '100%' }}
@@ -482,7 +486,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                         setCurrentChapter(doc);
 
                                         if (l.videoUrl) {
-                                          console.log("hello")
+                                          console.log('hello');
                                           setVideoSrc(l.videoUrl);
                                           setHangouts(null);
                                           MaterialsSet(null);
@@ -490,7 +494,10 @@ const KnowledgeBase = ({ match, ...props }) => {
                                           setQuiz(null);
                                         }
                                         if (l.handoutsUrl) {
-                                          setHangouts(l.handoutsUrl);
+                                          setHangouts([
+                                            l.handoutsUrl,
+                                            l.handouts,
+                                          ]);
                                           // setVideoSrc(null);
                                           //  setAssign(null);
                                           setQuiz(null);
@@ -498,20 +505,19 @@ const KnowledgeBase = ({ match, ...props }) => {
                                         }
 
                                         if (l.assignmentUrl) {
-                                          setAssign(l.assignmentUrl);
+                                          setAssign([
+                                            l.assignmentUrl,
+                                            l.assignment,
+                                          ]);
                                           // setVideoSrc(null);
                                           // setHangouts(null);
                                           setQuiz(null);
                                           setMaterial([l.assignmentUrl]);
                                         }
 
-                                        // if (l.quizUrl) {
-                                        //   setQuiz(l.quizUrl);
-                                        //   setVideoSrc(null);
-                                        //   setAssign(null);
-                                        //   setHangouts(null);
-                                        //   MaterialsSet(l.quizUrl);
-                                        // }
+                                        if (!l.videoUrl) {
+                                          setVideoSrc(null);
+                                        }
 
                                         lessonColor(index, ls, l, doc);
                                       }}
@@ -697,10 +703,10 @@ const KnowledgeBase = ({ match, ...props }) => {
                                   <Col md={12} xs={12}>
                                     {' '}
                                     <CardText className="mt-4 text-left">
-                                      Assignment
+                                      {Assign[1]}
                                     </CardText>
                                     <a
-                                      href={`${Assign}#toolbar=0`}
+                                      href={`${Assign[0]}#toolbar=0`}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                     >
@@ -712,10 +718,10 @@ const KnowledgeBase = ({ match, ...props }) => {
                                   <Col md={12} xs={12}>
                                     {' '}
                                     <CardText className="mt-4 text-left">
-                                      Hangouts
+                                      {Hangouts[1]}
                                     </CardText>
                                     <a
-                                      href={`${Hangouts}#toolbar=0`}
+                                      href={`${Hangouts[0]}#toolbar=0`}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                     >
