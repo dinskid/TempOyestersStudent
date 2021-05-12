@@ -13,7 +13,6 @@ import Cookies from 'universal-cookie';
 
 function Quiz() {
   const {
-    loading,
     quiz_time,
     quiz_name,
     quiz_questions,

@@ -70,15 +70,11 @@ const AppProvider = ({ children }) => {
   console.log(query);
 
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
   const [quiz_time, setQuiz_time] = useState('');
   const [quiz_questions, setQuiz_questions] = useState('');
   const [quiz_name, setQuiz_name] = useState('');
-  const [userName, setUserName] = useState('');
-  const [ProfilePicture, setProfilePicture] = useState('');
 
   const fetchQuestions = async () => {
-    setLoading(true);
     try {
       const response = await axios.get(
         `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/1`
@@ -88,31 +84,27 @@ const AppProvider = ({ children }) => {
       setQuiz_time(response.data.quiz_timer_time);
       setQuiz_questions(response.data.quiz_all_question);
       setQuiz_name(response.data.quiz_name);
-      setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(true);
     }
   };
 
-  const [studentId, setStudentId] = useState('');
-
-  useEffect(() => {
-    const getProfile = async () => {
-      const result = await axiosInstance.get('/student/auth/profile');
-      console.log(result);
-      setUserName(result.data.result.student_first_name);
-      setProfilePicture(result.data.result.student_profile_picture);
-      setStudentId(result.data.result.student_id);
-      localStorage.setItem('STUDENTID', result.data.result.student_id);
-      localStorage.setItem('USERNAME', result.data.result.student_first_name);
-      localStorage.setItem(
-        'PROFILEPICTURE',
-        result.data.result.student_profile_picture
-      );
-    };
-    getProfile();
-  }, []);
+  // useEffect(() => {
+  //   const getProfile = async () => {
+  //     const result = await axiosInstance.get(`/student/auth/profile`);
+  //     console.log(result);
+  //     setUserName(result.data.result.student_first_name);
+  //     setProfilePicture(result.data.result.student_profile_picture);
+  //     setStudentId(result.data.result.student_id);
+  //     localStorage.setItem('STUDENTID', result.data.result.student_id);
+  //     localStorage.setItem('USERNAME', result.data.result.student_first_name);
+  //     localStorage.setItem(
+  //       'PROFILEPICTURE',
+  //       result.data.result.student_profile_picture
+  //     );
+  //   };
+  //   getProfile();
+  // }, []);
 
   useEffect(() => {
     fetchQuestions();
@@ -135,15 +127,11 @@ const AppProvider = ({ children }) => {
         logo,
         favicon,
         data,
-        loading,
         quiz_time,
         quiz_questions,
         quiz_name,
-        userName,
-        ProfilePicture,
         fetchQuestions,
         quizStartTime,
-        studentId,
       }}
     >
       <Favicon url={favicon} />

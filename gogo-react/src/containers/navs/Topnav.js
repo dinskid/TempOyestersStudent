@@ -265,6 +265,12 @@ const TopNav = ({
       console.log(result);
       setUserName(result.data.result.student_first_name);
       setProfilePic(result.data.result.student_profile_picture);
+      localStorage.setItem(
+        'PROFILEPIC',
+        result.data.result.student_profile_picture
+      );
+      localStorage.setItem('STUDENTID', result.data.result.student_id);
+      localStorage.setItem('USERNAME', result.data.result.student_first_name);
     };
     getData();
   }, []);

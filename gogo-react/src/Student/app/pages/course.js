@@ -30,6 +30,7 @@ import { AiFillPlayCircle } from 'react-icons/ai';
 import { FiDownload } from 'react-icons/fi';
 import { FcCheckmark } from 'react-icons/fc';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import img from './img2.jpg';
 import { VideoPlayer } from './VideoPlayer';
