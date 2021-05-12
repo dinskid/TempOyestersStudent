@@ -366,7 +366,7 @@
 
 /* new css  for courses list*/
 
-.card-container {
+.course-card-container {
   display: grid;
   gap: 1rem;
   padding: 2rem 0;
@@ -443,7 +443,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .card-container {
+  .course-card-container {
     grid-template-columns: repeat(3, 1fr);
   }
   .card {
@@ -462,7 +462,7 @@
 }
 
 @media screen and (min-width: 820px) {
-  .card-container {
+  .course-card-container {
     grid-template-columns: repeat(4, 1fr);
   }
 }

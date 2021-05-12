@@ -196,7 +196,7 @@ const DataListPages = ({ match }) => {
   if (!names.length) return <NoDataFound />;
 
   return (
-    <div className="card-container">
+    <div className="course-card-container">
       {names.map((name, index) => {
         return (
           <div className="card">

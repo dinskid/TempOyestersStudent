@@ -39,6 +39,7 @@ import NoDataFound from './NoDataFound';
 import { useGlobalContext } from '../../../context';
 import NoCourseImg from './no-course.svg';
 import NoVideoImg from './noVideo.svg';
+import './course.css';
 
 const Materials = [
   // {
