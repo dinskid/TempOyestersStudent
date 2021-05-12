@@ -373,7 +373,7 @@
   grid-template-columns: auto auto;
 }
 
-.card {
+.course-card {
   position: relative;
   border-radius: 7px;
   box-shadow: 5px 5px 16px 4px rgba(0, 0, 0, 0.2);
@@ -382,7 +382,7 @@
   padding-bottom: 1rem;
 }
 
-.card-price {
+.course-card-price {
   background: red;
   color: white;
   width: 80px;
@@ -409,24 +409,24 @@
   object-fit: cover;
 }
 
-.card-content {
+.course-card-content {
   margin-bottom: 1.5rem;
   padding: 0.5rem 1rem;
 }
 
-.card-content h2 {
+.course-card-content h2 {
   font-size: 20px;
   font-weight: 700;
 }
 
-.card-content p {
+.course-card-content p {
   margin-top: 1.5rem;
   font-size: 15px;
   font-weight: 400;
   display: none;
 }
 
-.card-tags {
+.course-card-tags {
   display: none;
   grid-template-columns: repeat(3, 1fr);
   padding: 0rem 1rem;
@@ -446,15 +446,15 @@
   .course-card-container {
     grid-template-columns: repeat(3, 1fr);
   }
-  .card {
+  .course-card {
     height: 480px;
   }
 
-  .card-content p {
+  .course-card-content p {
     display: block;
   }
 
-  .card-tags {
+  .course-card-tags {
     display: grid;
     position: absolute;
     bottom: 20px;

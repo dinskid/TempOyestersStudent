@@ -200,10 +200,10 @@ const DataListPages = ({ match }) => {
     );
   if (!names.length) return <NoDataFound />;
   return (
-    <div className="card-container">
+    <div className="course-card-container">
       {names.map((name, index) => {
         return (
-          <div className="card">
+          <div className="course-card">
             <Route>
               <Link
                 to={{
@@ -211,17 +211,17 @@ const DataListPages = ({ match }) => {
                   state: { session_id: name.session_id },
                 }}
               >
-                <p className="card-price"> Rs.{name.cost}</p>
+                <p className="course-card-price"> Rs.{name.cost}</p>
                 <div className="img-container">
                   <img src={name.img || Logo} alt="Card image cap" />
                 </div>
               </Link>
             </Route>
-            <div className="card-content">
+            <div className="course-card-content">
               <h2>{name.course.substr(0, 38)}</h2>
               <p>{name.genre ? name.genre.substr(0, 200) : ''}</p>
             </div>
-            <div className="card-tags">
+            <div className="course-card-tags">
               {name.tags.split(',').map((tag) => {
                 return <Badge className="badge-color m-1">{tag}</Badge>;
               })}
