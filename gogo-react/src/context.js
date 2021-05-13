@@ -17,9 +17,8 @@ const AppProvider = ({ children }) => {
   const [quizStartTime, setQuizStartTime] = useState(
     localStorage.getItem('STARTQUIZ')
   );
+  const [canQuizStart, setCanQuizStart] = useState('');
   const cookies = new Cookies();
-
-  console.log(`/student/clientDetails/${params}`);
   const Test = cookies.get('Value');
 
   const getData = async () => {
@@ -32,10 +31,6 @@ const AppProvider = ({ children }) => {
 
   document.title = name;
 
-  // useEffect(() => {
-  //   sessionStorage.setItem('params', id);
-  //   sessionStorage.setItem('url', Url);
-  // }, []);
   const search = window.location.search;
   const href = window.location.href;
   const url = new URL(href);
@@ -56,8 +51,6 @@ const AppProvider = ({ children }) => {
         return old;
       });
     }
-
-    getData();
     // window.onload = function () {
     //   if (!window.location.hash) {
     //     window.location = window.location + '#loaded';
@@ -65,7 +58,13 @@ const AppProvider = ({ children }) => {
     //     window.location.reload();
     //   }
     // };
-  }, [query]);
+  }, [search]);
+
+  useEffect(() => {
+    // localStorage.setItem('QUERY', query);
+    // localStorage.setItem('PARAMS', params);
+    getData();
+  }, [query, params]);
 
   console.log(query);
 
@@ -114,6 +113,8 @@ const AppProvider = ({ children }) => {
     const getQuizStartTime = async () => {
       const result = await axiosInstance.get(`/student/quiz/canQuizStart/1`);
       localStorage.setItem('STARTQUIZ', result.data);
+      setCanQuizStart(result.data);
+      console.log(result);
     };
     getQuizStartTime();
   }, []);
@@ -132,6 +133,7 @@ const AppProvider = ({ children }) => {
         quiz_name,
         fetchQuestions,
         quizStartTime,
+        canQuizStart,
       }}
     >
       <Favicon url={favicon} />

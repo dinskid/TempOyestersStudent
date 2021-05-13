@@ -100,6 +100,7 @@ const KnowledgeBase = ({ match, ...props }) => {
     quiz_time,
     data,
     quizStartTime,
+    canQuizStart,
   } = useGlobalContext();
 
   const getData = async () => {
@@ -393,7 +394,7 @@ const KnowledgeBase = ({ match, ...props }) => {
             >
               45% of 100%
             </div> */}
-                {localStorage.getItem('STARTQUIZ') && (
+                {canQuizStart ? (
                   <button
                     className="btn-secondary"
                     style={{ border: 'none', width: '100%' }}
@@ -401,7 +402,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                   >
                     StartQuiz
                   </button>
-                )}
+                ) : null}
                 <div
                   className="content_all"
                   style={{

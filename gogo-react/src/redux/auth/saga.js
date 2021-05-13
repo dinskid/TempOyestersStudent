@@ -68,7 +68,7 @@ function* loginWithEmailPassword({ payload }) {
       const item = { uid: loginUser.token };
       setCurrentUser(item);
       yield put(loginUserSuccess(loginUser));
-      history.push('/app/pages/mycourses');
+      history.push(`/app/pages/mycourses`);
     } else {
       yield put(loginUserError(loginUser.error));
     }
