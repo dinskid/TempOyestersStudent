@@ -432,7 +432,10 @@
 }
 
 .no-video {
-  width: 100vw;
+  width: 95vw;
+  border: 2px solid black;
+  margin-bottom: 1rem;
+  padding: 1rem;
 }
 .nodata-img {
   width: 330px;
@@ -447,5 +450,11 @@
   .nodata-img {
     margin-top: 3%;
     width: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .no-course-container {
+    margin-bottom: 2rem;
   }
 }

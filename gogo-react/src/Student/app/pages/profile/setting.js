@@ -187,7 +187,7 @@ function Setting() {
                     else {
                       setStudent((prevState) => ({
                         ...prevState,
-                        student_profile_picture: currentImage,
+                        student_profile_picture: file,
                       }));
                       setDisplayProfileImage(file);
                     }

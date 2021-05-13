@@ -4,7 +4,7 @@ import { IoMdHelp } from 'react-icons/io';
 import axios from 'axios';
 import { useGlobalContext } from '../context';
 import './quiz.css';
-import axiosInstance2 from '../helpers/axiosInstance2';
+import axiosInstance from '../helpers/axiosInstance';
 import { useHistory } from 'react-router-dom';
 import avatar from './app/pages/profile/Asset 1.png';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -567,8 +567,8 @@ function Quiz() {
 
         <div className={`${warningModal ? 'popup popup-active' : 'popup'}`}>
           <h3>
-            Tab Shifting was detected. test will be submitted automatically
-            after {3 - warningCount} more time.
+            Tab Shifting was detected. Test will be submitted automatically
+            after {2 - warningCount} more time.
           </h3>
           <div
             className="submit-btn-container"

@@ -201,17 +201,17 @@ const KnowledgeBase = ({ match, ...props }) => {
   console.log('Handout', Hangouts);
   console.log('Assign', Assign);
 
-  useEffect(() => {
-    if (error)
-      NotificationManager.warning(
-        error,
-        'My Courses Error',
-        3000,
-        null,
-        null,
-        ''
-      );
-  }, [error]);
+  // useEffect(() => {
+  //   if (error)
+  //     NotificationManager.warning(
+  //       error,
+  //       'My Courses Error',
+  //       3000,
+  //       null,
+  //       null,
+  //       ''
+  //     );
+  // }, [error]);
 
   const IMgUpload = (e) => {
     const file = URL.createObjectURL(e.target.files[0]);
@@ -349,7 +349,13 @@ const KnowledgeBase = ({ match, ...props }) => {
                   Hangouts={Hangouts}
                 />
               ) : (
-                <div style={{ display: 'grid', placeItems: 'center' }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    placeItems: 'center',
+                  }}
+                  className="nocourse-container"
+                >
                   <img src={NoVideoImg} className="no-video" alt="noVideo" />
                   <h2 style={{ textAlign: 'center' }}>
                     No Course Video Available Right now
@@ -686,18 +692,31 @@ const KnowledgeBase = ({ match, ...props }) => {
                             aria-labelledby="contact-tab"
                             show
                           >
-                            <Card
-                              body
-                              className="text-center card-inner jt_comment"
-                            >
-                              <Row>
-                                <Col md={2} xs={12} className="card_comment">
-                                  <CardTitle tag="h5" className=""></CardTitle>
-                                </Col>
-                                {Assign && (
-                                  <Col md={12} xs={12}>
+                            {Assign && (
+                              <Card
+                                body
+                                className="text-center card-inner jt_comment"
+                              >
+                                <Row>
+                                  <Col md={2} xs={12} className="card_comment">
+                                    <CardTitle
+                                      tag="h5"
+                                      className=""
+                                    ></CardTitle>
+                                  </Col>
+                                  <Col
+                                    md={12}
+                                    xs={12}
+                                    style={{
+                                      display: 'grid',
+                                      alignItems: 'center',
+                                    }}
+                                  >
                                     {' '}
-                                    <CardText className="mt-4 text-left">
+                                    <CardText
+                                      className="text-left"
+                                      style={{ fontSize: '20px' }}
+                                    >
                                       {Assign[1]}
                                     </CardText>
                                     <a
@@ -708,23 +727,7 @@ const KnowledgeBase = ({ match, ...props }) => {
                                       <FiDownload /> View
                                     </a>
                                   </Col>
-                                )}
-                                {Hangouts && (
-                                  <Col md={12} xs={12}>
-                                    {' '}
-                                    <CardText className="mt-4 text-left">
-                                      {Hangouts[1]}
-                                    </CardText>
-                                    <a
-                                      href={`${Hangouts[0]}#toolbar=0`}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      <FiDownload /> View
-                                    </a>
-                                  </Col>
-                                )}
-                                {/* <Col md={10} xs={12}>
+                                  {/* <Col md={10} xs={12}>
                                   {' '}
                                   <CardText className="mt-4 text-left">
                                     Document
@@ -737,8 +740,41 @@ const KnowledgeBase = ({ match, ...props }) => {
                                     <FiDownload /> View
                                   </a>
                                 </Col> */}
-                              </Row>
-                            </Card>
+                                </Row>
+                              </Card>
+                            )}
+                            {Hangouts && (
+                              <Card
+                                body
+                                className="text-center card-inner jt_comment"
+                              >
+                                <Row>
+                                  <Col
+                                    md={12}
+                                    xs={12}
+                                    style={{
+                                      display: 'grid',
+                                      alignItems: 'center',
+                                    }}
+                                  >
+                                    {' '}
+                                    <CardText
+                                      className="mt-4 text-left"
+                                      style={{ fontSize: '20px' }}
+                                    >
+                                      {Hangouts[1]}
+                                    </CardText>
+                                    <a
+                                      href={`${Assign[0]}#toolbar=0`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <FiDownload /> View
+                                    </a>
+                                  </Col>
+                                </Row>
+                              </Card>
+                            )}
                           </div>
                         </>
                       ) : (

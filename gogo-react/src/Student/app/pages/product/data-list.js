@@ -101,17 +101,17 @@ const DataListPages = ({ match }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (error)
-      NotificationManager.warning(
-        error,
-        'All Courses Error',
-        3000,
-        null,
-        null,
-        ''
-      );
-  }, [error, setError]);
+  // useEffect(() => {
+  //   if (error)
+  //     NotificationManager.warning(
+  //       error,
+  //       'All Courses Error',
+  //       3000,
+  //       null,
+  //       null,
+  //       ''
+  //     );
+  // }, [error, setError]);
 
   const onCheckItem = (event, id) => {
     if (

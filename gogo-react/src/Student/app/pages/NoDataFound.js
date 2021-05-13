@@ -1,35 +1,30 @@
 import React from 'react';
-import logo from './noData.svg';
+import logo from './session.svg';
 
 const NoDataFound = () => {
   return (
     <>
-      <div
+      <img
+        src={logo}
+        alt="you don't have any sessions yet logo"
         style={{
-          position: 'relative',
-          display: 'grid',
-          placeItems: 'center',
-          padding: '2rem, 0',
+          marginTop: '5%',
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          width: '15%',
+          height: '15%',
         }}
+      />{' '}
+      <h3
+        style={{ marginBottom: '20px', textAlign: 'center', color: 'purple' }}
       >
-        <img
-          src={logo}
-          alt="you haven't purchase any course yet"
-          className="nodata-img"
-        />{' '}
-        <h3
-          style={{
-            marginBottom: '20px',
-            textAlign: 'center',
-            color: 'purple',
-            fontSize: '18px',
-            fontWeight: '500',
-          }}
-        >
-          {' '}
-          You haven't purchased any course yet.
-        </h3>
-      </div>
+        {' '}
+        You Don 't Have Any Data Yet
+      </h3>
+      <br />
+      <br />
+      <br />
     </>
   );
 };

@@ -15,7 +15,7 @@ import useMousetrap from '../../../hooks/use-mousetrap';
 import { Link, Route } from 'react-router-dom';
 import axiosInstance from '../../../helpers/axiosInstance';
 import NotificationManager from '../../../components/common/react-notifications/NotificationManager';
-import NoDataFound from './NoDataFound';
+import NoDataFoundMyCourse from './NoDataFoundMyCourse';
 import Logo from '../../../data/Logo';
 import Cookies from 'universal-cookie';
 
@@ -71,17 +71,17 @@ const DataListPages = ({ match }) => {
     setCurrentPage(1);
   }, [selectedPageSize, selectedOrderOption]);
 
-  useEffect(() => {
-    if (error)
-      NotificationManager.warning(
-        error,
-        'My Courses Error',
-        3000,
-        null,
-        null,
-        ''
-      );
-  }, [error]);
+  // useEffect(() => {
+  //   if (error)
+  //     NotificationManager.warning(
+  //       error,
+  //       'My Courses Error',
+  //       3000,
+  //       null,
+  //       null,
+  //       ''
+  //     );
+  // }, [error]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -199,7 +199,7 @@ const DataListPages = ({ match }) => {
         <Spinner color="primary" />
       </div>
     );
-  if (!names.length) return <NoDataFound />;
+  if (!names.length) return <NoDataFoundMyCourse />;
   return (
     <div className="course-card-container">
       {names.map((name, index) => {
