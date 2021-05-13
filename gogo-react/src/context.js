@@ -21,6 +21,8 @@ const AppProvider = ({ children }) => {
   const cookies = new Cookies();
   const Test = cookies.get('Value');
 
+  // fetching data for logo favicon and title
+
   const getData = async () => {
     const result = await axiosInstance.get(`/student/clientDetails/${params}`);
     console.log(result);
@@ -35,6 +37,8 @@ const AppProvider = ({ children }) => {
   const href = window.location.href;
   const url = new URL(href);
   const id = url.searchParams.get('tutor_id');
+
+  // fetching query params from url
 
   useEffect(() => {
     // setQuery(cookies.get('Params'));
@@ -73,6 +77,8 @@ const AppProvider = ({ children }) => {
   const [quiz_questions, setQuiz_questions] = useState('');
   const [quiz_name, setQuiz_name] = useState('');
 
+  // fetching quiz data
+
   const fetchQuestions = async () => {
     try {
       const response = await axios.get(
@@ -108,6 +114,8 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     fetchQuestions();
   }, []);
+
+  // fetching quiz start timer
 
   useEffect(() => {
     const getQuizStartTime = async () => {
