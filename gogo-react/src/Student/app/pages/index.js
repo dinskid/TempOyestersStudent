@@ -31,7 +31,7 @@ const Course = React.lazy(() =>
 );
 
 const Pages = ({ match }) => (
-  <Suspense fallback={<div className="loading" />}>
+  < Suspense fallback={< div className="loading" />}>
     <Switch>
       <Redirect exact from={`${match.url}/`} to={`${match.url}/product`} />
       <Route
@@ -67,6 +67,6 @@ const Pages = ({ match }) => (
 
       <Redirect to="/error" />
     </Switch>
-  </Suspense>
+  </Suspense >
 );
 export default Pages;

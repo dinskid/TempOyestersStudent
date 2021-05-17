@@ -21,7 +21,7 @@ import {
 } from 'reactstrap';
 import Fade from 'react-reveal/Fade';
 import Zoom from 'react-reveal/Zoom';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './miscellaneous/course.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classnames from 'classnames';
@@ -41,6 +41,7 @@ import { useGlobalContext } from '../../../context';
 import NoCourseImg from './no-course.svg';
 import NoVideoImg from './noVideo.svg';
 import './course.css';
+import IFrame from '../../../components/IFramePopUp';
 
 const Materials = [
   // {
@@ -92,6 +93,8 @@ const KnowledgeBase = ({ match, ...props }) => {
     session_id: courseDetails.session_id,
     customer_id: courseDetails.customer_id,
   });
+  const [iframeVisible, setIframeVisible] = useState(false);
+  const [iframeSrc, setIframeSrc] = useState('');
   const [Image, setImage] = useState(newComment.comment_img_url);
 
   const {
@@ -331,13 +334,14 @@ const KnowledgeBase = ({ match, ...props }) => {
   const startQuiz = () => {
     fetchQuestions();
     localStorage.setItem('DATA', JSON.stringify(quiz_questions));
-    localStorage.setItem('TIME', JSON.stringify(quiz_time));
+    localStorage.setItem('TIME', JSON.stringify(quiz_time * 60)); // setting the time left in seconds
     localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
     history.push('/quiz');
   };
 
   return (
     <>
+      {iframeVisible && <IFrame src={iframeSrc} close={() => { setIframeVisible(false) }} />}
       {courseContent.length ? (
         <div>
           <Row className="wrapper">
@@ -721,9 +725,11 @@ const KnowledgeBase = ({ match, ...props }) => {
                                       {Assign[1]}
                                     </CardText>
                                     <a
-                                      href={`${Assign[0]}#toolbar=0`}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
+                                      onClick={() => {
+                                        setIframeSrc(`${Assign[0]}#toolbar=0`);
+                                        setIframeVisible(true);
+                                      }}
+                                      href='#'
                                     >
                                       <FiDownload /> View
                                     </a>
@@ -766,9 +772,11 @@ const KnowledgeBase = ({ match, ...props }) => {
                                       {Hangouts[1]}
                                     </CardText>
                                     <a
-                                      href={`${Assign[0]}#toolbar=0`}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
+                                      onClick={() => {
+                                        setIframeSrc(`${Assign[0]}#toolbar=0`);
+                                        setIframeVisible(true);
+                                      }}
+                                      href="#"
                                     >
                                       <FiDownload /> View
                                     </a>

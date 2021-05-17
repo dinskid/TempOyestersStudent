@@ -12,6 +12,10 @@ import { usePageVisibility } from 'react-page-visibility';
 import Cookies from 'universal-cookie';
 
 function Quiz() {
+  const formatTime = (seconds) => {
+    return `${Math.floor(seconds / 60)}:${seconds % 60}`
+  }
+
   const {
     quiz_time,
     quiz_name,
@@ -27,14 +31,9 @@ function Quiz() {
   const [sectionOpen, setSectionOpen] = useState(false);
   const [sectionIndex, setSectionIndex] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [counter, setCounter] = useState(0);
-  const [timeElapsed, setTimeElapsed] = useState(0);
   const [totalTime, setTotalTime] = useState(
     JSON.parse(localStorage.getItem('TIME'))
   );
-
-  const [second, setSecond] = useState(60);
-
   const [quizData, setQuizData] = useState(
     JSON.parse(localStorage.getItem('DATA'))
   );
@@ -68,6 +67,7 @@ function Quiz() {
 
   const [progress, setProgress] = useState(100);
   const [modal, setModal] = useState(false);
+  const [timeLessWarning, setTimeLessWarning] = useState(false);
   const [warningCount, setWarningCount] = useState(0);
   const [warningModal, setWarningModal] = useState(false);
   const [submitPopup, setSubmitPopup] = useState(false);
@@ -99,34 +99,25 @@ function Quiz() {
     sectionStyle[questionIndex].notVisited = false;
   };
 
-  // timer
-
   useEffect(() => {
-    const timer = setInterval(() => setCounter(counter + 1), 1000);
-    return () => clearInterval(timer);
-  }, [counter]);
-
-  useEffect(() => {
-    if (counter > 60) {
-      setCounter(0);
-      setTimeElapsed(timeElapsed + 1);
+    const intervalId = setInterval(() => {
+      setTotalTime(old => {
+        let updatedTime = old - 1;
+        // warn on 5 minutes
+        if (updatedTime === 5 * 60) setTimeLessWarning(true);
+        if (updatedTime < 0) updatedTime = -1;
+        try {
+          localStorage.setItem('TIME', updatedTime);
+        } catch (e) {
+          console.log("Couldn't write to localStorage", e);
+        }
+        return updatedTime;
+      })
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
     }
-  }, [counter]);
-
-  useEffect(() => {
-    setTotalTime((old) => {
-      let newValue = old - 1;
-      if (newValue < 0) {
-        return -1;
-      }
-      return newValue;
-    });
-  }, [timeElapsed]);
-
-  useEffect(() => {
-    const sec = setInterval(() => setSecond(second - 1), 1000);
-    return () => clearInterval(sec);
-  }, [second]);
+  }, [totalTime]);
 
   // select answer event
 
@@ -159,39 +150,38 @@ function Quiz() {
 
   // final submission
 
-  const finalSubmit = async () => {
-    console.log(finalValues);
-    try {
-      const submit = await axios.post(
-        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/submitQuiz`,
-        finalValues
-      );
-      console.log(submit);
-      if (submit.status === 200) {
-        setSubmitPopup(true);
-      } else {
-        setSubmitPopup(false);
+  const finalSubmit = () => {
+    setFinalValues(async finalValues => {
+      const valuesToPost = {
+        ...finalValues,
+        answers: selectedAnswers,
+        remaining_time: formatTime(totalTime),
       }
+      try {
+        const submit = await axios.post(
+          `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/submitQuiz`,
+          valuesToPost
+        );
+        console.log(submit);
+        if (submit.status === 200) {
+          setSubmitPopup(true);
+        } else {
+          setSubmitPopup(false);
+        }
 
-      // history.push('/app/pages/mycourses');
-      // if (document.exitFullscreen) {
-      //   document.exitFullscreen();
-      // } else if (document.webkitExitFullscreen) {
-      //   /* Safari */
-      //   document.webkitExitFullscreen();
-      // }
-    } catch (error) {
-      console.log(Error);
-    }
-  };
-
-  useEffect(() => {
-    setFinalValues({
-      ...finalValues,
-      answers: selectedAnswers,
-      remaining_time: `${totalTime}:${second}`,
+        // history.push('/app/pages/mycourses');
+        // if (document.exitFullscreen) {
+        //   document.exitFullscreen();
+        // } else if (document.webkitExitFullscreen) {
+        //   /* Safari */
+        //   document.webkitExitFullscreen();
+        // }
+      } catch (error) {
+        console.log(Error);
+      }
+      return valuesToPost;
     });
-  }, [selectedAnswers, totalTime, second]);
+  };
 
   const Style = (item) => {
     if (item.Answered) {
@@ -202,12 +192,6 @@ function Quiz() {
       return 'section-btn';
     }
   };
-
-  useEffect(() => {
-    if (second < 0) {
-      setSecond(60);
-    }
-  }, [second]);
 
   useEffect(() => {
     if (totalTime < 0) {
@@ -236,12 +220,6 @@ function Quiz() {
   const closePopup = () => {
     setModal(false);
   };
-
-  useEffect(() => {
-    if (totalTime < 5) {
-      setModal(true);
-    }
-  }, [totalTime]);
 
   useEffect(() => {
     if (!isVisibleTab) {
@@ -337,11 +315,10 @@ function Quiz() {
                   return (
                     <div class="option-container">
                       <button
-                        className={`${
-                          index === answerSelectID
-                            ? 'option-btn option-btn-active'
-                            : 'option-btn'
-                        }`}
+                        className={`${index === answerSelectID
+                          ? 'option-btn option-btn-active'
+                          : 'option-btn'
+                          }`}
                         // className={optionStyle(item, index)}
                         key={index}
                         value={item.option_body}
@@ -420,24 +397,23 @@ function Quiz() {
                       <div
                         className="bar"
                         style={{
-                          width: `${
-                            (totalTime / localStorage.getItem('TIME')) * 100
-                          }%`,
+                          width: `${(totalTime / localStorage.getItem('TIME')) * 100
+                            }%`,
                         }}
                       ></div>
                     </div>
                     <h2>
-                      {totalTime}:{second}
+                      {formatTime(totalTime)}
+                      {/* {totalTime}:{second} */}
                     </h2>
                   </div>
                 </div>
               </div>
               <div
-                className={`${
-                  authorOpen
-                    ? 'profile-container profile-container-1'
-                    : 'profile-container'
-                }`}
+                className={`${authorOpen
+                  ? 'profile-container profile-container-1'
+                  : 'profile-container'
+                  }`}
               >
                 <div className="img-profile">
                   <img
@@ -457,11 +433,10 @@ function Quiz() {
               </div>
             </div>
             <div
-              className={`${
-                sectionOpen
-                  ? 'question-section question-section-1'
-                  : 'question-section'
-              }`}
+              className={`${sectionOpen
+                ? 'question-section question-section-1'
+                : 'question-section'
+                }`}
             >
               <h4>QUESTION SECTION</h4>
               <div className="sections">
@@ -519,11 +494,10 @@ function Quiz() {
               </div> */}
             </div>
             <div
-              className={`${
-                sectionOpen
-                  ? 'question-tab-container question-tab-container-1'
-                  : 'question-tab-container'
-              }`}
+              className={`${sectionOpen
+                ? 'question-tab-container question-tab-container-1'
+                : 'question-tab-container'
+                }`}
             >
               <div className="tab answered">Answered</div>
               <div className=" tab not-answered">Not Answered</div>
@@ -532,38 +506,38 @@ function Quiz() {
             </div>
           </div>
         </section>
-        {totalTime < 5 ? (
-          <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
-            <h3>
-              Your quiz will be automatically submitted after {totalTime}:
-              {second} minutes
+        <div className={`${timeLessWarning ? 'popup popup-active' : 'popup'}`}>
+          <h3>
+            {/* Your quiz will be automatically submitted after  {totalTime}:
+              {second} minutes */}
+              Your quiz will be automatically submitted after {formatTime(totalTime)} minutes
             </h3>
-            <div
-              className="submit-btn-container"
-              style={{
-                display: 'grid',
-                placeItems: 'center',
-                gridTemplateColumns: '1fr',
-              }}
-            >
-              <button className="btn-submit" onClick={closePopup}>
-                OK
+          <div
+            className="submit-btn-container"
+            style={{
+              display: 'grid',
+              placeItems: 'center',
+              gridTemplateColumns: '1fr',
+            }}
+          >
+            <button className="btn-submit" onClick={() => setTimeLessWarning(false)}>
+              OK
               </button>
-            </div>
           </div>
-        ) : (
-          <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
-            <h3>Do you want to submit your quiz ?</h3>
-            <div className="submit-btn-container">
-              <button className="btn-submit" onClick={closePopup}>
-                No
+        </div>
+
+        <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
+          <h3>Do you want to submit your quiz ?</h3>
+          <div className="submit-btn-container">
+            <button className="btn-submit" onClick={closePopup}>
+              No
               </button>
-              <button className="btn-submit" onClick={() => finalSubmit()}>
-                YES
+            <button className="btn-submit" onClick={() => finalSubmit()}>
+              YES
               </button>
-            </div>
           </div>
-        )}
+        </div>
+
 
         <div className={`${warningModal ? 'popup popup-active' : 'popup'}`}>
           <h3>

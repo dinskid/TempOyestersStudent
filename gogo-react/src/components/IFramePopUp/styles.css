@@ -1,0 +1,33 @@
+.pop-up {
+  position: fixed;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  width: 100vw;
+  height: 100vh;
+  top: 100px; /* navbar-height */
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pop-up > iframe {
+  height: 100%;
+  width: 90% !important;
+}
+
+.back {
+  padding: 1rem 1.25rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .back {
+    left: 3px;
+    top: 3px;
+    border-radius: 15px;
+    padding: 3px 10px;
+  }
+}
