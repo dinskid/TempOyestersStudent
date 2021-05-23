@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MdPerson } from 'react-icons/md';
 import { IoMdHelp } from 'react-icons/io';
 import axios from 'axios';
@@ -12,6 +12,7 @@ import { usePageVisibility } from 'react-page-visibility';
 import Cookies from 'universal-cookie';
 
 function Quiz() {
+  const intervalId = useRef(null);
   const formatTime = (seconds) => {
     return `${Math.floor(seconds / 60)}:${seconds % 60}`
   }
@@ -42,28 +43,37 @@ function Quiz() {
   );
 
   const [answerSelectID, setAnswerSelectID] = useState(-1);
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState(JSON.parse(localStorage.getItem('QUIZ_SELECTED_ANSWERS')) || []);
   const [finalValues, setFinalValues] = useState({
-    quiz_name: data.quiz_name,
-    quiz_id: data.quiz_id,
+    quiz_name: (data && data.quiz_name) || '',
+    quiz_id: (data && data.quiz_id) || '',
     student_id: localStorage.getItem('STUDENTID'),
   });
 
   // creating new object properties
 
-  const value = quizData.map((item) => ({
-    ...item,
-    Answered: false,
-    marked: false,
-    notAnswered: false,
-    notVisited: true,
-  }));
-  const [sectionStyle, setSectionStyle] = useState(value);
+  const [sectionStyle, setSectionStyle] = useState(JSON.parse(localStorage.getItem('QUIZ_SECTION_STYLE')) || []);
 
-  const Option = quizData[questionIndex].question_options.map((item) => ({
-    ...item,
-    answer: -1,
-  }));
+  useEffect(() => {
+    if (!(data && quizData)) {
+      history.push('/error');
+    }
+    if (quizData && sectionStyle === []) {
+      const value = quizData.map((item) => ({
+        ...item,
+        Answered: false,
+        marked: false,
+        notAnswered: false,
+        notVisited: true,
+      }));
+      setSectionStyle(value);
+    }
+  }, []);
+
+  // const Option = quizData[questionIndex].question_options.map((item) => ({
+  //   ...item,
+  //   answer: -1,
+  // }));
 
   const [progress, setProgress] = useState(100);
   const [modal, setModal] = useState(false);
@@ -77,45 +87,48 @@ function Quiz() {
   // handle next and prev buttons
 
   const prevButton = () => {
+    let updatedSectionStyle = [...sectionStyle];
     setQuestionIndex((oldValue) => {
-      let newValue = oldValue - 1;
-      if (newValue < 0) {
-        return 0;
-      }
+      let newValue = Math.max(0, oldValue - 1);
+      updatedSectionStyle[newValue].notVisited = false;
+      setSectionStyle(updatedSectionStyle);
       return newValue;
     });
-    sectionStyle[questionIndex].notVisited = false;
   };
 
   const nextButton = () => {
+    let updatedSectionStyle = [...sectionStyle];
     setQuestionIndex((oldValue) => {
-      let newValue = oldValue + 1;
-      if (newValue > quizData.length - 1) {
-        return quizData.length - 1;
-      }
+      let newValue = Math.min(oldValue + 1, quizData.length - 1);
+      console.log(newValue)
+      updatedSectionStyle[newValue].notAnswered = true;
+      updatedSectionStyle[newValue].notVisited = false;
+      setSectionStyle(updatedSectionStyle);
       return newValue;
     });
-    sectionStyle[questionIndex].notAnswered = true;
-    sectionStyle[questionIndex].notVisited = false;
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTotalTime(old => {
-        let updatedTime = old - 1;
-        // warn on 5 minutes
-        if (updatedTime === 5 * 60) setTimeLessWarning(true);
-        if (updatedTime < 0) updatedTime = -1;
-        try {
-          localStorage.setItem('TIME', updatedTime);
-        } catch (e) {
-          console.log("Couldn't write to localStorage", e);
-        }
-        return updatedTime;
-      })
-    }, 1000);
+    if (totalTime) {
+      intervalId.current = setInterval(() => {
+        setTotalTime(old => {
+          if (typeof old === 'number') {
+            let updatedTime = old - 1;
+            // warn on 5 minutes
+            if (updatedTime === 5 * 60) setTimeLessWarning(true);
+            if (updatedTime < 0) updatedTime = -1;
+            try {
+              localStorage.setItem('TIME', updatedTime);
+            } catch (e) {
+              console.log("Couldn't write to localStorage", e);
+            }
+            return updatedTime;
+          }
+        })
+      }, 1000);
+    }
     return () => {
-      clearInterval(intervalId);
+      clearInterval(intervalId.current);
     }
   }, [totalTime]);
 
@@ -144,9 +157,28 @@ function Quiz() {
     }
   };
 
+  const checkIfAnswerChosen = (option) => {
+    const answersOfThisQuestion = selectedAnswers.filter(e => e.question_id === quizData[questionIndex].question_id)
+    const last = answersOfThisQuestion.pop();
+    if (last)
+      return last.selectedAnswers === option;
+    return false;
+  }
+
   useEffect(() => {
-    setAnswerSelectID(quizData[questionIndex].question_match_options);
-  }, [questionIndex, quizData[questionIndex]]);
+    try {
+      localStorage.setItem('QUIZ_SELECTED_ANSWERS', JSON.stringify(selectedAnswers));
+      localStorage.setItem('QUIZ_SECTION_STYLE', JSON.stringify(sectionStyle));
+    } catch (e) {
+      console.log('Couln\'t write to localStorage', e);
+    }
+  }, [selectedAnswers, sectionStyle]);
+
+  useEffect(() => {
+    if (quizData && quizData[questionIndex])
+      setAnswerSelectID(quizData[questionIndex].question_match_options);
+
+  }, [questionIndex, quizData]);
 
   // final submission
 
@@ -168,7 +200,11 @@ function Quiz() {
         } else {
           setSubmitPopup(false);
         }
-
+        localStorage.removeItem('DATA');
+        localStorage.removeItem('QUIZ_DATA');
+        localStorage.removeItem('TIME');
+        localStorage.removeItem('QUIZ_SELECTED_ANSWERS');
+        localStorage.removeItem('QUIZ_SECTION_STYLE');
         // history.push('/app/pages/mycourses');
         // if (document.exitFullscreen) {
         //   document.exitFullscreen();
@@ -302,20 +338,21 @@ function Quiz() {
               <div className="quiz-question">
                 <h4>
                   <span>Q {questionIndex + 1}. </span>
-                  {quizData && quizData[questionIndex].question_body}
+                  {quizData && quizData[questionIndex] && quizData[questionIndex].question_body}
                 </h4>
-                {quizData[questionIndex].question_body_img_url && (
+                {quizData && quizData[questionIndex] && quizData[questionIndex].question_body_img_url && (
                   <div className="question-image-container">
                     <h2>REFERENCE IMAGE</h2>
                   </div>
                 )}
               </div>
               <div className="quiz-options option-container">
-                {quizData[questionIndex].question_options.map((item, index) => {
+                {quizData && quizData[questionIndex] && quizData[questionIndex].question_options.map((item, index) => {
                   return (
                     <div class="option-container">
+                      {/* {console.log('hellooooo ', selectedAnswers[index].selectedAnswers, item.option_body)} */}
                       <button
-                        className={`${index === answerSelectID
+                        className={`${(index === answerSelectID || checkIfAnswerChosen(item.option_body))
                           ? 'option-btn option-btn-active'
                           : 'option-btn'
                           }`}
@@ -445,7 +482,13 @@ function Quiz() {
                     return (
                       <button
                         className={Style(item)}
-                        onClick={() => setQuestionIndex(index)}
+                        onClick={() => {
+                          setQuestionIndex(index)
+                          let updatedSectionStyle = [...sectionStyle];
+                          updatedSectionStyle[index].notAnswered = true;
+                          updatedSectionStyle[index].notVisited = false;
+                          setSectionStyle(updatedSectionStyle);
+                        }}
                       >
                         {index + 1}{' '}
                       </button>

@@ -29,6 +29,9 @@ const Faq = React.lazy(() =>
 const Course = React.lazy(() =>
   retry(() => import(/* webpackChunkName: "miscellaneous-faq" */ './course'))
 );
+const QuizResults = React.lazy(() =>
+  retry(() => import(/* webpackChunkName: "quiz-results" */ './quiz-results'))
+);
 
 const Pages = ({ match }) => (
   < Suspense fallback={< div className="loading" />}>
@@ -63,6 +66,11 @@ const Pages = ({ match }) => (
       <Route
         path={`${match.url}/mycourses`}
         render={(props) => <Faq {...props} />}
+      />
+
+      <Route
+        path={`${match.url}/quiz-results`}
+        render={props => <QuizResults {...props} />}
       />
 
       <Redirect to="/error" />

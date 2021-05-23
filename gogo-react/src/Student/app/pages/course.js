@@ -332,11 +332,20 @@ const KnowledgeBase = ({ match, ...props }) => {
   };
 
   const startQuiz = () => {
-    fetchQuestions();
-    localStorage.setItem('DATA', JSON.stringify(quiz_questions));
-    localStorage.setItem('TIME', JSON.stringify(quiz_time * 60)); // setting the time left in seconds
-    localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
-    history.push('/quiz');
+    fetchQuestions(
+      // on success
+      () => {
+        localStorage.setItem('DATA', JSON.stringify(quiz_questions));
+        localStorage.setItem('TIME', JSON.stringify(quiz_time * 60)); // setting the time left in seconds
+        localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
+        history.push('/quiz');
+      },
+      // on failure
+      () => {
+        NotificationManager.error('You cannot attempt the quiz several times', 'Error', 5000, null, null, '');
+        history.push(0);
+        return;
+      });
   };
 
   return (

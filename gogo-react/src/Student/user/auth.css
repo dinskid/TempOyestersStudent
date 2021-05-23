@@ -1,3 +1,6 @@
+.auth-card{
+  height: initial !important;
+}
 .register {
   font-size: 20px !important;
 }

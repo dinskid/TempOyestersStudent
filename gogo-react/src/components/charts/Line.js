@@ -4,7 +4,7 @@ import { Chart } from 'chart.js';
 
 import { lineChartOptions } from './config';
 
-const Line = ({ data, shadow = false }) => {
+const Line = ({ data, shadow = false, options = null }) => {
   const chartContainer = useRef(null);
   const [, setChartInstance] = useState(null);
 
@@ -33,7 +33,7 @@ const Line = ({ data, shadow = false }) => {
       const context = chartContainer.current.getContext('2d');
       const newChartInstance = new Chart(context, {
         type: shadow ? 'lineWithShadow' : 'line',
-        options: lineChartOptions,
+        options: options || lineChartOptions,
         data,
       });
       setChartInstance(newChartInstance);

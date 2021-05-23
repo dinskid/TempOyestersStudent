@@ -79,7 +79,7 @@ const AppProvider = ({ children }) => {
 
   // fetching quiz data
 
-  const fetchQuestions = async () => {
+  const fetchQuestions = async (succ, err) => {
     try {
       const response = await axios.get(
         `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/1`
@@ -89,8 +89,10 @@ const AppProvider = ({ children }) => {
       setQuiz_time(response.data.quiz_timer_time);
       setQuiz_questions(response.data.quiz_all_question);
       setQuiz_name(response.data.quiz_name);
+      succ();
     } catch (error) {
       console.log(error);
+      err();
     }
   };
 
@@ -111,9 +113,9 @@ const AppProvider = ({ children }) => {
   //   getProfile();
   // }, []);
 
-  useEffect(() => {
-    fetchQuestions();
-  }, []);
+  // useEffect(() => {
+  //   fetchQuestions();
+  // }, []);
 
   // fetching quiz start timer
 
