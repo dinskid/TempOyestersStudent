@@ -39,7 +39,7 @@ function Quiz() {
     JSON.parse(localStorage.getItem('DATA'))
   );
   const [data, setData] = useState(
-    JSON.parse(localStorage.getItem('QUIZ_DATA'))
+    JSON.parse(localStorage.getItem('QUIZ_DATA')) || null
   );
 
   const [answerSelectID, setAnswerSelectID] = useState(-1);

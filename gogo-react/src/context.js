@@ -89,7 +89,7 @@ const AppProvider = ({ children }) => {
       setQuiz_time(response.data.quiz_timer_time);
       setQuiz_questions(response.data.quiz_all_question);
       setQuiz_name(response.data.quiz_name);
-      succ();
+      succ(response.data.quiz_all_question, response.data.quiz_timer_time, response.data);
     } catch (error) {
       console.log(error);
       err();

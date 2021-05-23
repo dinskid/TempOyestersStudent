@@ -334,10 +334,11 @@ const KnowledgeBase = ({ match, ...props }) => {
   const startQuiz = () => {
     fetchQuestions(
       // on success
-      () => {
-        localStorage.setItem('DATA', JSON.stringify(quiz_questions));
-        localStorage.setItem('TIME', JSON.stringify(quiz_time * 60)); // setting the time left in seconds
-        localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
+      (questions, time, data) => {
+        localStorage.setItem('DATA', JSON.stringify(questions));
+        localStorage.setItem('TIME', JSON.stringify(time * 60)); // setting the time left in seconds
+        if (data)
+          localStorage.setItem('QUIZ_DATA', JSON.stringify(data));
         history.push('/quiz');
       },
       // on failure
