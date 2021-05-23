@@ -36,7 +36,7 @@ function Quiz() {
     JSON.parse(localStorage.getItem('TIME'))
   );
   const [quizData, setQuizData] = useState(
-    JSON.parse(localStorage.getItem('DATA'))
+    JSON.parse(localStorage.getItem('DATA')) || null
   );
   const [data, setData] = useState(
     JSON.parse(localStorage.getItem('QUIZ_DATA')) || null
@@ -58,7 +58,7 @@ function Quiz() {
     if (!(data && quizData)) {
       history.push('/error');
     }
-    if (quizData && sectionStyle === []) {
+    if (quizData && sectionStyle.length === 0) {
       const value = quizData.map((item) => ({
         ...item,
         Answered: false,
@@ -68,7 +68,7 @@ function Quiz() {
       }));
       setSectionStyle(value);
     }
-  }, []);
+  }, [quizData]);
 
   // const Option = quizData[questionIndex].question_options.map((item) => ({
   //   ...item,
