@@ -16,6 +16,7 @@ import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import NoDataFound from './NoDataAllCourse';
 import Logo from '../../../../data/Logo';
+import { useGlobalContext } from '../../../../context';
 
 const getIndex = (value, arr, prop) => {
   for (let i = 0; i < arr.length; i += 1) {
@@ -59,6 +60,7 @@ const DataListPages = ({ match }) => {
   const [items, setItems] = useState([]);
   const [lastChecked, setLastChecked] = useState(null);
   const [error, setError] = useState(null);
+  const { logo, profilePicture } = useGlobalContext();
 
   useEffect(() => {
     setCurrentPage(1);
@@ -209,7 +211,7 @@ const DataListPages = ({ match }) => {
               >
                 <p className="course-card-price"> Rs.{name.cost}</p>
                 <div className="img-container">
-                  <img src={name.img || Logo} alt="Card image cap" />
+                  <img src={name.img || logo || profilePicture} alt="Card image cap" />
                 </div>
               </Link>
             </Route>

@@ -20,6 +20,14 @@ const data = [
     label: 'My Courses',
     to: `${adminRoot}/pages/mycourses`,
   },
+
+  {
+    id: 'quiz',
+    icon: 'iconsminds-diploma-2',
+    label: 'Quiz Results',
+    to: `${adminRoot}/pages/quiz-results`,
+  },
+
   {
     id: 'pages-profile',
     icon: 'iconsminds-affiliate',
@@ -33,12 +41,5 @@ const data = [
     label: 'Blogs',
     to: `${adminRoot}/pages/profile/blog`,
   },
-
-  {
-    id: 'quiz',
-    icon: 'iconsminds-diploma-2',
-    label: 'Quiz Results',
-    to: `${adminRoot}/pages/quiz-results`,
-  }
 ];
 export default data;

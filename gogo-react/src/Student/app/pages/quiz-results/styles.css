@@ -1,0 +1,4 @@
+.quiz-results-table-card {
+  height: 450px;
+  overflow-y: auto;
+}

@@ -14,11 +14,13 @@ import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import NoDataFound from './noDataLive';
 import Logo from '../../../../data/Logo';
+import { useGlobalContext } from '../../../../context';
 
 const Live_Session = () => {
   const [names, setNames] = useState([]);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { logo, profilePicture } = useGlobalContext();
 
   useEffect(() => {
     if (error)
@@ -84,7 +86,7 @@ const Live_Session = () => {
           <div className="course-card">
             <p className="course-card-price"> Rs.{name.cost}</p>
             <div className="img-container">
-              <img src={name.img || Logo} alt="Card image cap" />
+              <img src={name.img || logo || profilePicture} alt="Card image cap" />
             </div>
             <div className="course-card-content">
               <h2>{name.course.substr(0, 38)}</h2>

@@ -28,6 +28,7 @@ function Quiz() {
 
   let history = useHistory();
 
+  const [loading, setLoading] = useState(false);
   const [authorOpen, setAuthorOpen] = useState(false);
   const [sectionOpen, setSectionOpen] = useState(false);
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -183,6 +184,7 @@ function Quiz() {
   // final submission
 
   const finalSubmit = () => {
+    setLoading(true);
     setFinalValues(async finalValues => {
       const valuesToPost = {
         ...finalValues,
@@ -196,8 +198,10 @@ function Quiz() {
         );
         console.log(submit);
         if (submit.status === 200) {
+          setLoading(false);
           setSubmitPopup(true);
         } else {
+          setLoading(false);
           setSubmitPopup(false);
         }
         localStorage.removeItem('DATA');
@@ -213,6 +217,7 @@ function Quiz() {
         //   document.webkitExitFullscreen();
         // }
       } catch (error) {
+        setLoading(false);
         console.log(Error);
       }
       return valuesToPost;
@@ -296,83 +301,86 @@ function Quiz() {
 
   return (
     <>
-      <div className="quiz-center">
-        <MdPerson
-          className="section-open"
-          onClick={() => setAuthorOpen(!authorOpen)}
-        />
-        <IoMdHelp
-          className="section-open help"
-          onClick={() => setSectionOpen(!sectionOpen)}
-        />
-        <div className="quiz-title">
-          <h3>{quiz_name.toUpperCase()} QUIZ</h3>
-        </div>
-        <section className="quiz">
-          <div className="quiz-container">
-            {/* quiz header */}
-            <div className="quiz-header">
-              <button className="quiz-btn" onClick={prevButton}>
-                {' '}
+      {
+        loading
+          ? <div className="loading" />
+          : <div className="quiz-center">
+            <MdPerson
+              className="section-open"
+              onClick={() => setAuthorOpen(!authorOpen)}
+            />
+            <IoMdHelp
+              className="section-open help"
+              onClick={() => setSectionOpen(!sectionOpen)}
+            />
+            <div className="quiz-title">
+              <h3>{quiz_name.toUpperCase()} QUIZ</h3>
+            </div>
+            <section className="quiz">
+              <div className="quiz-container">
+                {/* quiz header */}
+                <div className="quiz-header">
+                  <button className="quiz-btn" onClick={prevButton}>
+                    {' '}
                 Previous
               </button>
-              <div className="question-numbers">
-                <h4>
-                  QUESTION <span>{questionIndex + 1}</span> OF{' '}
-                  <span>{quizData.length}</span>
-                </h4>
-              </div>
-              {quizData.length - 1 === questionIndex ? (
-                <button className="quiz-btn" onClick={() => openPopup()}>
-                  Submit
-                </button>
-              ) : (
-                <button className="quiz-btn" onClick={nextButton}>
-                  Next
-                </button>
-              )}
-            </div>
-            {/* quiz-question-container */}
-
-            <div className="quiz-question-container">
-              <div className="quiz-question">
-                <h4>
-                  <span>Q {questionIndex + 1}. </span>
-                  {quizData && quizData[questionIndex] && quizData[questionIndex].question_body}
-                </h4>
-                {quizData && quizData[questionIndex] && quizData[questionIndex].question_body_img_url && (
-                  <div className="question-image-container">
-                    <h2>REFERENCE IMAGE</h2>
+                  <div className="question-numbers">
+                    <h4>
+                      QUESTION <span>{questionIndex + 1}</span> OF{' '}
+                      <span>{quizData.length}</span>
+                    </h4>
                   </div>
-                )}
-              </div>
-              <div className="quiz-options option-container">
-                {quizData && quizData[questionIndex] && quizData[questionIndex].question_options.map((item, index) => {
-                  return (
-                    <div class="option-container">
-                      {/* {console.log('hellooooo ', selectedAnswers[index].selectedAnswers, item.option_body)} */}
-                      <button
-                        className={`${(index === answerSelectID || checkIfAnswerChosen(item.option_body))
-                          ? 'option-btn option-btn-active'
-                          : 'option-btn'
-                          }`}
-                        // className={optionStyle(item, index)}
-                        key={index}
-                        value={item.option_body}
-                        onClick={(e) => handleSelectAnswer(e, index, item)}
-                      >
-                        {item.option_body}
-                      </button>
-                      {item.option_body_img && (
-                        <div className="options-image-container">
-                          <h2>REFERENCE IMAGE</h2>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                  {quizData.length - 1 === questionIndex ? (
+                    <button className="quiz-btn" onClick={() => openPopup()}>
+                      Submit
+                    </button>
+                  ) : (
+                    <button className="quiz-btn" onClick={nextButton}>
+                      Next
+                    </button>
+                  )}
+                </div>
+                {/* quiz-question-container */}
 
-                {/* <label class="container">
+                <div className="quiz-question-container">
+                  <div className="quiz-question">
+                    <h4>
+                      <span>Q {questionIndex + 1}. </span>
+                      {quizData && quizData[questionIndex] && quizData[questionIndex].question_body}
+                    </h4>
+                    {quizData && quizData[questionIndex] && quizData[questionIndex].question_body_img_url && (
+                      <div className="question-image-container">
+                        <h2>REFERENCE IMAGE</h2>
+                      </div>
+                    )}
+                  </div>
+                  <div className="quiz-options option-container">
+                    {quizData && quizData[questionIndex] && quizData[questionIndex].question_options.map((item, index) => {
+                      return (
+                        <div class="option-container">
+                          {/* {console.log('hellooooo ', selectedAnswers[index].selectedAnswers, item.option_body)} */}
+                          <button
+                            className={`${(index === answerSelectID || checkIfAnswerChosen(item.option_body))
+                              ? 'option-btn option-btn-active'
+                              : 'option-btn'
+                              }`}
+                            // className={optionStyle(item, index)}
+                            key={index}
+                            value={item.option_body}
+                            onClick={(e) => handleSelectAnswer(e, index, item)}
+                          >
+                            {item.option_body}
+                          </button>
+                          {item.option_body_img && (
+                            <div className="options-image-container">
+                              <h2>REFERENCE IMAGE</h2>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+
+                    {/* <label class="container">
                   option A
                   <input type="radio" name="radio" />
                   <span class="checkmark"></span>
@@ -404,100 +412,100 @@ function Quiz() {
                     <h2>REFERENCE IMAGE</h2>
                   </div>
                 </label> */}
-              </div>
-            </div>
-            <div className="mobile-button-container">
-              <button className="mobile-btn quiz-btn" onClick={prevButton}>
-                Previous
-              </button>
-              {quizData.length - 1 === questionIndex ? (
-                <button
-                  className="mobile-btn quiz-btn"
-                  onClick={() => openPopup()}
-                >
-                  Submit
-                </button>
-              ) : (
-                <button className="mobile-btn quiz-btn" onClick={nextButton}>
-                  Next
-                </button>
-              )}
-            </div>
-          </div>
-          <div className="question-section-container">
-            <div className="time_profile-container">
-              <div className="timer-container">
-                <h4>TIME LEFT</h4>
-                <div className="timer">
-                  <div className="present-time">
-                    <div className="progress-bar">
-                      <div
-                        className="bar"
-                        style={{
-                          width: `${(totalTime / localStorage.getItem('TIME')) * 100
-                            }%`,
-                        }}
-                      ></div>
-                    </div>
-                    <h2>
-                      {formatTime(totalTime)}
-                      {/* {totalTime}:{second} */}
-                    </h2>
                   </div>
                 </div>
-              </div>
-              <div
-                className={`${authorOpen
-                  ? 'profile-container profile-container-1'
-                  : 'profile-container'
-                  }`}
-              >
-                <div className="img-profile">
-                  <img
-                    src={localStorage.getItem('PROFILEPICTURE') || avatar}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                    }}
-                    alt="profile-pic"
-                  />
+                <div className="mobile-button-container">
+                  <button className="mobile-btn quiz-btn" onClick={prevButton}>
+                    Previous
+              </button>
+                  {quizData.length - 1 === questionIndex ? (
+                    <button
+                      className="mobile-btn quiz-btn"
+                      onClick={() => openPopup()}
+                    >
+                      Submit
+                    </button>
+                  ) : (
+                    <button className="mobile-btn quiz-btn" onClick={nextButton}>
+                      Next
+                    </button>
+                  )}
                 </div>
-                <h5>
-                  {localStorage.getItem('USERNAME')
-                    ? localStorage.getItem('USERNAME')
-                    : 'lorem ipsum'}
-                </h5>
               </div>
-            </div>
-            <div
-              className={`${sectionOpen
-                ? 'question-section question-section-1'
-                : 'question-section'
-                }`}
-            >
-              <h4>QUESTION SECTION</h4>
-              <div className="sections">
-                <div className="btn-container">
-                  {sectionStyle.map((item, index) => {
-                    return (
-                      <button
-                        className={Style(item)}
-                        onClick={() => {
-                          setQuestionIndex(index)
-                          let updatedSectionStyle = [...sectionStyle];
-                          updatedSectionStyle[index].notAnswered = true;
-                          updatedSectionStyle[index].notVisited = false;
-                          setSectionStyle(updatedSectionStyle);
+              <div className="question-section-container">
+                <div className="time_profile-container">
+                  <div className="timer-container">
+                    <h4>TIME LEFT</h4>
+                    <div className="timer">
+                      <div className="present-time">
+                        <div className="progress-bar">
+                          <div
+                            className="bar"
+                            style={{
+                              width: `${(totalTime / localStorage.getItem('TIME')) * 100
+                                }%`,
+                            }}
+                          ></div>
+                        </div>
+                        <h2>
+                          {formatTime(totalTime)}
+                          {/* {totalTime}:{second} */}
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className={`${authorOpen
+                      ? 'profile-container profile-container-1'
+                      : 'profile-container'
+                      }`}
+                  >
+                    <div className="img-profile">
+                      <img
+                        src={localStorage.getItem('PROFILEPICTURE') || avatar}
+                        style={{
+                          width: '100%',
+                          height: '100%',
                         }}
-                      >
-                        {index + 1}{' '}
-                      </button>
-                    );
-                  })}
+                        alt="profile-pic"
+                      />
+                    </div>
+                    <h5>
+                      {localStorage.getItem('USERNAME')
+                        ? localStorage.getItem('USERNAME')
+                        : 'lorem ipsum'}
+                    </h5>
+                  </div>
                 </div>
-              </div>
+                <div
+                  className={`${sectionOpen
+                    ? 'question-section question-section-1'
+                    : 'question-section'
+                    }`}
+                >
+                  <h4>QUESTION SECTION</h4>
+                  <div className="sections">
+                    <div className="btn-container">
+                      {sectionStyle.map((item, index) => {
+                        return (
+                          <button
+                            className={Style(item)}
+                            onClick={() => {
+                              setQuestionIndex(index)
+                              let updatedSectionStyle = [...sectionStyle];
+                              updatedSectionStyle[index].notAnswered = true;
+                              updatedSectionStyle[index].notVisited = false;
+                              setSectionStyle(updatedSectionStyle);
+                            }}
+                          >
+                            {index + 1}{' '}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
 
-              {/* <div className="sections">
+                  {/* <div className="sections">
                 <h4>Section A</h4>
                 <div className="btn-container">
                   <button className="btn answered">1</button>
@@ -532,90 +540,91 @@ function Quiz() {
                   <button className="btn">25</button>
                 </div>
               </div> */}
-              {/* <div className="marked-btn-container">
+                  {/* <div className="marked-btn-container">
                 <button className="marked tab">Marked for Review</button>
               </div> */}
-            </div>
-            <div
-              className={`${sectionOpen
-                ? 'question-tab-container question-tab-container-1'
-                : 'question-tab-container'
-                }`}
-            >
-              <div className="tab answered">Answered</div>
-              <div className=" tab not-answered">Not Answered</div>
-              <div className="tab marked">Marked for Review</div>
-              <div className="tab not-visited">Not Visited</div>
-            </div>
-          </div>
-        </section>
-        <div className={`${timeLessWarning ? 'popup popup-active' : 'popup'}`}>
-          <h3>
-            {/* Your quiz will be automatically submitted after  {totalTime}:
+                </div>
+                <div
+                  className={`${sectionOpen
+                    ? 'question-tab-container question-tab-container-1'
+                    : 'question-tab-container'
+                    }`}
+                >
+                  <div className="tab answered">Answered</div>
+                  <div className=" tab not-answered">Not Answered</div>
+                  <div className="tab marked">Marked for Review</div>
+                  <div className="tab not-visited">Not Visited</div>
+                </div>
+              </div>
+            </section>
+            <div className={`${timeLessWarning ? 'popup popup-active' : 'popup'}`}>
+              <h3>
+                {/* Your quiz will be automatically submitted after  {totalTime}:
               {second} minutes */}
               Your quiz will be automatically submitted after {formatTime(totalTime)} minutes
             </h3>
-          <div
-            className="submit-btn-container"
-            style={{
-              display: 'grid',
-              placeItems: 'center',
-              gridTemplateColumns: '1fr',
-            }}
-          >
-            <button className="btn-submit" onClick={() => setTimeLessWarning(false)}>
-              OK
+              <div
+                className="submit-btn-container"
+                style={{
+                  display: 'grid',
+                  placeItems: 'center',
+                  gridTemplateColumns: '1fr',
+                }}
+              >
+                <button className="btn-submit" onClick={() => setTimeLessWarning(false)}>
+                  OK
               </button>
-          </div>
-        </div>
+              </div>
+            </div>
 
-        <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
-          <h3>Do you want to submit your quiz ?</h3>
-          <div className="submit-btn-container">
-            <button className="btn-submit" onClick={closePopup}>
-              No
+            <div className={`${modal ? 'popup popup-active' : 'popup'}`}>
+              <h3>Do you want to submit your quiz ?</h3>
+              <div className="submit-btn-container">
+                <button className="btn-submit" onClick={closePopup}>
+                  No
               </button>
-            <button className="btn-submit" onClick={() => finalSubmit()}>
-              YES
+                <button className="btn-submit" onClick={() => finalSubmit()}>
+                  YES
               </button>
-          </div>
-        </div>
+              </div>
+            </div>
 
 
-        <div className={`${warningModal ? 'popup popup-active' : 'popup'}`}>
-          <h3>
-            Tab Shifting was detected. Test will be submitted automatically
+            <div className={`${warningModal ? 'popup popup-active' : 'popup'}`}>
+              <h3>
+                Tab Shifting was detected. Test will be submitted automatically
             after {2 - warningCount} more time.
           </h3>
-          <div
-            className="submit-btn-container"
-            style={{
-              display: 'grid',
-              placeItems: 'center',
-              gridTemplateColumns: '1fr',
-            }}
-          >
-            <button className="btn-submit" onClick={closeWarningModal}>
-              OK
+              <div
+                className="submit-btn-container"
+                style={{
+                  display: 'grid',
+                  placeItems: 'center',
+                  gridTemplateColumns: '1fr',
+                }}
+              >
+                <button className="btn-submit" onClick={closeWarningModal}>
+                  OK
             </button>
-          </div>
-        </div>
-        <div className={`${submitPopup ? 'popup popup-active' : 'popup'}`}>
-          <h3>Your Quiz Have been submitted Sucessfully</h3>
-          <div
-            className="submit-btn-container"
-            style={{
-              display: 'grid',
-              placeItems: 'center',
-              gridTemplateColumns: '1fr',
-            }}
-          >
-            <button className="btn-submit" onClick={closeSubmitPopup}>
-              OK
+              </div>
+            </div>
+            <div className={`${submitPopup ? 'popup popup-active' : 'popup'}`}>
+              <h3>Your Quiz Have been submitted Sucessfully</h3>
+              <div
+                className="submit-btn-container"
+                style={{
+                  display: 'grid',
+                  placeItems: 'center',
+                  gridTemplateColumns: '1fr',
+                }}
+              >
+                <button className="btn-submit" onClick={closeSubmitPopup}>
+                  OK
             </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+      }
     </>
   );
 }

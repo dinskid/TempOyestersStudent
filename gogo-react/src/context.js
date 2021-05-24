@@ -80,9 +80,10 @@ const AppProvider = ({ children }) => {
   // fetching quiz data
 
   const fetchQuestions = async (succ, err) => {
+    const studentID = localStorage.getItem('STUDENTID');
     try {
       const response = await axios.get(
-        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/1`
+        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/1/${studentID}`
       );
       console.log(response);
       setData(response.data);

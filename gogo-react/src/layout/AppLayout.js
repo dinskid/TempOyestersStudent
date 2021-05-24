@@ -12,7 +12,7 @@ const AppLayout = ({ containerClassnames, children, history }) => {
       <TopNav history={history} />
       <Sidebar />
       <main>
-        <div className="container-fluid">{children}</div>
+        <div className="container-fluid" style={{ marginBottom: '5rem' }}>{children}</div>
       </main>
       <Footer />
     </div>

@@ -5,6 +5,7 @@ import Line from '../../../../components/charts/Line';
 import { ThemeColors } from '../../../../helpers/ThemeColors';
 import { Table, Card, CardBody, CardTitle } from 'reactstrap';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import './styles.css';
 
 export default function QuizResults(props) {
   const colors = ThemeColors();
@@ -61,7 +62,7 @@ export default function QuizResults(props) {
     },
   };
 
-  const headers = ['Quiz name', 'Your score', 'Max score', 'Min score', 'Time left', 'Avg score', 'Your rank', 'Re-attempt']
+  const headers = ['Quiz name', 'Your score', 'Max score', 'Min score', 'Avg score', 'Time left', 'Your rank', 'Re-attempt']
 
   useEffect(() => {
     const id = localStorage.getItem('STUDENTID');
@@ -82,11 +83,11 @@ export default function QuizResults(props) {
 
   useEffect(() => { // to set the graph data
     if (data) {
-      const X = []
-      const Y = []
+      const X = [0]
+      const Y = ['']
       data.map(item => {
         X.push(item.quiz_name);
-        Y.push(item.score); // to be replaced by percentage
+        Y.push(item.percentage);
       })
 
       // testing
@@ -127,7 +128,7 @@ export default function QuizResults(props) {
     <>
       <Card className="mb-5">
         <CardBody>
-          <CardTitle>Quiz Results</CardTitle>
+          <CardTitle className="font-weight-bold">Quiz Results</CardTitle>
           <div className="chart-container">
             {
               graphData && <Line data={graphData} options={chartOptions} />
@@ -136,7 +137,7 @@ export default function QuizResults(props) {
         </CardBody>
       </Card>
 
-      <Card>
+      <Card className="quiz-results-table-card mb-5">
         <CardBody>
           <Table responsive>
             <thead>
@@ -146,7 +147,7 @@ export default function QuizResults(props) {
                 }
               </tr>
             </thead>
-            <tbody>
+            <tbody className="quiz-results-tbody">
               {
                 data && data.map((item, idx) => {
                   return (
