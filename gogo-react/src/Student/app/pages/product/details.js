@@ -30,9 +30,11 @@ import axiosInstance from '../../../../helpers/axiosInstance';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
 import Loader from './Loader';
 import { FcOk } from 'react-icons/fc';
-import Logo from '../../../../data/Logo';
+import { useGlobalContext } from '../../../../context';
+// import Logo from '../../../../data/Logo';
 
 const DetailsPages = ({ match, intl, ...props }) => {
+  const { logo, profilePicture } = useGlobalContext();
   const history = useHistory();
 
   const [error, setError] = useState(null);
@@ -345,17 +347,17 @@ const DetailsPages = ({ match, intl, ...props }) => {
               <Row>
                 {session.chapter_learnings
                   ? session.chapter_learnings.map((doc) => {
-                      return (
-                        <>
-                          <Col md="1">
-                            <BiCheck className="bicheck" />
-                          </Col>
-                          <Col md="5">
-                            <CardText className="ct">{doc}</CardText>
-                          </Col>
-                        </>
-                      );
-                    })
+                    return (
+                      <>
+                        <Col md="1">
+                          <BiCheck className="bicheck" />
+                        </Col>
+                        <Col md="5">
+                          <CardText className="ct">{doc}</CardText>
+                        </Col>
+                      </>
+                    );
+                  })
                   : ''}
               </Row>
             </Card>
@@ -366,7 +368,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
             </CardTitle>
             <Row>
               <Col md="4">
-                <img src={Logo} className="inst_img" />
+                <img src={logo || profilePicture} className="inst_img" />
                 <CardText className="inst_name text-center mt-2">
                   {instructor}
                 </CardText>

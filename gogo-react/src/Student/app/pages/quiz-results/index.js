@@ -5,12 +5,15 @@ import Line from '../../../../components/charts/Line';
 import { ThemeColors } from '../../../../helpers/ThemeColors';
 import { Table, Card, CardBody, CardTitle } from 'reactstrap';
 import NotificationManager from '../../../../components/common/react-notifications/NotificationManager';
+import Fade from 'react-reveal/Fade';
+import NoData from './no-data.svg';
 import './styles.css';
 
 export default function QuizResults(props) {
   const colors = ThemeColors();
   const [data, setData] = useState(null);
   const [graphData, setGraphData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const chartTooltip = {
     backgroundColor: ThemeColors().foregroundColor,
@@ -65,18 +68,23 @@ export default function QuizResults(props) {
   const headers = ['Quiz name', 'Your score', 'Max score', 'Min score', 'Avg score', 'Time left', 'Your rank', 'Re-attempt']
 
   useEffect(() => {
+    setLoading(true);
     const id = localStorage.getItem('STUDENTID');
     console.log(id);
     axios.get(`/student/result/getQuizResults/${id}`)
       .then(results => {
+        setLoading(false);
         if ('data' in results) {
           console.log(results.data);
           setData(results.data);
         } else {
+          NotificationManager.error('There was an error fetching your details. Please try again.', 'Error', 3000, null, null, '');
           console.log('data object not present in the response')
         }
       })
       .catch(e => {
+        setLoading(false);
+        NotificationManager.error('There was an error fetching your details. Please try again.', 'Error', 3000, null, null, '');
         console.log(e)
       })
   }, []);
@@ -89,17 +97,6 @@ export default function QuizResults(props) {
         X.push(item.quiz_name);
         Y.push(item.percentage);
       })
-
-      // testing
-      X.push('paper 2')
-      X.push('paper 3')
-      X.push('paper 4')
-      X.push('paper 5')
-      Y.push(30)
-      Y.push(50)
-      Y.push(70)
-      Y.push(60)
-      // end testing
 
       setGraphData({
         labels: X,
@@ -126,57 +123,98 @@ export default function QuizResults(props) {
 
   return (
     <>
-      <Card className="mb-5">
-        <CardBody>
-          <CardTitle className="font-weight-bold">Quiz Results</CardTitle>
-          <div className="chart-container">
-            {
-              graphData && <Line data={graphData} options={chartOptions} />
-            }
-          </div>
-        </CardBody>
-      </Card>
+      {
+        (loading || !data) ? <div className="loading" />
+          : <>{
+            data.length <= 0 ?
+              // no data
+              <div
+                className="d-flex flex-column justify-content-center align-items-center"
+              >
+                <Fade left cascade>
+                  <img
+                    src={NoData}
+                    alt="you don't have any sessions yet logo"
+                    style={{
+                      width: '30vh',
+                      height: '30vh',
+                    }}
+                  />{' '}
+                </Fade>
+                <Fade right casecade effect="delayOut">
+                  <h1
+                    style={{
+                      // marginBottom: '20px',
+                      textAlign: 'center',
+                      color: 'purple',
+                      fontSize: '35px',
+                    }}
+                  >
+                    No data
+                    </h1>
+                  <h3 style={{ textAlign: 'center' }}>
+                    You have not participated in any quiz
+                    </h3>
+                </Fade>
+              </div>
 
-      <Card className="quiz-results-table-card mb-5">
-        <CardBody>
-          <Table responsive>
-            <thead>
-              <tr>
-                {
-                  headers.map((item, idx) => <th key={idx}>{item}</th>)
-                }
-              </tr>
-            </thead>
-            <tbody className="quiz-results-tbody">
-              {
-                data && data.map((item, idx) => {
-                  return (
-                    <tr key={idx}>
-                      <td>{item.quiz_name}</td>
-                      <td>{item.score}</td>
-                      <td>{item.max}</td>
-                      <td>{item.min}</td>
-                      <td>{item.average}</td>
-                      <td>{item.remaining_time}</td>
-                      <td>{item.rank}</td>
-                      <td>
-                        <button
-                          className="btn btn-primary p-1"
-                          onClick={() => {
-                            NotificationManager.warning('Contact your tutor to unlock it', 'Prohibited', 5000, null, null, '');
-                          }}
-                        >
-                          Re-attempt
+              :
+              <>
+                <Card className="mb-5">
+                  <CardBody>
+                    <CardTitle className="font-weight-bold">Quiz Results</CardTitle>
+                    <div className="chart-container">
+                      {
+                        graphData && <Line data={graphData} options={chartOptions} />
+                      }
+                    </div>
+                  </CardBody>
+                </Card>
+
+                <Card className="quiz-results-table-card mb-5">
+                  <CardBody>
+                    <Table responsive>
+                      <thead>
+                        <tr>
+                          {
+                            headers.map((item, idx) => <th key={idx}>{item}</th>)
+                          }
+                        </tr>
+                      </thead>
+                      <tbody className="quiz-results-tbody">
+                        {
+                          data && data.map((item, idx) => {
+                            return (
+                              <tr key={idx}>
+                                <td>{item.quiz_name}</td>
+                                <td>{item.score}</td>
+                                <td>{item.max}</td>
+                                <td>{item.min}</td>
+                                <td>{item.average}</td>
+                                <td>{item.remaining_time}</td>
+                                <td>{item.rank}</td>
+                                <td>
+                                  <button
+                                    className="btn btn-primary p-1"
+                                    onClick={() => {
+                                      NotificationManager.warning('Contact your tutor to unlock it', 'Prohibited', 5000, null, null, '');
+                                    }}
+                                  >
+                                    Re-attempt
                     </button>
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </Table>
-        </CardBody>
-      </Card>
+                                </td>
+                              </tr>
+                            )
+                          })
+                        }
+                      </tbody>
+                    </Table>
+                  </CardBody>
+                </Card>
+              </>
+
+          }</>
+      }
     </>
   )
 }
