@@ -9,10 +9,10 @@ import axiosInstance2 from './helpers/axiosInstance2';
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [query, setQuery] = useState('?tutor_id=1');
-  const [params, setParams] = useState(1);
+  const [query, setQuery] = useState(localStorage.getItem('TUTOR_ID_QUERY') || '?tutor_id=1');
+  const [params, setParams] = useState(localStorage.getItem('TUTOR_ID') || 1);
   const [name, setName] = useState('');
-  const [logo, setLogo] = useState('');
+  const [logo, setLogo] = useState(localStorage.getItem('logo') || '');
   const [favicon, setFavicon] = useState('');
   const [quizStartTime, setQuizStartTime] = useState(
     localStorage.getItem('STARTQUIZ')
@@ -24,6 +24,7 @@ const AppProvider = ({ children }) => {
   // fetching data for logo favicon and title
 
   const getData = async () => {
+    console.log('tutor_id used: ', params);
     const result = await axiosInstance.get(`/student/clientDetails/${params}`);
     console.log(result);
     setName(result.data.customer_institute_name);
@@ -44,9 +45,17 @@ const AppProvider = ({ children }) => {
     // setQuery(cookies.get('Params'));
     // setParams(cookies.get('Value'));
     if (search) {
-      setQuery(search);
-      setParams(id);
-      console.log(params);
+      try {
+        console.log('query from url: ', query);
+        setQuery(search);
+        localStorage.setItem('TUTOR_ID_QUERY', search);
+
+        console.log('id from url: ', id);
+        setParams(id);
+        localStorage.setItem('TUTOR_ID', id);
+      } catch (e) {
+        console.log('couldn\'t write TUTOR_ID_QUERY to the localStorage', e);
+      }
     } else {
       setQuery((old) => {
         return old;
