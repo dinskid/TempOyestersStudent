@@ -342,8 +342,8 @@ const KnowledgeBase = ({ match, ...props }) => {
         history.push('/quiz');
       },
       // on failure
-      () => {
-        NotificationManager.error('You cannot attempt the quiz several times', 'Error', 5000, null, null, '');
+      (error) => {
+        NotificationManager.error(error, 'Error', 5000, null, null, '');
         history.push(0);
         return;
       });

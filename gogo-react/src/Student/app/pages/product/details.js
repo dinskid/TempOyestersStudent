@@ -34,7 +34,6 @@ import { useGlobalContext } from '../../../../context';
 // import Logo from '../../../../data/Logo';
 
 const DetailsPages = ({ match, intl, ...props }) => {
-  const { logo, profilePicture } = useGlobalContext();
   const history = useHistory();
 
   const [error, setError] = useState(null);
@@ -47,6 +46,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
   const toggleCartModal = () => setCartModal(!cartModal);
 
   const [cartItemStatus, setCartItemStatus] = useState(false);
+  const { logo, profilePicture } = useGlobalContext();
 
   let session_id;
   try {
@@ -440,7 +440,7 @@ const DetailsPages = ({ match, intl, ...props }) => {
           <Card className="fixed width ">
             <CardImg
               top
-              src={require('./angular.png') || session.session_thumbnail}
+              src={session.session_thumbnail || logo || profilePicture}
               alt="Card image cap"
               style={{ width: '100%', height: '50%' }}
             />
@@ -449,8 +449,8 @@ const DetailsPages = ({ match, intl, ...props }) => {
                 Rs. {session.session_fee}
               </CardText>
               <CardText tag="h6" className="mb-2">
-                <ImAlarm className="mr-2" /> Duration {session.session_duration}{' '}
-                days
+                {/* <ImAlarm className="mr-2" /> Duration {session.session_duration}{' '} */}
+                <ImAlarm className="mr-2" /> Duration Lifetime access
               </CardText>
               {cartItemStatus == 'cart' ? (
                 <Button className="btn2 mt-4">

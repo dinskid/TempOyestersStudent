@@ -90,9 +90,14 @@ const AppProvider = ({ children }) => {
 
   const fetchQuestions = async (succ, err) => {
     const studentID = localStorage.getItem('STUDENTID');
+    const { quiz_id: quizId } = JSON.parse(localStorage.getItem('STARTQUIZ'));
+    if (quizId === undefined) {
+      err('You can\'t attempt the quiz now.');
+      return;
+    }
     try {
       const response = await axios.get(
-        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/1/${studentID}`
+        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/${quizId}/${studentID}`
       );
       console.log(response);
       setData(response.data);
@@ -102,7 +107,7 @@ const AppProvider = ({ children }) => {
       succ(response.data.quiz_all_question, response.data.quiz_timer_time, response.data);
     } catch (error) {
       console.log(error);
-      err();
+      err('You cannot attempt the quiz several times');
     }
   };
 
@@ -131,13 +136,13 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const getQuizStartTime = async () => {
-      const result = await axiosInstance.get(`/student/quiz/canQuizStart/1`);
-      localStorage.setItem('STARTQUIZ', result.data);
+      const result = await axiosInstance.get(`/student/quiz/canQuizStart/${params}`);
+      localStorage.setItem('STARTQUIZ', JSON.stringify(result.data));
       setCanQuizStart(result.data);
       console.log(result);
     };
-    getQuizStartTime();
-  }, []);
+    if (params) getQuizStartTime();
+  }, [params]);
 
   return (
     <AppContext.Provider
