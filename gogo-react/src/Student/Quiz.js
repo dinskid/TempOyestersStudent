@@ -192,10 +192,7 @@ function Quiz() {
         remaining_time: formatTime(totalTime),
       }
       try {
-        const submit = await axios.post(
-          `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/submitQuiz`,
-          valuesToPost
-        );
+        const submit = await axiosInstance.post('/student/quiz/submitQuiz', valuesToPost);
         console.log(submit);
         if (submit.status === 200) {
           setLoading(false);

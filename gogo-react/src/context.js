@@ -96,9 +96,7 @@ const AppProvider = ({ children }) => {
       return;
     }
     try {
-      const response = await axios.get(
-        `${window.location.protocol}//${window.location.hostname}:5000/student/quiz/getQuiz/${quizId}/${studentID}`
-      );
+      const response = await axiosInstance.get(`/student/quiz/getQuiz/${quizId}/${studentID}`);
       console.log(response);
       setData(response.data);
       setQuiz_time(response.data.quiz_timer_time);
