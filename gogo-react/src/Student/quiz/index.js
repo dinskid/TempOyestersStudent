@@ -92,17 +92,19 @@ export default function Quiz() {
 
   useEffect(() => {
     let newStatus = [...status]
-    if (currentAnswer.length)
-      newStatus[curSection][curQuestion] = 1; // answered
-    else
-      newStatus[curSection][curQuestion] = 2; // not-answered
+    if (currentAnswer) {
+      if (currentAnswer.length > 0)
+        newStatus[curSection][curQuestion] = 1; // answered
+      else
+        newStatus[curSection][curQuestion] = 2; // not-answered
 
-    setStatus(newStatus);
-    let ans = [...answers];
-    if (ans.length > curSection && ans[curSection].length > curQuestion) {
-      ans[curSection][curQuestion] = currentAnswer;
-      console.log(currentAnswer);
-      setAnswers(ans);
+      setStatus(newStatus);
+      let ans = [...answers];
+      if (ans.length > curSection && ans[curSection].length > curQuestion) {
+        ans[curSection][curQuestion] = currentAnswer;
+        console.log(currentAnswer);
+        setAnswers(ans);
+      }
     }
   }, [currentAnswer]);
 
@@ -117,13 +119,33 @@ export default function Quiz() {
   const previous = () => {
     if (curQuestion > 0) {
       setCurQuestion(curQuestion - 1);
+    } else {
+      if (curSection > 0) {
+        let sectionNow = curSection - 1;
+        setCurSection(sectionNow);
+        setCurQuestion(questionData[sectionNow].length - 1);
+      }
     }
   }
 
   const next = () => {
-    if (curQuestion < questionCount) {
+    if (curQuestion < questionCount - 1) {
       setCurQuestion(curQuestion + 1);
+    } else {
+      // last question in this section
+      if (curSection < quizData.quiz_section_info.length - 1) {
+        setCurSection(curSection + 1);
+        setCurQuestion(0);
+      }
+      // if (curSection < quizData.quiz_section_info.length - 1) {
+      //   setCurSection(curSection+1);
+      //   setCurQuestion(0);
+      // }
     }
+  }
+
+  const handleSubmit = () => {
+    console.log('submitted');
   }
 
   const QuestionComponent = () => {
@@ -141,7 +163,6 @@ export default function Quiz() {
                 else console.log('answers length: ', answers.length);
                 if (answers[curSection].length < curQuestion) return undefined;
                 else console.log('answers[curSection] length: ', answers[curSection].length);
-                console.log(answers[curSection][curQuestion]);
                 try {
                   let ans = JSON.parse(answers[curSection][curQuestion])
                   if (ans.length === 0) return undefined;
@@ -210,7 +231,9 @@ export default function Quiz() {
   return (
     <>
       <div className="quiz-container container-fluid">
-        <h1 className="title-bg rounded w-100 p-2 mb-5">{quizData.quiz_name || 'Quiz'}</h1>
+        <h1 className="title-bg rounded w-100 d-flex align-items-center m-0 p-0 h-50 px-lg-3 justify-content-center justify-content-lg-start">
+          {quizData.quiz_name || 'Quiz'}
+        </h1>
 
         <div className="d-lg-none d-flex justify-content-center position-relative">
           <div className="mobile-only-toggle person-toggle rounded-right"
@@ -231,19 +254,19 @@ export default function Quiz() {
           </div>
         </div>
 
-        <div className="row p-2 p-lg-0">
-          <div className="col-12 col-lg-8">
+        <div className="row p-0 h-100">
+          <div className="col-12 col-lg-8 overflow-auto question-grid">
             <div className="quiz-control d-flex justify-content-between align-items-center mb-5">
               <div className="prev-container h-100">
                 <button
-                  disabled={curQuestion === 0}
+                  disabled={curSection === 0 && curQuestion === 0}
                   className="btn btn-primary py-2 h-100"
                   onClick={previous}>
                   &lt;
                   <span className="d-none d-lg-inline">&nbsp;Previous</span>
                 </button>
               </div>
-              <div className="question-count d-flex align-items-center shadow-box px-3 py-2">
+              <div className="question-count d-flex align-items-center shadow-box px-3 py-2 h-100">
                 QUESTION&nbsp;
                 {/* <span className="text-primary">{currentQuestion}</span> */}
                 <span className="text-primary">{curQuestion + 1}</span>&nbsp;
@@ -253,14 +276,23 @@ export default function Quiz() {
               <div className="next-container h-100">
                 <button
                   className="btn btn-primary py-2 h-100"
-                  disabled={curQuestion === questionCount - 1}
-                  onClick={next}>
-                  <span className="d-none d-lg-inline">Next&nbsp;</span>
+                  // disabled={curSection === quizData.quiz_section_info.length - 1 && curQuestion === questionCount - 1}
+                  onClick={(curSection === quizData.quiz_section_info.length - 1 && curQuestion === questionCount - 1)
+                    ? handleSubmit : next
+                  }
+                >
+                  <span className="d-none d-lg-inline">
+                    {
+                      (curSection === quizData.quiz_section_info.length - 1 && curQuestion === questionCount - 1) ?
+                        'Submit' : 'Next'
+                    }
+                    &nbsp;
+                    </span>
                   &gt;
                 </button>
               </div>
             </div>
-            <div className="question-container shadow-box p-3">
+            <div className="question-container shadow-box p-3 mt-3 overflow-auto">
               {
                 (questionData.length > curSection && questionData[curSection].length > curQuestion) &&
                 <>
@@ -275,8 +307,8 @@ export default function Quiz() {
             </div>
           </div>
           {/* desktop only */}
-          <div className="d-none d-lg-block col-4">
-            <div className="timer-profile-container mb-5">
+          <div className="col-4 info-grid">
+            <div className="timer-profile-container">
               <Timer onTimerExpire={() => {
                 console.log('Timer expired');
               }} />
@@ -298,11 +330,11 @@ export default function Quiz() {
                 </div>
               </div>
             </div>
-            <div className="sections-container shadow-box p-3">
+            <div className="sections-container shadow-box p-3 h-100">
               <h3 className="text-center">SECTIONS</h3>
               <QuizSections status={status} sectionNames={sectionNames} setSection={setCurSection} setQuestion={setCurQuestion} />
             </div>
-            <div className="label-container shadow-box p-3 container-fluid">
+            <div className="label-container shadow-box p-3 container-fluid d-flex flex-column justify-content-center">
               <div className="row mb-2">
                 <div className="col d-flex justify-content-center">
                   <div className="label answered">Answered</div>

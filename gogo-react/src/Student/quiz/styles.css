@@ -18,16 +18,20 @@
 
 .person-toggle {
   left: 0;
+  transform: translateX(-15px); /* due to padding for bootstrap */
 }
 
 .section-toggle {
   right: 0;
+  transform: translateX(15px); /* due to padding for bootstrap */
 }
 
 .quiz-container {
   font-family: 'Roboto', sans-serif;
   padding: 2% 5%;
   min-height: 90vh;
+  display: grid;
+  grid-template-rows: 100px minmax(auto, 75vh);
 }
 
 .quiz-control {
@@ -37,7 +41,7 @@
 .quiz-container .btn {
   font-size: 19px;
   border-radius: 0;
-  width: 100px;
+  width: 125px;
 }
 
 .shadow-box {
@@ -52,7 +56,7 @@
 .timer-profile-container > * {
   width: 45%;
   box-shadow: var(--shadow);
-  height: 120px;
+  /* height: 120px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,6 +66,20 @@
 .img-profile {
   width: 50px;
   height: 60px;
+}
+
+.question-grid {
+  display: grid;
+  grid-template-rows: 50px minmax(auto, 100%);
+  padding: 1rem;
+}
+
+.info-grid {
+  display: grid;
+  /* grid-template-rows: 100px auto 150px; */
+  grid-template-rows: 100px calc(100% - 282px) 150px;
+  grid-row-gap: 1rem;
+  padding: 1rem;
 }
 
 .sections-container {
@@ -140,33 +158,6 @@
   background-color: var(--theme-color-5-10);
 }
 
-/* .match-table {
-  border-collapse:separate; 
-  border-spacing: 0 1em;
-}
-
-.match-table td {
-  text-align: center;
-}
-
-.match-table tr {
-  background-color: var(--theme-color-1-10);
-  margin: 5px 0;
-}
-
-.match-table tr:first-child {
-  border-top-left-radius: 3px !important;
-  border-bottom-left-radius: 3px !important;
-}
-.match-table tr:last-child {
-  border-top-right-radius: 3px !important;
-  border-bottom-right-radius: 3px !important;
-}
-
-.match-table td > .radio-mimic {
-  margin: 0 auto;
-} */
-
 .slider-wrap {
   display: grid;
   justify-items: center;
@@ -175,11 +166,19 @@
 
 @media screen and (max-width: 991px) {
   .quiz-container {
-    padding: 3% 0;
+    padding: 2% 15px; /* 15px for bootstrap row */
+    grid-template-rows: 75px 100px auto;
   }
 
   .quiz-container .btn {
     border-radius: 0;
     width: 50px;
+  }
+
+  .question-grid {
+    grid-template-rows: 50px minmax(auto, 50vh);
+  }
+  .info-grid {
+    display: none;
   }
 }
