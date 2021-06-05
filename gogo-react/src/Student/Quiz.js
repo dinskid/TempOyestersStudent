@@ -83,7 +83,7 @@ function Quiz() {
   const [warningModal, setWarningModal] = useState(false);
   const [submitPopup, setSubmitPopup] = useState(false);
 
-  const isVisibleTab = usePageVisibility();
+  // const isVisibleTab = usePageVisibility();
 
   // handle next and prev buttons
 
@@ -259,13 +259,13 @@ function Quiz() {
     setModal(false);
   };
 
-  useEffect(() => {
-    if (!isVisibleTab) {
-      setWarningCount(warningCount + 1);
-    }
+  // useEffect(() => {
+  //   if (!isVisibleTab) {
+  //     setWarningCount(warningCount + 1);
+  //   }
 
-    console.log(warningCount);
-  }, [isVisibleTab]);
+  //   console.log(warningCount);
+  // }, [isVisibleTab]);
 
   useEffect(() => {
     if (warningCount > 0) {

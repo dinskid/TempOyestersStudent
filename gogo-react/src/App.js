@@ -41,7 +41,8 @@ const Cart = React.lazy(() =>
   retry(() => import('./Student/app/pages/cart/index'))
 );
 
-const Quiz = React.lazy(() => retry(() => import('./Student/Quiz')));
+const QuizOld = React.lazy(() => retry(() => import('./Student/Quiz')));
+const Quiz = React.lazy(() => retry(() => import('./Student/quiz')));
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -127,6 +128,12 @@ class App extends React.Component {
                     exact
                     render={(props) => <Quiz {...props} />}
                   />
+                  <Route
+                    path="/quizold"
+                    exact
+                    render={(props) => <QuizOld {...props} />}
+                  />
+
 
                   <Redirect exact from="/" to={'/Student/user'} />
 
