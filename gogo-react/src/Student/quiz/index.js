@@ -9,6 +9,7 @@ import IntegerType from './IntegerType';
 import MCQType from './MCQType';
 import MatchType from './MatchType';
 import SliderType from './SliderType';
+import Popup from './Popup';
 import { MdPerson } from 'react-icons/md';
 import { IoMdHelp } from 'react-icons/io';
 
@@ -24,6 +25,8 @@ export default function Quiz() {
   const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('QUIZ_ANSWERS')) || []);
   const [sectionNames, setSectionNames] = useState([]);
   const [currentAnswer, setCurrentAnswer] = useState((answers[curSection] && answers[curSection][curQuestion]) || ''); // answer to the current question
+  const [popup, setPopup] = useState(true);
+  const [popupComponent, setPopupComponent] = useState(null);
 
   const [questionCount, setQuestionCount] = useState(0);
 
@@ -88,6 +91,7 @@ export default function Quiz() {
       newStatus[curSection][curQuestion] = 2; // notanswered
       setStatus(newStatus);
     }
+    if (popup) setPopup(false);
   }, [curSection, curQuestion, questionData]);
 
   useEffect(() => {
@@ -137,16 +141,17 @@ export default function Quiz() {
         setCurSection(curSection + 1);
         setCurQuestion(0);
       }
-      // if (curSection < quizData.quiz_section_info.length - 1) {
-      //   setCurSection(curSection+1);
-      //   setCurQuestion(0);
-      // }
     }
   }
 
+  const closePopup = () => {
+    setPopup(false);
+    setPopupComponent(null);
+  };
+
   const handleSubmit = () => {
     console.log('submitted');
-  }
+  };
 
   const QuestionComponent = () => {
     if (!question || !answers) return null;
@@ -230,6 +235,12 @@ export default function Quiz() {
 
   return (
     <>
+      {
+        popup &&
+        <Popup onClose={closePopup}>
+          {popupComponent}
+        </Popup>
+      }
       <div className="quiz-container container-fluid">
         <h1 className="title-bg rounded w-100 d-flex align-items-center m-0 p-0 h-50 px-lg-3 justify-content-center justify-content-lg-start">
           {quizData.quiz_name || 'Quiz'}
@@ -237,7 +248,28 @@ export default function Quiz() {
 
         <div className="d-lg-none d-flex justify-content-center position-relative">
           <div className="mobile-only-toggle person-toggle rounded-right"
-          // onClick={() => setAuthorOpen(!authorOpen)}
+            onClick={() => {
+              setPopupComponent(
+                <div className="profile-container d-flex flex-column justify-content-around">
+                  <div className="img-profile">
+                    <img
+                      src={localStorage.getItem('PROFILEPICTURE') || avatar}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                      }}
+                      alt="profile-pic"
+                    />
+                  </div>
+                  <div className="font-weight-bold text-primary">
+                    {localStorage.getItem('USERNAME')
+                      ? localStorage.getItem('USERNAME')
+                      : 'lorem ipsum'}
+                  </div>
+                </div>
+              );
+              setPopup(true);
+            }}
           >
             <MdPerson />
           </div>
@@ -248,7 +280,15 @@ export default function Quiz() {
               }} />
           </div>
           <div className="mobile-only-toggle section-toggle rounded-left"
-          // onClick={() => setAuthorOpen(!authorOpen)}
+            onClick={() => {
+              setPopupComponent(
+                <div className="sections-container shadow-box p-3 h-100">
+                  <h3 className="text-center">SECTIONS</h3>
+                  <QuizSections status={status} sectionNames={sectionNames} setSection={setCurSection} setQuestion={setCurQuestion} />
+                </div>
+              );
+              setPopup(true);
+            }}
           >
             <IoMdHelp />
           </div>
@@ -266,12 +306,16 @@ export default function Quiz() {
                   <span className="d-none d-lg-inline">&nbsp;Previous</span>
                 </button>
               </div>
-              <div className="question-count d-flex align-items-center shadow-box px-3 py-2 h-100">
-                QUESTION&nbsp;
-                {/* <span className="text-primary">{currentQuestion}</span> */}
-                <span className="text-primary">{curQuestion + 1}</span>&nbsp;
-                OF&nbsp;
-                <span className="text-primary">{questionCount}</span>
+              <div className="question-count d-flex flex-column flex-lg-row align-items-center shadow-box px-3 py-0 py-lg-2 h-100">
+                <div>
+                  QUESTION&nbsp;
+                </div>
+                <div>
+                  {/* <span className="text-primary">{currentQuestion}</span> */}
+                  <span className="text-primary">{curQuestion + 1}</span>&nbsp;
+                  OF&nbsp;
+                  <span className="text-primary">{questionCount}</span>
+                </div>
               </div>
               <div className="next-container h-100">
                 <button
@@ -287,8 +331,16 @@ export default function Quiz() {
                         'Submit' : 'Next'
                     }
                     &nbsp;
-                    </span>
-                  &gt;
+                  </span>
+
+                  {/* mobile only */}
+                  <span className="d-lg-none">
+                    {
+                      (curSection === quizData.quiz_section_info.length - 1 && curQuestion === questionCount - 1) ?
+                        'Submit' : ''
+                    }
+                    &nbsp;
+                  </span>&gt;
                 </button>
               </div>
             </div>

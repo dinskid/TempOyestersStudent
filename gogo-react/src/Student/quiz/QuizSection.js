@@ -31,7 +31,7 @@ export default function QuizSections({ status, sectionNames, setSection, setQues
                 {
                   section.map((qStatus, jdx) => (
                     <div
-                      className={"btn question mb-2 font-weight-bold d-flex justify-content-center align-items-center " +
+                      className={"btn rounded-0 question mb-2 font-weight-bold d-flex justify-content-center align-items-center " +
                         (qStatus === 1 ? 'answered' : '') +
                         (qStatus === 2 ? 'not-answered' : '') +
                         (qStatus === 3 ? 'marked' : '')
