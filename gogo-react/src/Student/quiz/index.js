@@ -88,7 +88,7 @@ export default function Quiz() {
     if (status[curSection][curQuestion] === 0) {
       // unvisited till now
       let newStatus = [...status]
-      newStatus[curSection][curQuestion] = 2; // notanswered
+      newStatus[curSection][curQuestion] = Math.max(newStatus[curSection][curQuestion], 2); // notanswered
       setStatus(newStatus);
     }
     if (popup) setPopup(false);
@@ -97,9 +97,9 @@ export default function Quiz() {
   useEffect(() => {
     let newStatus = [...status]
     if (currentAnswer.length > 0)
-      newStatus[curSection][curQuestion] = 1; // answered
+      newStatus[curSection][curQuestion] = Math.max(newStatus[curSection][curQuestion], 1); // notanswered
     else
-      newStatus[curSection][curQuestion] = 2; // not-answered
+      newStatus[curSection][curQuestion] = Math.max(newStatus[curSection][curQuestion], 2); // notanswered
 
     setStatus(newStatus);
     let ans = [...answers];
@@ -349,8 +349,23 @@ export default function Quiz() {
                   {console.log(questionData[curSection][curQuestion])}
                   <p className="question">
                     {questionData[curSection][curQuestion].question_body}
-
                   </p>
+                  <div className="mark-btn-wrap d-flex justify-content-end">
+                    <button
+                      className="btn p-0 px-1 marked text-white mark-btn"
+                      onClick={() => {
+                        let s = [...status]
+                        if (s[curSection][curQuestion] === 3) {
+                          s[curSection][curQuestion] = (answers[curSection][curQuestion].length > 0) ? 1 : 2;
+                        } else s[curSection][curQuestion] = 3;
+                        setStatus(s);
+                      }}
+                    >
+                      {
+                        status[curSection][curQuestion] === 3 ? 'Unmark' : 'Mark'
+                      }
+                    </button>
+                  </div>
                   {QuestionComponent()}
                 </>
               }

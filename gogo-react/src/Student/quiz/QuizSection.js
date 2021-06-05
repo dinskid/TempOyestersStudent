@@ -52,6 +52,6 @@ export default function QuizSections({ status, sectionNames, setSection, setQues
           );
         })
       }
-    </div>
+    </div >
   );
 }
