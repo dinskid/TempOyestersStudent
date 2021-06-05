@@ -96,19 +96,17 @@ export default function Quiz() {
 
   useEffect(() => {
     let newStatus = [...status]
-    if (currentAnswer) {
-      if (currentAnswer.length > 0)
-        newStatus[curSection][curQuestion] = 1; // answered
-      else
-        newStatus[curSection][curQuestion] = 2; // not-answered
+    if (currentAnswer.length > 0)
+      newStatus[curSection][curQuestion] = 1; // answered
+    else
+      newStatus[curSection][curQuestion] = 2; // not-answered
 
-      setStatus(newStatus);
-      let ans = [...answers];
-      if (ans.length > curSection && ans[curSection].length > curQuestion) {
-        ans[curSection][curQuestion] = currentAnswer;
-        console.log(currentAnswer);
-        setAnswers(ans);
-      }
+    setStatus(newStatus);
+    let ans = [...answers];
+    if (ans.length > curSection && ans[curSection].length > curQuestion) {
+      ans[curSection][curQuestion] = currentAnswer;
+      console.log(currentAnswer);
+      setAnswers(ans);
     }
   }, [currentAnswer]);
 
