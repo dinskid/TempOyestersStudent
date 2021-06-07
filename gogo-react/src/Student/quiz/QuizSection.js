@@ -39,7 +39,6 @@ export default function QuizSections({ status, sectionNames, setSection, setQues
                       }
                       role="button"
                       onClick={() => {
-                        console.log('clicked: ', idx, ' ', jdx)
                         setSection(idx);
                         setQuestion(jdx);
                       }}

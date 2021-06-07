@@ -24,7 +24,7 @@ export default function Quiz() {
   const [question, setQuestion] = useState(null);
   const [questionData, setQuestionData] = useState([]);
   const [status, setStatus] = useState(JSON.parse(localStorage.getItem('QUIZ_STATUS')) || []);
-  const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('QUIZ_ANSWERS')) || []);
+  const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('QUIZ_ANSWERS')) || "");
   const [sectionNames, setSectionNames] = useState([]);
   const [currentAnswer, setCurrentAnswer] = useState((answers[curSection] && answers[curSection][curQuestion]) || ''); // answer to the current question
   const [popup, setPopup] = useState(true);
@@ -55,7 +55,7 @@ export default function Quiz() {
       let tempAnswers = quizData.quiz_section_info.map(section => Array(section.section_no_of_ques));
       for (let row of tempAnswers) {
         for (let i = 0; i < row.length; i++) {
-          row[i] = new Array().fill([]);
+          row[i] = "";
         }
       }
       setAnswers(tempAnswers);
@@ -91,7 +91,6 @@ export default function Quiz() {
       setQuestion(questionData[curSection][curQuestion]);
     if (answers.length > 0)
       setCurrentAnswer(answers[curSection][curQuestion]);
-    console.log(status);
     if (status.length > curSection && status[curSection].length > curQuestion) {
       if (status[curSection][curQuestion] === 0) {
         // unvisited till now
@@ -103,12 +102,9 @@ export default function Quiz() {
     if (popup) setPopup(false);
 
     let qNo = 0;
-    console.log(qNo);
     for (let i = 0; i < curSection; i++) {
       qNo += quizData.quiz_section_info[i].section_no_of_ques;
-      console.log(qNo);
     }
-    console.log(qNo);
     qNo += curQuestion + 1;
     setQuestionNumber(qNo);
   }, [curSection, curQuestion, questionData]);
@@ -126,7 +122,6 @@ export default function Quiz() {
     let ans = [...answers];
     if (ans.length > curSection && ans[curSection].length > curQuestion) {
       ans[curSection][curQuestion] = currentAnswer;
-      console.log(currentAnswer);
       setAnswers(ans);
     }
   }, [currentAnswer]);
@@ -169,7 +164,8 @@ export default function Quiz() {
   };
 
   const handleSubmit = async () => {
-    console.log('submitted');
+    setPopup(false);
+    setPopupComponent(null);
     const ansToPost = [];
     questionData.forEach((section, idx) =>
       section.forEach((question, jdx) => ansToPost.push({
@@ -184,11 +180,10 @@ export default function Quiz() {
         quiz_name: quizData.quiz_name,
         quiz_id: quizData.quiz_id,
         student_id,
-        answers,
+        answers: ansToPost,
         remaining_time: `${Math.floor(timeLeft) / 60}:${timeLeft % 60}`
       }
       const submit = await axios.post('/student/quiz/submitQuiz', valuesToPost);
-      console.log(submit);
       if (submit.status === 200) {
         setLoading(false);
         localStorage.removeItem('DATA');
@@ -223,13 +218,10 @@ export default function Quiz() {
               initialState={(() => {
                 if (!answers) return undefined
                 if (answers.length < curSection) return undefined;
-                else console.log('answers length: ', answers.length);
                 if (answers[curSection].length < curQuestion) return undefined;
-                else console.log('answers[curSection] length: ', answers[curSection].length);
                 try {
                   let ans = JSON.parse(answers[curSection][curQuestion])
                   if (ans.length === 0) return undefined;
-                  console.log(question.question_options.map(option => ans.indexOf(option.option_body) >= 0));
                   return question.question_options.map(option => ans.indexOf(option.option_body) >= 0);
                 } catch (e) {
                   return undefined;
@@ -275,7 +267,6 @@ export default function Quiz() {
       case 'match':
         return (
           <>
-            {console.log(typeof (answers[curSection][curQuestion]))}
             <MatchType
               options={question.question_match_options}
               setAnswer={setCurrentAnswer}
@@ -337,9 +328,8 @@ export default function Quiz() {
           </div>
           <div className="w-50">
             <Timer
-              onTimerExpire={() => {
-                console.log('Timer expired');
-              }} />
+              onTimerExpire={handleSubmit}
+            />
           </div>
           <div className="mobile-only-toggle section-toggle rounded-left"
             onClick={() => {
@@ -393,7 +383,7 @@ export default function Quiz() {
                             <button className="btn btn-primary rounded-0" onClick={() => setPopup(false)}>
                               No
                             </button>
-                            <button className="btn btn-primary rounded-0" onClick={() => handleSubmit()}>
+                            <button className="btn btn-primary rounded-0" onClick={handleSubmit}>
                               YES
                             </button>
                           </div>
@@ -425,7 +415,6 @@ export default function Quiz() {
               {
                 (questionData.length > curSection && questionData[curSection].length > curQuestion) &&
                 <>
-                  {console.log(questionData[curSection][curQuestion])}
                   <p className="question">
                     <span className="font-weight-bold">Q {questionNumber}.</span> {questionData[curSection][curQuestion].question_body}
                   </p>
@@ -459,9 +448,8 @@ export default function Quiz() {
           {/* desktop only */}
           <div className="col-4 info-grid">
             <div className="timer-profile-container">
-              <Timer onTimerExpire={() => {
-                console.log('Timer expired');
-              }} />
+              <Timer onTimerExpire={handleSubmit} />
+
               <div className="profile-container d-flex flex-column justify-content-around">
                 <div className="img-profile">
                   <img

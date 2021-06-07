@@ -4,7 +4,6 @@ export default function MCQType({ setAnswer, initialState, type, options }) {
   const [selected, setSelected] = useState(initialState || Array(options.length).fill(false));
 
   useEffect(() => {
-    // console.log(selected);
     const requiredOptions = [];
     options.forEach((option, idx) => {
       if (selected[idx]) requiredOptions.push(option.option_body);
@@ -28,7 +27,6 @@ export default function MCQType({ setAnswer, initialState, type, options }) {
                       newSelected[idx] = true;
                       setSelected(newSelected);
                     }}>
-                    {/* {console.log(option)} */}
                     <div className="radio-mimic mcq-type" id={option.option_body}>
                       <div className={"check " + (selected[idx] ? "" : "d-none")} />
                     </div>
@@ -67,7 +65,6 @@ export default function MCQType({ setAnswer, initialState, type, options }) {
                       newSelected[idx] = !newSelected[idx];
                       setSelected(newSelected);
                     }}>
-                    {/* {console.log(option)} */}
                     <div className="radio-mimic mcq-type" id={option.option_body}>
                       <div className={"check " + (selected[idx] ? "" : "d-none")} />
                     </div>
