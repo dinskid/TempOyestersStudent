@@ -28,6 +28,7 @@ export default function Quiz() {
   const [popup, setPopup] = useState(true);
   const [popupComponent, setPopupComponent] = useState(null);
 
+  const [questionNumber, setQuestionNumber] = useState(1);
   const [questionCount, setQuestionCount] = useState(0);
 
   useEffect(() => {
@@ -85,23 +86,38 @@ export default function Quiz() {
       setQuestion(questionData[curSection][curQuestion]);
     if (answers.length > 0)
       setCurrentAnswer(answers[curSection][curQuestion]);
-    if (status[curSection][curQuestion] === 0) {
-      // unvisited till now
-      let newStatus = [...status]
-      newStatus[curSection][curQuestion] = Math.max(newStatus[curSection][curQuestion], 2); // notanswered
-      setStatus(newStatus);
+    console.log(status);
+    if (status.length > curSection && status[curSection].length > curQuestion) {
+      if (status[curSection][curQuestion] === 0) {
+        // unvisited till now
+        let newStatus = [...status]
+        newStatus[curSection][curQuestion] = Math.max(newStatus[curSection][curQuestion], 2); // notanswered
+        setStatus(newStatus);
+      }
     }
     if (popup) setPopup(false);
+
+    let qNo = 0;
+    console.log(qNo);
+    for (let i = 0; i < curSection; i++) {
+      qNo += quizData.quiz_section_info[i].section_no_of_ques;
+      console.log(qNo);
+    }
+    console.log(qNo);
+    qNo += curQuestion + 1;
+    setQuestionNumber(qNo);
   }, [curSection, curQuestion, questionData]);
 
   useEffect(() => {
     let newStatus = [...status]
-    if (currentAnswer.length > 0)
-      newStatus[curSection][curQuestion] = Math.max(newStatus[curSection][curQuestion], 1); // notanswered
-    else
-      newStatus[curSection][curQuestion] = Math.max(newStatus[curSection][curQuestion], 2); // notanswered
+    if (newStatus.length > curSection && newStatus[curSection].length > curQuestion) {
+      if (currentAnswer.length > 0)
+        newStatus[curSection][curQuestion] = newStatus[curSection][curQuestion] !== 3 ? 1 : 3; // notanswered
+      else
+        newStatus[curSection][curQuestion] = newStatus[curSection][curQuestion] !== 3 ? 2 : 3; // notanswered
 
-    setStatus(newStatus);
+      setStatus(newStatus);
+    }
     let ans = [...answers];
     if (ans.length > curSection && ans[curSection].length > curQuestion) {
       ans[curSection][curQuestion] = currentAnswer;
@@ -310,9 +326,9 @@ export default function Quiz() {
                 </div>
                 <div>
                   {/* <span className="text-primary">{currentQuestion}</span> */}
-                  <span className="text-primary">{curQuestion + 1}</span>&nbsp;
+                  <span className="text-primary">{questionNumber}</span>&nbsp;
                   OF&nbsp;
-                  <span className="text-primary">{questionCount}</span>
+                  <span className="text-primary">{data.length}</span>
                 </div>
               </div>
               <div className="next-container h-100">
@@ -348,7 +364,7 @@ export default function Quiz() {
                 <>
                   {console.log(questionData[curSection][curQuestion])}
                   <p className="question">
-                    {questionData[curSection][curQuestion].question_body}
+                    <span className="font-weight-bold">Q {questionNumber}.</span> {questionData[curSection][curQuestion].question_body}
                   </p>
                   <div className="mark-btn-wrap d-flex justify-content-end">
                     <button
@@ -366,6 +382,12 @@ export default function Quiz() {
                       }
                     </button>
                   </div>
+                  {
+                    questionData[curSection][curQuestion].quesion_body_img_url &&
+                    <div className="question-img-wrap d-flex justify-content-center align-items-center">
+                      <img src={questionData[curSection][curQuestion].quesion_body_img_url} alt="question-related-image" className="question-img" />
+                    </div>
+                  }
                   {QuestionComponent()}
                 </>
               }

@@ -22,14 +22,14 @@ export default function MCQType({ setAnswer, initialState, type, options }) {
             {
               options.map((option, idx) => {
                 return (
-                  <div className="option-wrap border border-primary rounded p-2 d-flex align-items-center mb-3" role="button" key={option.option_body}
+                  <div className="option-wrap border border-primary rounded p-2 d-flex flex-column justify-content-center mb-3" role="button" key={option.option_body}
                     onClick={() => {
                       const newSelected = Array(options.length).fill(false);
                       newSelected[idx] = true;
                       setSelected(newSelected);
                     }}>
                     {/* {console.log(option)} */}
-                    <div className="radio-mimic" id={option.option_body}>
+                    <div className="radio-mimic mcq-type" id={option.option_body}>
                       <div className={"check " + (selected[idx] ? "" : "d-none")} />
                     </div>
                     {/* <input
@@ -43,7 +43,13 @@ export default function MCQType({ setAnswer, initialState, type, options }) {
                         setSelected(newSelected);
                       }}
                     /> */}
-                    <label className={"mx-2 m-0 " + (selected[idx] ? "text-primary" : "")} htmlFor={option.option_body}>{option.option_body}</label>
+                    <label className={"mx-4 m-0 " + (selected[idx] ? "text-primary" : "")} htmlFor={option.option_body}>{option.option_body}</label>
+                    {
+                      option.option_body_img &&
+                      <div className="option-img-wrap d-flex justify-content-center align-items-center">
+                        <img src={option.option_body_img} alt="option-related-image" className="option-img" />
+                      </div>
+                    }
                   </div>
                 );
               })
@@ -55,14 +61,14 @@ export default function MCQType({ setAnswer, initialState, type, options }) {
             {
               options.map((option, idx) => {
                 return (
-                  <div className="option-wrap border border-primary rounded p-2 d-flex align-items-center mb-3" role="button" key={option.option_body}
+                  <div className="option-wrap border border-primary rounded p-2 d-flex flex-column justify-content-center mb-3" role="button" key={option.option_body}
                     onClick={() => {
                       const newSelected = [...selected];
                       newSelected[idx] = !newSelected[idx];
                       setSelected(newSelected);
                     }}>
                     {/* {console.log(option)} */}
-                    <div className="radio-mimic" id={option.option_body}>
+                    <div className="radio-mimic mcq-type" id={option.option_body}>
                       <div className={"check " + (selected[idx] ? "" : "d-none")} />
                     </div>
                     {/* <input
@@ -75,7 +81,13 @@ export default function MCQType({ setAnswer, initialState, type, options }) {
                         setSelected(newSelected);
                       }}
                     /> */}
-                    <label className={"mx-2 m-0 " + (selected[idx] ? "text-primary" : "")} htmlFor={option.option_body}>{option.option_body}</label>
+                    <label className={"mx-4 m-0 " + (selected[idx] ? "text-primary" : "")} htmlFor={option.option_body}>{option.option_body}</label>
+                    {
+                      option.option_body_img &&
+                      <div className="option-img-wrap d-flex justify-content-center align-items-center">
+                        <img src={option.option_body_img} alt="option-related-image" className="option-img" />
+                      </div>
+                    }
                   </div>
                 );
               })

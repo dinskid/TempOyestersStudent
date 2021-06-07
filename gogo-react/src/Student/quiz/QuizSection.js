@@ -20,6 +20,7 @@ export default function QuizSections({ status, sectionNames, setSection, setQues
   //   localStorage.setItem('QUIZ_STATUS', JSON.stringify(status));
   // }, [status]);
 
+  let c = 1;
   return (
     <div className="sections-wrap">
       {
@@ -43,7 +44,7 @@ export default function QuizSections({ status, sectionNames, setSection, setQues
                         setQuestion(jdx);
                       }}
                       key={jdx}>
-                      {jdx + 1}
+                      {c++}
                     </div>
                   ))
                 }
