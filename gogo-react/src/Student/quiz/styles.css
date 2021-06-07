@@ -17,6 +17,13 @@
   background: #555;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 0;
+}
+
 .popup.popup-overlay {
   position: fixed;
   width: 100vw;
@@ -78,9 +85,9 @@
   font-family: 'Roboto', sans-serif;
   padding: 2% 5%;
   padding-bottom: 0;
-  min-height: 90vh;
+  min-height: 95vh;
   display: grid;
-  grid-template-rows: 100px minmax(auto, 75vh);
+  grid-template-rows: 100px minmax(auto, 80vh);
 }
 
 .quiz-control {
@@ -112,6 +119,21 @@
   align-items: center;
 }
 
+.progress-bar {
+  width: 80%;
+  background-color: transparent;
+  border: 1px solid var(--theme-color-1);
+  height: 7px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress {
+  background-color: var(--theme-color-1);
+  height: 100%;
+  z-index: 1;
+}
+
 .img-profile {
   width: 50px;
   height: 60px;
@@ -119,24 +141,27 @@
 
 .question-grid {
   display: grid;
-  grid-template-rows: 50px minmax(auto, calc(75vh - 110px));
+  grid-template-rows: 50px minmax(auto, calc(80vh - 110px));
   padding: 1rem;
 }
 
 .info-grid {
   display: grid;
-  grid-template-rows: 100px calc(75vh - 342px) 150px;
+  grid-template-rows: 100px calc(80vh - 342px) 150px;
   grid-row-gap: 1rem;
   padding: 1rem;
 }
 
 .mark-btn {
   width: fit-content !important;
-  font-size: 0.8rem !important;
 }
 
 .question-count {
   font-size: clamp(1rem, 1vw, 1.3rem);
+}
+
+.question-container .question {
+  font-size: 1.5rem;
 }
 
 .question-img-wrap {
@@ -166,9 +191,13 @@
   overflow: auto;
 }
 
+.top-spacing {
+  margin-top: 8rem;
+}
+
 .section-body {
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: repeat(8,1fr);
   justify-items: center;
 }
 
@@ -214,6 +243,10 @@
 .option-wrap {
   cursor: pointer;
   position: relative;
+}
+
+.option-wrap label {
+  font-size: 1.1rem;
 }
 
 .mcq-info {
@@ -272,9 +305,17 @@
   }
 
   .question-grid {
-    grid-template-rows: 50px minmax(auto, 50vh);
+    grid-template-rows: 50px minmax(auto, 57vh);
   }
   .info-grid {
     display: none;
+  }
+
+  .question-container .question {
+    font-size: 1.1rem;
+  }
+
+  .option-wrap label {
+    font-size: 0.8rem;
   }
 }

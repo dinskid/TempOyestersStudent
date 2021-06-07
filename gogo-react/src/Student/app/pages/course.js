@@ -336,6 +336,7 @@ const KnowledgeBase = ({ match, ...props }) => {
       // on success
       (questions, time, data) => {
         localStorage.setItem('DATA', JSON.stringify(questions));
+        localStorage.setItem('TOTAL_TIME', JSON.stringify(time * 60)); // setting the time left in seconds
         localStorage.setItem('TIME', JSON.stringify(time * 60)); // setting the time left in seconds
         if (data)
           localStorage.setItem('QUIZ_DATA', JSON.stringify(data));

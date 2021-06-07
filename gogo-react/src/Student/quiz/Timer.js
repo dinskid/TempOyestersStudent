@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 export default function Timer({ onTimerExpire }) {
   const [time, setTime] = useState(localStorage.getItem('TIME') || -1);
+  const [totalTime, setTotalTime] = useState(localStorage.getItem('QUIZ_TOTAL_TIME') || -1);
 
   const formattedTime = () => {
     return `${Math.floor(time / 60)}:${time % 60}`;
@@ -28,6 +29,12 @@ export default function Timer({ onTimerExpire }) {
     <div className="timer-container font-weight-bold text-center">
       <div className="title">TIME LEFT</div>
       {/* insert bar here */}
+      <div className="progress-bar">
+        <div className="progress"
+          style={{
+            width: `${(time / totalTime)}%`,
+          }} />
+      </div>
       <span className="text-primary">{formattedTime()}</span>
     </div>
   )

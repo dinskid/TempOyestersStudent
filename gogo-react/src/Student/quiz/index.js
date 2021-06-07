@@ -12,6 +12,8 @@ import SliderType from './SliderType';
 import Popup from './Popup';
 import { MdPerson } from 'react-icons/md';
 import { IoMdHelp } from 'react-icons/io';
+import axios from '../../helpers/axiosInstance';
+import NotificationManager from '../../components/common/react-notifications/NotificationManager';
 
 export default function Quiz() {
   const history = useHistory();
@@ -30,6 +32,9 @@ export default function Quiz() {
 
   const [questionNumber, setQuestionNumber] = useState(1);
   const [questionCount, setQuestionCount] = useState(0);
+
+  const [loading, setLoading] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
     if (!(data && quizData)) {
@@ -163,11 +168,50 @@ export default function Quiz() {
     setPopupComponent(null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('submitted');
+    const ansToPost = [];
+    questionData.forEach((section, idx) =>
+      section.forEach((question, jdx) => ansToPost.push({
+        question_id: question.question_id,
+        selectedAnswers: answers[idx][jdx],
+      }))
+    );
+    try {
+      const student_id = localStorage.getItem('STUDENTID');
+      const timeLeft = localStorage.getItem('TIME');
+      const valuesToPost = {
+        quiz_name: quizData.quiz_name,
+        quiz_id: quizData.quiz_id,
+        student_id,
+        answers,
+        remaining_time: `${Math.floor(timeLeft) / 60}:${timeLeft % 60}`
+      }
+      const submit = await axios.post('/student/quiz/submitQuiz', valuesToPost);
+      console.log(submit);
+      if (submit.status === 200) {
+        setLoading(false);
+        localStorage.removeItem('DATA');
+        localStorage.removeItem('QUIZ_DATA');
+        localStorage.removeItem('TIME');
+        localStorage.removeItem('QUIZ_TOTAL_TIME');
+        localStorage.removeItem('QUIZ_STATUS');
+        localStorage.removeItem('QUIZ_CURRENT_SECTION');
+        localStorage.removeItem('QUIZ_CURRENT_QUESTION');
+        localStorage.removeItem('QUIZ_ANSWERS');
+        history.push('/app/pages/mycourses');
+      } else {
+        setLoading(false);
+        NotificationManager.error("Couldn't submit the quiz. Please try again.", 'Error', 3000, null, null, '');
+      }
+    } catch (e) {
+      setLoading(false);
+      console.log('Error', e);
+      NotificationManager.error("Couldn't submit the quiz. Please try again.", 'Error', 3000, null, null, '');
+    }
   };
 
-  const QuestionComponent = () => {
+  const QuestionComponent = (questionHadImage) => {
     if (!question || !answers) return null;
     switch (question.question_type) {
       case 'single_correct_type':
@@ -202,6 +246,7 @@ export default function Quiz() {
           <>
             {/* <h1>Single word</h1> */}
             <SingleWord
+              className={!questionHadImage ? "top-spacing" : ""}
               initialState={answers[curSection][curQuestion]}
               setAnswer={setCurrentAnswer}
             />
@@ -212,6 +257,7 @@ export default function Quiz() {
           <>
             {/* <h1>Integer</h1> */}
             <IntegerType
+              className={!questionHadImage ? "top-spacing" : ""}
               initialState={Number(answers[curSection][curQuestion])}
               setAnswer={setCurrentAnswer}
             />
@@ -246,6 +292,8 @@ export default function Quiz() {
   }
 
   if (!quizData) return null;
+
+  if (loading) return <div className="loading" />;
 
   return (
     <>
@@ -336,7 +384,22 @@ export default function Quiz() {
                   className="btn btn-primary py-2 h-100"
                   // disabled={curSection === quizData.quiz_section_info.length - 1 && curQuestion === questionCount - 1}
                   onClick={(curSection === quizData.quiz_section_info.length - 1 && curQuestion === questionCount - 1)
-                    ? handleSubmit : next
+                    ? () => {
+                      setPopup(true);
+                      setPopupComponent(
+                        <div className="submit-popup d-flex flex-column justify-content-center">
+                          <h3>Do you want to submit your quiz ?</h3>
+                          <div className="d-flex justify-content-around">
+                            <button className="btn btn-primary rounded-0" onClick={() => setPopup(false)}>
+                              No
+                            </button>
+                            <button className="btn btn-primary rounded-0" onClick={() => handleSubmit()}>
+                              YES
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    } : next
                   }
                 >
                   <span className="d-none d-lg-inline">
@@ -388,7 +451,7 @@ export default function Quiz() {
                       <img src={questionData[curSection][curQuestion].quesion_body_img_url} alt="question-related-image" className="question-img" />
                     </div>
                   }
-                  {QuestionComponent()}
+                  {QuestionComponent(questionData[curSection][curQuestion].quesion_body_img_url)}
                 </>
               }
             </div>
