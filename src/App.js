@@ -43,6 +43,10 @@ const Cart = React.lazy(() =>
 
 const QuizOld = React.lazy(() => retry(() => import('./Student/Quiz')));
 const Quiz = React.lazy(() => retry(() => import('./Student/quiz')));
+const Test = React.lazy(() =>
+  retry(() => import('./Student/video-test'))
+);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -132,6 +136,11 @@ class App extends React.Component {
                     path="/quizold"
                     exact
                     render={(props) => <QuizOld {...props} />}
+                  />
+                  <Route
+                    path="/test"
+                    exact
+                    render={(props) => <Test {...props} />}
                   />
 
 
