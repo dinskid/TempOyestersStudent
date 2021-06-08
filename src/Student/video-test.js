@@ -12,6 +12,12 @@ export default function Test() {
     fluid: true,
   }
   return (
-    <VideoPlayer {...videoJsOptions} />
+    <div style={{
+      width: '640px',
+      height: '480px',
+    }}
+    >
+      <VideoPlayer {...videoJsOptions} />
+    </div>
   )
 }

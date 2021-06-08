@@ -5,7 +5,7 @@ import 'videojs-mobile-ui';
 import 'videojs-mobile-ui/dist/videojs-mobile-ui.css';
 import 'videojs-contrib-quality-levels';
 import 'videojs-hls-quality-selector';
-require('videojs-playbackrate-adjuster');
+import 'videojs-playbackrate-adjuster';
 
 export default class VideoPlayer extends React.Component {
   componentDidMount() {
